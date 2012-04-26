@@ -17,6 +17,8 @@ typedef struct
 	Ligne * TabLignes;
 	int NbLin;
 	int NbCol;
+    int abscisse;
+    int ordonnee;
 }
 Grille;
 
@@ -37,16 +39,6 @@ Grille * CreerGrille(int nbLin, int nbCol);
  ligne et colonne doivent etre coherents avec les dimensions de la matrice
  */
 int Consulter(Grille * grille, int ligne, int colonne);
-
-
-/*
-    afficherGrille
- 
-    Affiche la grille à l'écran à une abscisse et une ordonnee donnees.
- 
-    grille doit être initialisée
-*/
-void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordonnee);
 
 /*
     SetVal
