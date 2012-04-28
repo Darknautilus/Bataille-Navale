@@ -1,5 +1,5 @@
 #include "parametre.h"
-#include <malloc.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include <string.h>

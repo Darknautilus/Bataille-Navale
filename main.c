@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 
+#include <SDL/SDL.h>
+#include <SDL_ttf/SDL_ttf.h>
+#include <SDL_image/SDL_image.h>
 
-#include "util.h"
-#include "bateau.h"
 #include "parametre.h"
-#include "vuev1.h"
-#include "lietrec.h"
+#include "grille.h"
 #include "vueGrille.h"
 
 void controleurParametreVersionTest(Tparam *param)
@@ -31,17 +30,11 @@ void controleurParametreVersionTest(Tparam *param)
 int main()
 {
     FILE * f;
-    char c;
 
 
     Tparam param;
-    initRandom();// pour initialiser la suite de valeurs aléatoires cf util.h
 
     controleurParametreVersionTest(&param);
-
-
-    // afficher les paramètres de la partie
-    afficherParam(&param);
 
     // sauver les paramètres de la partie dans un fichier essai.don
     f = fopen ("essai.don", "wb");
@@ -55,23 +48,9 @@ int main()
     chargerParam(f,&param);
     fclose(f);
 
-    textcolor(YELLOW);
-
-    // afficher les paramètres de la partie
-    afficherParam(&param);
-    scanf("%c",&c);
-    clrscr();
-    initConsoleJeu();
-
     // afficher les paramètres de la partie
     //afficherParam(&param);
   //  scanf("%c",&c);
-    clrscr();
-
-    afficherToutEnTest();
-
-    gotoxy( 30,50);
-    scanf("%c",&c);
-
+    
     return 0;
 }
