@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <SDL/SDL.h>
-#include <SDL_ttf/SDL_ttf.h>
 #include <SDL_image/SDL_image.h>
+#include <SDL_ttf/SDL_ttf.h>
+
+#include "utilsSDL.h"
 
 #include "parametre.h"
 #include "grille.h"
@@ -33,6 +34,8 @@ int main()
 
 
     Tparam param;
+    
+    DemarrerSDL(800, 600, "Bataille Navale");
 
     controleurParametreVersionTest(&param);
 
@@ -51,6 +54,8 @@ int main()
     // afficher les paramètres de la partie
     //afficherParam(&param);
   //  scanf("%c",&c);
+    
+    ArreterSDL();
     
     return 0;
 }
