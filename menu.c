@@ -8,18 +8,12 @@
 
 void AfficherMenuAccueil(SDL_Surface * ecran)
 {
-    SDL_Surface *fond;
-    SDL_Rect positionFond;
     SDL_Event event;
     int continuer = 1;
     
-    positionFond.x = 0;
-    positionFond.y = 0;
-    
     while(continuer)
     {
-        fond = IMG_Load("Images/menuAccueil.png");
-        SDL_BlitSurface(fond, NULL, ecran, &positionFond);
+        ImageFond("Images/menuAccueil.png");
         SDL_Flip(ecran);
         
         SDL_WaitEvent(&event);
@@ -47,21 +41,18 @@ void AfficherMenuAccueil(SDL_Surface * ecran)
 
 int AfficherMenuRacine(SDL_Surface * ecran)
 {
-    SDL_Surface *fond, *puceMenu;
-    SDL_Rect positionFond, positionPuce;
+    SDL_Surface *puceMenu;
+    SDL_Rect positionPuce;
     SDL_Event event;
     int continuer = 1;
     int choixMenu = 1;
     
-    positionFond.x = 0;
-    positionFond.y = 0;
     positionPuce.x = 80;
     positionPuce.y = 150;
     
     while(continuer)
     {
-        fond = IMG_Load("Images/menuRacine.png");
-        SDL_BlitSurface(fond, NULL, ecran, &positionFond);
+        ImageFond("Images/menuRacine.png");
         
         puceMenu = IMG_Load("Images/puceMenu.png");
         SDL_BlitSurface(puceMenu, NULL, ecran, &positionPuce);
@@ -106,7 +97,6 @@ int AfficherMenuRacine(SDL_Surface * ecran)
         }
     }
     
-    SDL_FreeSurface(fond);
     SDL_FreeSurface(puceMenu);
     
     return choixMenu;
@@ -119,8 +109,7 @@ void MenuNouvellePartie(void)
     SDL_Event * event;
     int continuer = 1;
     
-    champ = CreerChamp(50, 30, 100, 100);
-    champ = InitTexte(champ, "Salut");
+    champ = CreerChamp(30, 30, 100, 100);
     
     EffacerEcran();
     
@@ -133,10 +122,6 @@ void MenuNouvellePartie(void)
         {
             champ = ChangeFocus(champ, 1);
             EditerChamp(champ);
-        }
-        else
-        {
-            champ = ChangeFocus(champ, 0);
         }
     }
     

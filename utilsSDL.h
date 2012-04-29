@@ -4,6 +4,8 @@
 // Permet d'initialiser tous les modules SDL
 SDL_Surface * DemarrerSDL(int width, int height, char * titreFenetre);
 
+void ImageFond(char * cheminImage);
+
 void EffacerEcran(void);
 
 // Arrête tous les modules SDL

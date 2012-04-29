@@ -22,6 +22,18 @@ SDL_Surface * DemarrerSDL(int width, int height, char * titreFenetre)
     return ecran;
 }
 
+void ImageFond(char * cheminImage)
+{
+    SDL_Surface * imageFond;
+    SDL_Rect positionFond;
+    
+    positionFond.x = 0;
+    positionFond.y = 0;
+    
+    imageFond = IMG_Load(cheminImage);
+    SDL_BlitSurface(imageFond, NULL, SDL_GetVideoSurface(), &positionFond);
+}
+
 void EffacerEcran(void)
 {
     SDL_FillRect(SDL_GetVideoSurface(), NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, 0, 0, 0));

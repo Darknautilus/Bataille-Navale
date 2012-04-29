@@ -33,7 +33,7 @@ ChampSaisie * InitTexte(ChampSaisie * champ, char * texte)
 
 int ChainePleine(ChampSaisie * champ)
 {
-    if(strlen(champ->chaine) < champ->longMax-1)
+    if(strlen(champ->chaine) < champ->longMax)
         return 0;
     else
         return 1;
@@ -54,7 +54,7 @@ void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran)
     positionTexte.x = champ->abscisse+5;
     positionTexte.y = champ->ordonnee+5;
     
-    champBG = SDL_CreateRGBSurface(SDL_HWSURFACE, champ->longMax*5+10, champ->tailleTexte+10, 32, 0, 0, 0, 0);
+    champBG = SDL_CreateRGBSurface(SDL_HWSURFACE, champ->longMax*13+20, champ->tailleTexte+10, 32, 0, 0, 0, 0);
     if(champ->onFocus)
         couleurFondChamp = SDL_MapRGB(champBG->format, 255, 255, 255);
     else
@@ -75,7 +75,7 @@ void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran)
 
 int ClicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic)
 {    
-    if(positionClic->x >= champ->abscisse && positionClic->x <= champ->abscisse+champ->longMax*5+10 &&
+    if(positionClic->x >= champ->abscisse && positionClic->x <= champ->abscisse+champ->longMax*13+20 &&
         positionClic->y >= champ->ordonnee && positionClic->y <= champ->ordonnee+champ->tailleTexte+10)
     {
         return 1;
