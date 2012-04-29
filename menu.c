@@ -6,7 +6,7 @@
 #include "champSaisie.h"
 #include "utilsSDL.h"
 
-void AfficherMenuAccueil(SDL_Surface * ecran)
+void AfficherMenuAccueil(void)
 {
     SDL_Event event;
     int continuer = 1;
@@ -14,7 +14,7 @@ void AfficherMenuAccueil(SDL_Surface * ecran)
     while(continuer)
     {
         ImageFond("Images/menuAccueil.png");
-        SDL_Flip(ecran);
+        SDL_Flip(SDL_GetVideoSurface());
         
         SDL_WaitEvent(&event);
         switch(event.type)
@@ -39,7 +39,7 @@ void AfficherMenuAccueil(SDL_Surface * ecran)
     }
 }
 
-int AfficherMenuRacine(SDL_Surface * ecran)
+int AfficherMenuRacine(void)
 {
     SDL_Surface *puceMenu;
     SDL_Rect positionPuce;
@@ -55,9 +55,9 @@ int AfficherMenuRacine(SDL_Surface * ecran)
         ImageFond("Images/menuRacine.png");
         
         puceMenu = IMG_Load("Images/puceMenu.png");
-        SDL_BlitSurface(puceMenu, NULL, ecran, &positionPuce);
+        SDL_BlitSurface(puceMenu, NULL, SDL_GetVideoSurface(), &positionPuce);
         
-        SDL_Flip(ecran);
+        SDL_Flip(SDL_GetVideoSurface());
         
         SDL_WaitEvent(&event);
         switch(event.type)
@@ -106,13 +106,13 @@ void MenuNouvellePartie(void)
 {
     ChampSaisie * champPseudoHumain, * champPseudoIA;
     SDL_Rect positionClic;
-    SDL_Event * event;
     int continuer = 1;
     
     champPseudoHumain = CreerChamp(30, 30, 230, 150);
     champPseudoIA = CreerChamp(30, 30, 230, 200);
     
     ImageFond("Images/menuNouvellePartie.png");
+    ImageRetour("Images/flecheRetour.png");
     
     while (continuer)
     {
@@ -129,6 +129,10 @@ void MenuNouvellePartie(void)
         {
             champPseudoIA = ChangeFocus(champPseudoIA, 1);
             EditerChamp(champPseudoIA);
+        }
+        else if(ClicSurRetour(&positionClic))
+        {
+            continuer = 0;
         }
     }
     

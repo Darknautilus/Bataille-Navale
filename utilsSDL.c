@@ -32,6 +32,33 @@ void ImageFond(char * cheminImage)
     
     imageFond = IMG_Load(cheminImage);
     SDL_BlitSurface(imageFond, NULL, SDL_GetVideoSurface(), &positionFond);
+    
+    SDL_FreeSurface(imageFond);
+}
+
+void ImageRetour(char * cheminImage)
+{
+    SDL_Surface * imageRetour;
+    SDL_Rect positionImageRetour;
+    
+    positionImageRetour.x = KABSRETOUR;
+    positionImageRetour.y = KORDRETOUR;
+    
+    imageRetour = IMG_Load(cheminImage);
+    SDL_BlitSurface(imageRetour, NULL, SDL_GetVideoSurface(), &positionImageRetour);
+    
+    EcrireTexte("RETOUR", 35, KABSRETOUR + 30, KORDRETOUR);
+    
+    SDL_FreeSurface(imageRetour);
+}
+
+int ClicSurRetour(SDL_Rect * positionClic)
+{
+    if(positionClic->x >= KABSRETOUR - 5 && positionClic->x <= KABSRETOUR + 100 &&
+       positionClic->y >= KORDRETOUR - 10)
+        return 1;
+    else
+        return 0;
 }
 
 void EffacerEcran(void)

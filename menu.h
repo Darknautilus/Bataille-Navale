@@ -2,9 +2,9 @@
 #define MENU_H
 
 // Affiche le menu d'accueil
-void AfficherMenuAccueil(SDL_Surface * ecran);
+void AfficherMenuAccueil(void);
 
-int AfficherMenuRacine(SDL_Surface * ecran);
+int AfficherMenuRacine(void);
 
 void MenuNouvellePartie(void);
 

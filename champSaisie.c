@@ -61,7 +61,7 @@ void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran)
         couleurFondChamp = SDL_MapRGB(champBG->format, 200, 207, 212);
     SDL_FillRect(champBG, NULL, couleurFondChamp);
     
-    texte = TTF_RenderText_Solid(police, champ->chaine, couleurTexte);
+    texte = TTF_RenderText_Blended(police, champ->chaine, couleurTexte);
     
     SDL_BlitSurface(champBG, NULL, ecran, &positionChamp);
     SDL_BlitSurface(texte, NULL, ecran, &positionTexte);

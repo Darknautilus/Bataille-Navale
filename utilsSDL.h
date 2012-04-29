@@ -6,6 +6,12 @@ SDL_Surface * DemarrerSDL(int width, int height, char * titreFenetre);
 
 void ImageFond(char * cheminImage);
 
+#define KABSRETOUR 10
+#define KORDRETOUR 550
+void ImageRetour(char * cheminImage);
+
+int ClicSurRetour(SDL_Rect * positionClic);
+
 void EffacerEcran(void);
 
 // Arrête tous les modules SDL
