@@ -4,6 +4,7 @@
 
 #include "menu.h"
 #include "champSaisie.h"
+#include "utilsSDL.h"
 
 void AfficherMenuAccueil(SDL_Surface * ecran)
 {
@@ -114,9 +115,31 @@ int AfficherMenuRacine(SDL_Surface * ecran)
 void MenuNouvellePartie(void)
 {
     ChampSaisie * champ;
+    SDL_Rect positionClic;
+    SDL_Event * event;
+    int continuer = 1;
     
-    champ = CreerChamp(30, 30, 100, 100);
+    champ = CreerChamp(50, 30, 100, 100);
     champ = InitTexte(champ, "Salut");
-    AfficherChamp(champ, SDL_GetVideoSurface());
+    
+    EffacerEcran();
+    
+    while (continuer)
+    {
+        AfficherChamp(champ, SDL_GetVideoSurface());
+        SDL_Flip(SDL_GetVideoSurface());
+        AttendreClic(&positionClic);
+        if(ClicSurChamp(champ, &positionClic))
+        {
+            champ = ChangeFocus(champ, 1);
+            EditerChamp(champ);
+        }
+        else
+        {
+            champ = ChangeFocus(champ, 0);
+        }
+    }
+    
+
     LibererChamp(champ);
 }

@@ -20,11 +20,23 @@ ChampSaisie * CreerChamp(int longMax, int taille, int abscisse, int ordonnee);
 
 ChampSaisie * InitTexte(ChampSaisie * champ, char * texte);
 
+int ChainePleine(ChampSaisie * champ);
+
 void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran);
 
-int ClicSurChamp(ChampSaisie * champ, SDL_Rect positionClic);
+int ClicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic);
 
-ChampSaisie * ChangeFocus(ChampSaisie * champ);
+ChampSaisie * ChangeFocus(ChampSaisie * champ, int val);
+
+int EstNombre(SDL_Event * event);
+
+int EstLettre(SDL_Event * event);
+
+char * SupprimerDernierChar(char * chaine);
+
+char * AjouterCharFin(char * chaine, char charEnt);
+
+void EditerChamp(ChampSaisie * champ);
 
 void LibererChamp(ChampSaisie * champ);
 
