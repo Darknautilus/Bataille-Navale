@@ -10,7 +10,7 @@ void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordo
     SDL_Surface * caseGrille, * numCase;
     SDL_Rect positionCaseGrille, positionNumCase;
     TTF_Font * policeGrille;
-    SDL_Color couleurNoire = {0,0,0};
+    SDL_Color couleurBlanche = {255,255,255};
     
     int i,j;
     char * labelLin = (char*)malloc(2*sizeof(char));
@@ -26,7 +26,7 @@ void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordo
     for(i=0;i<grille->NbLin;i++)
     {
         sprintf(labelLin, "%c", 'A'+i);
-        numCase = TTF_RenderText_Solid(policeGrille, labelLin, couleurNoire);
+        numCase = TTF_RenderText_Solid(policeGrille, labelLin, couleurBlanche);
         positionNumCase.x = abscisse - 30;
         positionNumCase.y = ordonnee + i * 30;
         SDL_BlitSurface(numCase, NULL, ecran, &positionNumCase);
@@ -34,7 +34,7 @@ void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordo
         for (j=0; j<grille->NbCol; j++)
         {
             sprintf(labelCol, "%d", j+1);
-            numCase = TTF_RenderText_Solid(policeGrille, labelCol, couleurNoire);
+            numCase = TTF_RenderText_Solid(policeGrille, labelCol, couleurBlanche);
             positionNumCase.x = abscisse + j*30;
             positionNumCase.y = ordonnee - 30;
             SDL_BlitSurface(numCase, NULL, ecran, &positionNumCase);

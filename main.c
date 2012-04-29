@@ -1,13 +1,38 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <SDL/SDL.h>
-#include <SDL_ttf/SDL_ttf.h>
 #include <SDL_image/SDL_image.h>
+#include <SDL_ttf/SDL_ttf.h>
+
+#include "utilsSDL.h"
+#include "menu.h"
 
 #include "parametre.h"
 #include "grille.h"
 #include "vueGrille.h"
+
+#include "champSaisie.h"
+
+void pause()
+{
+    int continuer = 1;
+    SDL_Event event;
+    
+    while(continuer)
+    {
+        SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                exit(EXIT_FAILURE);
+                break;
+            case SDL_KEYDOWN:
+                continuer = 0;
+                break;
+        }
+    }
+    
+}
 
 void controleurParametreVersionTest(Tparam *param)
 {
@@ -29,28 +54,7 @@ void controleurParametreVersionTest(Tparam *param)
 
 int main()
 {
-    FILE * f;
-
-
-    Tparam param;
-
-    controleurParametreVersionTest(&param);
-
-    // sauver les paramètres de la partie dans un fichier essai.don
-    f = fopen ("essai.don", "wb");
-    if (f==NULL) exit (1);
-    memParam(&param, f);
-    fclose(f);
-
-     //lire les paramètres sauves dans essai.don
-    f = fopen ("essai.don", "rb");
-    if (f==NULL) exit (1);
-    chargerParam(f,&param);
-    fclose(f);
-
-    // afficher les paramètres de la partie
-    //afficherParam(&param);
-  //  scanf("%c",&c);
+    
     
     return 0;
 }
