@@ -11,6 +11,8 @@
 #include "grille.h"
 #include "vueGrille.h"
 
+#include "champSaisie.h"
+
 void pause()
 {
     int continuer = 1;
@@ -53,30 +55,28 @@ void controleurParametreVersionTest(Tparam *param)
 int main()
 {
     SDL_Surface * ecran;
-    Grille * grille;
     
     int choixMenu;
-
-
-    Tparam param;
     
     ecran = DemarrerSDL(800, 600, "Bataille Navale");
-    
+        
     AfficherMenuAccueil(ecran);
     
     choixMenu = AfficherMenuRacine(ecran);
-    EffacerEcran(ecran);
+    EffacerEcran();
     
     switch (choixMenu) 
     {
         case 1:// Nouvelle Partie
-            EcrireTexte("Nouvelle Partie", 30, 100, 100);
+            MenuNouvellePartie();
         break;
             
         case 5:// Quitter
             exit(EXIT_SUCCESS);
         break;
     }
+    
+    SDL_Flip(ecran);
     
     pause();
         

@@ -3,6 +3,7 @@
 #include <SDL_ttf/SDL_ttf.h>
 
 #include "menu.h"
+#include "champSaisie.h"
 
 void AfficherMenuAccueil(SDL_Surface * ecran)
 {
@@ -110,7 +111,12 @@ int AfficherMenuRacine(SDL_Surface * ecran)
     return choixMenu;
 }
 
-void MenuNouvellePartie()
+void MenuNouvellePartie(void)
 {
+    ChampSaisie * champ;
     
+    champ = CreerChamp(30, 30, 100, 100);
+    champ = InitTexte(champ, "Salut");
+    AfficherChamp(champ, SDL_GetVideoSurface());
+    LibererChamp(champ);
 }

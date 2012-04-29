@@ -6,6 +6,6 @@ void AfficherMenuAccueil(SDL_Surface * ecran);
 
 int AfficherMenuRacine(SDL_Surface * ecran);
 
-void MenuNouvellePartie();
+void MenuNouvellePartie(void);
 
 #endif

@@ -5,11 +5,6 @@
 #include "utilsSDL.h"
 #include "menu.h"
 
-void EffacerEcran(SDL_Surface * ecran)
-{
-    SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 0, 0, 0));
-}
-
 SDL_Surface * DemarrerSDL(int width, int height, char * titreFenetre)
 {
     SDL_Surface * ecran;
@@ -22,12 +17,17 @@ SDL_Surface * DemarrerSDL(int width, int height, char * titreFenetre)
     
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
     
-    EffacerEcran(ecran);
+    EffacerEcran();
     
     return ecran;
 }
 
-void ArreterSDL()
+void EffacerEcran(void)
+{
+    SDL_FillRect(SDL_GetVideoSurface(), NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, 0, 0, 0));
+}
+
+void ArreterSDL(void)
 {
     SDL_Quit();
     TTF_Quit();
@@ -45,6 +45,25 @@ void EcrireTexte(char * texte,int taille, int abscisse, int ordonnee)
     
     zoneTexte = TTF_RenderText_Blended(police, texte, couleur);
     SDL_BlitSurface(zoneTexte, NULL, SDL_GetVideoSurface(), &position);
-    SDL_Flip(SDL_GetVideoSurface());
     SDL_FreeSurface(zoneTexte);
+}
+
+void AttendreClic(SDL_Rect * coordClic)
+{
+    SDL_Event event;
+    int continuer = 1;
+    
+    while (continuer)
+    {
+        SDL_WaitEvent(&event);
+        if (event.type == SDL_MOUSEBUTTONUP)
+        {
+            if(event.button.button == SDL_BUTTON_RIGHT)
+            {
+                coordClic->x = event.button.x;
+                coordClic->y = event.button.y;
+                continuer = 0;
+            }
+        }
+    }
 }
