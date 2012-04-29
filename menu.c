@@ -104,27 +104,35 @@ int AfficherMenuRacine(SDL_Surface * ecran)
 
 void MenuNouvellePartie(void)
 {
-    ChampSaisie * champ;
+    ChampSaisie * champPseudoHumain, * champPseudoIA;
     SDL_Rect positionClic;
     SDL_Event * event;
     int continuer = 1;
     
-    champ = CreerChamp(30, 30, 100, 100);
+    champPseudoHumain = CreerChamp(30, 30, 230, 150);
+    champPseudoIA = CreerChamp(30, 30, 230, 200);
     
-    EffacerEcran();
+    ImageFond("Images/menuNouvellePartie.png");
     
     while (continuer)
     {
-        AfficherChamp(champ, SDL_GetVideoSurface());
+        AfficherChamp(champPseudoHumain, SDL_GetVideoSurface());
+        AfficherChamp(champPseudoIA, SDL_GetVideoSurface());
         SDL_Flip(SDL_GetVideoSurface());
         AttendreClic(&positionClic);
-        if(ClicSurChamp(champ, &positionClic))
+        if(ClicSurChamp(champPseudoHumain, &positionClic))
         {
-            champ = ChangeFocus(champ, 1);
-            EditerChamp(champ);
+            champPseudoHumain = ChangeFocus(champPseudoHumain, 1);
+            EditerChamp(champPseudoHumain);
+        }
+        else if(ClicSurChamp(champPseudoIA, &positionClic))
+        {
+            champPseudoIA = ChangeFocus(champPseudoIA, 1);
+            EditerChamp(champPseudoIA);
         }
     }
     
 
-    LibererChamp(champ);
+    LibererChamp(champPseudoHumain);
+    LibererChamp(champPseudoIA);
 }
