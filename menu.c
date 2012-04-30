@@ -8,35 +8,29 @@
 
 void AfficherMenuAccueil(void)
 {
-    SDL_Event event;
     int continuer = 1;
+    
+    SDLKey * touche = (SDLKey*)malloc(sizeof(SDLKey));
+    
+    ImageFond("Images/menuAccueil.png");
+    SDL_Flip(SDL_GetVideoSurface());
     
     while(continuer)
     {
-        ImageFond("Images/menuAccueil.png");
-        SDL_Flip(SDL_GetVideoSurface());
-        
-        SDL_WaitEvent(&event);
-        switch(event.type)
+        AttendreEvent(NULL, touche);
+        switch(*touche)
         {
-            case SDL_QUIT:
-                exit(EXIT_FAILURE);
-                break;
-                
-            case SDL_KEYDOWN:
-                switch(event.key.keysym.sym)
-            {
-                case SDLK_SPACE:
-                    continuer = 0;
-                    break;
+            case SDLK_SPACE:
+                continuer = 0;
+            break;
                     
-                case SDLK_ESCAPE:
-                    exit(EXIT_FAILURE);
-                    break;
-            }
-                break;
+            case SDLK_ESCAPE:
+                exit(EXIT_FAILURE);
+            break;
         }
     }
+    
+    free(touche);
 }
 
 int AfficherMenuRacine(void)
@@ -46,6 +40,8 @@ int AfficherMenuRacine(void)
     SDL_Event event;
     int continuer = 1;
     int choixMenu = 1;
+    
+    SDLKey * touche = (SDLKey*)malloc(sizeof(SDLKey));
     
     positionPuce.x = 80;
     positionPuce.y = 150;
@@ -59,44 +55,36 @@ int AfficherMenuRacine(void)
         
         SDL_Flip(SDL_GetVideoSurface());
         
-        SDL_WaitEvent(&event);
-        switch(event.type)
+        AttendreEvent(NULL, touche);
+        switch(*touche)
         {
-            case SDL_QUIT:
-                exit(EXIT_FAILURE);
+            case SDLK_RETURN:
+                continuer = 0;
+            break;
+                    
+            case SDLK_UP:
+                if(choixMenu != 1)
+                {
+                    choixMenu --;
+                    positionPuce.y -= 60;
+                }
             break;
                 
-            case SDL_KEYDOWN:
-                switch(event.key.keysym.sym)
-            {
-                case SDLK_RETURN:
-                    continuer = 0;
-                break;
-                    
-                case SDLK_UP:
-                    if(choixMenu != 1)
-                    {
-                        choixMenu --;
-                        positionPuce.y -= 60;
-                    }
-                break;
+            case SDLK_DOWN:
+                if(choixMenu != 5)
+                {
+                    choixMenu ++;
+                    positionPuce.y += 60;
+                }
+            break;
                 
-                case SDLK_DOWN:
-                    if(choixMenu != 5)
-                    {
-                        choixMenu ++;
-                        positionPuce.y += 60;
-                    }
-                break;
-                    
-                case SDLK_ESCAPE:
-                    exit(EXIT_FAILURE);
-                break;
-            }
+            case SDLK_ESCAPE:
+                exit(EXIT_SUCCESS);
             break;
         }
     }
     
+    free(touche);
     SDL_FreeSurface(puceMenu);
     
     return choixMenu;
@@ -105,8 +93,10 @@ int AfficherMenuRacine(void)
 void MenuNouvellePartie(void)
 {
     ChampSaisie * champPseudoHumain, * champPseudoIA;
-    SDL_Rect positionClic;
     int continuer = 1;
+    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+    SDLKey * touche = (SDLKey*)malloc(sizeof(SDLKey));
+    int controleEvent;
     
     champPseudoHumain = CreerChamp(30, 30, 230, 150);
     champPseudoIA = CreerChamp(30, 30, 230, 200);
@@ -119,24 +109,33 @@ void MenuNouvellePartie(void)
         AfficherChamp(champPseudoHumain, SDL_GetVideoSurface());
         AfficherChamp(champPseudoIA, SDL_GetVideoSurface());
         SDL_Flip(SDL_GetVideoSurface());
-        AttendreClic(&positionClic);
-        if(ClicSurChamp(champPseudoHumain, &positionClic))
+        controleEvent = AttendreEvent(positionClic, touche);
+        if(controleEvent == 1)
         {
-            champPseudoHumain = ChangeFocus(champPseudoHumain, 1);
-            EditerChamp(champPseudoHumain);
+            if(ClicSurChamp(champPseudoHumain, positionClic))
+            {
+                ChangeFocus(champPseudoHumain, CHAMP_ACTIF);
+                EditerChamp(champPseudoHumain);
+            }
+            else if(ClicSurChamp(champPseudoIA, positionClic))
+            {
+                ChangeFocus(champPseudoIA, CHAMP_ACTIF);
+                EditerChamp(champPseudoIA);
+            }
+            else if(ClicSurRetour(positionClic))
+            {
+                continuer = 0;
+            }
         }
-        else if(ClicSurChamp(champPseudoIA, &positionClic))
+        else if(controleEvent == 2)
         {
-            champPseudoIA = ChangeFocus(champPseudoIA, 1);
-            EditerChamp(champPseudoIA);
-        }
-        else if(ClicSurRetour(&positionClic))
-        {
-            continuer = 0;
+            if(*touche == SDLK_ESCAPE)
+                continuer = 0;
         }
     }
     
-
+    free(positionClic);
+    free(touche);
     LibererChamp(champPseudoHumain);
     LibererChamp(champPseudoIA);
 }

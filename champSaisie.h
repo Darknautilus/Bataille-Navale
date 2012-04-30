@@ -4,40 +4,79 @@
 /*
     Ce module implémente la gestion du champ de saisie. Il permet à l'utilisateur de saisir une chaine de caractères
 
+    Un champ de saisie est une structure simple mais efficace qui ne doit être manipulée que sous forme de pointeur.
+    Détaillons les différents champs du champ :
 */
+
+typedef enum{CHAMP_ACTIF,CHAMP_INACTIF} EtatChamp;
 
 typedef struct
 {
-    char * chaine;
-    int longMax;
-    int tailleTexte;
-    int abscisse;
-    int ordonnee;
-    int onFocus;
+    char * chaine;// Chaine tapée dans le champ
+    int longMax;// Longueur maximum de la chaine
+    int tailleTexte;// Taille de la police de texte
+    int abscisse;// Abscisse du champ
+    int ordonnee;// Ordonnee du champ
+    EtatChamp onFocus;// Vaut CHAMP_ACTIF si le champ est actif (mode édition) et CHAMP_INACTIF sinon
 }ChampSaisie;
 
+/*
+    Initialise le champ
+ 
+    longMax : longueur maximale du champ
+    taille : taille de la police
+    abscisse et ordonnee : coordonnees du champ
+*/
 ChampSaisie * CreerChamp(int longMax, int taille, int abscisse, int ordonnee);
 
-ChampSaisie * InitTexte(ChampSaisie * champ, char * texte);
+/*
+    Initialise le champ avec une chaine de caractères
+*/
+void InitTexte(ChampSaisie * champ, char * chaine);
 
+/*
+    Renvoit 1 si la chaine du champ est pleine et 0 sinon
+*/
 int ChainePleine(ChampSaisie * champ);
 
+/*
+    Affiche le champ aux coordonnees données lors de la création.
+    Le deuxième paramètre, l'écran peut être donné avec SDL_GetVideoSurface()
+*/
 void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran);
 
+/*
+    Renvoit 1 si le clic est sur le champ et 0 sinon
+    
+    positionClic : coordonnées du clic
+*/
 int ClicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic);
 
-ChampSaisie * ChangeFocus(ChampSaisie * champ, int val);
+/*
+    Définit le focus du champ (voir champ onFocus de la structure)
+*/
+void ChangeFocus(ChampSaisie * champ, EtatChamp etat);
 
-int EstNombre(SDL_Event * event);
-
-int EstLettre(SDL_Event * event);
-
+/*
+    Supprime le dernier caractère d'une chaine
+*/
 char * SupprimerDernierChar(char * chaine);
 
+/*
+    Ajoute un caractère à la fin de la chaine
+*/
 char * AjouterCharFin(char * chaine, char charEnt);
 
+/*
+    Passe le champ en mode édition (possibilité d'ajouter des caractères et d'en supprimer)
+    Pour sortir du mode édition, il est necessaire de cliquer hors du champ
+*/
 void EditerChamp(ChampSaisie * champ);
 
+/*
+    Supprime le champ en libérant l'espace mémoire
+    Ne pas oublier à la fin du programme
+*/
 void LibererChamp(ChampSaisie * champ);
 
 #endif
