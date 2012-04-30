@@ -10,6 +10,13 @@
         3 - bateau coulé
 */
 
+/*typedef struct
+{
+    int etatCase;
+    int bateau;
+}
+CaseGrille;*/
+
 typedef int * Ligne;
 
 typedef struct

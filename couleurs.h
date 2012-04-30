@@ -4,7 +4,7 @@
 #define KCOULEURS_NBCOULMAX 7
 #define KCOULEURS_LGNOMCOUL 10
 
-typedef enum COLORS {
+typedef enum {
     /*  dark colors     */
     BLACK,
     BLUE,
