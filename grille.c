@@ -24,7 +24,7 @@ Grille * CreerGrille(int nbLin, int nbCol)
 		// Parcours des lignes
 		for(i=0;i<nbLin;i++)
 		{
-			// Allocation de chaque ligne (tableau de reels)
+			// Allocation de chaque ligne (tableau d'entiers)
 			nouvGrille->TabLignes[i] = (int*)malloc(nbCol * sizeof(int));
 			if(nouvGrille->TabLignes[i] == NULL) return NULL;
 			

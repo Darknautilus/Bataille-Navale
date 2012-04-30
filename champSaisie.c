@@ -135,6 +135,8 @@ void EditerChamp(ChampSaisie * champ)
     SDL_Rect positionClic;
     int continuer = 1;
     
+    SDL_EnableUNICODE(SDL_ENABLE);
+    
     while (continuer)
     {
         SDL_WaitEvent(&event);
@@ -158,27 +160,18 @@ void EditerChamp(ChampSaisie * champ)
             break;
             
             case SDL_KEYDOWN:
-                if(!ChainePleine(champ))
-                {
-                    if(EstNombre(&event))
-                    {
-                        champ->chaine = AjouterCharFin(champ->chaine, '0' + event.key.keysym.sym - SDLK_0);
-                    }
-                    else if(EstLettre(&event))
-                    {
-                        champ->chaine = AjouterCharFin(champ->chaine, 'a' + event.key.keysym.sym - SDLK_a);
-                    }
-                }
-                
-                if(event.key.keysym.sym == SDLK_BACKSPACE)
-                {
+                if(!ChainePleine(champ) && event.key.keysym.sym != SDLK_BACKSPACE)
+                    champ->chaine = AjouterCharFin(champ->chaine, (char)event.key.keysym.unicode);
+                else
                     champ->chaine = SupprimerDernierChar(champ->chaine);
-                }
             break;
                 
         }
         AfficherChamp(champ, SDL_GetVideoSurface());
     }
+    
+    SDL_EnableUNICODE(SDL_DISABLE);
+    
 }
 
 void LibererChamp(ChampSaisie * champ)

@@ -13,7 +13,7 @@
 /*typedef struct
 {
     int etatCase;
-    int bateau;
+    TBateau bateau;
 }
 CaseGrille;*/
 
