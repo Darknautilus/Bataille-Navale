@@ -54,37 +54,7 @@ void controleurParametreVersionTest(Tparam *param)
 
 int main()
 {
-    SDL_Surface * ecran;
     
-    int choixMenu;
-    int continuer = 1;
-    
-    ecran = DemarrerSDL(800, 600, "Bataille Navale");
-        
-    AfficherMenuAccueil();
-    
-    while (continuer)
-    {
-        choixMenu = AfficherMenuRacine();
-        EffacerEcran();
-    
-        switch (choixMenu) 
-        {
-            case 1:// Nouvelle Partie
-                MenuNouvellePartie();
-                break;
-            
-            case 5:// Quitter
-                exit(EXIT_SUCCESS);
-                break;
-        }
-    
-        SDL_Flip(ecran);
-    }
-    
-    pause();
-        
-    ArreterSDL();
     
     return 0;
 }
