@@ -1,23 +1,20 @@
+#include <SDL/SDL.h>
 
-
-//#include <conio.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 
 #include "couleurs.h"
 
 const Couleur tableCouleurs[KCOULEURS_NBCOULMAX] = {
-	{'F',"FUSHIA", MAGENTA} ,
-	{'R',"ROUGE", RED},
-	{'B', "BLEU", BLUE},
-	{'C', "CYAN",CYAN },
-	{'M',"MARRON",BROWN},
-	{'J', "JAUNE" ,YELLOW},
-	{'V',"VERT", GREEN}
+	{'F',"FUSHIA", {255,0,255} } ,
+	{'R',"ROUGE", {255,0,0} },
+	{'B', "BLEU", {0,0,255} },
+	{'C', "CYAN", {0,255,255} },
+	{'M',"MARRON", {91,59,17} },
+	{'J', "JAUNE" , {255,255,0} },
+	{'V',"VERT", {0,255,0} }
 } ;
 
-int couleurs_nbCouleurs (void)
+int nbCouleurs (void)
 {
      return KCOULEURS_NBCOULMAX ;
 }
@@ -25,9 +22,8 @@ int couleurs_nbCouleurs (void)
 Couleur lettreToCouleur (char pLettre  )
 {
     int i;
-    for (i=0;i<couleurs_nbCouleurs ();i++)
+    for (i=0;i<nbCouleurs();i++)
         if (tableCouleurs[i].lettre == pLettre) return tableCouleurs[i];
-    return tableCouleurs[0]; // impossible mettre une precondition lettre existe
 }
 
 Couleur getCouleurFromNum (int pI)
@@ -36,18 +32,18 @@ Couleur getCouleurFromNum (int pI)
 }
 
 
-COLORS getColor (Couleur pCouleur)
+SDL_Color getColor (Couleur * pCouleur)
 {
-    return pCouleur.num;
+    return pCouleur->rgb;
 }
 
-char getChar (Couleur pCouleur)
+char getChar (Couleur * pCouleur)
 {
-    return pCouleur.lettre;
+    return pCouleur->lettre;
 }
-void getNom (Couleur pCouleur, char pNom[])
+void getNom (Couleur * pCouleur, char pNom[])
 {
-    strcpy(pNom,pCouleur.nom);
+    strcpy(pNom,pCouleur->nom);
 }
 
 

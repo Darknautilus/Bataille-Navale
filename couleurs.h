@@ -1,49 +1,40 @@
 #ifndef _COULEURS_H
 #define _COULEURS_H
 
+#include <SDL/SDL.h>
+
 #define KCOULEURS_NBCOULMAX 7
 #define KCOULEURS_LGNOMCOUL 10
-
-typedef enum {
-    /*  dark colors     */
-    BLACK,
-    BLUE,
-    GREEN,
-    CYAN,
-    RED,
-    MAGENTA,
-    BROWN,
-    LIGHTGRAY,
-    /*  light colors    */
-    DARKGRAY,
-    LIGHTBLUE,
-    LIGHTGREEN,
-    LIGHTCYAN,
-    LIGHTRED,
-    LIGHTMAGENTA,
-    YELLOW,
-    WHITE
-} COLORS;
 
 typedef
 	struct
 	{
 		char lettre;
 		char nom[KCOULEURS_LGNOMCOUL+1];
-		COLORS  num;
+		SDL_Color rgb;
 	}
 Couleur;
 
-//   mettre une precondition lettre existe retourne la couleur associÈe ‡ la lettre
+int nbCouleurs (void);
+
+/*
+    Retourne la couleur correspondant à la lettre entrée.
+ 
+    lettre doit exister dans le tableau de couleurs
+*/
 Couleur lettreToCouleur (char pLettre);
-//   mettre une precondition ...[pI] dÈfini
-//retourne la couleur ‡ l'indice pI dans le tableau des couleurs  tableCouleurs
+
+/*
+    Retourne la couleur associée à l'indice pI dans le tableau des couleurs.
+ 
+    Le tableau doit avoir au moins pI+1 éléments
+*/
 Couleur getCouleurFromNum (int pI);
 
-// fonction d'accËs ‡ chacun des champs de la structure couleur
-COLORS getColor (Couleur pCouleur);
-char getChar (Couleur pCouleur);
-void getNom (Couleur pCouleur, char pNom[]);
+// fonction d'accès à chacun des champs de la structure couleur
+SDL_Color getColor (Couleur * pCouleur);
+char getChar (Couleur * pCouleur);
+void getNom (Couleur * pCouleur, char pNom[]);
 
 #endif
 

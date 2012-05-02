@@ -26,7 +26,7 @@ int getCouleur(const TInfoBateau * pB)
 	Prec : -
 */
 
-EType getForme(const TInfoBateau * pB)
+EType getType(const TInfoBateau * pB)
 {
     return pB->mType;
 }

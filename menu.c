@@ -10,6 +10,8 @@
 #include "utilsSDL.h"
 #include "vueUtilsSDL.h"
 
+#include "test.h"
+
 void AfficherMenuAccueil(void)
 {
     int continuer = 1;
@@ -22,7 +24,7 @@ void AfficherMenuAccueil(void)
     while(continuer)
     {
         AttendreEvent(NULL, touche);
-        switch(touche->sym)
+        switch(ToucheSpec(touche))
         {
             case SDLK_SPACE:
                 continuer = 0;
@@ -45,6 +47,8 @@ int AfficherMenuRacine(void)
     
     SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
     
+    SDL_EnableUNICODE(SDL_ENABLE);
+    
     positionPuce.x = 80;
     positionPuce.y = 150;
     
@@ -57,7 +61,7 @@ int AfficherMenuRacine(void)
         SDL_Flip(SDL_GetVideoSurface());
         
         AttendreEvent(NULL, touche);
-        switch(touche->sym)
+        switch(ToucheSpec(touche))
         {
             case SDLK_RETURN:
                 continuer = 0;
@@ -83,7 +87,12 @@ int AfficherMenuRacine(void)
                 exit(EXIT_SUCCESS);
             break;
         }
+        
+        if(ToucheChar(touche) == 't')
+            MenuTest();
     }
+    
+    SDL_EnableUNICODE(SDL_DISABLE);
     
     free(touche);
     
@@ -112,6 +121,7 @@ void MenuNouvellePartie(void)
         AfficherChamp(champPseudoHumain, SDL_GetVideoSurface());
         AfficherChamp(champPseudoIA, SDL_GetVideoSurface());
         SDL_Flip(SDL_GetVideoSurface());
+        
         controleEvent = AttendreEvent(positionClic, touche);
         if(controleEvent == 1)
         {
@@ -132,7 +142,7 @@ void MenuNouvellePartie(void)
         }
         else if(controleEvent == 2)
         {
-            if(touche->sym == SDLK_ESCAPE)
+            if(ToucheSpec(touche) == SDLK_ESCAPE)
                 continuer = 0;
         }
     }

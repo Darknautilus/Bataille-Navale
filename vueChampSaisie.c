@@ -32,9 +32,7 @@ void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran)
     
     SDL_BlitSurface(champBG, NULL, ecran, &positionChamp);
     SDL_BlitSurface(texte, NULL, ecran, &positionTexte);
-    
-    SDL_Flip(SDL_GetVideoSurface());
-    
+        
     SDL_FreeSurface(champBG);
     SDL_FreeSurface(texte);
     TTF_CloseFont(police);
@@ -70,13 +68,14 @@ void EditerChamp(ChampSaisie * champ)
         }
         else if(etatEvent == 2)
         {
-            if(touche->sym == SDLK_BACKSPACE)
+            if(ToucheSpec(touche) == SDLK_BACKSPACE)
                 champ->chaine = SupprimerDernierChar(champ->chaine);
             else
-                champ->chaine = AjouterCharFin(champ->chaine, (char)(touche->unicode));
+                champ->chaine = AjouterCharFin(champ->chaine, ToucheChar(touche));
             
         }
         AfficherChamp(champ, SDL_GetVideoSurface());
+        SDL_Flip(SDL_GetVideoSurface());
     }
     
     SDL_EnableUNICODE(SDL_DISABLE);

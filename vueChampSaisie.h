@@ -1,6 +1,7 @@
 #ifndef VUE_CHAMP_SAISIE_H
 #define VUE_CHAMP_SAISIE_H
 
+#include "champSaisie.h"
 
 /*
  Affiche le champ aux coordonnees données lors de la création.
