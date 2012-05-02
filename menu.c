@@ -3,14 +3,18 @@
 #include <SDL_ttf/SDL_ttf.h>
 
 #include "menu.h"
+
 #include "champSaisie.h"
+#include "vueChampSaisie.h"
+
 #include "utilsSDL.h"
+#include "vueUtilsSDL.h"
 
 void AfficherMenuAccueil(void)
 {
     int continuer = 1;
     
-    SDLKey * touche = (SDLKey*)malloc(sizeof(SDLKey));
+    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
     
     ImageFond("Images/menuAccueil.png");
     SDL_Flip(SDL_GetVideoSurface());
@@ -18,7 +22,7 @@ void AfficherMenuAccueil(void)
     while(continuer)
     {
         AttendreEvent(NULL, touche);
-        switch(*touche)
+        switch(touche->sym)
         {
             case SDLK_SPACE:
                 continuer = 0;
@@ -35,13 +39,11 @@ void AfficherMenuAccueil(void)
 
 int AfficherMenuRacine(void)
 {
-    SDL_Surface *puceMenu;
     SDL_Rect positionPuce;
-    SDL_Event event;
     int continuer = 1;
     int choixMenu = 1;
     
-    SDLKey * touche = (SDLKey*)malloc(sizeof(SDLKey));
+    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
     
     positionPuce.x = 80;
     positionPuce.y = 150;
@@ -50,13 +52,12 @@ int AfficherMenuRacine(void)
     {
         ImageFond("Images/menuRacine.png");
         
-        puceMenu = IMG_Load("Images/puceMenu.png");
-        SDL_BlitSurface(puceMenu, NULL, SDL_GetVideoSurface(), &positionPuce);
+        AfficherImage("Images/puceMenu.png", positionPuce);
         
         SDL_Flip(SDL_GetVideoSurface());
         
         AttendreEvent(NULL, touche);
-        switch(*touche)
+        switch(touche->sym)
         {
             case SDLK_RETURN:
                 continuer = 0;
@@ -85,7 +86,6 @@ int AfficherMenuRacine(void)
     }
     
     free(touche);
-    SDL_FreeSurface(puceMenu);
     
     return choixMenu;
 }
@@ -95,11 +95,14 @@ void MenuNouvellePartie(void)
     ChampSaisie * champPseudoHumain, * champPseudoIA;
     int continuer = 1;
     SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
-    SDLKey * touche = (SDLKey*)malloc(sizeof(SDLKey));
+    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
     int controleEvent;
     
     champPseudoHumain = CreerChamp(30, 30, 230, 150);
     champPseudoIA = CreerChamp(30, 30, 230, 200);
+    
+    InitTexte(champPseudoHumain, "Anonyme");
+    InitTexte(champPseudoIA, "GlaDos");
     
     ImageFond("Images/menuNouvellePartie.png");
     ImageRetour("Images/flecheRetour.png");
@@ -129,7 +132,7 @@ void MenuNouvellePartie(void)
         }
         else if(controleEvent == 2)
         {
-            if(*touche == SDLK_ESCAPE)
+            if(touche->sym == SDLK_ESCAPE)
                 continuer = 0;
         }
     }

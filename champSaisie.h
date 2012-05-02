@@ -40,12 +40,6 @@ void InitTexte(ChampSaisie * champ, char * chaine);
 int ChainePleine(ChampSaisie * champ);
 
 /*
-    Affiche le champ aux coordonnees données lors de la création.
-    Le deuxième paramètre, l'écran peut être donné avec SDL_GetVideoSurface()
-*/
-void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran);
-
-/*
     Renvoit 1 si le clic est sur le champ et 0 sinon
     
     positionClic : coordonnées du clic
@@ -66,12 +60,6 @@ char * SupprimerDernierChar(char * chaine);
     Ajoute un caractère à la fin de la chaine
 */
 char * AjouterCharFin(char * chaine, char charEnt);
-
-/*
-    Passe le champ en mode édition (possibilité d'ajouter des caractères et d'en supprimer)
-    Pour sortir du mode édition, il est necessaire de cliquer hors du champ
-*/
-void EditerChamp(ChampSaisie * champ);
 
 /*
     Supprime le champ en libérant l'espace mémoire
