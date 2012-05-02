@@ -102,6 +102,16 @@ int AttendreEvent(SDL_Rect * coordClic, SDL_keysym * touche)
     return controle;
 }
 
+char ToucheChar(SDL_keysym * touche)
+{
+    return (char)(touche->unicode);
+}
+
+SDLKey ToucheSpec(SDL_keysym * touche)
+{
+    return touche->sym;
+}
+
 void EffacerEcran(void)
 {
     SDL_FillRect(SDL_GetVideoSurface(), NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, 0, 0, 0));

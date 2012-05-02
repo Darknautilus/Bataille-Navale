@@ -39,6 +39,26 @@ void EcrireTexte(char * texte, int taille, int abscisse, int ordonnee);
  */
 int AttendreEvent(SDL_Rect * coordClic, SDL_keysym * touche);
 
+/*
+    Renvoit le caractere Unicode correspondant à la touche tapée
+ 
+    touche : touche récupérée avec la fonction AttendreEvent()
+ 
+    Attention, le traitement du retour de cette fonction nécessite Unicode activé.
+    Utiliser SDL_EnableUNICODE(SDL_ENABLE) au début du programme appelant et SDL_EnableUNICODE(SDL_DISABLE) à la fin.
+*/
+char ToucheChar(SDL_keysym * touche);
+
+/*
+    Renvoit la valeur de la touche tapée
+ 
+    touche : touche récupérée avec la fonction AttendreEvent()
+
+    Le retour de cette fonction peut être utilisé pour tester si la touche appuyée est RETURN ou BACKSPACE par exemple, 
+    pour les caractères normaux, voir ToucheCar()
+*/
+SDLKey ToucheSpec(SDL_keysym * touche);
+
 // Efface l'ecran en cours
 void EffacerEcran(void);
 

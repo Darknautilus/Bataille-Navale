@@ -70,7 +70,6 @@ int main()
     while (continuer)
     {
         choixMenu = AfficherMenuRacine();
-        EffacerEcran();
     
         switch (choixMenu) 
         {
@@ -79,15 +78,11 @@ int main()
                 break;
             
             case 5:// Quitter
-                exit(EXIT_SUCCESS);
+                continuer = 0;
                 break;
-        }
-    
-        SDL_Flip(ecran);
+        }    
     }
-    
-    pause();
-        
+            
     ArreterSDL();
     
     return 0;
