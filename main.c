@@ -1,8 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+// Permet la portabilité du programme
+#ifdef _WIN32
+
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+
+#else
+
 #include <SDL/SDL.h>
 #include <SDL_image/SDL_image.h>
 #include <SDL_ttf/SDL_ttf.h>
+
+#endif
 
 #include "utilsSDL.h"
 #include "vueUtilsSDL.h"
@@ -56,7 +68,7 @@ void controleurParametreVersionTest(Tparam *param)
 }
 
 
-int main()
+int main(int argc, char ** argv)
 {
     SDL_Surface * ecran;
     

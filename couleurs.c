@@ -1,4 +1,13 @@
+// Permet la portabilité du programme
+#ifdef _WIN32
+
+#include <SDL.h>
+
+#else
+
 #include <SDL/SDL.h>
+
+#endif
 
 #include <string.h>
 
