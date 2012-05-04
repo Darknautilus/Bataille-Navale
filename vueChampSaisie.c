@@ -1,13 +1,13 @@
 // Permet la portabilité du programme
-#ifdef _WIN32
-
-#include <SDL.h>
-#include <SDL_ttf.h>
-
-#else
+#ifdef __APPLE__
 
 #include <SDL/SDL.h>
 #include <SDL_ttf/SDL_ttf.h>
+
+#else
+
+#include <SDL.h>
+#include <SDL_ttf.h>
 
 #endif
 

@@ -2,13 +2,13 @@
 #include <stdlib.h>
 
 // Permet la portabilité du programme
-#ifdef _WIN32
+#ifdef __APPLE__
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 #else
 
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 #endif
 

@@ -1,13 +1,14 @@
 // Permet la portabilité du programme
-#ifdef _WIN32
-
-#include <SDL.h>
-
-#else
+#ifdef __APPLE__
 
 #include <SDL/SDL.h>
 
+#else
+
+#include <SDL.h>
+
 #endif
+
 
 #include "vueUtilsSDL.h"
 #include "vueChampSaisie.h"
