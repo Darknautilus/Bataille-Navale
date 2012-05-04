@@ -1,5 +1,15 @@
+// Permet la portabilité du programme
+#ifdef __APPLE__
+
 #include <SDL/SDL.h>
 #include <SDL_ttf/SDL_ttf.h>
+
+#else
+
+#include <SDL.h>
+#include <SDL_ttf.h>
+
+#endif
 
 #include "utilsSDL.h"
 
