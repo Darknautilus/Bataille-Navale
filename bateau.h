@@ -4,19 +4,19 @@
 
 
 
-typedef enum  {horizontal,  vertical} ESens;
+typedef enum  {SENS_HORIZONTAL, SENS_VERTICAL} ESens;
 
 typedef struct
 {
-    ESens mDirection;
-    int mLatitude;
-    char mLongitude; /* en fait position dans la grille de jeu du point en haut à gauche */
+    ESens direction;
+    int abscisse;
+    char ordonnee; /* en fait position dans la grille de jeu du point en haut à gauche */
 }   TPosition;
 
 
 typedef struct
 {
-    TPosition mCoordonnees;
+    TPosition coordonnees;
     int idInfoBateau;
     //completer par exemple avec des informations sur l'etat du bateau
 }   TBateau;

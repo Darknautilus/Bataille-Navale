@@ -1,14 +1,54 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 
+// Permet la portabilitÃ© du programme
+#ifdef _WIN32
 
-#include "util.h"
-#include "bateau.h"
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+
+#else
+
+#include <SDL/SDL.h>
+#include <SDL_image/SDL_image.h>
+#include <SDL_ttf/SDL_ttf.h>
+
+#endif
+
+#include "utilsSDL.h"
+#include "vueUtilsSDL.h"
+
+#include "menu.h"
+
 #include "parametre.h"
-#include "vuev1.h"
-#include "lietrec.h"
+
+#include "grille.h"
 #include "vueGrille.h"
+
+#include "champSaisie.h"
+#include "vueChampSaisie.h"
+
+void pause()
+{
+    int continuer = 1;
+    SDL_Event event;
+    
+    while(continuer)
+    {
+        SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                exit(EXIT_FAILURE);
+                break;
+            case SDL_KEYDOWN:
+                continuer = 0;
+                break;
+        }
+    }
+    
+}
 
 void controleurParametreVersionTest(Tparam *param)
 {
@@ -28,50 +68,34 @@ void controleurParametreVersionTest(Tparam *param)
 }
 
 
-int main()
+int main(int argc, char ** argv)
 {
-    FILE * f;
-    char c;
-
-
-    Tparam param;
-    initRandom();// pour initialiser la suite de valeurs aléatoires cf util.h
-
-    controleurParametreVersionTest(&param);
-
-
-    // afficher les paramètres de la partie
-    afficherParam(&param);
-
-    // sauver les paramètres de la partie dans un fichier essai.don
-    f = fopen ("essai.don", "wb");
-    if (f==NULL) exit (1);
-    memParam(&param, f);
-    fclose(f);
-
-     //lire les paramètres sauves dans essai.don
-    f = fopen ("essai.don", "rb");
-    if (f==NULL) exit (1);
-    chargerParam(f,&param);
-    fclose(f);
-
-    textcolor(YELLOW);
-
-    // afficher les paramètres de la partie
-    afficherParam(&param);
-    scanf("%c",&c);
-    clrscr();
-    initConsoleJeu();
-
-    // afficher les paramètres de la partie
-    //afficherParam(&param);
-  //  scanf("%c",&c);
-    clrscr();
-
-    afficherToutEnTest();
-
-    gotoxy( 30,50);
-    scanf("%c",&c);
-
+    SDL_Surface * ecran;
+    
+    int choixMenu;
+    int continuer = 1;
+    
+    ecran = DemarrerSDL(800, 600, "Bataille Navale");
+        
+    AfficherMenuAccueil();
+    
+    while (continuer)
+    {
+        choixMenu = AfficherMenuRacine();
+    
+        switch (choixMenu) 
+        {
+            case 1:// Nouvelle Partie
+                MenuNouvellePartie();
+                break;
+            
+            case 5:// Quitter
+                continuer = 0;
+                break;
+        }    
+    }
+            
+    ArreterSDL();
+    
     return 0;
 }

@@ -1,5 +1,5 @@
 #include "parametre.h"
-#include <malloc.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include <string.h>
@@ -26,7 +26,7 @@ int getCouleur(const TInfoBateau * pB)
 	Prec : -
 */
 
-EType getForme(const TInfoBateau * pB)
+EType getType(const TInfoBateau * pB)
 {
     return pB->mType;
 }

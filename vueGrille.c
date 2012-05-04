@@ -1,136 +1,113 @@
+// Permet la portabilit√© du programme
+#ifdef _WIN32
 
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
 
+#else
 
+#include <SDL/SDL.h>
+#include <SDL_image/SDL_image.h>
+#include <SDL_ttf/SDL_ttf.h>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <conio.h>
+#endif
 
+#include "grille.h"
+#include "vueGrille.h"
 
-#include <unistd.h>
-#include <windows.h>
-#include "lietrec.h"
-#include "coniocouleur.h"
-#define KDELTAX 4
-#define KDELTAY 2
-
-
-void afficherGrille(int px, int py, int pnbLignes, int pnbColonnes, COLORS pCouleur)
+void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordonnee)
 {
-    int i;
-    textcolor(YELLOW);
-
-    //affiche colonne chiffres
-    for (i=0;i<pnbLignes;i++)
+    SDL_Surface * caseGrille, * numCase;
+    SDL_Rect positionCaseGrille, positionNumCase;
+    TTF_Font * policeGrille;
+    SDL_Color couleurBlanche = {255,255,255};
+    
+    int i,j;
+    char * labelLin = (char*)malloc(2*sizeof(char));
+    char * labelCol = (char*)malloc(2*sizeof(char));
+    
+    grille->abscisse = abscisse;
+    grille->ordonnee = ordonnee;
+    
+    caseGrille = SDL_CreateRGBSurface(SDL_HWSURFACE, 30, 30, 32, 0, 0, 0, 0);
+    
+    policeGrille = TTF_OpenFont("Fonts/apple.ttf", 30);
+    
+    for(i=0;i<grille->NbLin;i++)
     {
-        gotoxy(px-2, py+1+KDELTAY*i);
-        cprintf("%c",'A' + i);
+        sprintf(labelLin, "%c", 'A'+i);
+        numCase = TTF_RenderText_Solid(policeGrille, labelLin, couleurBlanche);
+        positionNumCase.x = abscisse - 30;
+        positionNumCase.y = ordonnee + i * 30;
+        SDL_BlitSurface(numCase, NULL, ecran, &positionNumCase);
+        
+        for (j=0; j<grille->NbCol; j++)
+        {
+            sprintf(labelCol, "%d", j+1);
+            numCase = TTF_RenderText_Solid(policeGrille, labelCol, couleurBlanche);
+            positionNumCase.x = abscisse + j*30;
+            positionNumCase.y = ordonnee - 30;
+            SDL_BlitSurface(numCase, NULL, ecran, &positionNumCase);
+            
+            switch(Consulter(grille, i+1, j+1))
+            {
+                case 0:
+                    caseGrille = IMG_Load("Images/caseVide.png");
+                    break;
+                case 1:
+                    caseGrille = IMG_Load("Images/caseBateau.png");
+                    break;
+                case 2:
+                    caseGrille = IMG_Load("Images/caseBateauTouche.png");
+                    break;
+                case 3:
+                    caseGrille = IMG_Load("Images/caseBateauCoule.png");
+                    break;
+            }
+            
+            positionCaseGrille.x = j*30 + abscisse;
+            positionCaseGrille.y = i*30 + ordonnee;
+            
+            SDL_BlitSurface(caseGrille, NULL, ecran,&positionCaseGrille);
+            
+        }
     }
-
-    //affiche ligne chiffres
-     for (i=0;i<pnbColonnes;i++)
-    {
-        gotoxy(px+1+KDELTAX*i, py-1);
-        cprintf("%d",i+1);
-    }
-
-    //trace rectangle
-    tracerRectangle(px, py, KDELTAX*pnbColonnes, KDELTAY*pnbLignes);
-
-    //trace lignes horizontales
-    for (i=2;i<=pnbLignes;i++)
-    {
-        tracerLigneH(px, py-2+KDELTAY*i,KDELTAX*pnbColonnes);
-    }
-    for (i=1;i<=pnbColonnes;i++)
-    {
-        gotoxy(KDELTAX*i, py-3);
-      //  cprintf("%d",i-1);
-        tracerLigneV(KDELTAX*i+px-KDELTAX, py+1, KDELTAY*pnbLignes-1);
-    }
+    
+    SDL_Flip(ecran);
+    
+    SDL_FreeSurface(caseGrille);
+    SDL_FreeSurface(numCase);
+    TTF_CloseFont(policeGrille);
 }
-void afficherCaractereDansGrille(COLORS pcouleurCaractere,COLORS pcouleurFond,char pcaractere,int  ppositionXGrille,int ppositionYGrille,int pligne,int pcolonne)
+
+void updateGrille(Grille * grille, SDL_Surface * ecran, int noLin, int noCol)
 {
-    char text[4];
-    text[0]=' ';
-    text[1]=pcaractere;
-    text[2]=' ';
-    text[3]='\0';
-    textcolor((pcouleurCaractere)|(pcouleurFond<<4));
-    gotoxy(  ppositionXGrille+(pcolonne-1)*KDELTAX+1, ppositionYGrille +(pligne-1)*KDELTAY+1);
-    cprintf("%s",text);
+    SDL_Surface * caseGrille;
+    SDL_Rect positionCaseGrille;
+    
+    positionCaseGrille.x = grille->abscisse + 30 * (noCol-1);
+    positionCaseGrille.y = grille->ordonnee + 30 * (noLin-1);
+    
+    caseGrille = SDL_CreateRGBSurface(SDL_HWSURFACE, 30, 30, 32, 0, 0, 0, 0);
+    
+    switch(Consulter(grille, noLin, noCol))
+    {
+        case 0:
+            caseGrille = IMG_Load("Images/caseVide.png");
+            break;
+        case 1:
+            caseGrille = IMG_Load("Images/caseBateau.png");
+            break;
+        case 2:
+            caseGrille = IMG_Load("Images/caseBateauTouche.png");
+            break;
+        case 3:
+            caseGrille = IMG_Load("Images/caseBateauCoule.png");
+            break;
+    }
+    
+    SDL_BlitSurface(caseGrille, NULL, ecran,&positionCaseGrille);
+    SDL_Flip(ecran);
+    SDL_FreeSurface(caseGrille);
 }
-
-void afficherToutEnTest()
-{
-    int haut =10;
-    int gauche =20;
-
-
-    gotoxy( gauche,haut/2);
-    textcolor((BLACK)|(LIGHTCYAN<<4));
-    cprintf("%s","mettre le nom du joueur");
-    afficherGrille(gauche,haut,10,10,YELLOW );
-    afficherGrille(gauche + 80 ,haut,10,10,YELLOW );
-
-    afficherCaractereDansGrille(BLACK, LIGHTCYAN, 'A', gauche, haut, 1, 5);
-
-    afficherCaractereDansGrille (WHITE,LIGHTRED,'*',gauche, haut, 4,6);
-}
-
-
-/*
-int afficherGrille()
-{
-
-    char c;
-    int i;
-    int ligne,colonne;
-
-
-    textcolor(YELLOW);
-
-    // afficher les paramËtres de la partie
-    //afficherParam(&param);
-  //  scanf("%c",&c);
-    clrscr();
-
-    //affiche colonne chiffres
-     for (i=0;i<=9;i++)
-    {
-        gotoxy(1, 4+2*i);
-        cprintf("%c",'A' + i);
-
-    }
-
-        //affiche ligne chiffres
-     for (i=0;i<=9;i++)
-    {
-        gotoxy(4+3*i, 2);
-        cprintf("%d",i+1);
-
-    }
-
-    //trace rectangle
-    tracerRectangle(3, 3, 30, 20);
-
-
-
-
-    //trace lignes horizontales
-    for (i=2;i<=10;i++)
-    {
-        tracerLigneH(3, 1+2*i, 30);
-    }
-
-
-    for (i=1;i<=10;i++)
-    {
-        gotoxy(3*i, 0);
-      //  cprintf("%d",i-1);
-        tracerLigneV(3*i, 4, 19);
-    }
-
-    return 0;
-}
-*/
