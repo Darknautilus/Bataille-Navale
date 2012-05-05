@@ -29,6 +29,8 @@ typedef struct
 }
 Grille;
 
+typedef struct {int noLin ; int noCol ; } Coord;
+
 /*
  CreerGrille
  
@@ -45,7 +47,7 @@ Grille * CreerGrille(int nbLin, int nbCol);
  
  ligne et colonne doivent etre coherents avec les dimensions de la matrice
  */
-int Consulter(Grille * grille, int ligne, int colonne);
+int Consulter(Grille * grille, Coord coord);
 
 /*
     SetVal
@@ -54,7 +56,7 @@ int Consulter(Grille * grille, int ligne, int colonne);
  
     La grille n'accepte que 0, 1, 2 et 3, la grille doit être initialisée
 */
-Grille * SetVal(Grille * grille, int ligne, int colonne, int valEnt);
+Grille * SetVal(Grille * grille, Coord coord, int valEnt);
 
 /*
     Effacer

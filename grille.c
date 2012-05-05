@@ -43,14 +43,14 @@ Grille * CreerGrille(int nbLin, int nbCol)
 	}	
 }
 
-int Consulter(Grille * grille, int ligne, int colonne)
+int Consulter(Grille * grille, Coord coord)
 {
-	return grille->TabLignes[ligne-1][colonne-1];
+	return grille->TabLignes[coord.noLin-1][coord.noCol-1];
 }
 
-Grille * SetVal(Grille * grille, int ligne, int colonne, int valEnt)
+Grille * SetVal(Grille * grille, Coord coord, int valEnt)
 {
-    grille->TabLignes[ligne-1][colonne-1] = valEnt;
+    grille->TabLignes[coord.noLin-1][coord.noCol-1] = valEnt;
     
     return grille;
 }
