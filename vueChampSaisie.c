@@ -20,7 +20,7 @@ void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran)
 {
     SDL_Surface * champBG, * texte;
     TTF_Font * police;
-    SDL_Color couleurTexte = {0,0,0};
+    SDL_Color couleurTexte = {KCOULTXT_R,KCOULTXT_G,KCOULTXT_B};
     SDL_Rect positionChamp, positionTexte;
     Uint32 couleurFondChamp;
     
@@ -28,14 +28,14 @@ void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran)
     
     positionChamp.x = champ->abscisse;
     positionChamp.y = champ->ordonnee;
-    positionTexte.x = champ->abscisse+5;
-    positionTexte.y = champ->ordonnee+5;
+    positionTexte.x = champ->abscisse+KESP_HORI;
+    positionTexte.y = champ->ordonnee+KESP_VERT;
     
-    champBG = SDL_CreateRGBSurface(SDL_HWSURFACE, champ->longMax*13+20, champ->tailleTexte+10, 32, 0, 0, 0, 0);
+    champBG = SDL_CreateRGBSurface(SDL_HWSURFACE, champ->longMax*KLARGCHAR+2*KESP_HORI, champ->tailleTexte+2*KESP_VERT, 32, 0, 0, 0, 0);
     if(champ->onFocus == CHAMP_ACTIF)
-        couleurFondChamp = SDL_MapRGB(champBG->format, 255, 255, 255);
+        couleurFondChamp = SDL_MapRGB(champBG->format, KCOULEDIT_R, KCOULEDIT_G, KCOULEDIT_B);
     else
-        couleurFondChamp = SDL_MapRGB(champBG->format, 200, 207, 212);
+        couleurFondChamp = SDL_MapRGB(champBG->format, KCOULNORM_R, KCOULNORM_G, KCOULNORM_B);
     SDL_FillRect(champBG, NULL, couleurFondChamp);
     
     texte = TTF_RenderText_Blended(police, champ->chaine, couleurTexte);
@@ -90,4 +90,17 @@ void EditerChamp(ChampSaisie * champ)
     
     SDL_EnableUNICODE(SDL_DISABLE);
     
+    free(positionClic);
+    free(touche);
+}
+
+int ClicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic)
+{    
+    if(positionClic->x >= champ->abscisse && positionClic->x <= champ->abscisse+champ->longMax*13+20 &&
+       positionClic->y >= champ->ordonnee && positionClic->y <= champ->ordonnee+champ->tailleTexte+10)
+    {
+        return 1;
+    }
+    else
+        return 0;
 }

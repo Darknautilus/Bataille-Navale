@@ -19,6 +19,21 @@ void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordo
  
  grille doit être initialisée, noLin et noCol doivent être cohérents avec les dimensions de la grille
  */
-void updateGrille(Grille * grille, SDL_Surface * ecran, int noLin, int noCol);
+void updateGrille(Grille * grille, SDL_Surface * ecran, Coord coord);
+
+/*
+    ClicCaseGrille
+ 
+    Détermine la case qui a été cliquée
+*/
+Coord ClicCaseGrille(Grille * grille, SDL_Rect * positionClic);
+
+/*
+    ClicDansGrille
+ 
+    Détermine si un clic est sur la grille (1) ou non (0)
+*/
+int ClicDansGrille(Grille * grille, SDL_Rect * positionClic);
+
 
 #endif

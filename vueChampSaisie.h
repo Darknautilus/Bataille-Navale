@@ -15,4 +15,11 @@ void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran);
  */
 void EditerChamp(ChampSaisie * champ);
 
+/*
+ Renvoit 1 si le clic est sur le champ et 0 sinon
+ 
+ positionClic : coordonnées du clic
+ */
+int ClicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic);
+
 #endif

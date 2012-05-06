@@ -69,7 +69,7 @@ void EcrireTexte(char * texte,int taille, int abscisse, int ordonnee)
     position.x = abscisse;
     position.y = ordonnee;
     
-    zoneTexte = TTF_RenderText_Blended(police, texte, couleur);
+    zoneTexte = TTF_RenderUTF8_Blended(police, texte, couleur);
     SDL_BlitSurface(zoneTexte, NULL, SDL_GetVideoSurface(), &position);
     SDL_FreeSurface(zoneTexte);
     

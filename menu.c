@@ -21,6 +21,9 @@
 #include "utilsSDL.h"
 #include "vueUtilsSDL.h"
 
+
+#include "vueGrille.h"
+
 #include "test.h"
 
 void AfficherMenuAccueil(void)
@@ -124,11 +127,13 @@ void MenuNouvellePartie(void)
     InitTexte(champPseudoHumain, "Anonyme");
     InitTexte(champPseudoIA, "GlaDos");
     
-    ImageFond("Images/menuNouvellePartie.png");
-    ImageRetour("Images/flecheRetour.png");
-    
     while (continuer)
     {
+        ImageFond("Images/menuNouvellePartie.png");
+        ImageRetour("Images/flecheRetour.png");
+        
+        EcrireTexte("Appuyez sur Entree pour continuer", 30, 270, 400);
+        
         AfficherChamp(champPseudoHumain, SDL_GetVideoSurface());
         AfficherChamp(champPseudoIA, SDL_GetVideoSurface());
         SDL_Flip(SDL_GetVideoSurface());
@@ -155,6 +160,8 @@ void MenuNouvellePartie(void)
         {
             if(ToucheSpec(touche) == SDLK_ESCAPE)
                 continuer = 0;
+            else if(ToucheSpec(touche) == SDLK_RETURN)
+                EcranGrille(champPseudoHumain);
         }
     }
     
@@ -162,4 +169,52 @@ void MenuNouvellePartie(void)
     free(touche);
     LibererChamp(champPseudoHumain);
     LibererChamp(champPseudoIA);
+}
+
+void EcranGrille(ChampSaisie * champ)
+{
+    Grille * grilleJoueur;
+    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+    int controleEvent;
+    Coord coord;
+
+    int continuer = 1;
+
+    
+    grilleJoueur = CreerGrille(10, 10);
+    
+    EffacerEcran();
+    afficherGrille(grilleJoueur, SDL_GetVideoSurface(), 40, 100);
+    
+    EcrireTexte(champ->chaine, 40, 40, 20);
+        
+    while (continuer)
+    {
+        SDL_Flip(SDL_GetVideoSurface());
+        controleEvent = AttendreEvent(positionClic, touche);
+        if(controleEvent == 2)
+        {
+            if(ToucheSpec(touche) == SDLK_ESCAPE)
+                continuer = 0;
+        }
+        else
+        {
+            coord = ClicCaseGrille(grilleJoueur, positionClic);
+            if(ClicDansGrille(grilleJoueur, positionClic))
+            {
+                if(Consulter(grilleJoueur, coord) == 0)
+                    grilleJoueur = SetVal(grilleJoueur, coord, 1);
+                else if(Consulter(grilleJoueur, coord) == 1)
+                    grilleJoueur = SetVal(grilleJoueur, coord, 0);
+                
+                updateGrille(grilleJoueur, SDL_GetVideoSurface(), coord);
+            }
+        }
+    }
+    
+    LibererGrille(grilleJoueur);
+    
+    free(touche);
+    free(positionClic);
 }
