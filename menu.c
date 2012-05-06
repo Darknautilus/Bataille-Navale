@@ -213,6 +213,8 @@ void EcranGrille(ChampSaisie * champ)
         }
     }
     
+    LibererGrille(grilleJoueur);
+    
     free(touche);
     free(positionClic);
 }

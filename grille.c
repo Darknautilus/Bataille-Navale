@@ -31,7 +31,7 @@ Grille * CreerGrille(int nbLin, int nbCol)
 			// Et on remplit avec des 0
 			for(j=0;j<nbCol;j++)
 			{
-				nouvGrille->TabLignes[i][j] = 0;
+				nouvGrille->TabLignes[i][j] = GRILLE_CASE_VIDE;
 			}
 		}
         
@@ -55,7 +55,7 @@ Grille * SetVal(Grille * grille, Coord coord, int valEnt)
     return grille;
 }
 
-Grille * Effacer(Grille * grille)
+Grille * EffacerGrille(Grille * grille)
 {
     int i,j;
 	
@@ -66,4 +66,15 @@ Grille * Effacer(Grille * grille)
     }
     
 	return grille;
+}
+
+void LibererGrille(Grille * grille)
+{
+    int i;
+    
+    for(i=0;i<grille->NbLin;i++)
+        free(grille->TabLignes[i]);
+    
+    free(grille->TabLignes);
+    free(grille);
 }

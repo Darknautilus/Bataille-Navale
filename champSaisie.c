@@ -1,16 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-// Permet la portabilité du programme
-#ifdef __APPLE__
-
-#include <SDL/SDL.h>
-
-#else
-
-#include <SDL.h>
-
-#endif
+#include <string.h>
 
 #include "champSaisie.h"
 
@@ -41,17 +31,6 @@ int ChainePleine(ChampSaisie * champ)
         return 0;
     else
         return 1;
-}
-
-int ClicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic)
-{    
-    if(positionClic->x >= champ->abscisse && positionClic->x <= champ->abscisse+champ->longMax*13+20 &&
-        positionClic->y >= champ->ordonnee && positionClic->y <= champ->ordonnee+champ->tailleTexte+10)
-    {
-        return 1;
-    }
-    else
-        return 0;
 }
 
 void ChangeFocus(ChampSaisie * champ, EtatChamp etat)
