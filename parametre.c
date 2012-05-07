@@ -1,8 +1,9 @@
 #include "parametre.h"
+
 #include <stdlib.h>
 #include <string.h>
-
 #include <string.h>
+
 //***************************
 /*	N : getCouleur
 	D : donne le l'index de la couleur dans la table des couleurs de couleurs.h/.c de la couleur de l'info bateau pB
@@ -14,7 +15,7 @@
 
 int getCouleur(const TInfoBateau * pB)
 {
-    return pB->mCouleur;
+	return pB->mCouleur;
 }
 
 //***************************
@@ -28,7 +29,7 @@ int getCouleur(const TInfoBateau * pB)
 
 EType getType(const TInfoBateau * pB)
 {
-    return pB->mType;
+	return pB->mType;
 }
 
 
@@ -43,7 +44,7 @@ EType getType(const TInfoBateau * pB)
 
 void getBNom(const TInfoBateau * pB, char pNom[]) //voir tp sur les chaines de caractères dynamique*/
 {
-    strcpy(pNom,pB->mNom);
+	strcpy(pNom,pB->mNom);
 }
 
 //***************************
@@ -56,9 +57,9 @@ void getBNom(const TInfoBateau * pB, char pNom[]) //voir tp sur les chaines de c
 */
 void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , EType pType)
 {
-    pB->mCouleur=pCouleur;
-    pB->mType=pType;
-    strcpy(pB->mNom,pNom);
+	pB->mCouleur=pCouleur;
+	pB->mType=pType;
+	strcpy(pB->mNom,pNom);
 }
 
 
@@ -73,7 +74,7 @@ void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , EType pType)
 */
 int getNBInstances (const Tparam * pParam)
 {
-    return pParam->mNombreInstanceBateaux;
+	return pParam->mNombreInstanceBateaux;
 }
 
 
@@ -87,11 +88,16 @@ int getNBInstances (const Tparam * pParam)
 	Prec : le pNum eme bateau  existe
 */
 
-TInfoBateau *getInfoBateau(int pNum ,const Tparam * pParam)
+TInfoBateau * getInfoBateau(int pNum ,const Tparam * pParam)
 {
-    if (pNum<K_NBTYPEBATEAUX*getNBInstances (pParam))
-        return &(pParam->mBateauxDuJoueur[pNum]);
-    return &(pParam->mBateauxMachine[pNum-K_NBTYPEBATEAUX*getNBInstances (pParam)]);
+	TInfoBateau * infoBat;
+
+	if (pNum < K_NBTYPEBATEAUX * getNBInstances (pParam))
+		infoBat = &(pParam->mBateauxDuJoueur[pNum]);
+	else
+		infoBat = &(pParam->mBateauxMachine[pNum-K_NBTYPEBATEAUX*getNBInstances (pParam)]);
+
+	return infoBat;
 }
 
 
@@ -107,15 +113,16 @@ TInfoBateau *getInfoBateau(int pNum ,const Tparam * pParam)
 
 void chargerParam(FILE * pDesc, Tparam * pParam)
 {
-   /* Tparam param; pour eviter recopie*/
-    int nb;
-    fread (&(pParam->mNombreInstanceBateaux), sizeof(int), 1, pDesc);
-    nb = K_NBTYPEBATEAUX*getNBInstances (pParam);
-    pParam->mBateauxDuJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-    pParam->mBateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-    fread ((pParam->mBateauxDuJoueur), sizeof(TInfoBateau), nb, pDesc);
-    fread ((pParam->mBateauxMachine), sizeof(TInfoBateau), nb, pDesc);
-   /* return param;*/
+	/* Tparam param; pour eviter recopie*/
+	int nb;
+
+	fread (&(pParam->mNombreInstanceBateaux), sizeof(int), 1, pDesc);
+	nb = K_NBTYPEBATEAUX*getNBInstances (pParam);
+	pParam->mBateauxDuJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
+	pParam->mBateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
+	fread ((pParam->mBateauxDuJoueur), sizeof(TInfoBateau), nb, pDesc);
+	fread ((pParam->mBateauxMachine), sizeof(TInfoBateau), nb, pDesc);
+	/* return param;*/
 }
 
 //***************************
@@ -129,11 +136,12 @@ void chargerParam(FILE * pDesc, Tparam * pParam)
 
 void memParam(const Tparam * pParam, FILE * pDesc)
 {
-    int nb = K_NBTYPEBATEAUX*getNBInstances (pParam);
-    int i;
-    fwrite (&(pParam->mNombreInstanceBateaux), sizeof(int), 1, pDesc);
-    for (i=0;i<nb;i++) fwrite (&(pParam->mBateauxDuJoueur[i]), sizeof(TInfoBateau), 1, pDesc);
-    for (i=0;i<nb;i++) fwrite  (&(pParam->mBateauxMachine[i]), sizeof(TInfoBateau), 1, pDesc);
+	int nb = K_NBTYPEBATEAUX*getNBInstances (pParam);
+	int i;
+
+	fwrite (&(pParam->mNombreInstanceBateaux), sizeof(int), 1, pDesc);
+	for (i=0;i<nb;i++) fwrite (&(pParam->mBateauxDuJoueur[i]), sizeof(TInfoBateau), 1, pDesc);
+	for (i=0;i<nb;i++) fwrite  (&(pParam->mBateauxMachine[i]), sizeof(TInfoBateau), 1, pDesc);
 }
 
 
@@ -145,6 +153,7 @@ void memParam(const Tparam * pParam, FILE * pDesc)
 	R :
 	Prec : -
 */
+
 void newTParam(int pNbInstances , Tparam * pP)
 /* question a ce poser les tableaux sont vides qui doit faire les saisies des informations sur les bateaux : la vue, le contrôleur va donc appeler la vue
 pour saisir les info sur un bateau puis appeler un fonction du module param pour initialiser le nième bateau de la liste des paramètres =>
@@ -152,13 +161,13 @@ pour saisir les info sur un bateau puis appeler un fonction du module param pour
 */
 
 {
-   /* Tparam param; pour eviter recopie*/
-    int nb;
-    pP->mNombreInstanceBateaux=pNbInstances;
-    nb = K_NBTYPEBATEAUX*getNBInstances (pP);
-    pP->mBateauxDuJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-    pP->mBateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-   /* return param;*/
+	/* Tparam param; pour eviter recopie*/
+	int nb;
+	pP->mNombreInstanceBateaux=pNbInstances;
+	nb = K_NBTYPEBATEAUX*getNBInstances (pP);
+	pP->mBateauxDuJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
+	pP->mBateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
+	/* return param;*/
 }
 
 
@@ -176,18 +185,19 @@ pour saisir les info sur un bateau puis appeler un fonction du module param pour
 void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam,const char pNom[], int pCouleur , EType pType)
 {
 
-    if (pIdBateau<K_NBTYPEBATEAUX*getNBInstances (pParam))
-    {
-        pParam->mBateauxDuJoueur[pIdBateau].mCouleur=pCouleur;
-        pParam->mBateauxDuJoueur[pIdBateau].mType=pType;
-        strcpy(pParam->mBateauxDuJoueur[pIdBateau].mNom ,pNom);
-    }
-    else
-    {
-        pParam->mBateauxMachine[pIdBateau-K_NBTYPEBATEAUX*getNBInstances (pParam)].mCouleur=pCouleur;
-        pParam->mBateauxMachine[pIdBateau-K_NBTYPEBATEAUX*getNBInstances (pParam)].mType=pType;
-        strcpy(pParam->mBateauxMachine[pIdBateau-K_NBTYPEBATEAUX*getNBInstances (pParam)].mNom, pNom);
-    }
+	if (pIdBateau<K_NBTYPEBATEAUX*getNBInstances (pParam))
+	{
+		pParam->mBateauxDuJoueur[pIdBateau].mCouleur=pCouleur;
+		pParam->mBateauxDuJoueur[pIdBateau].mType=pType;
+		strcpy(pParam->mBateauxDuJoueur[pIdBateau].mNom ,pNom);
+	}
+
+	else
+	{
+		pParam->mBateauxMachine[pIdBateau-K_NBTYPEBATEAUX*getNBInstances (pParam)].mCouleur=pCouleur;
+		pParam->mBateauxMachine[pIdBateau-K_NBTYPEBATEAUX*getNBInstances (pParam)].mType=pType;
+		strcpy(pParam->mBateauxMachine[pIdBateau-K_NBTYPEBATEAUX*getNBInstances (pParam)].mNom, pNom);
+	}
 
 }
 

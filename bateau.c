@@ -1,5 +1,6 @@
 #include "bateau.h"
 #include "parametre.h"
+
 /*
 typedef enum type {horizontal,  vertical} ESens;
 

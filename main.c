@@ -3,17 +3,13 @@
 
 // Permet la portabilité du programme
 #ifdef __APPLE__
-
-#include <SDL/SDL.h>
-#include <SDL_image/SDL_image.h>
-#include <SDL_ttf/SDL_ttf.h>
-
+	#include <SDL/SDL.h>
+	#include <SDL_image/SDL_image.h>
+	#include <SDL_ttf/SDL_ttf.h>
 #else
-
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
-
+	#include <SDL.h>
+	#include <SDL_image.h>
+	#include <SDL_ttf.h>
 #endif
 
 #include "utilsSDL.h"
@@ -31,71 +27,82 @@
 
 void pause()
 {
-    int continuer = 1;
-    SDL_Event event;
-    
-    while(continuer)
-    {
-        SDL_WaitEvent(&event);
-        switch(event.type)
-        {
-            case SDL_QUIT:
-                exit(EXIT_FAILURE);
-                break;
-            case SDL_KEYDOWN:
-                continuer = 0;
-                break;
+	int continuer = 1;
+	SDL_Event event;
+
+	while(continuer)
+	{
+		SDL_WaitEvent(&event);
+		switch(event.type)
+		{
+			case SDL_QUIT:
+				exit(EXIT_FAILURE);
+			break;
+
+			case SDL_KEYDOWN:
+				continuer = 0;
+			break;
         }
     }
-    
+
 }
 
 void controleurParametreVersionTest(Tparam *param)
 {
-    newTParam(1 , param);
+	newTParam(1 , param);
 
-    // boucles avec void newTParam(int pIdBateau , Tparam * pP, char pNom[], int pCouleur , EType pType) doit remplacer ce qui suit
-    setIemeInfoBateauTParam(0 , param, "redon", 0 , remorqueur);
-    setIemeInfoBateauTParam(1 , param, "peninou", 1 , porteAvion);
-    setIemeInfoBateauTParam(2 , param, "canut", 2 , sousMarin);
-    setIemeInfoBateauTParam(3, param , "caplain", 3 , cargot);
-    setIemeInfoBateauTParam(4 , param , "bruel", 4 , remorqueur);
-    setIemeInfoBateauTParam(5 , param , "inglebert", 5 , porteAvion);
-    setIemeInfoBateauTParam(6 , param , "verdier", 0 , sousMarin);
-    setIemeInfoBateauTParam(7 , param , "nonne", 1 , cargot);
-
-
+	// boucles avec void newTParam(int pIdBateau , Tparam * pP, char pNom[], int pCouleur , EType pType) doit remplacer ce qui suit
+	setIemeInfoBateauTParam(0 , param, "redon", 0 , remorqueur);
+	setIemeInfoBateauTParam(1 , param, "peninou", 1 , porteAvion);
+	setIemeInfoBateauTParam(2 , param, "canut", 2 , sousMarin);
+	setIemeInfoBateauTParam(3, param , "caplain", 3 , cargot);
+	setIemeInfoBateauTParam(4 , param , "bruel", 4 , remorqueur);
+	setIemeInfoBateauTParam(5 , param , "inglebert", 5 , porteAvion);
+	setIemeInfoBateauTParam(6 , param , "verdier", 0 , sousMarin);
+	setIemeInfoBateauTParam(7 , param , "nonne", 1 , cargot);
 }
 
 
 int main(int argc, char ** argv)
 {
-    SDL_Surface * ecran;
-    
-    int choixMenu;
-    int continuer = 1;
-    
-    ecran = DemarrerSDL(800, 600, "Bataille Navale");
-        
-    AfficherMenuAccueil();
-    
-    while (continuer)
-    {
-        choixMenu = AfficherMenuRacine();
-    
-        switch (choixMenu) 
-        {
-            case 1:// Nouvelle Partie
-                MenuNouvellePartie();
-                break;
-            
-            case 5:// Quitter
-                continuer = 0;
-                break;
-        }    
+	SDL_Surface * ecran;
+
+	int choixMenu;
+	int continuer = 1;
+
+	ecran = DemarrerSDL(800, 600, "Bataille Navale");
+
+	AfficherMenuAccueil();
+
+	while (continuer)
+	{
+		choixMenu = AfficherMenuRacine();
+
+	switch (choixMenu)
+	{
+		case 1: // Nouvelle Partie
+			MenuNouvellePartie();
+		break;
+
+		case 2: // Charger partie
+
+		break;
+
+		case 3: // Meilleurs scores
+
+		break;
+
+		case 4: // Afficher règles
+			afficherRegles();
+		break;
+
+		case 5: // Quitter
+			continuer = 0;
+		break;
+        }
     }
-            
-    ArreterSDL();
-    
-    return 0;
+
+	ArreterSDL();
+
+	return 0;
 }

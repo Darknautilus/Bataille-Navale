@@ -1,12 +1,8 @@
 // Permet la portabilité du programme
 #ifdef __APPLE__
-
-#include <SDL/SDL.h>
-
+	#include <SDL/SDL.h>
 #else
-
-#include <SDL.h>
-
+	#include <SDL.h>
 #endif
 
 #include <string.h>
@@ -23,36 +19,45 @@ const Couleur tableCouleurs[KCOULEURS_NBCOULMAX] = {
 	{'V',"VERT", {0,255,0} }
 } ;
 
+// à quoi ça sert?
+// pourquoi elle s'appelle pas getNbCouleurs?
 int nbCouleurs (void)
 {
-     return KCOULEURS_NBCOULMAX ;
+	return KCOULEURS_NBCOULMAX ;
 }
 
+// modifié car il y avait un return conditionnel, mon compilo n'en veut pas (et c'est moche :p )
 Couleur lettreToCouleur (char pLettre  )
 {
-    int i;
-    for (i=0;i<nbCouleurs();i++)
-        if (tableCouleurs[i].lettre == pLettre) return tableCouleurs[i];
+	int i = 0;
+
+	while (i < nbCouleurs() && tableCouleurs[i].lettre != pLettre)
+	{
+		i++;
+	}
+
+	return tableCouleurs[i];
 }
 
 Couleur getCouleurFromNum (int pI)
 {
-    return tableCouleurs[pI];
+	return tableCouleurs[pI];
 }
 
 
 SDL_Color getColor (Couleur * pCouleur)
 {
-    return pCouleur->rgb;
+	return pCouleur->rgb;
 }
 
 char getChar (Couleur * pCouleur)
 {
-    return pCouleur->lettre;
+	return pCouleur->lettre;
 }
+
 void getNom (Couleur * pCouleur, char pNom[])
 {
-    strcpy(pNom,pCouleur->nom);
+	strcpy(pNom,pCouleur->nom);
 }
 
 

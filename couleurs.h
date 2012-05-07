@@ -1,7 +1,11 @@
 #ifndef _COULEURS_H
 #define _COULEURS_H
 
-#include <SDL/SDL.h>
+#ifdef __APPLE__
+	#include <SDL/SDL.h>
+#else
+	#include <SDL.h>
+#endif
 
 #define KCOULEURS_NBCOULMAX 7
 #define KCOULEURS_LGNOMCOUL 10
@@ -19,14 +23,14 @@ int nbCouleurs (void);
 
 /*
     Retourne la couleur correspondant à la lettre entrée.
- 
+
     lettre doit exister dans le tableau de couleurs
 */
 Couleur lettreToCouleur (char pLettre);
 
 /*
     Retourne la couleur associée à l'indice pI dans le tableau des couleurs.
- 
+
     Le tableau doit avoir au moins pI+1 éléments
 */
 Couleur getCouleurFromNum (int pI);

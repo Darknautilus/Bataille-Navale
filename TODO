@@ -1,3 +1,10 @@
+*** Charte de programmation *** :p
+- Un return unique à ma fin d'une fonction
+- Régler l'ide pour qu'il indente en insérant des tabulation et non des espaces.
+- Trouver un autre format de caractère (je ne peux pas voir tes car. spéciaux)
+- Pas de if/for/while sur une seule ligne
+- Commenter les trucs qu'à fait l'autre et qu'on comprends pas
+
 - Interface (En partie fait, attente du dev des autres modules)
 - Paramétrage
 - Pile des coups

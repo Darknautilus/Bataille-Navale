@@ -3,22 +3,24 @@
 
 #ifndef _PARAM_H
 #define _PARAM_H
+
 //#include <SDL/SDL.h>
 #include <stdio.h>
 #include "couleurs.h"
+
 #define K_NBCOULEURS 4
 #define K_NBTYPEBATEAUX 4
 #define K_LGNOM 25
 
 
-typedef enum  {remorqueur=2,  porteAvion, sousMarin, cargot} EType;
+typedef enum {remorqueur=2,  porteAvion, sousMarin, cargot} EType;
 
 typedef struct
 {
-     int mCouleur /*indice dans la table des couleurs*/;
-     EType mType;
-     char mNom[K_LGNOM];
-}     TInfoBateau;
+	int mCouleur /*indice dans la table des couleurs*/;
+	EType mType;
+	char mNom[K_LGNOM];
+}	TInfoBateau;
 
 //***************************
 /*	N : getCouleur
