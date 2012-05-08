@@ -1,0 +1,13 @@
+   *** Règles du jeu ***
+
+Le but:
+Il s'agit de découvrir en premier l'emplacement des bateaux de son adversaire pour les couler et ainsi faire capituler la flotte adverse.
+
+Les préparatifs de jeu:
+Chacun des deux jours trace sur sa feuille un tableau comportant 10 cases sur chacun de ses côtés. En abscisse, on porte les lettres (de A a J soit 10 cases) et en abscisse les chiffres de 1 a 10. Les joueurs mettent des croix contigües et alignées en ligne horizontalement ou verticalement (mais pas diagonalement) pour former des navires.
+
+La règle de la bataille navale:
+Chaque joueur crée ainsi un cuirassé (quatre cases), deux croiseurs (trois cases) et trois torpilleurs (2 cases). Le joueur qui entame la partie déclare la oà¹ il pense que son adversaire a caché un navire en déclarant B5 par exemple. L'adversaire répond par "raté" ou "touché". Un bateau entièrement touché est "coulé".
+
+La fin de la bataille navale
+Le gagnant est celui qui en premier a découvert et détruit l'intégralité de la flotte adverse.  
