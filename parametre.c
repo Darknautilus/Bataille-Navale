@@ -27,7 +27,7 @@ int getCouleur(const TInfoBateau * pB)
 	Prec : -
 */
 
-EType getType(const TInfoBateau * pB)
+ETypeBat getType(const TInfoBateau * pB)
 {
 	return pB->mType;
 }
@@ -55,7 +55,7 @@ void getBNom(const TInfoBateau * pB, char pNom[]) //voir tp sur les chaines de c
 	R :
 	Prec : -
 */
-void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , EType pType)
+void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
 {
 	pB->mCouleur=pCouleur;
 	pB->mType=pType;
@@ -182,7 +182,7 @@ pour saisir les info sur un bateau puis appeler un fonction du module param pour
 	Prec : ne peut etre appelé qu'apres newTParam
 */
 
-void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam,const char pNom[], int pCouleur , EType pType)
+void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam,const char pNom[], int pCouleur , ETypeBat pType)
 {
 
 	if (pIdBateau<K_NBTYPEBATEAUX*getNBInstances (pParam))

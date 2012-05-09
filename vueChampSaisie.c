@@ -15,7 +15,7 @@ void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran)
 {
 	SDL_Surface * champBG, * texte;
 	TTF_Font * police;
-	SDL_Color couleurTexte = {KCOULTXT_R,KCOULTXT_G,KCOULTXT_B};
+	SDL_Color couleurTexte = {KCOULTXT_R, KCOULTXT_G, KCOULTXT_B};
 	SDL_Rect positionChamp, positionTexte;
 	Uint32 couleurFondChamp;
 

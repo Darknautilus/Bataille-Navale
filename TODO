@@ -1,10 +1,16 @@
 *** Charte de programmation *** :p
-- Un return unique à ma fin d'une fonction
+- Éviter les returns multiples dans les fonctions
 - Régler l'ide pour qu'il indente en insérant des tabulation et non des espaces.
 - Trouver un autre format de caractère (je ne peux pas voir tes car. spéciaux)
 - Pas de if/for/while sur une seule ligne
-- Commenter les trucs qu'à fait l'autre et qu'on comprends pas
 - nom de fonction : 1ere lettre en minuscule
+
+*** Questions et remarques ***
+- Dans grille.h :
+	Grille * SetVal(Grille * grille, Coord coord, int valEnt);
+	pourquoi int valEnt et pas EtatCase etat
+
+*** À réaliser ***
 
 - Interface (En partie fait, attente du dev des autres modules)
 - Paramétrage
