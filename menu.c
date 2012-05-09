@@ -183,7 +183,7 @@ void EcranGrille(ChampSaisie * champ)
     grilleJoueur = CreerGrille(10, 10);
 
     EffacerEcran();
-    afficherGrille(grilleJoueur, SDL_GetVideoSurface(), 40, 100);
+    afficherGrille(grilleJoueur, 40, 100);
 
     EcrireTexte(champ->chaine, 40, 40, 20);
 
@@ -206,7 +206,7 @@ void EcranGrille(ChampSaisie * champ)
                 else if(Consulter(grilleJoueur, coord) == 1)
                     grilleJoueur = SetVal(grilleJoueur, coord, 0);
 
-                updateGrille(grilleJoueur, SDL_GetVideoSurface(), coord);
+                updateGrille(grilleJoueur, coord);
             }
         }
     }

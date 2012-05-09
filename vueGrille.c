@@ -12,7 +12,7 @@
 #include "grille.h"
 #include "vueGrille.h"
 
-void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordonnee)
+void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 {
 	SDL_Surface * caseGrille, * numCase;
 	SDL_Rect positionCaseGrille, positionNumCase;
@@ -37,7 +37,7 @@ void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordo
 		numCase = TTF_RenderText_Blended(policeGrille, labelLin, couleurBlanche);
 		positionNumCase.x = abscisse - KLARGCASE;
 		positionNumCase.y = ordonnee + i * KHAUTEURCASE;
-		SDL_BlitSurface(numCase, NULL, ecran, &positionNumCase);
+		SDL_BlitSurface(numCase, NULL, SDL_GetVideoSurface(), &positionNumCase);
 
 		for (j=0; j<grille->NbCol; j++)
 		{
@@ -45,7 +45,7 @@ void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordo
 			numCase = TTF_RenderText_Blended(policeGrille, labelCol, couleurBlanche);
 			positionNumCase.x = abscisse + j*KLARGCASE;
 			positionNumCase.y = ordonnee - KHAUTEURCASE;
-			SDL_BlitSurface(numCase, NULL, ecran, &positionNumCase);
+			SDL_BlitSurface(numCase, NULL, SDL_GetVideoSurface(), &positionNumCase);
 
 			coord.noCol = i+1;
 			coord.noLin = j+1;
@@ -72,12 +72,12 @@ void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordo
 			positionCaseGrille.x = j*KLARGCASE + abscisse;
 			positionCaseGrille.y = i*KHAUTEURCASE + ordonnee;
 
-			SDL_BlitSurface(caseGrille, NULL, ecran,&positionCaseGrille);
+			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 
 		}
 	}
 
-	SDL_Flip(ecran);
+	SDL_Flip(SDL_GetVideoSurface());
 
 	free(labelCol);
 	free(labelLin);
@@ -87,7 +87,7 @@ void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordo
 	TTF_CloseFont(policeGrille);
 }
 
-void updateGrille(Grille * grille, SDL_Surface * ecran, Coord coord)
+void updateGrille(Grille * grille, Coord coord)
 {
 	SDL_Surface * caseGrille;
 	SDL_Rect positionCaseGrille;
@@ -116,8 +116,8 @@ void updateGrille(Grille * grille, SDL_Surface * ecran, Coord coord)
 		break;
 	}
 
-	SDL_BlitSurface(caseGrille, NULL, ecran, &positionCaseGrille);
-	SDL_Flip(ecran);
+	SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(), &positionCaseGrille);
+	SDL_Flip(SDL_GetVideoSurface());
 	SDL_FreeSurface(caseGrille);
 }
 

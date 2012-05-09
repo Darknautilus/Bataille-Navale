@@ -51,9 +51,9 @@ int Consulter(Grille * grille, Coord coord)
 	return grille->TabLignes[coord.noLin-1][coord.noCol-1];
 }
 
-Grille * SetVal(Grille * grille, Coord coord, int valEnt)
+Grille * SetVal(Grille * grille, Coord coord, EtatCase etat)
 {
-	grille->TabLignes[coord.noLin-1][coord.noCol-1] = valEnt;
+	grille->TabLignes[coord.noLin-1][coord.noCol-1] = etat;
 
 	return grille;
 }

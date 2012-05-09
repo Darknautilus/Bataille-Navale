@@ -64,7 +64,7 @@ int Consulter(Grille * grille, Coord coord);
  
     La grille n'accepte que 0, 1, 2 et 3, la grille doit être initialisée
 */
-Grille * SetVal(Grille * grille, Coord coord, int valEnt);
+Grille * SetVal(Grille * grille, Coord coord, EtatCase etat);
 
 /*
     Effacer

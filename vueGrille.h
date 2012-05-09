@@ -10,7 +10,7 @@
  
  grille doit être initialisée
  */
-void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordonnee);
+void afficherGrille(Grille * grille, int abscisse, int ordonnee);
 
 /*
  updateGrille
@@ -19,7 +19,7 @@ void afficherGrille(Grille * grille, SDL_Surface * ecran, int abscisse, int ordo
  
  grille doit être initialisée, noLin et noCol doivent être cohérents avec les dimensions de la grille
  */
-void updateGrille(Grille * grille, SDL_Surface * ecran, Coord coord);
+void updateGrille(Grille * grille, Coord coord);
 
 /*
     ClicCaseGrille
