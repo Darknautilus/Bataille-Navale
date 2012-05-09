@@ -75,7 +75,7 @@ void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
 int *getNBInstances (const Tparam * pParam)
 {
     int * nombreInstBateaux = pParam->nombreInstanceBateaux;
-	return pParam->nombreInstanceBateaux;
+	return nombreInstBateaux;
 }
 
 
@@ -92,11 +92,12 @@ int *getNBInstances (const Tparam * pParam)
 TInfoBateau * getInfoBateau(int pNum ,const Tparam * pParam)
 {
 	TInfoBateau * infoBat;
+    int * nombreInstBateaux = getNBInstances(pParam);
 
-	if (pNum < K_NBTYPEBATEAUX * getNBInstances (pParam))
-		infoBat = &(pParam->mBateauxDuJoueur[pNum]);
+	if (pNum < K_NBTYPEBATEAUX * )
+		infoBat = &(pParam->bateauxJoueur[pNum]);
 	else
-		infoBat = &(pParam->mBateauxMachine[pNum-K_NBTYPEBATEAUX*getNBInstances (pParam)]);
+		infoBat = &(pParam->bateauxMachine[pNum-K_NBTYPEBATEAUX*getNBInstances (pParam)]);
 
 	return infoBat;
 }
@@ -117,12 +118,12 @@ void chargerParam(FILE * pDesc, Tparam * pParam)
 	/* Tparam param; pour eviter recopie*/
 	int nb;
 
-	fread (&(pParam->mNombreInstanceBateaux), sizeof(int), 1, pDesc);
+	fread (&(pParam->nombreInstanceBateaux), sizeof(int), 1, pDesc);
 	nb = K_NBTYPEBATEAUX*getNBInstances (pParam);
-	pParam->mBateauxDuJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-	pParam->mBateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-	fread ((pParam->mBateauxDuJoueur), sizeof(TInfoBateau), nb, pDesc);
-	fread ((pParam->mBateauxMachine), sizeof(TInfoBateau), nb, pDesc);
+	pParam->bateauxJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
+	pParam->bateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
+	fread ((pParam->bateauxJoueur), sizeof(TInfoBateau), nb, pDesc);
+	fread ((pParam->bateauxMachine), sizeof(TInfoBateau), nb, pDesc);
 	/* return param;*/
 }
 
@@ -140,9 +141,9 @@ void memParam(const Tparam * pParam, FILE * pDesc)
 	int nb = K_NBTYPEBATEAUX*getNBInstances (pParam);
 	int i;
 
-	fwrite (&(pParam->mNombreInstanceBateaux), sizeof(int), 1, pDesc);
-	for (i=0;i<nb;i++) fwrite (&(pParam->mBateauxDuJoueur[i]), sizeof(TInfoBateau), 1, pDesc);
-	for (i=0;i<nb;i++) fwrite  (&(pParam->mBateauxMachine[i]), sizeof(TInfoBateau), 1, pDesc);
+	fwrite (&(pParam->nombreInstanceBateaux), sizeof(int), 1, pDesc);
+	for (i=0;i<nb;i++) fwrite (&(pParam->bateauxJoueur[i]), sizeof(TInfoBateau), 1, pDesc);
+	for (i=0;i<nb;i++) fwrite  (&(pParam->bateauxMachine[i]), sizeof(TInfoBateau), 1, pDesc);
 }
 
 
@@ -159,10 +160,10 @@ void newTParam(int pNbInstances , Tparam * pP)
 {
 	/* Tparam param; pour eviter recopie*/
 	int nb;
-	pP->mNombreInstanceBateaux=pNbInstances;
+	pP->nombreInstanceBateaux=pNbInstances;
 	nb = K_NBTYPEBATEAUX*getNBInstances (pP);
-	pP->mBateauxDuJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-	pP->mBateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
+	pP->bateauxJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
+	pP->bateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
 	/* return param;*/
 }
 
@@ -183,9 +184,9 @@ void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam,const char pNom[], 
 
 	if (pIdBateau<K_NBTYPEBATEAUX*getNBInstances (pParam))
 	{
-		pParam->mBateauxDuJoueur[pIdBateau].mCouleur=pCouleur;
-		pParam->mBateauxDuJoueur[pIdBateau].mType=pType;
-		strcpy(pParam->mBateauxDuJoueur[pIdBateau].mNom ,pNom);
+		pParam->bateauxJoueur[pIdBateau].couleur=pCouleur;
+		pParam->bateauxJoueur[pIdBateau].type=pType;
+		strcpy(pParam->bateauxJoueur[pIdBateau].nom ,pNom);
 	}
 
 	else
