@@ -1,11 +1,6 @@
 // Permet la portabilité du programme
-#ifdef __APPLE__
-	#include <SDL/SDL.h>
-	#include <SDL_ttf/SDL_ttf.h>
-#else
-	#include <SDL/SDL.h>
-	#include <SDL/SDL_ttf.h>
-#endif
+#include "includeSDL.h"
+
 
 #include "champSaisie.h"
 #include "vueChampSaisie.h"

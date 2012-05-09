@@ -28,7 +28,7 @@ typedef enum {GRILLE_CASE_VIDE, GRILLE_CASE_BATEAU, GRILLE_CASE_TOUCHE, GRILLE_C
 /*typedef struct
  {
  EtatCase etatCase;
- TBateau bateau;
+ TBateau * bateau;
  }
  CaseGrille;*/
 
