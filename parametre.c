@@ -15,7 +15,7 @@
 
 int getCouleur(const TInfoBateau * pB)
 {
-	return pB->mCouleur;
+	return pB->couleur;
 }
 
 //***************************
@@ -29,7 +29,7 @@ int getCouleur(const TInfoBateau * pB)
 
 ETypeBat getType(const TInfoBateau * pB)
 {
-	return pB->mType;
+	return pB->type;
 }
 
 
@@ -42,9 +42,9 @@ ETypeBat getType(const TInfoBateau * pB)
 	Prec : -
 */
 
-void getBNom(const TInfoBateau * pB, char pNom[]) //voir tp sur les chaines de caractères dynamique*/
+void getBNom(const TInfoBateau * pB, char pNom[])
 {
-	strcpy(pNom,pB->mNom);
+	strcpy(pNom,pB->nomBateau);
 }
 
 //***************************
@@ -57,9 +57,9 @@ void getBNom(const TInfoBateau * pB, char pNom[]) //voir tp sur les chaines de c
 */
 void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
 {
-	pB->mCouleur=pCouleur;
-	pB->mType=pType;
-	strcpy(pB->mNom,pNom);
+	pB->couleur=pCouleur;
+	pB->type=pType;
+	strcpy(pB->nomBateau,pNom);
 }
 
 
@@ -72,9 +72,10 @@ void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
 	R : ce nombre
 	Prec : -
 */
-int getNBInstances (const Tparam * pParam)
+int *getNBInstances (const Tparam * pParam)
 {
-	return pParam->mNombreInstanceBateaux;
+    int * nombreInstBateaux = pParam->nombreInstanceBateaux;
+	return pParam->nombreInstanceBateaux;
 }
 
 
@@ -155,11 +156,6 @@ void memParam(const Tparam * pParam, FILE * pDesc)
 */
 
 void newTParam(int pNbInstances , Tparam * pP)
-/* question a ce poser les tableaux sont vides qui doit faire les saisies des informations sur les bateaux : la vue, le contrôleur va donc appeler la vue
-pour saisir les info sur un bateau puis appeler un fonction du module param pour initialiser le nième bateau de la liste des paramètres =>
-
-*/
-
 {
 	/* Tparam param; pour eviter recopie*/
 	int nb;

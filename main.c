@@ -65,44 +65,9 @@ void controleurParametreVersionTest(Tparam *param)
 
 int main(int argc, char ** argv)
 {
-	SDL_Surface * ecran;
-
-	int choixMenu;
-	int continuer = 1;
-
-	ecran = DemarrerSDL(800, 600, "Bataille Navale");
-
-	AfficherMenuAccueil();
-
-	while (continuer)
-	{
-		choixMenu = AfficherMenuRacine();
-
-	switch (choixMenu)
-	{
-		case 1: // Nouvelle Partie
-			MenuNouvellePartie();
-		break;
-
-		case 2: // Charger partie
-
-		break;
-
-		case 3: // Meilleurs scores
-
-		break;
-
-		case 4: // Afficher règles
-			afficherRegles();
-		break;
-
-		case 5: // Quitter
-			continuer = 0;
-		break;
-        }
-    }
-
-	ArreterSDL();
+	printf("\n== Test du module de paramétrage ==\n");
+    
+    
 
 	return 0;
 }
