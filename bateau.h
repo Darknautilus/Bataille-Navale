@@ -23,14 +23,34 @@ typedef struct
 	int etat[KTAILLEMAXBAT];
 }	TBateau;
 
-// crée un bateau
+/**
+    Créer un bateau.
+    @param pos La position du bateau
+    @param type Le type du bateau
+    @return Une strucutre Bateau correctement initialisée.
+*/
 TBateau * creerBateau(TPosition pos, ETypeBat type);
 
-// touche le bateau à un emplacement défini
-TBateau * toucherBateau(TBateau * bat, int posTouch);
+/**
+    Cette fonction marque une case d'un bateau donnée comme touchée.
+    @param bat Le pointeur sur le bateau en question
+    @param posTouch La postion touchée.
+    @return
+
+*/
+void toucherBateau(TBateau * bat, int posTouch);
 
 // renvoie le nombre de coups necessaires pour couler le bateau (0 si le bateau est coulé)
 int etatBateau(TBateau * bat);
+
+/**
+    Vérifie si le bateau est coulé.
+    @param bat Un pointeur sur une structure TBateau
+    @return 1 si le bateau est coulé, 0 si il est en vie
+*/
+int estCoule(TBateau * bat);
+
+TPosition getPosBateau(TBateau * bat);
 
 /* il faut faire égalemnt des fonctions pour les informations positionnelles direction latitude et logitude=> compléter*/
 #endif

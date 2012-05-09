@@ -17,7 +17,7 @@ TBateau * creerBateau(TPosition pos, ETypeBat type)
 	return bat;
 }
 
-TBateau * toucherBateau(TBateau * bat, int posTouch)
+void toucherBateau(TBateau * bat, int posTouch)
 {
 	int i;
 	int nbTouche = 0;
@@ -41,10 +41,15 @@ TBateau * toucherBateau(TBateau * bat, int posTouch)
 		}
 	}
 
-	return bat;
+	//return bat;
 }
 
-int etatBateau(TBateau * bat)
+/**
+    Retoune le nombre de coups qu'a reçu un bateau.
+    @param bat Un pointeur vers la structure du bateau
+    @return Un entier.
+*/
+int nbCoupsBateau(TBateau * bat)
 {
 	int i;
 	int nbCoups = bat->type;
@@ -58,8 +63,15 @@ int etatBateau(TBateau * bat)
 	return nbCoups;
 }
 
+/**
+    Retourne la postion du bateau.
+    @param bat Un pointeur vers le bateau en question
+    @return Une strucutre TPosition contenant les
+*/
 TPosition getPosBateau(TBateau * bat)
 {
 	return bat->position;
 }
+
+
 /* il faut faire égalemnt des fonctions pour les informations positionnelles direction latitude et logitude=> compléter*/
