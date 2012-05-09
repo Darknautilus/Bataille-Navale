@@ -4,13 +4,8 @@
 #include "grille.h"
 #include "bateau.h"
 
-/*
-    SetVal
-
-    Insère un élément dans la grille
-
-    La grille n'accepte que 0, 1, 2 et 3, la grille doit être initialisée
-*/
+// insère un bateau dans une grille, renvoie NULL si ce n'est pas possible.
+// On peut également insérer des bateaux touché ou coulé (pour le chargement d'une partie par ex.)
 Grille * InsertBateau(Grille * grille, TBateau * bat);
 
 

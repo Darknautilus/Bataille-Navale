@@ -12,25 +12,31 @@ Grille * CreerGrille(int nbLin, int nbCol)
 	if(nbLin > 0 && nbCol > 0)
 	{
 		// Allocation de la matrice
-		Grille * nouvGrille = (Grille*)malloc(sizeof(Grille));
-		if(nouvGrille == NULL) return NULL;
+		Grille * nouvGrille = (Grille*) malloc(sizeof(Grille));
+
+		if(nouvGrille == NULL)
+			return NULL;
 
 		nouvGrille->NbLin = nbLin;
 		nouvGrille->NbCol = nbCol;
 
 		// Allocation du tableau de lignes
-		nouvGrille->TabLignes = (Ligne*)malloc(nbLin * sizeof(Ligne));
-		if(nouvGrille->TabLignes == NULL) return NULL;
+		nouvGrille->TabLignes = (Ligne*) malloc(nbLin * sizeof(Ligne));
+
+		if(nouvGrille->TabLignes == NULL)
+			return NULL;
 
 		// Parcours des lignes
-		for(i=0;i<nbLin;i++)
+		for(i=0; i<nbLin; i++)
 		{
 			// Allocation de chaque ligne (tableau d'entiers)
-			nouvGrille->TabLignes[i] = (int*)malloc(nbCol * sizeof(int));
-			if(nouvGrille->TabLignes[i] == NULL) return NULL;
+			nouvGrille->TabLignes[i] = (int*) malloc(nbCol * sizeof(int));
+
+			if(nouvGrille->TabLignes[i] == NULL)
+				return NULL;
 
 			// Et on remplit avec des 0
-			for(j=0;j<nbCol;j++)
+			for(j=0; j<nbCol; j++)
 			{
 				nouvGrille->TabLignes[i][j] = GRILLE_CASE_VIDE;
 			}
@@ -75,11 +81,13 @@ Grille * EffacerGrille(Grille * grille)
 
 void LibererGrille(Grille * grille)
 {
-    int i;
+	int i;
 
-    for(i=0;i<grille->NbLin;i++)
-        free(grille->TabLignes[i]);
+	for(i=0;i<grille->NbLin;i++)
+	{
+		free(grille->TabLignes[i]);
+	}
 
-    free(grille->TabLignes);
-    free(grille);
+	free(grille->TabLignes);
+	free(grille);
 }

@@ -71,7 +71,6 @@ void EcrireCar(char car,int taille, int abscisse, int ordonnee)
 	TTF_CloseFont(police);
 }
 
-
 void EcrireTexte(char * texte,int taille, int abscisse, int ordonnee)
 {
 	SDL_Surface * zoneTexte;

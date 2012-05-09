@@ -1,5 +1,6 @@
-// parametre.h le module parametre d'une partie permet de charger et sauver ces param dans un fichier pour simplifier on ne paramettre
-// que les couleurs et noms des bateaux du joueur + le nombre d'instance de chaque bateau (les bateaux de la machine peuvent ou non être paramétrés)...
+// parametre.h le module parametre d'une partie permet de charger et sauver ces param dans un fichier.
+// Pour simplifier, on ne paramettre que les couleurs, le nom des bateaux du joueur et le nombre d'instance de chaque bateau.
+// Les bateaux de la machine peuvent ou non être paramétrés.
 
 #ifndef _PARAM_H
 #define _PARAM_H
@@ -7,18 +8,16 @@
 //#include <SDL/SDL.h>
 #include <stdio.h>
 #include "couleurs.h"
+#include "bateau.h"
 
 #define K_NBCOULEURS 4
 #define K_NBTYPEBATEAUX 4
 #define K_LGNOM 25
 
-
-typedef enum {remorqueur=2,  porteAvion, sousMarin, cargot} EType;
-
 typedef struct
 {
 	int mCouleur /*indice dans la table des couleurs*/;
-	EType mType;
+	ETypeBat mType;
 	char mNom[K_LGNOM];
 }	TInfoBateau;
 
@@ -42,7 +41,7 @@ int getCouleur(const TInfoBateau * pB);
 	Prec : -
 */
 
-EType getType(const TInfoBateau *pB);
+ETypeBat getType(const TInfoBateau *pB);
 
 
 //***************************
@@ -65,7 +64,7 @@ void getBNom(const TInfoBateau * pB, char pNom[]); //voir tp sur les chaines de 
 	R :
 	Prec : -
 */
-void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , EType pType);
+void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType);
 
 
 
@@ -152,7 +151,7 @@ pour saisir les info sur un bateau puis appeler un fonction du module param pour
 	R :
 	Prec : ne peut etre appelé qu'apres newTParam
 */
-void setIemeInfoBateauTParam(int pIdBateau , Tparam * pP, const char pNom[], int pCouleur , EType pType);
+void setIemeInfoBateauTParam(int pIdBateau , Tparam * pP, const char pNom[], int pCouleur , ETypeBat pType);
 
 
 

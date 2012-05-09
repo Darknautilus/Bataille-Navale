@@ -2,23 +2,35 @@
 #ifndef _BATEAU_H
 #define _BATEAU_H
 
-typedef enum  {SENS_HORIZONTAL, SENS_VERTICAL} ESens;
+#define KTAILLEMAXBAT 5
+
+typedef enum {VOILIER = 1, REMORQUEUR,  PORTEAVION, SOUSMARIN, CARGOT} ETypeBat;
+typedef enum {HORIZONTAL, VERTICAL} ESens;
+typedef enum {INTACT, TOUCHE, COULE} EEtat;
 
 typedef struct
 {
 	ESens direction;
-	int abscisse;
-	char ordonnee; /* position du point en haut gauche du bateau dans la grille de jeu */
+	int x;
+	int y; /* position du point en haut gauche du bateau dans la grille de jeu */
 }	TPosition;
 
 typedef struct
 {
-	TPosition coordonnees;
-	int idInfoBateau;
-	int taille;
-	int etat[5];
-	//completer par exemple avec des informations sur l'etat du bateau
+	TPosition position;
+//	int idInfoBateau;
+	ETypeBat type;
+	int etat[KTAILLEMAXBAT];
 }	TBateau;
+
+// crée un bateau
+TBateau * creerBateau(TPosition pos, ETypeBat type);
+
+// touche le bateau à un emplacement défini
+TBateau * toucherBateau(TBateau * bat, int posTouch);
+
+// renvoie le nombre de coups necessaires pour couler le bateau (0 si le bateau est coulé)
+int etatBateau(TBateau * bat);
 
 /* il faut faire égalemnt des fonctions pour les informations positionnelles direction latitude et logitude=> compléter*/
 #endif

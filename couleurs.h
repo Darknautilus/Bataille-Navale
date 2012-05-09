@@ -22,20 +22,20 @@ Couleur;
 int nbCouleurs (void);
 
 /*
-    Retourne la couleur correspondant à la lettre entrée.
+    Retourne la couleur correspondant ‡ la lettre entrÈe.
 
     lettre doit exister dans le tableau de couleurs
 */
 Couleur lettreToCouleur (char pLettre);
 
 /*
-    Retourne la couleur associée à l'indice pI dans le tableau des couleurs.
+    Retourne la couleur associÈe ‡ l'indice pI dans le tableau des couleurs.
 
-    Le tableau doit avoir au moins pI+1 éléments
+    Le tableau doit avoir au moins pI+1 ÈlÈments
 */
 Couleur getCouleurFromNum (int pI);
 
-// fonction d'accès à chacun des champs de la structure couleur
+// fonction d'accËs ‡ chacun des champs de la structure couleur
 SDL_Color getColor (Couleur * pCouleur);
 char getChar (Couleur * pCouleur);
 void getNom (Couleur * pCouleur, char pNom[]);
