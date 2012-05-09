@@ -1,9 +1,5 @@
 // Permet la portabilité du programme
-#ifdef __APPLE__
-	#include <SDL/SDL.h>
-#else
-	#include <SDL/SDL.h>
-#endif
+#include "includeSDL.h"
 
 #include "vueUtilsSDL.h"
 #include "vueChampSaisie.h"
