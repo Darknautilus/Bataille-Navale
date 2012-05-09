@@ -4,6 +4,7 @@
 
 #include "champSaisie.h"
 
+
 ChampSaisie * CreerChamp(int longMax, int taille, int abscisse, int ordonnee)
 {
 	ChampSaisie * champ;
