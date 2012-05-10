@@ -1,11 +1,8 @@
 #ifndef _COULEURS_H
 #define _COULEURS_H
 
-#ifdef __APPLE__
-	#include <SDL/SDL.h>
-#else
-	#include <SDL.h>
-#endif
+#include "includeSDL.h"
+
 
 #define KCOULEURS_NBCOULMAX 7
 #define KCOULEURS_LGNOMCOUL 10

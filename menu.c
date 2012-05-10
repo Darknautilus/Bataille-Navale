@@ -1,13 +1,6 @@
 // Permet la portabilité du programme
-#ifdef __APPLE__
-	#include <SDL/SDL.h>
-	#include <SDL_image/SDL_image.h>
-	#include <SDL_ttf/SDL_ttf.h>
-#else
-	#include <SDL.h>
-	#include <SDL_image.h>
-	#include <SDL_ttf.h>
-#endif
+#include "includeSDL.h"
+
 
 #include "menu.h"
 #include "champSaisie.h"
@@ -39,6 +32,9 @@ void AfficherMenuAccueil(void)
 			case SDLK_ESCAPE:
 				exit(EXIT_FAILURE);
 			break;
+
+			default:
+			break;
 		}
 	}
 
@@ -47,56 +43,62 @@ void AfficherMenuAccueil(void)
 
 int AfficherMenuRacine(void)
 {
-SDL_Rect positionPuce;
-int continuer = 1;
-int choixMenu = 1;
+    SDL_Rect positionPuce;
+    int continuer = 1;
+    int choixMenu = 1;
 
-SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 
-SDL_EnableUNICODE(SDL_ENABLE);
+    SDL_EnableUNICODE(SDL_ENABLE);
 
-positionPuce.x = 80;
-positionPuce.y = 150;
+    positionPuce.x = 80;
+    positionPuce.y = 150;
 
-while(continuer)
-{
-	ImageFond("Images/menuRacine.png");
+    while(continuer)
+    {
+        ImageFond("Images/menuRacine.png");
 
-	AfficherImage("Images/puceMenu.png", positionPuce);
+        AfficherImage("Images/puceMenu.png", positionPuce);
 
-	SDL_Flip(SDL_GetVideoSurface());
+        SDL_Flip(SDL_GetVideoSurface());
 
-	AttendreEvent(NULL, touche);
+        AttendreEvent(NULL, touche);
 
-	switch(ToucheSpec(touche))
-	{
-		case SDLK_RETURN:
-			continuer = 0;
-		break;
+        switch(ToucheSpec(touche))
+        {
+            case SDLK_RETURN:
+                continuer = 0;
+            break;
 
-		case SDLK_UP:
-			if(choixMenu != 1)
-			{
-				choixMenu --;
-				positionPuce.y -= 60;
-			}
-		break;
+            case SDLK_UP:
+                if(choixMenu != 1)
+                {
+                    choixMenu --;
+                    positionPuce.y -= 60;
+                }
+            break;
 
-		case SDLK_DOWN:
-			if(choixMenu != 5)
-			{
-				choixMenu ++;
-				positionPuce.y += 60;
-			}
-		break;
+            case SDLK_DOWN:
+                if(choixMenu != 5)
+                {
+                    choixMenu ++;
+                    positionPuce.y += 60;
+                }
+            break;
 
-		case SDLK_ESCAPE:
-			exit(EXIT_SUCCESS);
-		break;
-		}
+            case SDLK_ESCAPE:
+                exit(EXIT_SUCCESS);
+            break;
 
-		if(ToucheChar(touche) == 't')
-			MenuTest();
+            default:
+            break;
+
+        }
+
+        if(ToucheChar(touche) == 't')
+            MenuTest();
+
+
 	}
 
 	SDL_EnableUNICODE(SDL_DISABLE);

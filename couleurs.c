@@ -1,9 +1,6 @@
 // Permet la portabilité du programme
-#ifdef __APPLE__
-	#include <SDL/SDL.h>
-#else
-	#include <SDL.h>
-#endif
+#include "includeSDL.h"
+
 
 #include <string.h>
 

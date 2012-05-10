@@ -37,7 +37,7 @@ TBateau * toucherBateau(TBateau * bat, int posTouch)
 	{
 		for (i=0; i < bat->type; i++)
 		{
-			bat->etat[i] == COULE;
+			bat->etat[i] = COULE;
 		}
 	}
 

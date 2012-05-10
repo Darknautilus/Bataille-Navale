@@ -1,9 +1,5 @@
 // Permet la portabilité du programme
-#ifdef __APPLE__
-	#include <SDL/SDL.h>
-#else
-	#include <SDL.h>
-#endif
+#include "includeSDL.h"
 
 #include "vueUtilsSDL.h"
 #include "vueChampSaisie.h"
@@ -24,8 +20,7 @@ void MenuTest(void)
 	{
 		EffacerEcran();
 
-		afficherGrille(grille, 50, 50);
-
+		SDL_Flip(SDL_GetVideoSurface());
 		AttendreEvent(NULL, touche);
 
 		if(ToucheSpec(touche) == SDLK_ESCAPE)
