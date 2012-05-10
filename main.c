@@ -40,6 +40,7 @@ void pause()
 
 }
 
+/*
 void controleurParametreVersionTest(Tparam *param)
 {
 	newTParam(1 , param);
@@ -54,6 +55,7 @@ void controleurParametreVersionTest(Tparam *param)
 	setIemeInfoBateauTParam(6 , param , "verdier", 0 , SOUSMARIN);
 	setIemeInfoBateauTParam(7 , param , "nonne", 1 , CARGOT);
 }
+*/
 
 int main(int argc, char ** argv)
 {

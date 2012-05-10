@@ -85,7 +85,7 @@ typedef struct
  R : ce nombre
  Prec : -
  */
-int *getNBInstances (const Tparam * pParam);
+//int *getNBInstances (const Tparam * pParam);
 
 //***************************
 /*	N : getInfoBateau
@@ -96,7 +96,7 @@ int *getNBInstances (const Tparam * pParam);
 	Prec : le pNum eme bateau  existe
 */
 
-TInfoBateau *getInfoBateau(int pNum ,const Tparam * pParam);
+//TInfoBateau *getInfoBateau(int pNum ,const Tparam * pParam);
 
 
 //***************************
@@ -107,7 +107,7 @@ TInfoBateau *getInfoBateau(int pNum ,const Tparam * pParam);
 	R : ce nombre
 	Prec : -
 */
-int getNbInstances (const Tparam * pParam);
+//int getNbInstances (const Tparam * pParam);
 
 
 //***************************
@@ -120,7 +120,7 @@ int getNbInstances (const Tparam * pParam);
 */
 
 
-void chargerParam(FILE * pDesc, Tparam *pP);
+//void chargerParam(FILE * pDesc, Tparam *pP);
 
 //***************************
 /*	N : memParam
@@ -131,7 +131,7 @@ void chargerParam(FILE * pDesc, Tparam *pP);
 	Prec : pDesc est un descriteur de fichier ouvert en écriture
 */
 
-void memParam(const Tparam * pParam, FILE * pDesc);
+//void memParam(const Tparam * pParam, FILE * pDesc);
 
 
 //***************************
@@ -142,7 +142,7 @@ void memParam(const Tparam * pParam, FILE * pDesc);
 	R :
 	Prec : -
 */
-void newTParam(int pNbInstances , Tparam * pP);
+//void newTParam(int pNbInstances , Tparam * pP);
 
 
 //***************************
@@ -153,7 +153,7 @@ void newTParam(int pNbInstances , Tparam * pP);
 	R :
 	Prec : ne peut etre appelé qu'apres newTParam
 */
-void setIemeInfoBateauTParam(int pIdBateau , Tparam * pP, const char pNom[], int pCouleur , ETypeBat pType);
+//void setIemeInfoBateauTParam(int pIdBateau , Tparam * pP, const char pNom[], int pCouleur , ETypeBat pType);
 
 
 

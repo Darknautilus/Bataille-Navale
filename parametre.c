@@ -72,12 +72,13 @@ void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
 	R : ce nombre
 	Prec : -
 */
+/*
 int *getNBInstances (const Tparam * pParam)
 {
     int * nombreInstBateaux = pParam->nombreInstanceBateaux;
 	return nombreInstBateaux;
 }
-
+*/
 
 
 //***************************
@@ -88,7 +89,7 @@ int *getNBInstances (const Tparam * pParam)
 	R :  les informations sur le bateau
 	Prec : le pNum eme bateau  existe
 */
-
+/*
 TInfoBateau * getInfoBateau(int pNum ,const Tparam * pParam)
 {
 	TInfoBateau * infoBat;
@@ -101,7 +102,7 @@ TInfoBateau * getInfoBateau(int pNum ,const Tparam * pParam)
 
 	return infoBat;
 }
-
+*/
 
 //***************************
 /*	N : chargerParam
@@ -112,10 +113,10 @@ TInfoBateau * getInfoBateau(int pNum ,const Tparam * pParam)
 	Prec : pDesc est un descriteur de fichier ouvert en lecture place sur la lecture des paramètres de la partie
 */
 
-
+/*
 void chargerParam(FILE * pDesc, Tparam * pParam)
 {
-	/* Tparam param; pour eviter recopie*/
+	//Tparam param; pour eviter recopie
 	int nb;
 
 	fread (&(pParam->nombreInstanceBateaux), sizeof(int), 1, pDesc);
@@ -124,8 +125,9 @@ void chargerParam(FILE * pDesc, Tparam * pParam)
 	pParam->bateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
 	fread ((pParam->bateauxJoueur), sizeof(TInfoBateau), nb, pDesc);
 	fread ((pParam->bateauxMachine), sizeof(TInfoBateau), nb, pDesc);
-	/* return param;*/
+	//return param;
 }
+*/
 
 //***************************
 /*	N : memParam
@@ -135,7 +137,7 @@ void chargerParam(FILE * pDesc, Tparam * pParam)
 	R :
 	Prec : pDesc est un descriteur de fichier ouvert en écriture
 */
-
+/*
 void memParam(const Tparam * pParam, FILE * pDesc)
 {
 	int nb = K_NBTYPEBATEAUX*getNBInstances (pParam);
@@ -145,7 +147,7 @@ void memParam(const Tparam * pParam, FILE * pDesc)
 	for (i=0;i<nb;i++) fwrite (&(pParam->bateauxJoueur[i]), sizeof(TInfoBateau), 1, pDesc);
 	for (i=0;i<nb;i++) fwrite  (&(pParam->bateauxMachine[i]), sizeof(TInfoBateau), 1, pDesc);
 }
-
+*/
 
 //***************************
 /*	N : newTParam
@@ -155,18 +157,18 @@ void memParam(const Tparam * pParam, FILE * pDesc)
 	R :
 	Prec : -
 */
-
+/*
 void newTParam(int pNbInstances , Tparam * pP)
 {
-	/* Tparam param; pour eviter recopie*/
+	//Tparam param; pour eviter recopie
 	int nb;
 	pP->nombreInstanceBateaux=pNbInstances;
 	nb = K_NBTYPEBATEAUX*getNBInstances (pP);
 	pP->bateauxJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
 	pP->bateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-	/* return param;*/
+	//return param;
 }
-
+*/
 
 
 
@@ -178,7 +180,7 @@ void newTParam(int pNbInstances , Tparam * pP)
 	R :
 	Prec : ne peut etre appelé qu'apres newTParam
 */
-
+/*
 void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam,const char pNom[], int pCouleur , ETypeBat pType)
 {
 
@@ -197,9 +199,7 @@ void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam,const char pNom[], 
 	}
 
 }
-
-
-
+*/
 
 
 
