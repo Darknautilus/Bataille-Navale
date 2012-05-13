@@ -72,27 +72,30 @@ int main(int argc, char ** argv)
 	{
 		choixMenu = AfficherMenuRacine();
 
-	switch (choixMenu)
-	{
-		case 1: // Nouvelle Partie
-			MenuNouvellePartie();
-		break;
+        switch (choixMenu)
+        {
+            case 1: // Nouvelle Partie
+                MenuNouvellePartie();
+                break;
 
-		case 2: // Charger partie
+            case 2: // Charger partie
 
-		break;
+                break;
 
-		case 3: // Meilleurs scores
+            case 3: // Meilleurs scores
 
-		break;
+                break;
 
-		case 4: // Afficher règles
-			afficherRegles();
-		break;
+            case 4: // Afficher règles
+                afficherRegles();
+                break;
 
-		case 5: // Quitter
-			continuer = 0;
-		break;
+            case 5: // Quitter
+                continuer = 0;
+                break;
+            
+            default:
+                break;
         }
     }
 

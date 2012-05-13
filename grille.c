@@ -1,3 +1,13 @@
+/**
+ * \file grille.c
+ * \author Aurélien Bertron
+ * \date 21 avril 2012
+ * \brief Code modèle grille
+ *
+ * Contient les corps des fonctions du module de grille
+ *
+ */
+
 #include <stdlib.h>
 
 #include "grille.h"
@@ -29,16 +39,14 @@ Grille * CreerGrille(int nbLin, int nbCol)
 		// Parcours des lignes
 		for(i=0; i<nbLin; i++)
 		{
-			// Allocation de chaque ligne (tableau d'entiers)
-			nouvGrille->TabLignes[i] = (int*) malloc(nbCol * sizeof(int));
-
 			if(nouvGrille->TabLignes[i] == NULL)
 				return NULL;
 
-			// Et on remplit avec des 0
+			// Et on initialise
 			for(j=0; j<nbCol; j++)
 			{
-				nouvGrille->TabLignes[i][j] = GRILLE_CASE_VIDE;
+                nouvGrille->TabLignes[i][j] = (CaseGrille*) malloc(sizeof(CaseGrille));
+				nouvGrille->TabLignes[i][j]->etatCase = GRILLE_CASE_NORMAL;
 			}
 		}
 
@@ -52,14 +60,14 @@ Grille * CreerGrille(int nbLin, int nbCol)
 	return grille;
 }
 
-int Consulter(Grille * grille, Coord coord)
+CaseGrille * Consulter(Grille * grille, Coord coord)
 {
 	return grille->TabLignes[coord.noLin-1][coord.noCol-1];
 }
 
-Grille * SetVal(Grille * grille, Coord coord, EtatCase etat)
+Grille * SetEtatCase(Grille * grille, Coord coord, EtatCase etat)
 {
-	grille->TabLignes[coord.noLin-1][coord.noCol-1] = etat;
+	grille->TabLignes[coord.noLin-1][coord.noCol-1]->etatCase = etat;
 
 	return grille;
 }
@@ -72,7 +80,7 @@ Grille * EffacerGrille(Grille * grille)
 	{
 		for(j=0;j<grille->NbCol;j++)
 		{
-			grille->TabLignes[i][j] = 0;
+			grille->TabLignes[i][j]->etatCase = GRILLE_CASE_NORMAL;
 		}
 	}
 
@@ -81,10 +89,13 @@ Grille * EffacerGrille(Grille * grille)
 
 void LibererGrille(Grille * grille)
 {
-	int i;
+	int i, j;
 
 	for(i=0;i<grille->NbLin;i++)
 	{
+        for(j=0;j<grille->NbCol;j++)
+            free(grille->TabLignes[i][j]);
+        
 		free(grille->TabLignes[i]);
 	}
 

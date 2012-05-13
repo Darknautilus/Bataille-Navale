@@ -23,13 +23,13 @@ Grille * InsertBateau(Grille * grille, TBateau * bat)
 
 	// 1ere case du bateau
 	if (bat->etat[0] == INTACT)
-		grille = SetVal(grille, pos, GRILLE_CASE_BATEAU);
+		grille = SetEtatCase(grille, pos, GRILLE_CASE_NORMAL);
 
 	else if (bat->etat[0] == TOUCHE)
-		grille = SetVal(grille, pos, GRILLE_CASE_TOUCHE);
+		grille = SetEtatCase(grille, pos, GRILLE_CASE_TOUCHE);
 
 	else
-		grille = SetVal(grille, pos, GRILLE_CASE_COULE);
+		grille = SetEtatCase(grille, pos, GRILLE_CASE_COULE);
 
 	for (i=0; i < bat->type; i++)
 	{
@@ -38,7 +38,7 @@ Grille * InsertBateau(Grille * grille, TBateau * bat)
 		else
 			pos.noCol = bat->position.y + i;
 
-		grille = SetVal(grille, pos, GRILLE_CASE_BATEAU);
+		grille = SetEtatCase(grille, pos, GRILLE_CASE_NORMAL);
 	}
 
 	return grille;
