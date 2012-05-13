@@ -18,7 +18,7 @@ typedef struct
 typedef struct
 {
 	TPosition position;
-//	int idInfoBateau;
+ 	int idInfoBateau;
 	ETypeBat type;
 	int etat[KTAILLEMAXBAT];
 }	TBateau;
