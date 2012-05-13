@@ -5,20 +5,19 @@
 #ifndef _PARAM_H
 #define _PARAM_H
 
-//#include <SDL/SDL.h>
 #include <stdio.h>
 #include "couleurs.h"
 #include "bateau.h"
 
-#define K_NBCOULEURS 4
-#define K_NBTYPEBATEAUX 4
+#define K_NBTYPEBATEAUX KTAILLEMAXBAT-1
 #define K_LGNOM 25
 
 typedef struct
 {
-	int mCouleur /*indice dans la table des couleurs*/;
-	ETypeBat mType;
-	char mNom[K_LGNOM];
+	int couleur /*indice dans la table des couleurs*/;
+	ETypeBat type;
+    int idInfoBateau;
+	char nomBateau[K_LGNOM];
 }	TInfoBateau;
 
 //***************************
@@ -53,7 +52,7 @@ ETypeBat getType(const TInfoBateau *pB);
 	Prec : -
 */
 
-void getBNom(const TInfoBateau * pB, char pNom[]); //voir tp sur les chaines de caractères dynamique*/
+void getBNom(const TInfoBateau * pB, char pNom[]);
 
 
 //***************************
@@ -70,15 +69,23 @@ void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
 
 typedef struct
 {
-    int mNombreInstanceBateaux;
-    TInfoBateau * mBateauxDuJoueur; /*tableau dynamique de mNombreInstanceBateaux*K_NBTYPEBATEAUX bateaux du joueur*/
-    TInfoBateau * mBateauxMachine; /*tableau dynamique de mNombreInstanceBateaux*K_NBTYPEBATEAUX bateaux de la machine*/
+    int nombreInstanceBateaux[K_NBTYPEBATEAUX];
+    char nomJoueur[K_LGNOM];
+    char nomMachine[K_LGNOM];
+    TInfoBateau * bateauxJoueur; /*tableau dynamique des bateaux du joueur*/
+    TInfoBateau * bateauxMachine; /*tableau dynamique des bateaux de la machine*/
 }Tparam;
 
-/* on va supposer que les bateaux du joueur sont numérotés de 0 à mNombreInstanceBateaux*K_NBTYPEBATEAUX -1 et donc que leur numéro sera l'indice dans le tableau
-mBateauxDuJoueur
-et les bateaux de la machine sont nimérotés de  mNombreInstanceBateaux*K_NBTYPEBATEAUX à (2* mNombreInstanceBateaux*K_NBTYPEBATEAUX) -1 et donc que leur numéro -  mNombreInstanceBateaux*K_NBTYPEBATEAUX
-sera l'indice dans le tableau mBateauxMachine*/
+
+//***************************
+/*	N : getNBInstances
+ D : donne le nombre d'instances de chaque bateau pour un joueur pour les parametres de partie pParam
+ E : pParam
+ S :
+ R : ce nombre
+ Prec : -
+ */
+//int *getNBInstances (const Tparam * pParam);
 
 //***************************
 /*	N : getInfoBateau
@@ -89,18 +96,18 @@ sera l'indice dans le tableau mBateauxMachine*/
 	Prec : le pNum eme bateau  existe
 */
 
-TInfoBateau *getInfoBateau(int pNum ,const Tparam * pParam);
+//TInfoBateau *getInfoBateau(int pNum ,const Tparam * pParam);
 
 
 //***************************
 /*	N : getNBInstances
-	D : donne le nombre d'instances de chaque bateau pour un joueur pour les parametres de partie pParam
+	D : donne le nombre d'instances d'un type de bateau pour un joueur pour les parametres de partie pParam
 	E : pParam
 	S :
 	R : ce nombre
 	Prec : -
 */
-int getNBInstances (const Tparam * pParam);
+//int getNbInstances (const Tparam * pParam);
 
 
 //***************************
@@ -113,7 +120,7 @@ int getNBInstances (const Tparam * pParam);
 */
 
 
-void chargerParam(FILE * pDesc, Tparam *pP);
+//void chargerParam(FILE * pDesc, Tparam *pP);
 
 //***************************
 /*	N : memParam
@@ -124,7 +131,7 @@ void chargerParam(FILE * pDesc, Tparam *pP);
 	Prec : pDesc est un descriteur de fichier ouvert en écriture
 */
 
-void memParam(const Tparam * pParam, FILE * pDesc);
+//void memParam(const Tparam * pParam, FILE * pDesc);
 
 
 //***************************
@@ -135,12 +142,7 @@ void memParam(const Tparam * pParam, FILE * pDesc);
 	R :
 	Prec : -
 */
-void newTParam(int pNbInstances , Tparam * pP);
-/* question a ce poser les tableaux sont vides qui doit faire les saisies des informations sur les bateaux : la vue, le contrôleur va donc appeler la vue
-pour saisir les info sur un bateau puis appeler un fonction du module param pour initialiser le nième bateau de la liste des paramètres =>
-
-*/
-
+//void newTParam(int pNbInstances , Tparam * pP);
 
 
 //***************************
@@ -151,7 +153,7 @@ pour saisir les info sur un bateau puis appeler un fonction du module param pour
 	R :
 	Prec : ne peut etre appelé qu'apres newTParam
 */
-void setIemeInfoBateauTParam(int pIdBateau , Tparam * pP, const char pNom[], int pCouleur , ETypeBat pType);
+//void setIemeInfoBateauTParam(int pIdBateau , Tparam * pP, const char pNom[], int pCouleur , ETypeBat pType);
 
 
 

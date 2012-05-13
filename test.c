@@ -6,14 +6,14 @@
 #include "test.h"
 #include "grille.h"
 #include "vueGrille.h"
-#include "bateau.h"
-#include "vueBateau.h"
+//#include "bateau.h"
+//#include "vueBateau.h"
 
 void MenuTest(void)
 {
 	int continuer = 1;
 	SDL_keysym * touche = (SDL_keysym*) malloc(sizeof(SDL_keysym));
-
+    
 	Grille * grille = CreerGrille(10, 10);
 
 	while (continuer)

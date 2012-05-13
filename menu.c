@@ -178,6 +178,7 @@ void EcranGrille(ChampSaisie * champ)
     SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
     int controleEvent;
     Coord coord;
+    CaseGrille * caseGrille;
 
     int continuer = 1;
 
@@ -201,12 +202,13 @@ void EcranGrille(ChampSaisie * champ)
         else
         {
             coord = ClicCaseGrille(grilleJoueur, positionClic);
+            caseGrille = Consulter(grilleJoueur, coord);
             if(ClicDansGrille(grilleJoueur, positionClic))
             {
-                if(Consulter(grilleJoueur, coord) == 0)
-                    grilleJoueur = SetVal(grilleJoueur, coord, 1);
-                else if(Consulter(grilleJoueur, coord) == 1)
-                    grilleJoueur = SetVal(grilleJoueur, coord, 0);
+                if(caseGrille->etatCase == GRILLE_CASE_NORMAL)
+                    grilleJoueur = SetEtatCase(grilleJoueur, coord, GRILLE_CASE_TOUCHE);
+                else if(caseGrille->etatCase == GRILLE_CASE_TOUCHE)
+                    grilleJoueur = SetEtatCase(grilleJoueur, coord, GRILLE_CASE_NORMAL);
 
                 updateGrille(grilleJoueur, coord);
             }
