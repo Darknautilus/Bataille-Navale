@@ -1,10 +1,18 @@
-// bateau.h le module bateau définit les couleurs et type et autre info des bateaux
+/**
+ *   /file bateau.h
+ *   /author Benoit Sauvere
+ *   /date 13/05/2012
+ *   /brief Module Bateau Headers
+ *
+ *   Contient les déclaration du module Bateau
+*/
+
 #ifndef _BATEAU_H
 #define _BATEAU_H
 
 #define KTAILLEMAXBAT 5
 
-typedef enum {VOILIER = 1, REMORQUEUR,  PORTEAVION, SOUSMARIN, CARGOT} ETypeBat;
+typedef enum {VOILIER = 1, REMORQUEUR = 2,  PORTEAVION = 4, SOUSMARIN = 3/*, CARGOT = 3*/} ETypeBat;
 typedef enum {HORIZONTAL, VERTICAL} ESens;
 typedef enum {INTACT, TOUCHE, COULE} EEtat;
 
@@ -20,7 +28,7 @@ typedef struct
 	TPosition position;
  	int idInfoBateau;
 	ETypeBat type;
-	int etat[KTAILLEMAXBAT];
+	int etat[KTAILLEMAXBAT]; //Un tableau de booleen (1 = touché, 0 = non touché)
 }	TBateau;
 
 /**
@@ -40,7 +48,11 @@ TBateau * creerBateau(TPosition pos, ETypeBat type);
 */
 void toucherBateau(TBateau * bat, int posTouch);
 
-// renvoie le nombre de coups necessaires pour couler le bateau (0 si le bateau est coulé)
+/**
+    Renvoie le nombre de coups necessaires pour couler le bateau (0 si le bateau est coulé).
+    @param bat un pointeur sur le bateau en question.
+    @return Une valeur de l'énumération EEtat.
+**/
 int etatBateau(TBateau * bat);
 
 /**

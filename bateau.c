@@ -1,3 +1,12 @@
+/**
+ *   /file bateau.c
+ *   /author Benoit Sauvere
+ *   /date 13/05/2012
+ *   /brief Module Bateau
+ *
+ *   Contient le module de gestion des structure de type bateau.
+*/
+
 #include "bateau.h"
 #include "parametre.h"
 
@@ -41,7 +50,6 @@ void toucherBateau(TBateau * bat, int posTouch)
 		}
 	}
 
-	//return bat;
 }
 
 /**
@@ -72,6 +80,34 @@ TPosition getPosBateau(TBateau * bat)
 {
 	return bat->position;
 }
+
+/**
+    Vérifie si le bateau est coulé.
+    @param bat Un pointeur sur une structure TBateau
+    @return 1 si le bateau est coulé, 0 si il est en vie
+*/
+int estCoule(TBateau * bat){
+
+    int longBateau = bat->type; //On récupère la longueur du bateau
+    int i = 0;
+
+    int resultat = 1; //Par défaut non coulé
+
+    //Tant que l'on a pas trouvé une case non touchée et que la longueur du bateau n'est pas dépassée
+    while(resultat != 0 && i < longBateau){
+
+        //Si un case n'est pas touchée
+        if(bat->etat[i] == 0){
+            //Le bateau n'est pas coulé
+            resultat = 0;
+        }
+
+    }
+
+    return resultat;
+}
+
+
 
 
 /* il faut faire égalemnt des fonctions pour les informations positionnelles direction latitude et logitude=> compléter*/
