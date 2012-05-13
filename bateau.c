@@ -18,6 +18,12 @@ TBateau * creerBateau(TPosition pos, ETypeBat type)
 	bat->position = pos;
 	bat->type = type;
 
+	int *etat = malloc(
+                    sizeof(int) * type
+                    );
+
+    bat->etat = etat;
+
 	for (i=0; i<type; i++)
 	{
 		bat->etat[i] = INTACT;
@@ -102,12 +108,11 @@ int estCoule(TBateau * bat){
             resultat = 0;
         }
 
+        i++;
     }
 
     return resultat;
 }
-
-
 
 
 /* il faut faire égalemnt des fonctions pour les informations positionnelles direction latitude et logitude=> compléter*/

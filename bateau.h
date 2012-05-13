@@ -12,7 +12,7 @@
 
 #define KTAILLEMAXBAT 5
 
-typedef enum {VOILIER = 1, REMORQUEUR = 2,  PORTEAVION = 4, SOUSMARIN = 3/*, CARGOT = 3*/} ETypeBat;
+typedef enum {VOILIER = 1, REMORQUEUR = 2,  PORTEAVION = 5, SOUSMARIN = 4, CARGOT = 3} ETypeBat;
 typedef enum {HORIZONTAL, VERTICAL} ESens;
 typedef enum {INTACT, TOUCHE, COULE} EEtat;
 
@@ -28,7 +28,7 @@ typedef struct
 	TPosition position;
  	int idInfoBateau;
 	ETypeBat type;
-	int etat[KTAILLEMAXBAT]; //Un tableau de booleen (1 = touché, 0 = non touché)
+	int *etat; //Un tableau de booleen (1 = touché, 0 = non touché)
 }	TBateau;
 
 /**
