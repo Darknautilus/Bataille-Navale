@@ -10,13 +10,22 @@
 #include "bateau.h"
 #include "parametre.h"
 
-TBateau * creerBateau(TPosition pos, ETypeBat type)
+/**
+    Créer un bateau.
+    @param pos La position du bateau
+    @param type Le type du bateau
+    @param idInfoBateau L'indentifiant de la strucutre TInfoBateau associée.
+    @return Une strucutre Bateau correctement initialisée.
+*/
+TBateau * creerBateau(TPosition pos, ETypeBat type, int idInfoBateau)
 {
 	int i;
 	TBateau * bat = (TBateau*) malloc(sizeof(TBateau));
 
 	bat->position = pos;
 	bat->type = type;
+
+    bat->idInfoBateau = idInfoBateau;
 
 	int *etat = malloc(
                     sizeof(int) * type
@@ -32,6 +41,12 @@ TBateau * creerBateau(TPosition pos, ETypeBat type)
 	return bat;
 }
 
+/**
+    Cette fonction marque une case d'un bateau donnée comme touchée.
+    @param bat Le pointeur sur le bateau en question
+    @param posTouch La postion touchée.
+    @return
+*/
 void toucherBateau(TBateau * bat, int posTouch)
 {
 	int i;
@@ -114,5 +129,18 @@ int estCoule(TBateau * bat){
     return resultat;
 }
 
+int getPosXBateau(TBateau *bat){
+    return bat->position.x;
+}
 
-/* il faut faire égalemnt des fonctions pour les informations positionnelles direction latitude et logitude=> compléter*/
+int getPosYBateau(TBateau *bat){
+    return bat->position.y;
+}
+
+ESens getSensBateau(TBateau *bat){
+    return bat->position.direction;
+}
+
+
+
+

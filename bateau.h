@@ -26,30 +26,31 @@ typedef struct
 typedef struct
 {
 	TPosition position;
- 	int idInfoBateau;
 	ETypeBat type;
-	int *etat; //Un tableau de booleen (1 = touché, 0 = non touché)
+	int *etat; //Un tableau dynamique de booleen (1 = touché, 0 = non touché)
+    int idInfoBateau; //Identifiant de la strucutre TInfoBateau associée.
 }	TBateau;
 
 /**
     Créer un bateau.
     @param pos La position du bateau
     @param type Le type du bateau
+    @param idInfoBateau L'indentifiant de la strucutre TInfoBateau associée.
     @return Une strucutre Bateau correctement initialisée.
 */
-TBateau * creerBateau(TPosition pos, ETypeBat type);
+TBateau * creerBateau(TPosition pos, ETypeBat type, int idInfoBateau);
 
 /**
     Cette fonction marque une case d'un bateau donnée comme touchée.
     @param bat Le pointeur sur le bateau en question
     @param posTouch La postion touchée.
     @return
-
 */
 void toucherBateau(TBateau * bat, int posTouch);
 
 /**
     Renvoie le nombre de coups necessaires pour couler le bateau (0 si le bateau est coulé).
+    Utile ?
     @param bat un pointeur sur le bateau en question.
     @return Une valeur de l'énumération EEtat.
 **/
@@ -62,7 +63,32 @@ int etatBateau(TBateau * bat);
 */
 int estCoule(TBateau * bat);
 
+/**
+    Retourne une structure contenant la position d'un bateau.
+    @param bat Un pointeur sur le bateau en question.
+    @return Une structure de type TPosition.
+*/
 TPosition getPosBateau(TBateau * bat);
 
-/* il faut faire égalemnt des fonctions pour les informations positionnelles direction latitude et logitude=> compléter*/
+/**
+    Retourne la postion en X (latitude) d'un bateau.
+    @param bat Un pointeur sur le bateau en question.
+    @return un entier.
+*/
+int getPosXBateau(TBateau *bat);
+
+/**
+    Retourne la postion en Y (longitutde) d'un bateau.
+    @param bat Un pointeur sur le bateau en question.
+    @return un entier.
+*/
+int getPosYBateau(TBateau *bat);
+
+/**
+    Retourne le sens d'un bateau.
+    @param bat Un pointeur sur le bateau en question.
+    @return Un élément de l'enumération ESens.
+*/
+ESens getSensBateau(TBateau *bat);
+
 #endif

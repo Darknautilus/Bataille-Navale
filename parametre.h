@@ -14,9 +14,9 @@
 
 typedef struct
 {
+    int idInfoBateau;
 	int couleur /*indice dans la table des couleurs*/;
 	ETypeBat type;
-    int idInfoBateau;
 	char nomBateau[K_LGNOM];
 }	TInfoBateau;
 
