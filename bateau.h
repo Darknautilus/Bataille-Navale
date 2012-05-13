@@ -1,8 +1,8 @@
 /**
- *   /file bateau.h
- *   /author Benoit Sauvere
- *   /date 13/05/2012
- *   /brief Module Bateau Headers
+ *   @file bateau.h
+ *   @author Benoit Sauvere
+ *   @date 13/05/2012
+ *   @brief Module Bateau Headers
  *
  *   Contient les déclaration du module Bateau
 */
@@ -27,18 +27,16 @@ typedef struct
 {
 	TPosition position;
 	ETypeBat type;
-	int *etat; //Un tableau dynamique de booleen (1 = touché, 0 = non touché)
-    int idInfoBateau; //Identifiant de la strucutre TInfoBateau associée.
+	int etat[KTAILLEMAXBAT]; //Un tableau statique de booleen (1 = touché, 0 = non touché)
 }	TBateau;
 
 /**
     Créer un bateau.
     @param pos La position du bateau
     @param type Le type du bateau
-    @param idInfoBateau L'indentifiant de la strucutre TInfoBateau associée.
     @return Une strucutre Bateau correctement initialisée.
 */
-TBateau * creerBateau(TPosition pos, ETypeBat type, int idInfoBateau);
+TBateau * creerBateau(TPosition pos, ETypeBat type);
 
 /**
     Cette fonction marque une case d'un bateau donnée comme touchée.

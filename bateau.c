@@ -1,8 +1,8 @@
 /**
- *   /file bateau.c
- *   /author Benoit Sauvere
- *   /date 13/05/2012
- *   /brief Module Bateau
+ *   @file bateau.c
+ *   @author Benoit Sauvere
+ *   @date 13/05/2012
+ *   @brief Module Bateau
  *
  *   Contient le module de gestion des structure de type bateau.
 */
@@ -14,24 +14,15 @@
     Créer un bateau.
     @param pos La position du bateau
     @param type Le type du bateau
-    @param idInfoBateau L'indentifiant de la strucutre TInfoBateau associée.
     @return Une strucutre Bateau correctement initialisée.
 */
-TBateau * creerBateau(TPosition pos, ETypeBat type, int idInfoBateau)
+TBateau * creerBateau(TPosition pos, ETypeBat type)
 {
 	int i;
 	TBateau * bat = (TBateau*) malloc(sizeof(TBateau));
 
 	bat->position = pos;
 	bat->type = type;
-
-    bat->idInfoBateau = idInfoBateau;
-
-	int *etat = malloc(
-                    sizeof(int) * type
-                    );
-
-    bat->etat = etat;
 
 	for (i=0; i<type; i++)
 	{
