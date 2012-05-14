@@ -4,7 +4,7 @@
  * \date 21 avril 2012
  * \brief Header modèle grille
  *
- * Contient les en-têtes des fonctions du module de grille
+ * Contient les types et en-têtes des fonctions du module de grille
  *
  */
 

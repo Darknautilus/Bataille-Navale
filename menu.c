@@ -129,8 +129,8 @@ void MenuNouvellePartie(void)
 
 		EcrireTexte("Appuyez sur Entree pour continuer", 30, 270, 400);
 
-		AfficherChamp(champPseudoHumain, SDL_GetVideoSurface());
-		AfficherChamp(champPseudoIA, SDL_GetVideoSurface());
+		AfficherChamp(champPseudoHumain);
+		AfficherChamp(champPseudoIA);
 		SDL_Flip(SDL_GetVideoSurface());
 
 		controleEvent = AttendreEvent(positionClic, touche);

@@ -1,3 +1,13 @@
+/**
+ * \file vueChampSaisie.c
+ * \author Aurélien Bertron
+ * \date 29 avril 2012
+ * \brief Vue champ saisie
+ *
+ * Contient les corps des fonctions d'entrée/sortie du module de champs de saisie.
+ * Ce module implémente la gestion du champ de saisie. Il permet à l'utilisateur de saisir une chaine de caractères.
+ */
+
 // Permet la portabilité du programme
 #include "includeSDL.h"
 
@@ -6,7 +16,7 @@
 #include "vueChampSaisie.h"
 #include "vueUtilsSDL.h"
 
-void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran)
+void AfficherChamp(ChampSaisie * champ)
 {
 	SDL_Surface * champBG, * texte;
 	TTF_Font * police;
@@ -32,8 +42,8 @@ void AfficherChamp(ChampSaisie * champ, SDL_Surface * ecran)
 
 	texte = TTF_RenderText_Blended(police, champ->chaine, couleurTexte);
 
-	SDL_BlitSurface(champBG, NULL, ecran, &positionChamp);
-	SDL_BlitSurface(texte, NULL, ecran, &positionTexte);
+	SDL_BlitSurface(champBG, NULL, SDL_GetVideoSurface(), &positionChamp);
+	SDL_BlitSurface(texte, NULL, SDL_GetVideoSurface(), &positionTexte);
 
 	SDL_FreeSurface(champBG);
 	SDL_FreeSurface(texte);
@@ -48,13 +58,6 @@ void EditerChamp(ChampSaisie * champ)
 	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 
-
-	/*
-	L'utilisation des caractères Unicode nous empêche d'utiliser AttendreEvent() qui ne les prend pas en charge
-	La gestion d'Unicode s'active au début du sous-programme puis se désactive à la fin
-	*/
-
-	SDL_EnableUNICODE(SDL_ENABLE);
 
 	while (continuer)
 	{
@@ -78,11 +81,9 @@ void EditerChamp(ChampSaisie * champ)
 				champ->chaine = AjouterCharFin(champ->chaine, ToucheChar(touche));
 		}
 
-		AfficherChamp(champ, SDL_GetVideoSurface());
+		AfficherChamp(champ);
 		SDL_Flip(SDL_GetVideoSurface());
 	}
-
-	SDL_EnableUNICODE(SDL_DISABLE);
 
 	free(positionClic);
 	free(touche);

@@ -122,7 +122,13 @@ int AttendreEvent(SDL_Rect * coordClic, SDL_keysym * touche)
 
 char ToucheChar(SDL_keysym * touche)
 {
-	return (char)(touche->unicode);
+    char charTouche;
+    
+    SDL_EnableUNICODE(SDL_ENABLE);
+    charTouche = (char)(touche->unicode);
+    SDL_EnableUNICODE(SDL_DISABLE);
+    
+	return charTouche; 
 }
 
 SDLKey ToucheSpec(SDL_keysym * touche)
