@@ -1,8 +1,8 @@
 /**
- *   @file bateau.c
- *   @author Benoit Sauvere
- *   @date 13/05/2012
- *   @brief Module Bateau
+ *   \file bateau.c
+ *   \author Benoit Sauvere
+ *   \date 13 mai 2012
+ *   \brief Module Bateau
  *
  *   Contient le module de gestion des structure de type bateau.
 */
@@ -10,12 +10,6 @@
 #include "bateau.h"
 #include "parametre.h"
 
-/**
-    Créer un bateau.
-    @param pos La position du bateau
-    @param type Le type du bateau
-    @return Une strucutre Bateau correctement initialisée.
-*/
 TBateau * creerBateau(TPosition pos, ETypeBat type)
 {
 	int i;
@@ -32,12 +26,6 @@ TBateau * creerBateau(TPosition pos, ETypeBat type)
 	return bat;
 }
 
-/**
-    Cette fonction marque une case d'un bateau donnée comme touchée.
-    @param bat Le pointeur sur le bateau en question
-    @param posTouch La postion touchée.
-    @return
-*/
 void toucherBateau(TBateau * bat, int posTouch)
 {
 	int i;
@@ -64,11 +52,6 @@ void toucherBateau(TBateau * bat, int posTouch)
 
 }
 
-/**
-    Retoune le nombre de coups qu'a reçu un bateau.
-    @param bat Un pointeur vers la structure du bateau
-    @return Un entier.
-*/
 int nbCoupsBateau(TBateau * bat)
 {
 	int i;
@@ -83,21 +66,11 @@ int nbCoupsBateau(TBateau * bat)
 	return nbCoups;
 }
 
-/**
-    Retourne la postion du bateau.
-    @param bat Un pointeur vers le bateau en question
-    @return Une strucutre TPosition contenant les
-*/
 TPosition getPosBateau(TBateau * bat)
 {
 	return bat->position;
 }
 
-/**
-    Vérifie si le bateau est coulé.
-    @param bat Un pointeur sur une structure TBateau
-    @return 1 si le bateau est coulé, 0 si il est en vie
-*/
 int estCoule(TBateau * bat){
 
     int longBateau = bat->type; //On récupère la longueur du bateau

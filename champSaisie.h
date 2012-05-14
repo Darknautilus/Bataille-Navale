@@ -11,24 +11,23 @@
 #ifndef CHAMP_SAISIE_H
 #define CHAMP_SAISIE_H
 
-#define KLARGCHAR 13 // Largeur caractère
-#define KESP_VERT 5 // Espacement du texte avec le bord du champ
-#define KESP_HORI 5
+#define KLARGCHAR 13 /**< \brief Largeur d'un caractère */
+#define KESP_VERT 5 /**< \brief Espacement vertical du texte avec le bord du champ */
+#define KESP_HORI 5 /**< \brief Espacement horizontal du texte avec le bord du champ */
 
-// Couleur du texte (format RGB)
-#define KCOULTXT_R 0
-#define KCOULTXT_G 0
-#define KCOULTXT_B 0
+#define KCOULTXT_R 0 /**< \brief Couleur du texte RGB R */
+#define KCOULTXT_G 0 /**< \brief Couleur du texte RGB G */
+#define KCOULTXT_B 0 /**< \brief Couleur du texte RGB B */
 
 // Couleur du champ (mode normal)
-#define KCOULNORM_R 200
-#define KCOULNORM_G 207
-#define KCOULNORM_B 212
+#define KCOULNORM_R 200 /**< \brief Couleur du champ normal RGB R */
+#define KCOULNORM_G 207 /**< \brief Couleur du champ normal RGB G */
+#define KCOULNORM_B 212 /**< \brief Couleur du champ normal RGB B */
 
 // Couleur du champ (mode édition)
-#define KCOULEDIT_R 255
-#define KCOULEDIT_G 255
-#define KCOULEDIT_B 255
+#define KCOULEDIT_R 255 /**< \brief Couleur du champ édition RGB R */
+#define KCOULEDIT_G 255 /**< \brief Couleur du champ édition RGB G */
+#define KCOULEDIT_B 255 /**< \brief Couleur du champ édition RGB B */
 
 /**
  * \enum EtatChamp
