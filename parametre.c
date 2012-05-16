@@ -72,13 +72,26 @@ void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
 	R : ce nombre
 	Prec : -
 */
-/*
 int *getNBInstances (const Tparam * pParam)
 {
-    int * nombreInstBateaux = pParam->nombreInstanceBateaux;
-	return nombreInstBateaux;
+	return pParam->nombreInstanceBateaux;
 }
-*/
+
+int getNbInstancesType (const Tparam * pParam, ETypeBat pType)
+{
+	return pParam->nombreInstanceBateaux[pType-1];
+}
+
+int nombreBat(const Tparam * pParam)
+{
+	int i;
+	int nombreBat=0;
+	
+	for(i=0;i<K_NBTYPEBATEAUX;i++)
+		nombreBat += pParam->nombreInstanceBateaux[i];
+
+	return nombreBat;
+}
 
 
 //***************************
@@ -89,20 +102,17 @@ int *getNBInstances (const Tparam * pParam)
 	R :  les informations sur le bateau
 	Prec : le pNum eme bateau  existe
 */
-/*
 TInfoBateau * getInfoBateau(int pNum ,const Tparam * pParam)
 {
 	TInfoBateau * infoBat;
-    int * nombreInstBateaux = getNBInstances(pParam);
 
-	if (pNum < K_NBTYPEBATEAUX * )
+	if (pNum < nombreBat(pParam) )
 		infoBat = &(pParam->bateauxJoueur[pNum]);
 	else
-		infoBat = &(pParam->bateauxMachine[pNum-K_NBTYPEBATEAUX*getNBInstances (pParam)]);
+		infoBat = &(pParam->bateauxMachine[pNum-nombreBat(pParam)]);
 
 	return infoBat;
 }
-*/
 
 //***************************
 /*	N : chargerParam
@@ -157,18 +167,24 @@ void memParam(const Tparam * pParam, FILE * pDesc)
 	R :
 	Prec : -
 */
-/*
-void newTParam(int pNbInstances , Tparam * pP)
+Tparam * newTParam(int pNbInstances)
 {
-	//Tparam param; pour eviter recopie
 	int nb;
-	pP->nombreInstanceBateaux=pNbInstances;
-	nb = K_NBTYPEBATEAUX*getNBInstances (pP);
-	pP->bateauxJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-	pP->bateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-	//return param;
+    int i;
+    Tparam * param = (Tparam*)malloc(sizeof(Tparam));
+    
+	param->nombreInstanceBateaux=(int*)malloc(K_NBTYPEBATEAUX * sizeof(int));
+    for(i=0;i<K_NBTYPEBATEAUX;i++)
+    {
+        param->nombreInstanceBateaux[i] = pNbInstances;
+    }
+    
+	nb = K_NBTYPEBATEAUX*pNbInstances;
+	param->bateauxJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
+	param->bateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
+	
+    return param;
 }
-*/
 
 
 

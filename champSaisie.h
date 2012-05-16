@@ -46,7 +46,7 @@ typedef enum{
 */
 typedef struct
 {
-    char * chaine; /**< Chaine tapée dans le champ */
+	char * chaine; /**< Chaine tapée dans le champ */
     int longMax; /**< Longueur maximum de la chaine */
     int tailleTexte; /**< Taille de la police de texte */
     int abscisse; /**< Abscisse du champ dans l'écran */

@@ -37,6 +37,11 @@ typedef enum {
     VERTICAL
 } ESens;
 
+/**
+ * \enum EEtat
+ * \brief État d'une case de bateau
+ * Est utilisé dans un tableau dont le nombre d'éléments est égal à la taille du bateau
+*/
 typedef enum {INTACT, TOUCHE, COULE} EEtat;
 
 /**
@@ -58,7 +63,7 @@ typedef struct
 {
 	TPosition position; /**< Position du bateau dans la grille */
 	ETypeBat type; /**< Type/Taille du bateau */
-	int etat[KTAILLEMAXBAT]; /**< Un tableau statique de booleen (1 = touché, 0 = non touché) */
+	EEtat etat[KTAILLEMAXBAT]; /**< Tableau d'état du bateau, renseigne l'état de chaque case du bateau */
 }	TBateau;
 
 /**

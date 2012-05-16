@@ -9,7 +9,7 @@
 #include "couleurs.h"
 #include "bateau.h"
 
-#define K_NBTYPEBATEAUX KTAILLEMAXBAT-1
+#define K_NBTYPEBATEAUX KTAILLEMAXBAT
 #define K_LGNOM 25
 
 typedef struct
@@ -56,7 +56,7 @@ void getBNom(const TInfoBateau * pB, char pNom[]);
 
 //***************************
 /*	N : setInfoBateau
-	D : affecte les infos pNom pCouleur et pType ‡ l'info bateau pB
+	D : affecte les infos pNom pCouleur et pType à l'info bateau pB
 	E :  pNom pCouleur et pType
 	S : pB
 	R :
@@ -68,7 +68,7 @@ void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
 
 typedef struct
 {
-    int nombreInstanceBateaux[K_NBTYPEBATEAUX];
+    int * nombreInstanceBateaux;
     char nomJoueur[K_LGNOM];
     char nomMachine[K_LGNOM];
     TInfoBateau * bateauxJoueur; /*tableau dynamique des bateaux du joueur*/
@@ -84,7 +84,15 @@ typedef struct
  R : ce nombre
  Prec : -
  */
-//int *getNBInstances (const Tparam * pParam);
+int *getNBInstances (const Tparam * pParam);
+
+/**
+ * \brief Donne le nombre total de bateaux pour chaque joueur
+ *
+ * \param[in] pParam
+ * \return Nombre total de bateaux pour chaque joueur
+*/
+int nombreBat(const Tparam * pParam);
 
 //***************************
 /*	N : getInfoBateau
@@ -94,8 +102,7 @@ typedef struct
 	R :  les informations sur le bateau
 	Prec : le pNum eme bateau  existe
 */
-
-//TInfoBateau *getInfoBateau(int pNum ,const Tparam * pParam);
+TInfoBateau *getInfoBateau(int pNum ,const Tparam * pParam);
 
 
 //***************************
@@ -106,7 +113,7 @@ typedef struct
 	R : ce nombre
 	Prec : -
 */
-//int getNbInstances (const Tparam * pParam);
+int getNbInstancesType (const Tparam * pParam, ETypeBat pType);
 
 
 //***************************
@@ -137,11 +144,11 @@ typedef struct
 /*	N : newTParam
 	D : creer un Tparam pour pNbInstances de chaque bateau pour chacun : remarque devra allouer les tableaux dynamiques
 	E :pNbInstances,
-	S : pP
-	R :
+	S :
+	R : un paramètre initialisé
 	Prec : -
 */
-//void newTParam(int pNbInstances , Tparam * pP);
+Tparam * newTParam(int pNbInstances);
 
 
 //***************************
