@@ -2,6 +2,7 @@
 
 #include "test.h"
 #include "parametre.h"
+#include "vueParam.h"
 
 void MenuTest(void)
 {
@@ -36,9 +37,7 @@ void MenuTest(void)
 }
 
 void controleurParametreVersionTest(Tparam *param)
-{
-	param = newTParam(1);
-	
+{	
 	// boucles avec void newTParam(int pIdBateau , Tparam * pP, char pNom[], int pCouleur , EType pType) doit remplacer ce qui suit
 	setIemeInfoBateauTParam(0 , param, "redon", 0 , VOILIER);
 	setIemeInfoBateauTParam(1 , param, "peninou", 1 , REMORQUEUR);
@@ -54,7 +53,32 @@ void controleurParametreVersionTest(Tparam *param)
 
 void TestParam(void)
 {
-	Tparam * param;
+	Tparam * param = newTParam(1);
+	Tparam * paramLu = newTParam(1);
+	FILE * ficParam;
 	
+	printf("\n\nAjout des bateaux\n");
 	controleurParametreVersionTest(param);
+	printf("Fait\n");
+	
+	printf("\nAffichage des bateaux\n");
+	AfficherParamTest(param);
+	printf("Fait\n");
+	
+	printf("\nEnregistrement dans un fichier\n");
+	ficParam = fopen("param.txt", "w");
+	memParam(param, ficParam);
+	fclose(ficParam);
+	printf("Fait\n");
+	
+	printf("\nLecture fichier paramètres\n");
+	ficParam = fopen("param.txt", "r");
+	chargerParam(ficParam, paramLu);
+	fclose(ficParam);
+	printf("Fait\n");
+	
+	printf("\nAffichage des parametres lus\n");
+	AfficherParamTest(paramLu);
+	printf("Fait\n");
+
 }

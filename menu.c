@@ -9,6 +9,7 @@
 #include "vueUtilsSDL.h"
 #include "vueGrille.h"
 #include "testVue.h"
+#include "test.h"
 
 void AfficherMenuAccueil(void)
 {
