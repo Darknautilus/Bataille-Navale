@@ -124,9 +124,7 @@ char ToucheChar(SDL_keysym * touche)
 {
     char charTouche;
     
-    SDL_EnableUNICODE(SDL_ENABLE);
     charTouche = (char)(touche->unicode);
-    SDL_EnableUNICODE(SDL_DISABLE);
     
 	return charTouche; 
 }

@@ -16,7 +16,7 @@ typedef
 	}
 Couleur;
 
-int nbCouleurs (void);
+int getNbCouleurs (void);
 
 /*
     Retourne la couleur correspondant à la lettre entrée.
@@ -33,9 +33,9 @@ Couleur lettreToCouleur (char pLettre);
 Couleur getCouleurFromNum (int pI);
 
 // fonction d'accès à chacun des champs de la structure couleur
-SDL_Color getColor (Couleur * pCouleur);
-char getChar (Couleur * pCouleur);
-void getNom (Couleur * pCouleur, char pNom[]);
+SDL_Color getColor (Couleur pCouleur);
+char getChar (Couleur pCouleur);
+void getNom (Couleur pCouleur, char pNom[]);
 
 #endif
 

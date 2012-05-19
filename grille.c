@@ -32,21 +32,20 @@ Grille * CreerGrille(int nbLin, int nbCol)
 
 		// Allocation du tableau de lignes
 		nouvGrille->TabLignes = (Ligne*) malloc(nbLin * sizeof(Ligne));
-
 		if(nouvGrille->TabLignes == NULL)
 			return NULL;
 
 		// Parcours des lignes
 		for(i=0; i<nbLin; i++)
 		{
+			nouvGrille->TabLignes[i] = (CaseGrille*) malloc(nbCol * sizeof(CaseGrille));
 			if(nouvGrille->TabLignes[i] == NULL)
 				return NULL;
-
+			
 			// Et on initialise
 			for(j=0; j<nbCol; j++)
 			{
-                nouvGrille->TabLignes[i][j] = (CaseGrille*) malloc(sizeof(CaseGrille));
-				nouvGrille->TabLignes[i][j]->etatCase = GRILLE_CASE_NORMAL;
+				nouvGrille->TabLignes[i][j].etatCase = GRILLE_CASE_NORMAL;
 			}
 		}
 
@@ -60,14 +59,14 @@ Grille * CreerGrille(int nbLin, int nbCol)
 	return grille;
 }
 
-CaseGrille * Consulter(Grille * grille, Coord coord)
+CaseGrille Consulter(Grille * grille, Coord coord)
 {
 	return grille->TabLignes[coord.noLin-1][coord.noCol-1];
 }
 
 Grille * SetEtatCase(Grille * grille, Coord coord, EtatCase etat)
 {
-	grille->TabLignes[coord.noLin-1][coord.noCol-1]->etatCase = etat;
+	grille->TabLignes[coord.noLin-1][coord.noCol-1].etatCase = etat;
 
 	return grille;
 }
@@ -80,7 +79,7 @@ Grille * EffacerGrille(Grille * grille)
 	{
 		for(j=0;j<grille->NbCol;j++)
 		{
-			grille->TabLignes[i][j]->etatCase = GRILLE_CASE_NORMAL;
+			grille->TabLignes[i][j].etatCase = GRILLE_CASE_NORMAL;
 		}
 	}
 
@@ -89,15 +88,10 @@ Grille * EffacerGrille(Grille * grille)
 
 void LibererGrille(Grille * grille)
 {
-	int i, j;
+	int i;
 
 	for(i=0;i<grille->NbLin;i++)
-	{
-        for(j=0;j<grille->NbCol;j++)
-            free(grille->TabLignes[i][j]);
-        
 		free(grille->TabLignes[i]);
-	}
 
 	free(grille->TabLignes);
 	free(grille);

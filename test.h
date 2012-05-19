@@ -3,4 +3,6 @@
 
 void MenuTest(void);
 
+void TestParam(void);
+
 #endif

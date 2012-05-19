@@ -17,18 +17,16 @@ const Couleur tableCouleurs[KCOULEURS_NBCOULMAX] = {
 } ;
 
 // à quoi ça sert?
-// pourquoi elle s'appelle pas getNbCouleurs?
-int nbCouleurs (void)
+int getNbCouleurs (void)
 {
 	return KCOULEURS_NBCOULMAX ;
 }
 
-// modifié car il y avait un return conditionnel, mon compilo n'en veut pas (et c'est moche :p )
 Couleur lettreToCouleur (char pLettre  )
 {
 	int i = 0;
 
-	while (i < nbCouleurs() && tableCouleurs[i].lettre != pLettre)
+	while (i < getNbCouleurs() && tableCouleurs[i].lettre != pLettre)
 	{
 		i++;
 	}
@@ -42,19 +40,19 @@ Couleur getCouleurFromNum (int pI)
 }
 
 
-SDL_Color getColor (Couleur * pCouleur)
+SDL_Color getColor (Couleur pCouleur)
 {
-	return pCouleur->rgb;
+	return pCouleur.rgb;
 }
 
-char getChar (Couleur * pCouleur)
+char getChar (Couleur pCouleur)
 {
-	return pCouleur->lettre;
+	return pCouleur.lettre;
 }
 
-void getNom (Couleur * pCouleur, char pNom[])
+void getNom (Couleur pCouleur, char pNom[])
 {
-	strcpy(pNom,pCouleur->nom);
+	strcpy(pNom,pCouleur.nom);
 }
 
 

@@ -21,7 +21,7 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 	TTF_Font * policeGrille;
 	SDL_Color couleurBlanche = {255,255,255};
 	Coord coord;
-    CaseGrille * contenuCaseGrille;
+    CaseGrille contenuCaseGrille;
 
 	int i,j;
 	char * labelLin = (char*)malloc(2*sizeof(char));
@@ -66,7 +66,7 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 			coord.noLin = j+1;
 
             contenuCaseGrille = Consulter(grille, coord);
-			switch(contenuCaseGrille->etatCase)
+			switch(contenuCaseGrille.etatCase)
 			{
 				case GRILLE_CASE_NORMAL:
 					caseGrille = IMG_Load("Images/caseVide.png");
@@ -110,7 +110,7 @@ void updateGrille(Grille * grille, Coord coord)
 {
 	SDL_Surface * caseGrille;
 	SDL_Rect positionCaseGrille;
-    CaseGrille * contenuCaseGrille;
+    CaseGrille contenuCaseGrille;
 
 	positionCaseGrille.x = grille->abscisse + KLARGCASE * (coord.noCol-1);
 	positionCaseGrille.y = grille->ordonnee + KHAUTEURCASE * (coord.noLin-1);
@@ -118,7 +118,7 @@ void updateGrille(Grille * grille, Coord coord)
 	caseGrille = SDL_CreateRGBSurface(SDL_HWSURFACE, 30, 30, 32, 0, 0, 0, 0);
 
 	contenuCaseGrille = Consulter(grille, coord);
-    switch(contenuCaseGrille->etatCase)
+    switch(contenuCaseGrille.etatCase)
     {
         case GRILLE_CASE_NORMAL:
             caseGrille = IMG_Load("Images/caseVide.png");

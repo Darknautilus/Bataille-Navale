@@ -92,7 +92,7 @@ int *getNBInstances (const Tparam * pParam);
  * \param[in] pParam
  * \return Nombre total de bateaux pour chaque joueur
 */
-int nombreBat(const Tparam * pParam);
+int nbBat(const Tparam * pParam);
 
 //***************************
 /*	N : getInfoBateau
@@ -126,7 +126,7 @@ int getNbInstancesType (const Tparam * pParam, ETypeBat pType);
 */
 
 
-//void chargerParam(FILE * pDesc, Tparam *pP);
+void chargerParam(FILE * pDesc, Tparam * pParam);
 
 //***************************
 /*	N : memParam
@@ -137,12 +137,12 @@ int getNbInstancesType (const Tparam * pParam, ETypeBat pType);
 	Prec : pDesc est un descriteur de fichier ouvert en Ècriture
 */
 
-//void memParam(const Tparam * pParam, FILE * pDesc);
+void memParam(const Tparam * pParam, FILE * pDesc);
 
 
 //***************************
 /*	N : newTParam
-	D : creer un Tparam pour pNbInstances de chaque bateau pour chacun : remarque devra allouer les tableaux dynamiques
+	D : creer un Tparam pour pNbInstances de chaque bateau pour chaque type : remarque devra allouer les tableaux dynamiques
 	E :pNbInstances,
 	S :
 	R : un paramètre initialisé
@@ -159,7 +159,7 @@ Tparam * newTParam(int pNbInstances);
 	R :
 	Prec : ne peut etre appelÈ qu'apres newTParam
 */
-//void setIemeInfoBateauTParam(int pIdBateau , Tparam * pP, const char pNom[], int pCouleur , ETypeBat pType);
+void setIemeInfoBateauTParam(int pIdBateau , Tparam * pP, const char pNom[], int pCouleur , ETypeBat pType);
 
 
 

@@ -8,7 +8,7 @@
 #include "utilsSDL.h"
 #include "vueUtilsSDL.h"
 #include "vueGrille.h"
-#include "test.h"
+#include "testVue.h"
 
 void AfficherMenuAccueil(void)
 {
@@ -49,10 +49,10 @@ int AfficherMenuRacine(void)
 
     SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 
-    SDL_EnableUNICODE(SDL_ENABLE);
-
     positionPuce.x = 80;
     positionPuce.y = 150;
+	
+	SDL_EnableUNICODE(SDL_ENABLE);
 
     while(continuer)
     {
@@ -64,6 +64,9 @@ int AfficherMenuRacine(void)
 
         AttendreEvent(NULL, touche);
 
+        if(ToucheChar(touche) == 't')
+            MenuTestVue();
+		
         switch(ToucheSpec(touche))
         {
             case SDLK_RETURN:
@@ -94,11 +97,6 @@ int AfficherMenuRacine(void)
             break;
 
         }
-
-        if(ToucheChar(touche) == 't')
-            MenuTest();
-
-
 	}
 
 	SDL_EnableUNICODE(SDL_DISABLE);
@@ -178,7 +176,7 @@ void EcranGrille(ChampSaisie * champ)
     SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
     int controleEvent;
     Coord coord;
-    CaseGrille * caseGrille;
+    CaseGrille caseGrille;
 
     int continuer = 1;
 
@@ -205,9 +203,9 @@ void EcranGrille(ChampSaisie * champ)
             caseGrille = Consulter(grilleJoueur, coord);
             if(ClicDansGrille(grilleJoueur, positionClic))
             {
-                if(caseGrille->etatCase == GRILLE_CASE_NORMAL)
+                if(caseGrille.etatCase == GRILLE_CASE_NORMAL)
                     grilleJoueur = SetEtatCase(grilleJoueur, coord, GRILLE_CASE_TOUCHE);
-                else if(caseGrille->etatCase == GRILLE_CASE_TOUCHE)
+                else if(caseGrille.etatCase == GRILLE_CASE_TOUCHE)
                     grilleJoueur = SetEtatCase(grilleJoueur, coord, GRILLE_CASE_NORMAL);
 
                 updateGrille(grilleJoueur, coord);

@@ -42,7 +42,7 @@ CaseGrille;
  * \struct Ligne
  * \brief Tableau dynamique de cases
 */
-typedef CaseGrille ** Ligne;
+typedef CaseGrille * Ligne;
 
 /**
  * \struct Grille
@@ -96,7 +96,7 @@ Grille * CreerGrille(int nbLin, int nbCol);
  * Récupère une case de la grille.
  * Attention, ligne et colonne doivent etre coherents avec les dimensions de la grilles
 */
-CaseGrille * Consulter(Grille * grille, Coord coord);
+CaseGrille Consulter(Grille * grille, Coord coord);
 
 /**
  * \brief Définit l'état d'une case

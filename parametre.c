@@ -82,7 +82,7 @@ int getNbInstancesType (const Tparam * pParam, ETypeBat pType)
 	return pParam->nombreInstanceBateaux[pType-1];
 }
 
-int nombreBat(const Tparam * pParam)
+int nbBat(const Tparam * pParam)
 {
 	int i;
 	int nombreBat=0;
@@ -106,10 +106,10 @@ TInfoBateau * getInfoBateau(int pNum ,const Tparam * pParam)
 {
 	TInfoBateau * infoBat;
 
-	if (pNum < nombreBat(pParam) )
+	if (pNum < nbBat(pParam) )
 		infoBat = &(pParam->bateauxJoueur[pNum]);
 	else
-		infoBat = &(pParam->bateauxMachine[pNum-nombreBat(pParam)]);
+		infoBat = &(pParam->bateauxMachine[pNum-nbBat(pParam)]);
 
 	return infoBat;
 }
@@ -123,41 +123,38 @@ TInfoBateau * getInfoBateau(int pNum ,const Tparam * pParam)
 	Prec : pDesc est un descriteur de fichier ouvert en lecture place sur la lecture des paramètres de la partie
 */
 
-/*
 void chargerParam(FILE * pDesc, Tparam * pParam)
 {
-	//Tparam param; pour eviter recopie
-	int nb;
-
-	fread (&(pParam->nombreInstanceBateaux), sizeof(int), 1, pDesc);
-	nb = K_NBTYPEBATEAUX*getNBInstances (pParam);
-	pParam->bateauxJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-	pParam->bateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-	fread ((pParam->bateauxJoueur), sizeof(TInfoBateau), nb, pDesc);
-	fread ((pParam->bateauxMachine), sizeof(TInfoBateau), nb, pDesc);
-	//return param;
+	int nombreBat;
+	
+	pParam->nombreInstanceBateaux = (int*)malloc(K_NBTYPEBATEAUX * sizeof(int));
+	fread(pParam->nombreInstanceBateaux, sizeof(int), K_NBTYPEBATEAUX, pDesc);
+	
+	nombreBat = nbBat(pParam);
+	
+	pParam->bateauxJoueur = (TInfoBateau*)malloc(nombreBat*sizeof(TInfoBateau));
+	fread(pParam->bateauxJoueur, sizeof(TInfoBateau), nombreBat, pDesc);
+	
+	pParam->bateauxMachine = (TInfoBateau*)malloc(nombreBat*sizeof(TInfoBateau));
+	fread(pParam->bateauxMachine, sizeof(TInfoBateau), nombreBat, pDesc); 
 }
-*/
 
 //***************************
 /*	N : memParam
-	D : sauve les paramètres de la partie pParam dans un fichier de nom pNom
-	E :pNom , pParam
+	D : sauve les paramètres de la partie pParam dans un fichier pDesc
+	E : pDesc , pParam
 	S :
 	R :
 	Prec : pDesc est un descriteur de fichier ouvert en écriture
 */
-/*
 void memParam(const Tparam * pParam, FILE * pDesc)
 {
-	int nb = K_NBTYPEBATEAUX*getNBInstances (pParam);
-	int i;
+	int nombreBat = nbBat(pParam);
 
-	fwrite (&(pParam->nombreInstanceBateaux), sizeof(int), 1, pDesc);
-	for (i=0;i<nb;i++) fwrite (&(pParam->bateauxJoueur[i]), sizeof(TInfoBateau), 1, pDesc);
-	for (i=0;i<nb;i++) fwrite  (&(pParam->bateauxMachine[i]), sizeof(TInfoBateau), 1, pDesc);
+	fwrite(pParam->nombreInstanceBateaux, sizeof(int), K_NBTYPEBATEAUX, pDesc);
+	fwrite(pParam->bateauxJoueur, sizeof(TInfoBateau), nombreBat, pDesc);
+	fwrite(pParam->bateauxMachine, sizeof(TInfoBateau), nombreBat, pDesc);
 }
-*/
 
 //***************************
 /*	N : newTParam
@@ -196,26 +193,25 @@ Tparam * newTParam(int pNbInstances)
 	R :
 	Prec : ne peut etre appelé qu'apres newTParam
 */
-/*
+
 void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam,const char pNom[], int pCouleur , ETypeBat pType)
 {
 
-	if (pIdBateau<K_NBTYPEBATEAUX*getNBInstances (pParam))
+	if (pIdBateau<nbBat(pParam))
 	{
 		pParam->bateauxJoueur[pIdBateau].couleur=pCouleur;
 		pParam->bateauxJoueur[pIdBateau].type=pType;
-		strcpy(pParam->bateauxJoueur[pIdBateau].nom ,pNom);
+		strcpy(pParam->bateauxJoueur[pIdBateau].nomBateau ,pNom);
 	}
 
 	else
 	{
-		pParam->mBateauxMachine[pIdBateau-K_NBTYPEBATEAUX*getNBInstances (pParam)].mCouleur=pCouleur;
-		pParam->mBateauxMachine[pIdBateau-K_NBTYPEBATEAUX*getNBInstances (pParam)].mType=pType;
-		strcpy(pParam->mBateauxMachine[pIdBateau-K_NBTYPEBATEAUX*getNBInstances (pParam)].mNom, pNom);
+		pParam->bateauxMachine[pIdBateau-nbBat(pParam)].couleur=pCouleur;
+		pParam->bateauxMachine[pIdBateau-nbBat(pParam)].type=pType;
+		strcpy(pParam->bateauxMachine[pIdBateau-nbBat(pParam)].nomBateau, pNom);
 	}
 
 }
-*/
 
 
 

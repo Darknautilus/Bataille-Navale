@@ -40,23 +40,6 @@ void pause()
 
 }
 
-/*
-void controleurParametreVersionTest(Tparam *param)
-{
-	newTParam(1 , param);
-
-	// boucles avec void newTParam(int pIdBateau , Tparam * pP, char pNom[], int pCouleur , EType pType) doit remplacer ce qui suit
-	setIemeInfoBateauTParam(0 , param, "redon", 0 , REMORQUEUR);
-	setIemeInfoBateauTParam(1 , param, "peninou", 1 , PORTEAVION);
-	setIemeInfoBateauTParam(2 , param, "canut", 2 , SOUSMARIN);
-	setIemeInfoBateauTParam(3, param , "caplain", 3 , CARGOT);
-	setIemeInfoBateauTParam(4 , param , "bruel", 4 , REMORQUEUR);
-	setIemeInfoBateauTParam(5 , param , "inglebert", 5 , PORTEAVION);
-	setIemeInfoBateauTParam(6 , param , "verdier", 0 , SOUSMARIN);
-	setIemeInfoBateauTParam(7 , param , "nonne", 1 , CARGOT);
-}
-*/
-
 int main(int argc, char ** argv)
 {
 	SDL_Surface * ecran;
