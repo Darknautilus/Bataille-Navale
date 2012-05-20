@@ -7,6 +7,8 @@
  *   Contient le module de gestion des structure de type bateau.
 */
 
+#include <stdlib.h>
+
 #include "bateau.h"
 #include "parametre.h"
 
@@ -24,6 +26,11 @@ TBateau * creerBateau(TPosition pos, ETypeBat type)
 	}
 
 	return bat;
+}
+
+int getIdBat(TBateau * pBat)
+{
+	return pBat->idBateau;
 }
 
 void toucherBateau(TBateau * bat, int posTouch)

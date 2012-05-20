@@ -61,6 +61,7 @@ typedef struct
 */
 typedef struct
 {
+	int idBateau; /**< Numro du bateau (voir paramtres) */
 	TPosition position; /**< Position du bateau dans la grille */
 	ETypeBat type; /**< Type/Taille du bateau */
 	EEtat etat[KTAILLEMAXBAT]; /**< Tableau d'tat du bateau, renseigne l'tat de chaque case du bateau */
@@ -75,10 +76,18 @@ typedef struct
 TBateau * creerBateau(TPosition pos, ETypeBat type);
 
 /**
+ * \brief Rcupre l'id du bateau
+ *
+ * \param[in] pBat Le bateau voulu
+ * \return Le numero du bateau
+*/
+int getIdBat(TBateau * pBat);
+
+/**
  * Cette fonction marque une case d'un bateau donnée comme touchée.
  * \param bat Le pointeur sur le bateau en question
  * \param posTouch La postion touchée.
- * \return
+ *
 */
 void toucherBateau(TBateau * bat, int posTouch);
 

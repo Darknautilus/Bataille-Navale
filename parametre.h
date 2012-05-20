@@ -1,163 +1,187 @@
-// parametre.h le module parametre d'une partie permet de charger et sauver ces param dans un fichier.
-// Pour simplifier, on ne paramettre que les couleurs, le nom des bateaux du joueur et le nombre d'instance de chaque bateau.
-// Les bateaux de la machine peuvent ou non Ítre paramÈtrÈs.
+/**
+ * \file parametre.h
+ * \author Aurélien Bertron
+ * \date 19 mai 2012
+ * \brief Header Module Paramètres 
+ * 
+ * Le module parametre d'une partie permet de charger et sauver ces paramètres dans un fichier.
+*/
 
 #ifndef _PARAM_H
 #define _PARAM_H
 
 #include <stdio.h>
-#include "couleurs.h"
 #include "bateau.h"
 
-#define K_NBTYPEBATEAUX KTAILLEMAXBAT
-#define K_LGNOM 25
+#define K_NBTYPEBATEAUX KTAILLEMAXBAT /**< \brief Nombre de types de bateaux */
+#define K_LGNOM 25 /**< \brief Longueur maximale du nom du bateau */
 
+/**
+ * \struct TInfoBateau
+ * \brief Contient les informations sur un bateau
+ *
+ * Ces informations seront stockées dans un tableau (voir Tparam)
+*/
 typedef struct
 {
-	int couleur /*indice dans la table des couleurs*/;
-	ETypeBat type;
-	char nomBateau[K_LGNOM];
+	int couleur;/**< Indice dans la table des couleurs */
+	ETypeBat type;/**< Type du bateau */
+	char nomBateau[K_LGNOM];/**< Nom du bateau */
 }	TInfoBateau;
 
 //***************************
-/*	N : getCouleur
-	D : donne le l'index de la couleur dans la table des couleurs de couleurs.h/.c de la couleur de l'info bateau pB
-	E : pB
-	S :
-	R : le numÈro de la couleur
-	Prec : -
+/**
+ * \brief Récupère la couleur du bateau
+ *
+ * \param[in] pB Un pointeur sur les informations du bateau
+ * \return Le numéro de la couleur
+ *
+ * Donne l'index de la couleur de l'info bateau pB dans la table des couleurs de couleurs.h/.c
 */
-
 int getCouleur(const TInfoBateau * pB);
 
 //***************************
-/*	N : getType
-	D : donne le type de l'info bateau pB
-	E : pB
-	S :
-	R : le numÈro du type
-	Prec : -
+/**
+ * \brief Donne le type de l'info bateau pB
+ *
+ * \param[in] pB Un pointeur sur les informations du bateau
+ * \return Le type du bateau
 */
 
 ETypeBat getType(const TInfoBateau *pB);
 
 
 //***************************
-/*	N : getNom
-	D : donne nom du bateau pB
-	E : pB
-	S : pNom
-	R :
-	Prec : -
+/**
+ * \brief Donne le nom du bateau
+ *
+ * \param[in] pB Un pointeur sur les informations du bateau
+ * \param[out] pNom Une chaine de caractères contenant le nom
 */
 
 void getBNom(const TInfoBateau * pB, char pNom[]);
 
 
 //***************************
-/*	N : setInfoBateau
-	D : affecte les infos pNom pCouleur et pType à l'info bateau pB
-	E :  pNom pCouleur et pType
-	S : pB
-	R :
-	Prec : -
+/**
+ * \brief Affecte les infos pNom, pCouleur et pType à l'info bateau pB
+ *
+ * \param[out] pB Un pointeur sur les informations du bateau
+ * \param[in] pNom Le nom du bateau
+ * \param[in] pCouleur La couleur du bateau
+ * \param[in] pType Le type du bateau
 */
 void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType);
 
 
-
+//***************************
+/**
+ * \struct Tparam
+ * \brief Les paramètres d'une partie
+ *
+ * Ces paramètres seront ceux écrits dans un fichier.
+ * Les noms du joueur et de la machine devront être déplacés dans la structure Tpartie
+*/
 typedef struct
 {
-    int * nombreInstanceBateaux;
-    char nomJoueur[K_LGNOM];
-    char nomMachine[K_LGNOM];
-    TInfoBateau * bateauxJoueur; /*tableau dynamique des bateaux du joueur*/
-    TInfoBateau * bateauxMachine; /*tableau dynamique des bateaux de la machine*/
+    int * nombreInstanceBateaux;/**< Nombre d'instances de chaque type de bateau */
+    char nomJoueur[K_LGNOM];/**< Nom du joueur (À déplacer) */
+    char nomMachine[K_LGNOM];/**< Nom de l'IA (À déplacer) */
+    TInfoBateau * bateauxJoueur; /**< Tableau dynamique des bateaux du joueur */
+    TInfoBateau * bateauxMachine; /**< Tableau dynamique des bateaux de la machine */
 }Tparam;
 
+//***************************
+/**
+ * \brief Constructeur de Tparam
+ *
+ * \param[in] pNbInstances Nombre d'instances de bateaux pour chaque type
+ * \return Des paramètres initialisés
+ *
+ * Attention, à appeler avant toute manipulation de paramètres (même chargerParam)
+ */
+Tparam * newTParam(int pNbInstances);
 
 //***************************
-/*	N : getNBInstances
- D : donne le nombre d'instances de chaque bateau pour un joueur pour les parametres de partie pParam
- E : pParam
- S :
- R : ce nombre
- Prec : -
- */
+/**
+ * \brief Donne le nombre d'instances de chaque bateau pour un joueur
+ *
+ * \param[in] pParam Les paramètres de la partie
+ * \return Un pointeur sur le premier élément d'un tableau d'entiers
+*/
 int *getNBInstances (const Tparam * pParam);
 
-/**
- * \brief Donne le nombre total de bateaux pour chaque joueur
- *
- * \param[in] pParam
- * \return Nombre total de bateaux pour chaque joueur
-*/
-int nbBat(const Tparam * pParam);
-
 //***************************
-/*	N : getInfoBateau
-	D : donne les information sur le pNum eme bateau des parametres de la partie
-	E : pNum , pParam
-	S :*
-	R :  les informations sur le bateau
-	Prec : le pNum eme bateau  existe
-*/
+/**
+ * \brief Donne les informations sur le pNum eme bateau des parametres de la partie
+ *
+ * \param[in] pNum Le numéro du bateau
+ * \param[in] pParam Les paramètres de la partie
+ * \return Les informations du bateau
+ *
+ * Les id des bateaux vont de 0 à m pour le joueur et de m+1 à n pour la machine
+ * Attention, pNum doit correspondre à un bateau existant
+ */
 TInfoBateau *getInfoBateau(int pNum ,const Tparam * pParam);
 
-
 //***************************
-/*	N : getNBInstances
-	D : donne le nombre d'instances d'un type de bateau pour un joueur pour les parametres de partie pParam
-	E : pParam
-	S :
-	R : ce nombre
-	Prec : -
+/**
+ * \brief Donne le nombre d'instances d'un type de bateau pour un joueur
+ *
+ * \param[in] pParam Les paramètres de la partie
+ * \param[in] pType Le type de bateau
+ * \return Un nombre
 */
 int getNbInstancesType (const Tparam * pParam, ETypeBat pType);
 
+//***************************
+/**
+ * \brief Donne le nombre total de bateaux pour chaque joueur
+ *
+ * \param[in] pParam Les paramètres de la partie
+ * \return Nombre total de bateaux pour chaque joueur
+*/
+int getNbBat(const Tparam * pParam);
+
+
+
+
 
 //***************************
-/*	N : chargerParam
-	D : lit les paramËtres de la partie dans un descripteur de fichier pDesc
-	E :pDesc
-	S : pP
-	R :
-	Prec : pDesc est un descriteur de fichier ouvert en lecture placÈ sur la lecture des paramËtres de la partie
+/**
+ * \brief Lit les paramètres de la partie dans un descripteur de fichier pDesc
+ *
+ * \param[in,out] pDesc Un descripteur de fichier
+ * \param[out] pParam Les paramètres de la partie
+ *
+ * pDesc doit être ouvert en lecture
 */
-
-
 void chargerParam(FILE * pDesc, Tparam * pParam);
 
 //***************************
-/*	N : memParam
-	D : sauve les paramËtres de la partie pParam dans un fichier de nom pNom
-	E :pNom , pParam
-	S :
-	R :
-	Prec : pDesc est un descriteur de fichier ouvert en Ècriture
+/**
+ * \brief Sauve les paramètres de la partie pParam dans un fichier
+ *
+ * \param[in] pParam Les paramètres de la partie
+ * \param[in,out] pDesc Un descripteur de fichier
+ *
+ * pDesc est un descriteur de fichier ouvert en écriture
 */
-
 void memParam(const Tparam * pParam, FILE * pDesc);
 
 
-//***************************
-/*	N : newTParam
-	D : creer un Tparam pour pNbInstances de chaque bateau pour chaque type : remarque devra allouer les tableaux dynamiques
-	E :pNbInstances,
-	S :
-	R : un paramètre initialisé
-	Prec : -
-*/
-Tparam * newTParam(int pNbInstances);
+
 
 
 //***************************
-/*	N : setIemeInfoBateauTParam
-	D : COMPLETER
-	E  pIdBateau  pNom[] pCouleur  pType
-	S : pP
-	R :
-	Prec : ne peut etre appelÈ qu'apres newTParam
+/**
+ * \brief Configure un bateau selon son numéro
+ *
+ * \param[in] pIdBateau Le numéro du bateau voulu
+ * \param[out] pP Les paramètres de la partie
+ * \param[in] pNom Le nom du bateau
+ * \param[in] pCouleur La couleur du bateau
+ * \param[in] pType Le type du bateau
 */
 void setIemeInfoBateauTParam(int pIdBateau , Tparam * pP, const char pNom[], int pCouleur , ETypeBat pType);
 
