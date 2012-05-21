@@ -25,14 +25,17 @@ void ImageRetour(char * cheminImage)
 {
 	SDL_Surface * imageRetour;
 	SDL_Rect positionImageRetour;
+	SDL_Rect positionTexteRetour;
 
 	positionImageRetour.x = KABSRETOUR;
 	positionImageRetour.y = KORDRETOUR;
+	positionTexteRetour.x = KABSRETOUR + 30;
+	positionTexteRetour.y = KORDRETOUR;
 
 	imageRetour = IMG_Load(cheminImage);
 	SDL_BlitSurface(imageRetour, NULL, SDL_GetVideoSurface(), &positionImageRetour);
 
-	EcrireTexte("RETOUR", 35, KABSRETOUR + 30, KORDRETOUR);
+	EcrireTexte("RETOUR", 35, positionTexteRetour);
 
 	SDL_FreeSurface(imageRetour);
 }
@@ -47,35 +50,27 @@ void AfficherImage(char * cheminImage, SDL_Rect positionImage)
 	SDL_FreeSurface(image);
 }
 
-void EcrireCar(char car,int taille, int abscisse, int ordonnee)
+void EcrireCar(char car,int taille, SDL_Rect positionChar)
 {
 	SDL_Surface * zoneTexte;
 	TTF_Font * police = TTF_OpenFont("Fonts/apple.ttf", taille);
 	SDL_Color couleur = {255,255,255};
-	SDL_Rect position;
-
-	position.x = abscisse;
-	position.y = ordonnee;
 
 	zoneTexte = TTF_RenderUTF8_Blended(police, &car, couleur);
-	SDL_BlitSurface(zoneTexte, NULL, SDL_GetVideoSurface(), &position);
+	SDL_BlitSurface(zoneTexte, NULL, SDL_GetVideoSurface(), &positionChar);
 	SDL_FreeSurface(zoneTexte);
 
 	TTF_CloseFont(police);
 }
 
-void EcrireTexte(char * texte,int taille, int abscisse, int ordonnee)
+void EcrireTexte(char * texte,int taille, SDL_Rect positionTexte)
 {
 	SDL_Surface * zoneTexte;
 	TTF_Font * police = TTF_OpenFont("Fonts/apple.ttf", taille);
 	SDL_Color couleur = {255,255,255};
-	SDL_Rect position;
-
-	position.x = abscisse;
-	position.y = ordonnee;
 
 	zoneTexte = TTF_RenderUTF8_Blended(police, texte, couleur);
-	SDL_BlitSurface(zoneTexte, NULL, SDL_GetVideoSurface(), &position);
+	SDL_BlitSurface(zoneTexte, NULL, SDL_GetVideoSurface(), &positionTexte);
 	SDL_FreeSurface(zoneTexte);
 
 	TTF_CloseFont(police);
@@ -132,6 +127,12 @@ char ToucheChar(SDL_keysym * touche)
 SDLKey ToucheSpec(SDL_keysym * touche)
 {
 	return touche->sym;
+}
+
+Uint32 convertSDL_Color(SDL_Color pCouleur)
+{
+	
+	return SDL_MapRGB(SDL_GetVideoSurface()->format, pCouleur.r, pCouleur.g, pCouleur.b);
 }
 
 void EffacerEcran(void)

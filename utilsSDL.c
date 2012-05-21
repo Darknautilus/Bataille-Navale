@@ -10,7 +10,7 @@ SDL_Surface * DemarrerSDL(int width, int height, char * titreFenetre)
 
 	TTF_Init();// Pour écrire
 	SDL_Init(SDL_INIT_VIDEO);// Pour voir des images
-
+	
 	ecran = SDL_SetVideoMode(width, height, 32, SDL_HWSURFACE | SDL_DOUBLEBUF);// Pour voir mieux
 	SDL_WM_SetCaption(titreFenetre, NULL);// Pour savoir de quoi on parle
 

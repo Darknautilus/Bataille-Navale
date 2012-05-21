@@ -7,6 +7,7 @@
 #include "couleurs.h"
 
 const Couleur tableCouleurs[KCOULEURS_NBCOULMAX] = {
+	{'b',"BLANC", {255,255,255} },
 	{'F',"FUSHIA", {255,0,255} } ,
 	{'R',"ROUGE", {255,0,0} },
 	{'B', "BLEU", {0,0,255} },

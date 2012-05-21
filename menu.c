@@ -67,6 +67,8 @@ int AfficherMenuRacine(void)
 
         if(ToucheChar(touche) == 't')
             MenuTestVue();
+		else if(ToucheChar(touche) == 'y')
+			MenuTest();
 		
         switch(ToucheSpec(touche))
         {
@@ -112,6 +114,7 @@ void MenuNouvellePartie(void)
 	ChampSaisie * champPseudoHumain, * champPseudoIA;
 	int continuer = 1;
 	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+	SDL_Rect * positionTexte = (SDL_Rect*)malloc(sizeof(SDL_Rect));
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 	int controleEvent;
 
@@ -125,8 +128,11 @@ void MenuNouvellePartie(void)
 	{
 		ImageFond("Images/menuNouvellePartie.png");
 		ImageRetour("Images/flecheRetour.png");
+		
+		positionTexte->x = 270;
+		positionTexte->y = 400;
 
-		EcrireTexte("Appuyez sur Entree pour continuer", 30, 270, 400);
+		EcrireTexte("Appuyez sur Entree pour continuer", 30, *positionTexte);
 
 		AfficherChamp(champPseudoHumain);
 		AfficherChamp(champPseudoIA);
@@ -164,6 +170,7 @@ void MenuNouvellePartie(void)
 		}
 	}
 
+	free(positionTexte);
 	free(positionClic);
 	free(touche);
 	LibererChamp(champPseudoHumain);
@@ -175,6 +182,7 @@ void EcranGrille(ChampSaisie * champ)
     Grille * grilleJoueur;
     SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
     SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+	SDL_Rect * positionTexte = (SDL_Rect*)malloc(sizeof(SDL_Rect));
     int controleEvent;
     Coord coord;
     CaseGrille caseGrille;
@@ -187,7 +195,10 @@ void EcranGrille(ChampSaisie * champ)
     EffacerEcran();
     afficherGrille(grilleJoueur, 40, 100);
 
-    EcrireTexte(champ->chaine, 40, 40, 20);
+	positionTexte->x = 40;
+	positionTexte->y = 20;
+	
+    EcrireTexte(champ->chaine, 40, *positionTexte);
 
     while (continuer)
     {
@@ -218,4 +229,5 @@ void EcranGrille(ChampSaisie * champ)
 
     free(touche);
     free(positionClic);
+	free(positionTexte);
 }

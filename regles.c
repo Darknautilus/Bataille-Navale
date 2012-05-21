@@ -9,15 +9,12 @@
 void afficherRegles()
 {
 	int continuer = 1;
-	int posX = 10;
-	int posY = 10;
 	SDL_keysym * touche = (SDL_keysym*) malloc(sizeof(SDL_keysym));
 
 	while (continuer)
 	{
 		EffacerEcran();
 
-		EcrireTexte("ABC123?./éàè", 20, posX, posY);
 
 		SDL_Flip(SDL_GetVideoSurface());
 		AttendreEvent(NULL, touche);
