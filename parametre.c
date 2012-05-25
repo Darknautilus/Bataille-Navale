@@ -15,6 +15,8 @@
 
 #include "bateau.h"
 
+int idDernierBateau = 0;/**< \brief Continent le dernier ID attribué.*/
+
 //***************************
 
 int getCouleur(const TInfoBateau * pB)

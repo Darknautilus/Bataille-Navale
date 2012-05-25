@@ -20,10 +20,10 @@
 */
 typedef enum {
     VOILIER = 1,
-    REMORQUEUR,
-    CARGOT,
-    SOUSMARIN,
-    PORTEAVION
+    REMORQUEUR=2,
+    CARGOT=3,
+    SOUSMARIN=4,
+    PORTEAVION=5
 } ETypeBat;
 
 /**
@@ -39,8 +39,8 @@ typedef enum {
 
 /**
  * \enum EEtat
- * \brief ƒtat d'une case de bateau
- * Est utilisŽ dans un tableau dont le nombre d'ŽlŽments est Žgal ˆ la taille du bateau
+ * \brief état d'une case de bateau
+ * Est utilisé dans un tableau dont le nombre d'éléments est égal à la taille du bateau
 */
 typedef enum {INTACT, TOUCHE, COULE} EEtat;
 
@@ -51,8 +51,8 @@ typedef enum {INTACT, TOUCHE, COULE} EEtat;
 typedef struct
 {
 	ESens direction; /**< Sens/Direction du bateau */
-	int x; /**< Num colonne dans la grille (point en haut ˆ gauche du bateau) */
-	int y; /**< Num ligne dans la grille (point en haut ˆ gauche du bateau) */
+	int x; /**< Num colonne dans la grille (point en haut à gauche du bateau) */
+	int y; /**< Num ligne dans la grille (point en haut à gauche du bateau) */
 }	TPosition;
 
 /**
@@ -61,14 +61,14 @@ typedef struct
 */
 typedef struct
 {
-	int idBateau; /**< NumŽro du bateau (voir paramtres) */
+	int idBateau; /**< Numéro du bateau (voir paramtres) */
 	TPosition position; /**< Position du bateau dans la grille */
 	ETypeBat type; /**< Type/Taille du bateau */
-	EEtat etat[KTAILLEMAXBAT]; /**< Tableau d'Žtat du bateau, renseigne l'Žtat de chaque case du bateau */
+	EEtat etat[KTAILLEMAXBAT]; /**< Tableau d'état du bateau, renseigne l'état de chaque case du bateau */
 }	TBateau;
 
 /**
- * CrŽer un bateau.
+ * Crée un bateau.
  * \param pos La position du bateau
  * \param type Le type du bateau
  * \return Une strucutre Bateau correctement initialisŽe.
@@ -86,7 +86,7 @@ int getIdBat(TBateau * pBat);
 /**
  * Cette fonction marque une case d'un bateau donnée comme touchée.
  * \param bat Le pointeur sur le bateau en question
- * \param posTouch La postion touchée.
+ * \param posTouch Le rang de la case touchée (cases de 1 à type).
  *
 */
 void toucherBateau(TBateau * bat, int posTouch);

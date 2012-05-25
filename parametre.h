@@ -29,8 +29,6 @@ typedef struct
 	char nomBateau[K_LGNOM];/**< Nom du bateau */
 }	TInfoBateau;
 
-int idDernierBateau = 0;/**< \brief Continent le dernier ID attribué.*/
-
 //***************************
 /**
  * \brief Récupre la couleur du bateau

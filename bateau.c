@@ -36,20 +36,11 @@ int getIdBat(TBateau * pBat)
 void toucherBateau(TBateau * bat, int posTouch)
 {
 	int i;
-	int nbTouche = 0;
 
-	bat->etat[posTouch] = TOUCHE;
+	bat->etat[posTouch-1] = TOUCHE;
 
-	// si l'ensemble du bateau est touché, alors il est coulé
-	for (i=0; i < bat->type; i++)
-	{
-		if (bat->etat[i] != INTACT)
-		{
-			nbTouche++;
-		}
-	}
-
-	if (nbTouche == bat->type)
+    //Si le bateau est coule
+	if (estCoule(bat))
 	{
 		for (i=0; i < bat->type; i++)
 		{
@@ -89,7 +80,7 @@ int estCoule(TBateau * bat){
     while(resultat != 0 && i < longBateau){
 
         //Si un case n'est pas touchée
-        if(bat->etat[i] == 0){
+        if(bat->etat[i] == INTACT){
             //Le bateau n'est pas coulé
             resultat = 0;
         }
