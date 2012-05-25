@@ -76,7 +76,7 @@ typedef struct
 TBateau * creerBateau(TPosition pos, ETypeBat type);
 
 /**
- * \brief Rcupre l'id du bateau
+ * \brief Récupre l'id du bateau
  *
  * \param[in] pBat Le bateau voulu
  * \return Le numero du bateau
@@ -100,7 +100,7 @@ void toucherBateau(TBateau * bat, int posTouch);
 int etatBateau(TBateau * bat);
 
 /**
- * Vrifie si le bateau est coul.
+ * Vérifie si le bateau est coulé.
  * \param bat Un pointeur sur une structure TBateau
  * \return 1 si le bateau est coulé, 0 si il est en vie
 */

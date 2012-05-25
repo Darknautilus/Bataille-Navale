@@ -2,8 +2,8 @@
  * \file parametre.c
  * \author AurŽlien Bertron
  * \date 19 mai 2012
- * \brief Module Paramtres 
- * 
+ * \brief Module Paramtres
+ *
  * Le module parametre d'une partie permet de charger et sauver ces paramtres dans un fichier.
  */
 
@@ -55,17 +55,17 @@ Tparam * newTParam(int pNbInstances)
 	int nb;
     int i;
     Tparam * param = (Tparam*)malloc(sizeof(Tparam));
-    
+
 	param->nombreInstanceBateaux=(int*)malloc(K_NBTYPEBATEAUX * sizeof(int));
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {
         param->nombreInstanceBateaux[i] = pNbInstances;
     }
-    
+
 	nb = getNbBat(param);
 	param->bateauxJoueur = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
 	param->bateauxMachine = (TInfoBateau * )malloc(nb * sizeof(TInfoBateau));
-	
+
     return param;
 }
 
@@ -89,7 +89,7 @@ int getNbBat(const Tparam * pParam)
 {
 	int i;
 	int nombreBat=0;
-	
+
 	for(i=0;i<K_NBTYPEBATEAUX;i++)
 		nombreBat += pParam->nombreInstanceBateaux[i];
 
@@ -117,13 +117,13 @@ TInfoBateau * getInfoBateau(int pNum ,const Tparam * pParam)
 void chargerParam(FILE * pDesc, Tparam * pParam)
 {
 	int nombreBat;
-		
+
 	fread(pParam->nombreInstanceBateaux, sizeof(int), K_NBTYPEBATEAUX, pDesc);
-	
+
 	nombreBat = getNbBat(pParam);
-	
+
 	fread(pParam->bateauxJoueur, sizeof(TInfoBateau), nombreBat, pDesc);
-	
+
 	fread(pParam->bateauxMachine, sizeof(TInfoBateau), nombreBat, pDesc);
 }
 
@@ -134,9 +134,9 @@ void memParam(const Tparam * pParam, FILE * pDesc)
 	int nombreBat = getNbBat(pParam);
 
 	fwrite(pParam->nombreInstanceBateaux, sizeof(int), K_NBTYPEBATEAUX, pDesc);
-	
+
 	fwrite(pParam->bateauxJoueur, sizeof(TInfoBateau), nombreBat, pDesc);
-			   
+
 	fwrite(pParam->bateauxMachine, sizeof(TInfoBateau), nombreBat, pDesc);
 }
 
@@ -145,6 +145,8 @@ void memParam(const Tparam * pParam, FILE * pDesc)
 void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam,const char pNom[], int pCouleur , ETypeBat pType)
 {
 
+    //Si l'id du bateau est inférieure au nombre de bateaux par joueur
+    //C'est un bateau du joueur
 	if (pIdBateau<getNbBat(pParam))
 	{
 		pParam->bateauxJoueur[pIdBateau].couleur=pCouleur;
@@ -152,6 +154,7 @@ void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam,const char pNom[], 
 		strcpy(pParam->bateauxJoueur[pIdBateau].nomBateau ,pNom);
 	}
 
+    //Sinon c'est un batea de l'IA
 	else
 	{
 		pParam->bateauxMachine[pIdBateau-getNbBat(pParam)].couleur=pCouleur;

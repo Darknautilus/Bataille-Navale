@@ -2,8 +2,8 @@
  * \file parametre.h
  * \author Aurélien Bertron
  * \date 19 mai 2012
- * \brief Header Module Paramètres 
- * 
+ * \brief Header Module Paramètres
+ *
  * Le module parametre d'une partie permet de charger et sauver ces paramètres dans un fichier.
 */
 
@@ -29,12 +29,14 @@ typedef struct
 	char nomBateau[K_LGNOM];/**< Nom du bateau */
 }	TInfoBateau;
 
+int idDernierBateau = 0;/**< \brief Continent le dernier ID attribuÈ.*/
+
 //***************************
 /**
- * \brief Récupère la couleur du bateau
+ * \brief RÈcupère la couleur du bateau
  *
  * \param[in] pB Un pointeur sur les informations du bateau
- * \return Le numéro de la couleur
+ * \return Le numÈro de la couleur
  *
  * Donne l'index de la couleur de l'info bateau pB dans la table des couleurs de couleurs.h/.c
 */
@@ -84,11 +86,11 @@ void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
 */
 typedef struct
 {
-    int * nombreInstanceBateaux;/**< Nombre d'instances de chaque type de bateau */
-    char nomJoueur[K_LGNOM];/**< Nom du joueur (À déplacer) */
-    char nomMachine[K_LGNOM];/**< Nom de l'IA (À déplacer) */
-    TInfoBateau * bateauxJoueur; /**< Tableau dynamique des bateaux du joueur */
-    TInfoBateau * bateauxMachine; /**< Tableau dynamique des bateaux de la machine */
+    int * nombreInstanceBateaux;    /**< Nombre d'instances de chaque type de bateau */
+    char nomJoueur[K_LGNOM];        /**< Nom du joueur (‡ dÈplacer) */
+    char nomMachine[K_LGNOM];       /**< Nom de l'IA (‡ dÈplacer) */
+    TInfoBateau * bateauxJoueur;    /**< Tableau dynamique des bateaux du joueur */
+    TInfoBateau * bateauxMachine;   /**< Tableau dynamique des bateaux de la machine */
 }Tparam;
 
 //***************************
@@ -96,9 +98,9 @@ typedef struct
  * \brief Constructeur de Tparam
  *
  * \param[in] pNbInstances Nombre d'instances de bateaux pour chaque type
- * \return Des paramètres initialisés
+ * \return Des paramètres initialisÈs
  *
- * Attention, à appeler avant toute manipulation de paramètres (même chargerParam)
+ * Attention, ‡ appeler avant toute manipulation de paramètres (même chargerParam)
  */
 Tparam * newTParam(int pNbInstances);
 
@@ -170,12 +172,9 @@ void chargerParam(FILE * pDesc, Tparam * pParam);
 void memParam(const Tparam * pParam, FILE * pDesc);
 
 
-
-
-
 //***************************
 /**
- * \brief Configure un bateau selon son numéro
+ * \brief Configure un bateau selon son numÈro
  *
  * \param[in] pIdBateau Le numéro du bateau voulu
  * \param[out] pP Les paramètres de la partie
