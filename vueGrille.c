@@ -69,32 +69,29 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 			coord.noCol = i+1;
 			coord.noLin = j+1;
 			
+			positionCaseGrille.x = j*(KLARGCASE + KESP_CASE_HORI) + abscisse;
+			positionCaseGrille.y = i*(KHAUTEURCASE + KESP_CASE_VERT) + ordonnee;
+			
 			contenuCaseGrille = Consulter(grille, coord);
+			
+			SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille.couleur))));
+			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
+			
 			switch(contenuCaseGrille.etatCase)
 			{
-				case GRILLE_CASE_NORMAL:
-					SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille.couleur))));
-					break;
-					
 				case GRILLE_CASE_TOUCHE:
 					caseGrille = IMG_Load("Images/caseBateauTouche.png");
+					SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 					break;
 					
 				case GRILLE_CASE_COULE:
 					caseGrille = IMG_Load("Images/caseBateauCoule.png");
+					SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 					break;
 					
 				default:
 					break;
 			}
-
-            // Affichage de la case
-            
-			positionCaseGrille.x = j*(KLARGCASE + KESP_CASE_HORI) + abscisse;
-			positionCaseGrille.y = i*(KHAUTEURCASE + KESP_CASE_VERT) + ordonnee;
-
-			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
-
 		}
 	}
 
@@ -123,24 +120,26 @@ void updateGrille(Grille * grille, Coord coord)
 	caseGrille = SDL_DisplayFormat(caseGrille);// Règle le problème de couleur imprévisible
 	
 	contenuCaseGrille = Consulter(grille, coord);
-    switch(contenuCaseGrille.etatCase)
-    {
-		case GRILLE_CASE_NORMAL:
-			SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille.couleur))));
+	
+	SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille.couleur))));
+	SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
+	
+	switch(contenuCaseGrille.etatCase)
+	{
+		case GRILLE_CASE_TOUCHE:
+			caseGrille = IMG_Load("Images/caseBateauTouche.png");
+			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 			break;
-        case GRILLE_CASE_TOUCHE:
-            caseGrille = IMG_Load("Images/caseBateauTouche.png");
-            break;
-            
-        case GRILLE_CASE_COULE:
-            caseGrille = IMG_Load("Images/caseBateauCoule.png");
-            break;
-            
-        default:
-            break;
-    }
-
-	SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(), &positionCaseGrille);
+			
+		case GRILLE_CASE_COULE:
+			caseGrille = IMG_Load("Images/caseBateauCoule.png");
+			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
+			break;
+			
+		default:
+			break;
+	}
+	
 	SDL_Flip(SDL_GetVideoSurface());
 	SDL_FreeSurface(caseGrille);
 }

@@ -10,6 +10,7 @@
 #include "vueGrille.h"
 #include "testVue.h"
 #include "test.h"
+#include "vueBateau.h"
 
 void AfficherMenuAccueil(void)
 {
@@ -177,6 +178,11 @@ void MenuNouvellePartie(void)
 	LibererChamp(champPseudoIA);
 }
 
+Tparam * MenuParam(void)
+{
+	
+}
+
 void EcranGrille(ChampSaisie * champ)
 {
     Grille * grilleJoueur;
@@ -186,14 +192,19 @@ void EcranGrille(ChampSaisie * champ)
     int controleEvent;
     Coord coord;
     CaseGrille caseGrille;
+	TBateau * bat;
+	TPosition posBat = {HORIZONTAL,2,2};
 
     int continuer = 1;
 
 
     grilleJoueur = CreerGrille(10, 10);
+	
+	bat = creerBateau(posBat, CARGOT);
 
     EffacerEcran();
     afficherGrille(grilleJoueur, 40, 100);
+	InsertBateau(grilleJoueur, bat);
 
 	positionTexte->x = 40;
 	positionTexte->y = 20;
@@ -226,6 +237,7 @@ void EcranGrille(ChampSaisie * champ)
     }
 
     LibererGrille(grilleJoueur);
+	LibererBateau(bat);
 
     free(touche);
     free(positionClic);

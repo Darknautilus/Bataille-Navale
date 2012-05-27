@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #include "test.h"
-#include "testParam.h"
+//#include "testParam.h"
 #include "parametre.h"
 
 void MenuTest(void)
@@ -26,7 +26,7 @@ void MenuTest(void)
 				break;
 
 			case 1:
-				TestParam();
+				//TestParam();
 				break;
 
 			default:

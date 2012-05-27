@@ -1,14 +1,18 @@
 #ifndef PILE_COUP_H
 #define PILE_COUP_H
 
+#include "grille.h"
+#include "joueur.h"
+
 typedef struct
 {
-	int numCoup;
+	Joueur carJoueur;
+	Coord coordTir;
 }Coup;
 
 struct Cellule
 {
-	Coup Info;
+	Coup * Info;
 	struct Cellule * Lien;
 };
 
@@ -39,7 +43,7 @@ int PileVide(Pile pPile);
  R : retourne la pile modifiee
  Prec : -
  */
-Pile Empiler(Pile pPile, Coup pElem);
+Pile Empiler(Pile pPile, Coup * pElem);
 
 /*
  N : Depiler
@@ -57,6 +61,6 @@ Pile Depiler(Pile pPile);
  R : retourne le premier element de la pile
  Prec : la pile ne doit pas etre vide
  */
-Coup Sommet(Pile pPile);
+Coup * Sommet(Pile pPile);
 
 #endif

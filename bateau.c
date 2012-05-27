@@ -111,3 +111,8 @@ int getPosYBateau(TBateau *bat){
 ESens getSensBateau(TBateau *bat){
     return bat->position.direction;
 }
+
+void LibererBateau(TBateau * bat)
+{
+	free(bat);
+}

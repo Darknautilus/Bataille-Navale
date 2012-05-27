@@ -9,16 +9,11 @@ Pile CreerPile(void)
 }
 
 int PileVide(Pile pPile)
-{
-	int estVide = 0;
-	
-	if(pPile == NULL)
-		estVide = 1;
-	
-	return estVide;
+{	
+	return pPile == NULL;
 }
 
-Pile Empiler(Pile pPile, int pElem)
+Pile Empiler(Pile pPile, Coup * pElem)
 {
 	struct Cellule * N = (struct Cellule *)malloc(sizeof(struct Cellule));
 	if(N == NULL)
@@ -42,7 +37,7 @@ Pile Depiler(Pile pPile)
 	return N;
 }
 
-int Sommet(Pile pPile)
+Coup * Sommet(Pile pPile)
 {
 	return pPile->Info;
 }
