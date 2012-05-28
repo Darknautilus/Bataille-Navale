@@ -11,7 +11,7 @@
 #ifndef CHAMP_SAISIE_H
 #define CHAMP_SAISIE_H
 
-#define KLARGCHAR 13 /**< \brief Largeur d'un caractère */
+
 #define KESP_VERT 5 /**< \brief Espacement vertical du texte avec le bord du champ */
 #define KESP_HORI 5 /**< \brief Espacement horizontal du texte avec le bord du champ */
 

@@ -15,6 +15,7 @@
 #include "champSaisie.h"
 #include "vueChampSaisie.h"
 #include "vueUtilsSDL.h"
+#include <string.h>
 
 void AfficherChamp(ChampSaisie * champ)
 {
@@ -24,7 +25,7 @@ void AfficherChamp(ChampSaisie * champ)
 	SDL_Rect positionChamp, positionTexte;
 	Uint32 couleurFondChamp;
 
-	police = TTF_OpenFont("Fonts/apple.ttf", champ->tailleTexte);
+	police = TTF_OpenFont("Fonts/default.ttf", champ->tailleTexte);
 
 	positionChamp.x = champ->abscisse;
 	positionChamp.y = champ->ordonnee;
@@ -57,10 +58,14 @@ void EditerChamp(ChampSaisie * champ)
 
 	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
-
+	
+	SDL_EnableUNICODE(SDL_ENABLE);
 
 	while (continuer)
 	{
+		AfficherChamp(champ);
+		SDL_Flip(SDL_GetVideoSurface());
+		
 		etatEvent = AttendreEvent(positionClic, touche);
 
 		if(etatEvent == 1)
@@ -78,12 +83,15 @@ void EditerChamp(ChampSaisie * champ)
 			if(ToucheSpec(touche) == SDLK_BACKSPACE)
 				champ->chaine = SupprimerDernierChar(champ->chaine);
 			else
-				champ->chaine = AjouterCharFin(champ->chaine, ToucheChar(touche));
+			{
+				if(!ChainePleine(champ))
+					champ->chaine = AjouterCharFin(champ->chaine, ToucheChar(touche));
+			}
 		}
 
-		AfficherChamp(champ);
-		SDL_Flip(SDL_GetVideoSurface());
 	}
+	
+	SDL_EnableUNICODE(SDL_DISABLE);
 
 	free(positionClic);
 	free(touche);
@@ -93,8 +101,8 @@ int ClicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic)
 {
 	int codeRetour = 0;
 
-	if(positionClic->x >= champ->abscisse && positionClic->x <= champ->abscisse+champ->longMax*13+20 &&
-	positionClic->y >= champ->ordonnee && positionClic->y <= champ->ordonnee+champ->tailleTexte+10)
+	if(positionClic->x >= champ->abscisse && positionClic->x <= champ->abscisse+champ->longMax*KLARGCHAR+2*KESP_HORI &&
+	positionClic->y >= champ->ordonnee && positionClic->y <= champ->ordonnee+champ->tailleTexte+2*KESP_VERT)
 	{
 		codeRetour = 1;
 	}

@@ -53,7 +53,7 @@ void AfficherImage(char * cheminImage, SDL_Rect positionImage)
 void EcrireCar(char car,int taille, SDL_Rect positionChar)
 {
 	SDL_Surface * zoneTexte;
-	TTF_Font * police = TTF_OpenFont("Fonts/apple.ttf", taille);
+	TTF_Font * police = TTF_OpenFont("Fonts/default.ttf", taille);
 	SDL_Color couleur = {255,255,255};
 
 	zoneTexte = TTF_RenderUTF8_Blended(police, &car, couleur);
@@ -66,7 +66,7 @@ void EcrireCar(char car,int taille, SDL_Rect positionChar)
 void EcrireTexte(char * texte,int taille, SDL_Rect positionTexte)
 {
 	SDL_Surface * zoneTexte;
-	TTF_Font * police = TTF_OpenFont("Fonts/apple.ttf", taille);
+	TTF_Font * police = TTF_OpenFont("Fonts/default.ttf", taille);
 	SDL_Color couleur = {255,255,255};
 
 	zoneTexte = TTF_RenderUTF8_Blended(police, texte, couleur);

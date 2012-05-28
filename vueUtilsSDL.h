@@ -1,6 +1,8 @@
 #ifndef VUE_UTILS_H
 #define VUE_UTILS_H
 
+#define KLARGCHAR 16 /**< \brief Largeur d'un caractère */
+
 /**
  * \brief Charge une image de fond
  *

@@ -36,7 +36,7 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 	caseGrille = SDL_DisplayFormat(caseGrille);// Règle le problème de couleur imprévisible
 
 
-	policeGrille = TTF_OpenFont("Fonts/apple.ttf", KTAILLEPOLICE);
+	policeGrille = TTF_OpenFont("Fonts/default.ttf", KTAILLEPOLICE);
 
     // Parcours de la matrice/grille
     

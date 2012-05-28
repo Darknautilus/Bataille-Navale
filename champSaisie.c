@@ -57,9 +57,7 @@ char * SupprimerDernierChar(char * chaine)
 {
 	int i=0;
 	while(chaine[i]!='\0')
-	{
 		i++;
-	}
 
 	chaine[i-1] = '\0';
 
@@ -69,10 +67,8 @@ char * SupprimerDernierChar(char * chaine)
 char * AjouterCharFin(char * chaine, char charEnt)
 {
 	int i=0;
-	while (chaine[i]!='\0')
-	{
+	while (chaine[i] != '\0')
 		i++;
-	}
 
 	chaine[i+1] = '\0';
 	chaine[i] = charEnt;

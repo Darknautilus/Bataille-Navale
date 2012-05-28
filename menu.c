@@ -11,6 +11,7 @@
 #include "testVue.h"
 #include "test.h"
 #include "vueBateau.h"
+#include "SDLButton.h"
 
 void AfficherMenuAccueil(void)
 {
@@ -114,13 +115,20 @@ void MenuNouvellePartie(void)
 {
 	ChampSaisie * champPseudoHumain, * champPseudoIA;
 	int continuer = 1;
+	SDL_Rect positionTexte;
+	SDL_Rect positionBoutonOK;
 	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
-	SDL_Rect * positionTexte = (SDL_Rect*)malloc(sizeof(SDL_Rect));
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+	SDL_Bouton * boutonOK;
+	
 	int controleEvent;
 
 	champPseudoHumain = CreerChamp(30, 30, 230, 150);
 	champPseudoIA = CreerChamp(30, 30, 230, 200);
+	
+	positionBoutonOK.x = 230;
+	positionBoutonOK.y = 500;
+	boutonOK = CreerBouton("OK", &positionBoutonOK, 30);
 
 	InitTexte(champPseudoHumain, "Anonyme");
 	InitTexte(champPseudoIA, "GlaDos");
@@ -130,13 +138,14 @@ void MenuNouvellePartie(void)
 		ImageFond("Images/menuNouvellePartie.png");
 		ImageRetour("Images/flecheRetour.png");
 		
-		positionTexte->x = 270;
-		positionTexte->y = 400;
+		positionTexte.x = 270;
+		positionTexte.y = 400;
 
-		EcrireTexte("Appuyez sur Entree pour continuer", 30, *positionTexte);
+		EcrireTexte("Appuyez sur Entree pour continuer", 30, positionTexte);
 
 		AfficherChamp(champPseudoHumain);
 		AfficherChamp(champPseudoIA);
+		AfficherBouton(boutonOK);
 		SDL_Flip(SDL_GetVideoSurface());
 
 		controleEvent = AttendreEvent(positionClic, touche);
@@ -171,11 +180,11 @@ void MenuNouvellePartie(void)
 		}
 	}
 
-	free(positionTexte);
 	free(positionClic);
 	free(touche);
 	LibererChamp(champPseudoHumain);
 	LibererChamp(champPseudoIA);
+	LibererBouton(boutonOK);
 }
 
 Tparam * MenuParam(void)
@@ -188,7 +197,7 @@ void EcranGrille(ChampSaisie * champ)
     Grille * grilleJoueur;
     SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
     SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
-	SDL_Rect * positionTexte = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+	SDL_Rect positionTexte;
     int controleEvent;
     Coord coord;
     CaseGrille caseGrille;
@@ -206,10 +215,10 @@ void EcranGrille(ChampSaisie * champ)
     afficherGrille(grilleJoueur, 40, 100);
 	InsertBateau(grilleJoueur, bat);
 
-	positionTexte->x = 40;
-	positionTexte->y = 20;
+	positionTexte.x = 40;
+	positionTexte.y = 20;
 	
-    EcrireTexte(champ->chaine, 40, *positionTexte);
+    EcrireTexte(champ->chaine, 40, positionTexte);
 
     while (continuer)
     {
@@ -241,5 +250,4 @@ void EcranGrille(ChampSaisie * champ)
 
     free(touche);
     free(positionClic);
-	free(positionTexte);
 }
