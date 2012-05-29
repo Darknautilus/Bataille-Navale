@@ -1,36 +1,6 @@
 #ifndef VUE_UTILS_H
 #define VUE_UTILS_H
 
-#define KLARGCHAR 16 /**< \brief Largeur d'un caractère */
-
-/**
- * \brief Charge une image de fond
- *
- * \param[in] cheminImage Le chemin relatif de l'image
- *
- * Charge l'image et l'applique sur toute la surface de l'écran courant
-*/
-void ImageFond(char * cheminImage);
-
-/**
- * \brief Affiche l'image de retour
- *
- * \param[in] cheminImage Le chemin relatif de l'image
- *
- * Permet d'afficher l'image de retour
- * L'image de retour est primordiale lors de la navigation dans les menus.
- * Cliquer sur elle permet de revenir à l'écran précédent
-*/
-void ImageRetour(char * cheminImage);
-
-/**
- * \brief Affiche une image
- *
- * \param[in] cheminImage Le chemin relatif de l'image
- * \param[in] positionImage Coordonnées de l'image dans l'écran
-*/
-void AfficherImage(char * cheminImage, SDL_Rect positionImage);
-
 /**
  * \brief Permet d'écrire du texte en blanc et avec la police par défaut
  *

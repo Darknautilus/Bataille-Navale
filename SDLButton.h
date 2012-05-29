@@ -4,7 +4,6 @@
 #include "includeSDL.h"
 #include "vueUtilsSDL.h"
 
-#define SDL_BOUTON_KLARGCHAR KLARGCHAR
 #define SDL_BOUTON_KLONGMAX 30 /**< \brief Longueur maximum du texte du bouton */
 #define SDL_BOUTON_KESP_VERT 5 /**< \brief Espacement vertical du texte avec le bord du bouton */
 #define SDL_BOUTON_KESP_HORI 15 /**< \brief Espacement horizontal du texte avec le bord du bouton */
@@ -20,14 +19,19 @@
 
 typedef struct
 {
-	SDL_Rect * coordBouton;
+	int abscisse;
+	int ordonnee;
 	char texte[SDL_BOUTON_KLONGMAX];
 	int tailleTexte;
+	int longTexte;
+	int largCarac;
 }SDL_Bouton;
 
 SDL_Bouton * CreerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte);
 
 void AfficherBouton(SDL_Bouton * pBouton);
+
+int ClicSurBouton(SDL_Bouton * pBouton, SDL_Rect * positionClic);
 
 void LibererBouton(SDL_Bouton * pBouton);
 

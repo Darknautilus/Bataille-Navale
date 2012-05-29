@@ -32,7 +32,7 @@ void AfficherChamp(ChampSaisie * champ)
 	positionTexte.x = champ->abscisse+KESP_HORI;
 	positionTexte.y = champ->ordonnee+KESP_VERT;
 
-	champBG = SDL_CreateRGBSurface(SDL_HWSURFACE, champ->longMax*KLARGCHAR+2*KESP_HORI, champ->tailleTexte+2*KESP_VERT, 32, 0, 0, 0, 0);
+	champBG = SDL_CreateRGBSurface(SDL_HWSURFACE, champ->longMax*champ->largCarac+2*KESP_HORI, champ->tailleTexte+2*KESP_VERT, 32, 0, 0, 0, 0);
 
 	if(champ->onFocus == CHAMP_ACTIF)
 		couleurFondChamp = SDL_MapRGB(champBG->format, KCOULEDIT_R, KCOULEDIT_G, KCOULEDIT_B);
@@ -101,7 +101,7 @@ int ClicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic)
 {
 	int codeRetour = 0;
 
-	if(positionClic->x >= champ->abscisse && positionClic->x <= champ->abscisse+champ->longMax*KLARGCHAR+2*KESP_HORI &&
+	if(positionClic->x >= champ->abscisse && positionClic->x <= champ->abscisse+champ->longMax*champ->largCarac+2*KESP_HORI &&
 	positionClic->y >= champ->ordonnee && positionClic->y <= champ->ordonnee+champ->tailleTexte+2*KESP_VERT)
 	{
 		codeRetour = 1;

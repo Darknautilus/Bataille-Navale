@@ -49,6 +49,7 @@ typedef struct
 	char * chaine; /**< Chaine tapée dans le champ */
     int longMax; /**< Longueur maximum de la chaine */
     int tailleTexte; /**< Taille de la police de texte */
+	int largCarac;
     int abscisse; /**< Abscisse du champ dans l'écran */
     int ordonnee; /**< Ordonnee du champ dans l'écran */ 
     EtatChamp onFocus; /**< Vaut CHAMP_ACTIF si le champ est actif (mode édition) et CHAMP_INACTIF sinon */

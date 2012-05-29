@@ -9,7 +9,7 @@ void AfficherMenuAccueil(void);
 
 int AfficherMenuRacine(void);
 
-void MenuNouvellePartie(void);
+Tparam * MenuNouvellePartie(void);
 
 Tparam * MenuParam(void);
 

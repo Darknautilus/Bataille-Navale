@@ -25,6 +25,7 @@ ChampSaisie * CreerChamp(int longMax, int taille, int abscisse, int ordonnee)
         champ->chaine = (char*)malloc((longMax+1)*sizeof(char));
         champ->longMax = longMax;
         champ->tailleTexte = taille;
+		champ->largCarac = champ->tailleTexte/2;
         champ->abscisse = abscisse;
         champ->ordonnee = ordonnee;
         champ->onFocus = CHAMP_INACTIF;

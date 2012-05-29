@@ -19,16 +19,6 @@ SDL_Surface * DemarrerSDL(int width, int height, char * titreFenetre)
 	return ecran;
 }
 
-int ClicSurRetour(SDL_Rect * positionClic)
-{
-	int codeRetour = 0;
-
-	if(positionClic->x >= KABSRETOUR - 5 && positionClic->x <= KABSRETOUR + 100 && positionClic->y >= KORDRETOUR - 10)
-		codeRetour = 1;
-
-	return codeRetour;
-}
-
 void ArreterSDL(void)
 {
 	SDL_Quit();// On ne voit plus
