@@ -1,7 +1,6 @@
 // Permet la portabilité du programme
 #include "includeSDL.h"
 
-
 #include "menu.h"
 #include "champSaisie.h"
 #include "vueChampSaisie.h"
@@ -22,7 +21,7 @@ void AfficherMenuAccueil(void)
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 
 	AfficherImage(imageFond);
-	
+
 	SDL_Flip(SDL_GetVideoSurface());
 
 	while(continuer)
@@ -57,7 +56,7 @@ int AfficherMenuRacine(void)
 
 	Image * imageFond = CreerImage("Images/menuRacine.png", 0, 0);
 	Image * imagePuce = CreerImage("Images/puceMenu.png", 80, 150);
-	
+
 	SDL_EnableUNICODE(SDL_ENABLE);
 
     while(continuer)
@@ -73,7 +72,7 @@ int AfficherMenuRacine(void)
             MenuTestVue();
 		else if(ToucheChar(touche) == 'y')
 			MenuTest();
-		
+
         switch(ToucheSpec(touche))
         {
             case SDLK_RETURN:
@@ -126,19 +125,19 @@ Tparam * MenuNouvellePartie(void)
 	SDL_Bouton * boutonParam;
 	Image * imageFond = CreerImage("Images/menuNouvellePartie.png", 0, 0);
 	Tparam * paramPartie;
-		
+
 	int controleEvent;
 
 	champPseudoHumain = CreerChamp(30, 30, 230, 150);
 	champPseudoIA = CreerChamp(30, 30, 230, 200);
-	
+
 	positionBoutonParam.x = 230;
 	positionBoutonParam.y = 300;
 	boutonParam = CreerBouton("Plus de parametres", &positionBoutonParam, 25);
 	positionBoutonOK.x = 230;
 	positionBoutonOK.y = 350;
 	boutonOK = CreerBouton("Demarrer la partie", &positionBoutonOK, 25);
-	
+
 
 	InitTexte(champPseudoHumain, "Anonyme");
 	InitTexte(champPseudoIA, "GlaDos");
@@ -168,18 +167,18 @@ Tparam * MenuNouvellePartie(void)
 				ChangeFocus(champPseudoIA, CHAMP_ACTIF);
 				EditerChamp(champPseudoIA);
 			}
-			
+
 			else if(ClicSurBouton(boutonOK, positionClic))
 			{
 				EcranGrille(champPseudoHumain);
 			}
-			
+
 		}
-		
+
 		if(controleEvent == 2 && ToucheSpec(touche) == SDLK_ESCAPE)
 			continuer = 0;
 	}
-	
+
 	free(positionClic);
 	free(touche);
 	LibererChamp(champPseudoHumain);
@@ -187,13 +186,13 @@ Tparam * MenuNouvellePartie(void)
 	LibererBouton(boutonOK);
 	LibererBouton(boutonParam);
 	LibererImage(imageFond);
-	
+
 	return paramPartie;
 }
 
 Tparam * MenuParam(void)
 {
-	
+
 }
 
 void EcranGrille(ChampSaisie * champ)
@@ -212,7 +211,7 @@ void EcranGrille(ChampSaisie * champ)
 
 
     grilleJoueur = CreerGrille(10, 10);
-	
+
 	bat = creerBateau(posBat, CARGOT);
 	toucherBateau(bat, 1);
 
@@ -222,7 +221,7 @@ void EcranGrille(ChampSaisie * champ)
 
 	positionTexte.x = 40;
 	positionTexte.y = 20;
-	
+
     EcrireTexte(champ->chaine, 40, positionTexte);
 
     while (continuer)

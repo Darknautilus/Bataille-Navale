@@ -4,12 +4,15 @@
 
 Joueur * nouvJoueur(void)
 {
-	return (Joueur*)malloc(sizeof(Joueur));
+	Joueur *joueur = (Joueur*)malloc(sizeof(Joueur));
+	joueur->type = UNDEF;
+
+	return joueur;
 }
 
-int getIDJoueur(const Joueur * pJoueur)
+int getTypeJoueur(const Joueur * pJoueur)
 {
-	return pJoueur->idJ;
+	return pJoueur->type;
 }
 
 char * getNomJoueur(Joueur * pJoueur)

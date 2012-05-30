@@ -16,7 +16,7 @@
  * \enum ETypeBat
  * \brief Types de bateaux
  *
- * DŽfinit ˆ la fois le type et la taille du bateau
+ * Définit à la fois le type et la taille du bateau
 */
 typedef enum {
     VOILIER = 1,

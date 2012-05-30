@@ -3,17 +3,30 @@
 
 #define KLGNOMJ 25
 
-typedef enum {HUMAIN,MACHINE} IdJoueur;
+/**
+ * \enum ETypeBat
+ * \brief Types de bateaux
+ *
+ * DÈfinit ‡ la fois le type et la taille du bateau
+*/
+typedef enum {HUMAIN,MACHINE,UNDEF} ETypeJoueur;
 
+/**
+ * \struct TInfoBateau
+ * \brief Contient les informations sur un bateau
+ *
+ * Ces informations seront stockées dans un tableau (voir Tparam)
+*/
 typedef struct
 {
-	IdJoueur idJ;
+	ETypeJoueur type;
 	char nomJ[KLGNOMJ];
 }Joueur;
 
+
 Joueur * nouvJoueur(void);
 
-int getIDJoueur(const Joueur * pJoueur);
+int getTypeJoueur(const Joueur * pJoueur);
 
 char * getNomJoueur(Joueur * pJoueur);
 

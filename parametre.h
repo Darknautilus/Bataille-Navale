@@ -11,6 +11,7 @@
 #define _PARAM_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "bateau.h"
 
 #define K_NBTYPEBATEAUX KTAILLEMAXBAT /**< \brief Nombre de types de bateaux */
@@ -28,8 +29,6 @@ typedef struct
 	ETypeBat type;/**< Type du bateau */
 	char nomBateau[K_LGNOM];/**< Nom du bateau */
 }	TInfoBateau;
-
-int idDernierBateau = 0;/**< \brief Continent le dernier ID attribué.*/
 
 //***************************
 /**

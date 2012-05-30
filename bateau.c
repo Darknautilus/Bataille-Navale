@@ -7,8 +7,6 @@
  *   Contient le module de gestion des structure de type bateau.
 */
 
-#include <stdlib.h>
-
 #include "bateau.h"
 #include "parametre.h"
 
