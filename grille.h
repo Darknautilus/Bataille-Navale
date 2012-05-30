@@ -11,12 +11,13 @@
 #ifndef GRILLE_H
 #define GRILLE_H
 
-#define KLARGCASE 40 /**< \brief Largeur d'une case */
-#define KHAUTEURCASE 40 /**< \brief Hauteur d'une case */
+#define KLARGCASE 30 /**< \brief Largeur d'une case */
+#define KHAUTEURCASE 30 /**< \brief Hauteur d'une case */
 
-#define KTAILLEPOLICE 30 /**< \brief Taille de police */
-#define KESP_VERT 5 /**< \brief Espace vertical entre les cases */
-#define KESP_HORI 5 /**< \brief Espace horizontal entre les cases */
+#define KTAILLEPOLICE 30 //**< \brief Taille de police */
+#define KESP_CASE_VERT 5 /**< \brief Espace vertical entre les cases */
+#define KESP_CASE_HORI 5 /**< \brief Espace horizontal entre les cases */
+#define KIDCOULDEFAUT 0 //**< \brief Indice de la couleur par défaut de la grille */
 
 /**
  * \enum EtatCase
@@ -35,6 +36,8 @@ typedef enum {
 typedef struct
 {
     EtatCase etatCase; /**< État de la case */
+	int couleur; /**< Numéro de la couleur dans la table des couleurs */
+	int estOccupe; /**< Vaut 1 si un bateau est placé sur la case et 0 sinon */
 }
 CaseGrille;
 

@@ -13,6 +13,8 @@
 
 #include "grille.h"
 #include "vueGrille.h"
+#include "couleurs.h"
+#include "vueUtilsSDL.h"
 
 void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 {
@@ -31,8 +33,10 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 	grille->ordonnee = ordonnee;
 
 	caseGrille = SDL_CreateRGBSurface(SDL_HWSURFACE, KLARGCASE, KHAUTEURCASE, 32, 0, 0, 0, 0);
+	caseGrille = SDL_DisplayFormat(caseGrille);// Règle le problème de couleur imprévisible
 
-	policeGrille = TTF_OpenFont("Fonts/apple.ttf", KTAILLEPOLICE);
+
+	policeGrille = TTF_OpenFont("Fonts/default.ttf", KTAILLEPOLICE);
 
     // Parcours de la matrice/grille
     
@@ -43,7 +47,7 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
         sprintf(labelLin, "%c", 'A'+i);
 		numCase = TTF_RenderText_Blended(policeGrille, labelLin, couleurBlanche);
 		positionNumCase.x = abscisse - KLARGCASE;
-		positionNumCase.y = ordonnee + i * KHAUTEURCASE;
+		positionNumCase.y = ordonnee + i * (KHAUTEURCASE + KESP_CASE_VERT);
 		SDL_BlitSurface(numCase, NULL, SDL_GetVideoSurface(), &positionNumCase);
 
         // Parcours des colonnes
@@ -55,7 +59,7 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
                 // Écriture du numéro de colonne
                 sprintf(labelCol, "%d", j+1);
                 numCase = TTF_RenderText_Blended(policeGrille, labelCol, couleurBlanche);
-                positionNumCase.x = abscisse + j*KLARGCASE;
+                positionNumCase.x = abscisse + j*(KLARGCASE + KESP_CASE_HORI);
                 positionNumCase.y = ordonnee - KHAUTEURCASE;
                 SDL_BlitSurface(numCase, NULL, SDL_GetVideoSurface(), &positionNumCase);
             }
@@ -64,33 +68,30 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
                 
 			coord.noCol = i+1;
 			coord.noLin = j+1;
-
-            contenuCaseGrille = Consulter(grille, coord);
+			
+			positionCaseGrille.x = j*(KLARGCASE + KESP_CASE_HORI) + abscisse;
+			positionCaseGrille.y = i*(KHAUTEURCASE + KESP_CASE_VERT) + ordonnee;
+			
+			contenuCaseGrille = Consulter(grille, coord);
+			
+			SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille.couleur))));
+			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
+			
 			switch(contenuCaseGrille.etatCase)
 			{
-				case GRILLE_CASE_NORMAL:
-					caseGrille = IMG_Load("Images/caseVide.png");
-				break;
-
 				case GRILLE_CASE_TOUCHE:
 					caseGrille = IMG_Load("Images/caseBateauTouche.png");
-				break;
-
+					SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
+					break;
+					
 				case GRILLE_CASE_COULE:
 					caseGrille = IMG_Load("Images/caseBateauCoule.png");
-				break;
-
-                default:
-                    break;
+					SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
+					break;
+					
+				default:
+					break;
 			}
-
-            // Affichage de la case
-            
-			positionCaseGrille.x = j*KLARGCASE + abscisse;
-			positionCaseGrille.y = i*KHAUTEURCASE + ordonnee;
-
-			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
-
 		}
 	}
 
@@ -112,31 +113,33 @@ void updateGrille(Grille * grille, Coord coord)
 	SDL_Rect positionCaseGrille;
     CaseGrille contenuCaseGrille;
 
-	positionCaseGrille.x = grille->abscisse + KLARGCASE * (coord.noCol-1);
-	positionCaseGrille.y = grille->ordonnee + KHAUTEURCASE * (coord.noLin-1);
+	positionCaseGrille.x = grille->abscisse + (KLARGCASE + KESP_CASE_HORI) * (coord.noCol-1);
+	positionCaseGrille.y = grille->ordonnee + (KHAUTEURCASE + KESP_CASE_VERT) * (coord.noLin-1);
 
 	caseGrille = SDL_CreateRGBSurface(SDL_HWSURFACE, 30, 30, 32, 0, 0, 0, 0);
-
+	caseGrille = SDL_DisplayFormat(caseGrille);// Règle le problème de couleur imprévisible
+	
 	contenuCaseGrille = Consulter(grille, coord);
-    switch(contenuCaseGrille.etatCase)
-    {
-        case GRILLE_CASE_NORMAL:
-            caseGrille = IMG_Load("Images/caseVide.png");
-            break;
-            
-        case GRILLE_CASE_TOUCHE:
-            caseGrille = IMG_Load("Images/caseBateauTouche.png");
-            break;
-            
-        case GRILLE_CASE_COULE:
-            caseGrille = IMG_Load("Images/caseBateauCoule.png");
-            break;
-            
-        default:
-            break;
-    }
-
-	SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(), &positionCaseGrille);
+	
+	SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille.couleur))));
+	SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
+	
+	switch(contenuCaseGrille.etatCase)
+	{
+		case GRILLE_CASE_TOUCHE:
+			caseGrille = IMG_Load("Images/caseBateauTouche.png");
+			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
+			break;
+			
+		case GRILLE_CASE_COULE:
+			caseGrille = IMG_Load("Images/caseBateauCoule.png");
+			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
+			break;
+			
+		default:
+			break;
+	}
+	
 	SDL_Flip(SDL_GetVideoSurface());
 	SDL_FreeSurface(caseGrille);
 }
@@ -145,8 +148,8 @@ int ClicDansGrille(Grille * grille, SDL_Rect * positionClic)
 {
 	int codeRetour = 0;
 
-	if(positionClic->x >= grille->abscisse && positionClic->x <= grille->abscisse+KLARGCASE*grille->NbCol &&
-       positionClic->y >= grille->ordonnee && positionClic->y <= grille->ordonnee+KHAUTEURCASE*grille->NbLin)
+	if(positionClic->x >= grille->abscisse && positionClic->x <= grille->abscisse+(KLARGCASE + KESP_CASE_HORI)*grille->NbCol &&
+       positionClic->y >= grille->ordonnee && positionClic->y <= grille->ordonnee+(KHAUTEURCASE + KESP_CASE_VERT)*grille->NbLin)
 		codeRetour = 1;
 
     return codeRetour;
@@ -159,10 +162,10 @@ Coord ClicCaseGrille(Grille * grille, SDL_Rect * positionClic)
 
 	if(ClicDansGrille(grille, positionClic))
 	{
-		for(compteurCol=0;positionClic->x > grille->abscisse+compteurCol*KLARGCASE;compteurCol++)
+		for(compteurCol=0;positionClic->x > grille->abscisse+compteurCol*(KLARGCASE + KESP_CASE_HORI);compteurCol++)
 		{}
 
-		for(compteurLin=0;positionClic->y > grille->ordonnee+compteurLin*KHAUTEURCASE;compteurLin++)
+		for(compteurLin=0;positionClic->y > grille->ordonnee+compteurLin*(KHAUTEURCASE + KESP_CASE_VERT);compteurLin++)
 		{}
 
 		coordClic.noCol = compteurCol;

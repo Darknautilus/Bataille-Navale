@@ -134,4 +134,10 @@ int getPosYBateau(TBateau *bat);
 */
 ESens getSensBateau(TBateau *bat);
 
+/**
+ * Libre le bateau en mmoire
+ * \param[in] bat Un pointeur sur le bateau
+*/
+void LibererBateau(TBateau * bat);
+
 #endif

@@ -11,6 +11,7 @@
 #include <stdlib.h>
 
 #include "grille.h"
+#include "couleurs.h"
 
 Grille * CreerGrille(int nbLin, int nbCol)
 {
@@ -46,6 +47,7 @@ Grille * CreerGrille(int nbLin, int nbCol)
 			for(j=0; j<nbCol; j++)
 			{
 				nouvGrille->TabLignes[i][j].etatCase = GRILLE_CASE_NORMAL;
+				nouvGrille->TabLignes[i][j].couleur = KIDCOULDEFAUT;
 			}
 		}
 

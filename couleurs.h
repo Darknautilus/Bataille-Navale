@@ -4,7 +4,7 @@
 #include "includeSDL.h"
 
 
-#define KCOULEURS_NBCOULMAX 7
+#define KCOULEURS_NBCOULMAX 8
 #define KCOULEURS_LGNOMCOUL 10
 
 typedef

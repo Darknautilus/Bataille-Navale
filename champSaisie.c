@@ -25,6 +25,7 @@ ChampSaisie * CreerChamp(int longMax, int taille, int abscisse, int ordonnee)
         champ->chaine = (char*)malloc((longMax+1)*sizeof(char));
         champ->longMax = longMax;
         champ->tailleTexte = taille;
+		champ->largCarac = champ->tailleTexte/2;
         champ->abscisse = abscisse;
         champ->ordonnee = ordonnee;
         champ->onFocus = CHAMP_INACTIF;
@@ -57,9 +58,7 @@ char * SupprimerDernierChar(char * chaine)
 {
 	int i=0;
 	while(chaine[i]!='\0')
-	{
 		i++;
-	}
 
 	chaine[i-1] = '\0';
 
@@ -69,10 +68,8 @@ char * SupprimerDernierChar(char * chaine)
 char * AjouterCharFin(char * chaine, char charEnt)
 {
 	int i=0;
-	while (chaine[i]!='\0')
-	{
+	while (chaine[i] != '\0')
 		i++;
-	}
 
 	chaine[i+1] = '\0';
 	chaine[i] = charEnt;
