@@ -175,3 +175,6 @@ lib
 *.layout
 maintestBenoit.c
 *.layout.cbtemp
+
+#Ignore log files
+*.log

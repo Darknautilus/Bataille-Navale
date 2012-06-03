@@ -11,7 +11,9 @@
 #ifndef VUEGRILLE_H
 #define VUEGRILLE_H
 
-#include "grille.h"
+#include "../model/grille.h"
+
+#include "includeSDL.h"
 
 /**
 * \brief Affiche la grille à l'écran

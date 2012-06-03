@@ -1,8 +1,8 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "champSaisie.h"
-#include "parametre.h"
+#include "../model/champSaisie.h"
+#include "../model/parametre.h"
 
 // Affiche le menu d'accueil
 void AfficherMenuAccueil(void);

@@ -1,22 +1,19 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "../model/champSaisie.h"
+#include "../model/parametre.h"
+#include "../model/grille.h"
 
-// Permet la portabilité du programme
-#include "includeSDL.h"
+#include "../view/vueUtilsSDL.h"
+#include "../view/menu.h"
+#include "../view/vueGrille.h"
+#include "../view/vueChampSaisie.h"
+#include "../view/vueRegles.h"
+#include "../view/includeSDL.h"
 
 #include "utilsSDL.h"
-#include "vueUtilsSDL.h"
+#include "fichierDebug.h"
 
-#include "menu.h"
-
-#include "parametre.h"
-
-#include "grille.h"
-#include "vueGrille.h"
-
-#include "champSaisie.h"
-#include "vueChampSaisie.h"
-#include "regles.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 void pause()
 {
@@ -49,6 +46,8 @@ int main(int argc, char ** argv)
 
 	ecran = DemarrerSDL(800, 600, "Bataille Navale");
 
+    init_debug();
+
 	AfficherMenuAccueil();
 
 	while (continuer)
@@ -76,13 +75,14 @@ int main(int argc, char ** argv)
             case 5: // Quitter
                 continuer = 0;
                 break;
-            
+
             default:
                 break;
         }
     }
 
 	ArreterSDL();
+	detruire_debug();
 
 	return 0;
 }

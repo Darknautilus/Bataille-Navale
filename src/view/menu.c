@@ -1,22 +1,26 @@
+#include "menu.h"
+
+#include "../model/champSaisie.h"
+
 // Permet la portabilité du programme
 #include "includeSDL.h"
-
-#include "menu.h"
-#include "champSaisie.h"
 #include "vueChampSaisie.h"
-#include "utilsSDL.h"
+
 #include "vueUtilsSDL.h"
 #include "vueGrille.h"
-#include "testVue.h"
-#include "test.h"
 #include "vueBateau.h"
 #include "SDLButton.h"
 #include "SDLImage.h"
 
+#include "../ctrl/utilsSDL.h"
+
+#include "../test/test.h"
+#include "../test/view/testVue.h"
+
 void AfficherMenuAccueil(void)
 {
 	int continuer = 1;
-	Image * imageFond = CreerImage("Images/menuAccueil.png", 0, 0);
+	Image * imageFond = CreerImage("menuAccueil.png", 0, 0);
 
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 
@@ -54,8 +58,8 @@ int AfficherMenuRacine(void)
 
     SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 
-	Image * imageFond = CreerImage("Images/menuRacine.png", 0, 0);
-	Image * imagePuce = CreerImage("Images/puceMenu.png", 80, 150);
+	Image * imageFond = CreerImage("menuRacine.png", 0, 0);
+	Image * imagePuce = CreerImage("puceMenu.png", 80, 150);
 
 	SDL_EnableUNICODE(SDL_ENABLE);
 
@@ -123,7 +127,7 @@ Tparam * MenuNouvellePartie(void)
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 	SDL_Bouton * boutonOK;
 	SDL_Bouton * boutonParam;
-	Image * imageFond = CreerImage("Images/menuNouvellePartie.png", 0, 0);
+	Image * imageFond = CreerImage("menuNouvellePartie.png", 0, 0);
 	Tparam * paramPartie;
 
 	int controleEvent;
@@ -192,6 +196,7 @@ Tparam * MenuNouvellePartie(void)
 
 Tparam * MenuParam(void)
 {
+
 
 }
 

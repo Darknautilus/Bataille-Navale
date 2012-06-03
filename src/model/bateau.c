@@ -8,6 +8,7 @@
 */
 
 #include "bateau.h"
+
 #include "parametre.h"
 
 TBateau * creerBateau(TPosition pos, ETypeBat type)

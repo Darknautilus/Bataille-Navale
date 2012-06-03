@@ -1,10 +1,8 @@
-// Permet la portabilité du programme
-#include "includeSDL.h"
+#include "couleurs.h"
 
+#include "../view/includeSDL.h"
 
 #include <string.h>
-
-#include "couleurs.h"
 
 const Couleur tableCouleurs[KCOULEURS_NBCOULMAX] = {
 	{'b',"BLANC", {255,255,255} },

@@ -8,13 +8,15 @@
  * Ce module implémente la gestion du champ de saisie. Il permet à l'utilisateur de saisir une chaine de caractères.
  */
 
-// Permet la portabilité du programme
+#include "../model/champSaisie.h"
+
 #include "includeSDL.h"
-
-
-#include "champSaisie.h"
 #include "vueChampSaisie.h"
 #include "vueUtilsSDL.h"
+
+#include "../ctrl/utilsPoliceEcriture.h"
+#include "../ctrl/fichierDebug.h"
+
 #include <string.h>
 
 void AfficherChamp(ChampSaisie * champ)
@@ -25,7 +27,7 @@ void AfficherChamp(ChampSaisie * champ)
 	SDL_Rect positionChamp, positionTexte;
 	Uint32 couleurFondChamp;
 
-	police = TTF_OpenFont("Fonts/default.ttf", champ->tailleTexte);
+	police = chargerPoliceEcriture("default.ttf", champ->tailleTexte);
 
 	positionChamp.x = champ->abscisse;
 	positionChamp.y = champ->ordonnee;
@@ -58,14 +60,14 @@ void EditerChamp(ChampSaisie * champ)
 
 	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
-	
+
 	SDL_EnableUNICODE(SDL_ENABLE);
 
 	while (continuer)
 	{
 		AfficherChamp(champ);
 		SDL_Flip(SDL_GetVideoSurface());
-		
+
 		etatEvent = AttendreEvent(positionClic, touche);
 
 		if(etatEvent == 1)
@@ -90,7 +92,7 @@ void EditerChamp(ChampSaisie * champ)
 		}
 
 	}
-	
+
 	SDL_EnableUNICODE(SDL_DISABLE);
 
 	free(positionClic);

@@ -1,14 +1,14 @@
+#include "vueUtilsSDL.h"
+
 // Permet la portabilité du programme
 #include "includeSDL.h"
 
-
-#include "vueUtilsSDL.h"
-#include "utilsSDL.h"
+#include "../ctrl/utilsSDL.h"
 
 void EcrireCar(char car,int taille, SDL_Rect positionChar)
 {
 	SDL_Surface * zoneTexte;
-	TTF_Font * police = TTF_OpenFont("Fonts/default.ttf", taille);
+	TTF_Font * police = chargerPoliceEcriture("default.ttf", taille);
 	SDL_Color couleur = {255,255,255};
 
 	zoneTexte = TTF_RenderUTF8_Blended(police, &car, couleur);
@@ -21,7 +21,7 @@ void EcrireCar(char car,int taille, SDL_Rect positionChar)
 void EcrireTexte(char * texte,int taille, SDL_Rect positionTexte)
 {
 	SDL_Surface * zoneTexte;
-	TTF_Font * police = TTF_OpenFont("Fonts/default.ttf", taille);
+	TTF_Font * police = chargerPoliceEcriture("default.ttf", taille);
 	SDL_Color couleur = {255,255,255};
 
 	zoneTexte = TTF_RenderUTF8_Blended(police, texte, couleur);
@@ -73,10 +73,10 @@ int AttendreEvent(SDL_Rect * coordClic, SDL_keysym * touche)
 char ToucheChar(SDL_keysym * touche)
 {
     char charTouche;
-    
+
     charTouche = (char)(touche->unicode);
-    
-	return charTouche; 
+
+	return charTouche;
 }
 
 SDLKey ToucheSpec(SDL_keysym * touche)
@@ -86,7 +86,7 @@ SDLKey ToucheSpec(SDL_keysym * touche)
 
 Uint32 convertSDL_Color(SDL_Color pCouleur)
 {
-	
+
 	return SDL_MapRGB(SDL_GetVideoSurface()->format, pCouleur.r, pCouleur.g, pCouleur.b);
 }
 

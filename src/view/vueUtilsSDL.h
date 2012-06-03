@@ -1,6 +1,8 @@
 #ifndef VUE_UTILS_H
 #define VUE_UTILS_H
 
+#include "includeSDL.h"
+
 /**
  * \brief Permet d'écrire du texte en blanc et avec la police par défaut
  *

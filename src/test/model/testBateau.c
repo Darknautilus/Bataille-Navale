@@ -1,5 +1,7 @@
 #include "testBateau.h"
 
+#include <stdio.h>
+
 /**
     Test unitaire de la fonction estCoule.
     \return 1 si tout les test sont passé. 0 Si echec.
@@ -152,7 +154,6 @@ int testToucheBateau(){
 int testGetPosBateau(){
 
     int resultat = 1;
-    int i;
     int type = REMORQUEUR;
 
     TPosition pos;

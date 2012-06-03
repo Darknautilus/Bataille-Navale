@@ -1,10 +1,11 @@
+#include "vueRegles.h"
+
 // Permet la portabilité du programme
 #include "includeSDL.h"
 
-
 #include "vueUtilsSDL.h"
 #include "vueChampSaisie.h"
-#include "regles.h"
+
 
 void afficherRegles()
 {

@@ -8,12 +8,11 @@
  * Ce module implémente la gestion du champ de saisie. Il permet à l'utilisateur de saisir une chaine de caractères.
 */
 
+#include "champSaisie.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include "champSaisie.h"
-
 
 ChampSaisie * CreerChamp(int longMax, int taille, int abscisse, int ordonnee)
 {
@@ -30,7 +29,7 @@ ChampSaisie * CreerChamp(int longMax, int taille, int abscisse, int ordonnee)
         champ->ordonnee = ordonnee;
         champ->onFocus = CHAMP_INACTIF;
     }
-    
+
 	return champ;
 }
 

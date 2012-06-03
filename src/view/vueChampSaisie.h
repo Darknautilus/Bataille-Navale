@@ -11,7 +11,7 @@
 #ifndef VUE_CHAMP_SAISIE_H
 #define VUE_CHAMP_SAISIE_H
 
-#include "champSaisie.h"
+#include "../model/champSaisie.h"
 
 /**
  * \brief Affiche le champ

@@ -27,6 +27,13 @@ typedef struct
 	int largCarac;
 }SDL_Bouton;
 
+/**
+ * Crée une bouton.
+ * \param pTexte Le texte du bouton.
+ * \param pCoord Un pointeur sur les coordonnées
+ * \param pTailleTexte Un entier contenant la taille du texte.
+ * \return Une strucutre SDL_Bouton correctement initialisée.
+*/
 SDL_Bouton * CreerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte);
 
 void AfficherBouton(SDL_Bouton * pBouton);

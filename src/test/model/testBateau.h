@@ -1,8 +1,8 @@
 #ifndef TESTBATEAU_H
 #define TESTBATEAU_H
 
-#include "bateau.h"
-#include <stdio.h>
+#include "../../model/bateau.h"
+
 /**
     Test unitaire de la fonction estCoule.
     \return 1 si tout les test sont passé. 0 Si echec.

@@ -1,8 +1,7 @@
 #ifndef _COULEURS_H
 #define _COULEURS_H
 
-#include "includeSDL.h"
-
+#include "../view/includeSDL.h"
 
 #define KCOULEURS_NBCOULMAX 8
 #define KCOULEURS_LGNOMCOUL 10

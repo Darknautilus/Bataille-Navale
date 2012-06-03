@@ -2,7 +2,7 @@
 
 #include "test.h"
 //#include "testParam.h"
-#include "parametre.h"
+#include "../model/parametre.h"
 
 void MenuTest(void)
 {

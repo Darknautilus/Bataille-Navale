@@ -1,21 +1,25 @@
-#include "includeSDL.h"
 #include "SDLButton.h"
+
+#include "includeSDL.h"
+
+#include "../ctrl/utilsPoliceEcriture.h"
+
 #include <string.h>
 
 SDL_Bouton * CreerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte)
 {
 	if(strlen(pTexte)>SDL_BOUTON_KLONGMAX)
 		return NULL;
-	
+
 	SDL_Bouton * nouvBouton = (SDL_Bouton*)malloc(sizeof(SDL_Bouton));
-	
+
 	strcpy(nouvBouton->texte, pTexte);
 	nouvBouton->abscisse = pCoord->x;
 	nouvBouton->ordonnee = pCoord->y;
 	nouvBouton->tailleTexte = pTailleTexte;
 	nouvBouton->largCarac = nouvBouton->tailleTexte/1.5;
 	nouvBouton->longTexte = strlen(nouvBouton->texte);
-	
+
 	return nouvBouton;
 }
 
@@ -25,24 +29,24 @@ void AfficherBouton(SDL_Bouton * pBouton)
 	TTF_Font * police;
 	SDL_Color couleurTexte = {SDL_BOUTON_KCOULTXT_R,SDL_BOUTON_KCOULTXT_G,SDL_BOUTON_KCOULTXT_B};
 	SDL_Rect positionFondBouton, positionTexteBouton;
-	
-	police = TTF_OpenFont("Fonts/default.ttf", pBouton->tailleTexte);
-	
+
+	police = chargerPoliceEcriture("default.ttf", pBouton->tailleTexte);
+
 	positionFondBouton.x = pBouton->abscisse;
 	positionFondBouton.y = pBouton->ordonnee;
 	positionTexteBouton.x = pBouton->abscisse + SDL_BOUTON_KESP_HORI;
 	positionTexteBouton.y = pBouton->ordonnee + SDL_BOUTON_KESP_VERT;
-	
+
 	fondBouton = SDL_CreateRGBSurface(SDL_HWSURFACE, pBouton->longTexte*pBouton->largCarac+2*SDL_BOUTON_KESP_HORI, pBouton->tailleTexte+2*SDL_BOUTON_KESP_VERT, 32, 0, 0, 0, 0);
-	
+
 	fondBouton = SDL_DisplayFormat(fondBouton);
-	
+
 	SDL_FillRect(fondBouton, NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, SDL_BOUTON_KCOUL_R, SDL_BOUTON_KCOUL_G, SDL_BOUTON_KCOUL_B));
 	SDL_BlitSurface(fondBouton, NULL, SDL_GetVideoSurface(), &positionFondBouton);
-	
+
 	texteBouton = TTF_RenderText_Blended(police, pBouton->texte, couleurTexte);
 	SDL_BlitSurface(texteBouton, NULL, SDL_GetVideoSurface(), &positionTexteBouton);
-	
+
 	TTF_CloseFont(police);
 	SDL_FreeSurface(fondBouton);
 	SDL_FreeSurface(texteBouton);

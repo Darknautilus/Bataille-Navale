@@ -1,7 +1,8 @@
-#include <stdlib.h>
-
 #include "vueBateau.h"
-#include "grille.h"
+
+#include "../model/grille.h"
+
+#include <stdlib.h>
 
 // insère un bateau dans une grille
 Grille * InsertBateau(Grille * grille, TBateau * bat)
@@ -27,10 +28,10 @@ Grille * InsertBateau(Grille * grille, TBateau * bat)
 			coordCaseGrille.noCol = bat->position.x;
 			coordCaseGrille.noLin = bat->position.y + i;
 		}
-		
+
 		if(Consulter(grille, coordCaseGrille).estOccupe)
 			return NULL;
-		
+
 		if(bat->etat[i] == TOUCHE)
 			grille = SetEtatCase(grille, coordCaseGrille, GRILLE_CASE_TOUCHE);
 		else if(bat->etat[i] == COULE)

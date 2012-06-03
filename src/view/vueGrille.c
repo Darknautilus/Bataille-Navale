@@ -8,13 +8,15 @@
  *
  */
 
-// Permet la portabilité du programme
-#include "includeSDL.h"
-
-#include "grille.h"
 #include "vueGrille.h"
-#include "couleurs.h"
+
+#include "../model/grille.h"
+#include "../model/couleurs.h"
+
+#include "includeSDL.h"
 #include "vueUtilsSDL.h"
+
+#include "../ctrl/utilsPoliceEcriture.h"
 
 void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 {
@@ -36,10 +38,10 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 	caseGrille = SDL_DisplayFormat(caseGrille);// Règle le problème de couleur imprévisible
 
 
-	policeGrille = TTF_OpenFont("Fonts/default.ttf", KTAILLEPOLICE);
+	policeGrille = chargerPoliceEcriture("default.ttf", KTAILLEPOLICE);
 
     // Parcours de la matrice/grille
-    
+
     // Parcours des lignes
 	for(i=0;i<grille->NbLin;i++)
 	{
@@ -63,32 +65,32 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
                 positionNumCase.y = ordonnee - KHAUTEURCASE;
                 SDL_BlitSurface(numCase, NULL, SDL_GetVideoSurface(), &positionNumCase);
             }
-            
+
             //Consultation du contenu de la case et chargement de l'image correspondante
-                
+
 			coord.noCol = i+1;
 			coord.noLin = j+1;
-			
+
 			positionCaseGrille.x = j*(KLARGCASE + KESP_CASE_HORI) + abscisse;
 			positionCaseGrille.y = i*(KHAUTEURCASE + KESP_CASE_VERT) + ordonnee;
-			
+
 			contenuCaseGrille = Consulter(grille, coord);
-			
+
 			SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille.couleur))));
 			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
-			
+
 			switch(contenuCaseGrille.etatCase)
 			{
 				case GRILLE_CASE_TOUCHE:
-					caseGrille = IMG_Load("Images/caseBateauTouche.png");
+					caseGrille = creerSDLImage("caseBateauTouche.png");
 					SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 					break;
-					
+
 				case GRILLE_CASE_COULE:
-					caseGrille = IMG_Load("Images/caseBateauCoule.png");
+					caseGrille = creerSDLImage("caseBateauCoule.png");
 					SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 					break;
-					
+
 				default:
 					break;
 			}
@@ -118,28 +120,28 @@ void updateGrille(Grille * grille, Coord coord)
 
 	caseGrille = SDL_CreateRGBSurface(SDL_HWSURFACE, 30, 30, 32, 0, 0, 0, 0);
 	caseGrille = SDL_DisplayFormat(caseGrille);// Règle le problème de couleur imprévisible
-	
+
 	contenuCaseGrille = Consulter(grille, coord);
-	
+
 	SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille.couleur))));
 	SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
-	
+
 	switch(contenuCaseGrille.etatCase)
 	{
 		case GRILLE_CASE_TOUCHE:
-			caseGrille = IMG_Load("Images/caseBateauTouche.png");
+			caseGrille = creerSDLImage("caseBateauTouche.png");
 			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 			break;
-			
+
 		case GRILLE_CASE_COULE:
-			caseGrille = IMG_Load("Images/caseBateauCoule.png");
+			caseGrille = creerSDLImage("caseBateauCoule.png");
 			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 			break;
-			
+
 		default:
 			break;
 	}
-	
+
 	SDL_Flip(SDL_GetVideoSurface());
 	SDL_FreeSurface(caseGrille);
 }
