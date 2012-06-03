@@ -4,6 +4,7 @@
 #include "includeSDL.h"
 
 #include "../ctrl/utilsSDL.h"
+#include "../ctrl/utilsPoliceEcriture.h"
 
 void EcrireCar(char car,int taille, SDL_Rect positionChar)
 {

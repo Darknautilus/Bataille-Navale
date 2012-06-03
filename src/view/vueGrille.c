@@ -15,6 +15,7 @@
 
 #include "includeSDL.h"
 #include "vueUtilsSDL.h"
+#include "SDLImage.h"
 
 #include "../ctrl/utilsPoliceEcriture.h"
 
