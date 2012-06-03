@@ -1,4 +1,4 @@
-﻿
+
 #################
 ## Eclipse
 #################
@@ -174,3 +174,4 @@ lib
 *.exe
 *.layout
 maintestBenoit.c
+*.layout.cbtemp

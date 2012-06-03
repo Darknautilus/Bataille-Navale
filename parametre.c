@@ -156,7 +156,7 @@ void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam,const char pNom[], 
 		strcpy(pParam->bateauxJoueur[pIdBateau].nomBateau ,pNom);
 	}
 
-    //Sinon c'est un batea de l'IA
+    //Sinon c'est un bateau de l'IA
 	else
 	{
 		pParam->bateauxMachine[pIdBateau-getNbBat(pParam)].couleur=pCouleur;
