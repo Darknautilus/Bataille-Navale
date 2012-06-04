@@ -20,35 +20,69 @@
 void AfficherMenuAccueil(void)
 {
 	int continuer = 1;
-	Image * imageFond = CreerImage("menuAccueil.png", 0, 0);
+    int controle;
+    SDL_Rect positionTexte;
+    SDL_Color couleurRectangleImages = {255,255,255};
+    
+    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    
+    afficherRectangle(10, 10, 231, 110, couleurRectangleImages);
+    Image * imageIUT = CreerImage("iutBlagnac.jpg", 15, 15);
+    Image * imageUniv = CreerImage("univMirail.gif", 115, 15);
+    Image * imageBateau = CreerImage("bateau.png", 454, 418);
+    
+    positionTexte.x = 219;
+    positionTexte.y = 282;
+    EcrireLigneTexte("Bataille Navale", 70, positionTexte, "default.ttf");
+    
+    positionTexte.x = 15;
+    positionTexte.y = 700;
+    EcrireTexte("Par Aurelien Bertron\net Benoit Sauvere", 20, positionTexte, "default.ttf");
+    
+    positionTexte.x = 223;
+    positionTexte.y = 539;
+    EcrireTexte("Appuyez sur espace pour continuer", 25, positionTexte, "default.ttf");
+    
 
-	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
-
-	AfficherImage(imageFond);
+    AfficherImage(imageIUT);
+    AfficherImage(imageUniv);
+    AfficherImage(imageBateau);
 
 	SDL_Flip(SDL_GetVideoSurface());
 
 	while(continuer)
 	{
-		AttendreEvent(NULL, touche);
+		controle = AttendreEvent(positionClic, touche);
 
-		switch(ToucheSpec(touche))
-		{
-			case SDLK_SPACE:
-				continuer = 0;
-			break;
+        if (controle == 2)
+        {
+            switch(ToucheSpec(touche))
+            {
+                case SDLK_SPACE:
+                    continuer = 0;
+                    break;
 
-			case SDLK_ESCAPE:
-				exit(EXIT_FAILURE);
-			break;
+                case SDLK_ESCAPE:
+                    exit(EXIT_FAILURE);
+                    break;
 
-			default:
-			break;
-		}
+                default:
+                    break;
+            }
+        }
+        else if(controle == 1)
+        {
+            afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
+            SDL_Flip(SDL_GetVideoSurface());
+        }
 	}
 
-	LibererImage(imageFond);
+    LibererImage(imageIUT);
+    LibererImage(imageUniv);
+    LibererImage(imageBateau);
 	free(touche);
+    free(positionClic);
 }
 
 int AfficherMenuRacine(void)
@@ -58,15 +92,28 @@ int AfficherMenuRacine(void)
 
     SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 
-	Image * imageFond = CreerImage("menuRacine.png", 0, 0);
-	Image * imagePuce = CreerImage("puceMenu.png", 80, 150);
+	Image * imagePuce = CreerImage("puceMenu.png", 100, 200);
+    
+    SDL_Rect positionTexte;
 
 	SDL_EnableUNICODE(SDL_ENABLE);
 
     while(continuer)
     {
-        AfficherImage(imageFond);
+        EffacerEcran();
         AfficherImage(imagePuce);
+        
+        positionTexte.x = 170;
+        positionTexte.y = 210;
+        EcrireTexte("- Nouvelle Partie", 30, positionTexte, "default.ttf");
+        positionTexte.y += 60;
+        EcrireTexte("- Charger Partie", 30, positionTexte, "default.ttf");
+        positionTexte.y += 60;
+        EcrireTexte("- Meilleurs Scores", 30, positionTexte, "default.ttf");
+        positionTexte.y += 60;
+        EcrireTexte("- Afficher Regles", 30, positionTexte, "default.ttf");
+        positionTexte.y += 60;
+        EcrireTexte("- Quitter", 30, positionTexte, "default.ttf");
 
         SDL_Flip(SDL_GetVideoSurface());
 
@@ -111,7 +158,6 @@ int AfficherMenuRacine(void)
 
 	SDL_EnableUNICODE(SDL_DISABLE);
 
-	LibererImage(imageFond);
 	LibererImage(imagePuce);
 	free(touche);
 
@@ -122,18 +168,18 @@ Tparam * MenuNouvellePartie(void)
 {
 	ChampSaisie * champPseudoHumain, * champPseudoIA;
 	int continuer = 1;
-	SDL_Rect positionBoutonOK, positionBoutonParam;
+	SDL_Rect positionBoutonOK, positionBoutonParam, positionTexte;
 	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 	SDL_Bouton * boutonOK;
 	SDL_Bouton * boutonParam;
-	Image * imageFond = CreerImage("menuNouvellePartie.png", 0, 0);
+	//Image * imageFond = CreerImage("menuNouvellePartie.png", 0, 0);
 	Tparam * paramPartie;
 
 	int controleEvent;
 
-	champPseudoHumain = CreerChamp(30, 30, 230, 150);
-	champPseudoIA = CreerChamp(30, 30, 230, 200);
+	champPseudoHumain = CreerChamp(30, 20, 230, 150);
+	champPseudoIA = CreerChamp(30, 20, 230, 200);
 
 	positionBoutonParam.x = 230;
 	positionBoutonParam.y = 300;
@@ -148,7 +194,17 @@ Tparam * MenuNouvellePartie(void)
 
 	while (continuer)
 	{
-		AfficherImage(imageFond);
+        EffacerEcran();
+		//AfficherImage(imageFond);
+        positionTexte.x = 300;
+        positionTexte.y = 15;
+        EcrireTexte("Nouvelle Partie", 50, positionTexte, "default.ttf");
+        positionTexte.x = 10;
+        positionTexte.y = 150;
+        EcrireTexte("Pseudo Humain :", 26, positionTexte, "default.ttf");
+        positionTexte.x = 10;
+        positionTexte.y = 200;
+        EcrireTexte("Pseudo IA :", 26, positionTexte, "default.ttf");
 
 		AfficherChamp(champPseudoHumain);
 		AfficherChamp(champPseudoIA);
@@ -189,7 +245,7 @@ Tparam * MenuNouvellePartie(void)
 	LibererChamp(champPseudoIA);
 	LibererBouton(boutonOK);
 	LibererBouton(boutonParam);
-	LibererImage(imageFond);
+	//LibererImage(imageFond);
 
 	return paramPartie;
 }
@@ -227,7 +283,7 @@ void EcranGrille(ChampSaisie * champ)
 	positionTexte.x = 40;
 	positionTexte.y = 20;
 
-    EcrireTexte(champ->chaine, 40, positionTexte);
+    EcrireLigneTexte(champ->chaine, 40, positionTexte, "default.ttf");
 
     while (continuer)
     {

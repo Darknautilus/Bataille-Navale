@@ -4,23 +4,24 @@
 #include "includeSDL.h"
 
 /**
- * \brief Permet d'écrire du texte en blanc et avec la police par défaut
+ * \brief Permet d'écrire du texte en blanc
+ *
+ * \param[in] texte Texte à écrire (utiliser \n pour sauter des lignes)
+ * \param[in] taille Taille du texte
+ * \param[in] positionTexte Coordonnées du texte à l'écran
+ * \param[in] cheminPolice Chemin de la police dans le dossier Fonts
+ */
+void EcrireTexte(char * texte, int taille, SDL_Rect positionTexte, char * cheminPolice);
+
+/**
+ * \brief Permet d'écrire une ligne de texte
  *
  * \param[in] texte Le texte à écrire
  * \param[in] taille La taille de la police
  * \param[in] positionTexte Coordonnées du texte sur l'ecran
+ * \param[in] cheminPolice Chemin de la police dans le dossier Fonts
  */
-void EcrireTexte(char * texte,int taille, SDL_Rect positionTexte);
-
-
-/**
- * \brief Permet d'écrire un caractère à l'écran
- *
- * \param[in] car Le caractère à écrire
- * \param[in] taille Taille du texte
- * \param[in] positionChar Coordonnées du caractère dans l'écran
-*/
-void EcrireCar(char car,int taille, SDL_Rect positionChar);
+void EcrireLigneTexte(char * texte,int taille, SDL_Rect positionTexte, char * cheminPolice);
 
 /**
  * \brief Récupère un événement
@@ -67,6 +68,28 @@ SDLKey ToucheSpec(SDL_keysym * touche);
  * Il est donc nécessaire de réaliser une conversion
 */
 Uint32 convertSDL_Color(SDL_Color pCouleur);
+
+/**
+ * \brief Affiche les coordonnees du clic
+ *
+ * \param[in] pPosClic La position du clic
+ * \param[in] pTaille Taille du texte
+ * \param[in] pAbs Abscisse du texte
+ * \param[in] pOrd Ordonnee du texte
+ * \param[in] pPolice Police du texte
+*/
+void afficherCoordClic(SDL_Rect * pPosClic, int pTaille, int pAbs, int pOrd, char * pPolice);
+
+/**
+ * \brief Affiche un rectangle
+ *
+ * \param[in] pAbs Abscisse du rectangle
+ * \param[in] pOrd Ordonnee du rectangle
+ * \param[in] pLarg Largeur du rectangle
+ * \param[in] pHaut Hauteur du rectangle
+ * \param[in] pCouleur Couleur du rectangle
+*/
+void afficherRectangle(int pAbs, int pOrd, int pLarg, int pHaut, SDL_Color pCouleur);
 
 /**
  * \brief Efface l'écran

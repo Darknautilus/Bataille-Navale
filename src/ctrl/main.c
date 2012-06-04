@@ -44,7 +44,7 @@ int main(int argc, char ** argv)
 	int choixMenu;
 	int continuer = 1;
 
-	ecran = DemarrerSDL(800, 600, "Bataille Navale");
+	ecran = DemarrerSDL(1024, 768, "Bataille Navale");
 
     init_debug();
 

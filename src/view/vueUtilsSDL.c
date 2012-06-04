@@ -5,30 +5,54 @@
 
 #include "../ctrl/utilsSDL.h"
 #include "../ctrl/utilsPoliceEcriture.h"
+#include "../model/champSaisie.h"
 
-void EcrireCar(char car,int taille, SDL_Rect positionChar)
+void EcrireTexte(char * texte, int taille, SDL_Rect positionTexte, char * cheminPolice)
 {
-	SDL_Surface * zoneTexte;
-	TTF_Font * police = chargerPoliceEcriture("default.ttf", taille);
-	SDL_Color couleur = {255,255,255};
-
-	zoneTexte = TTF_RenderUTF8_Blended(police, &car, couleur);
-	SDL_BlitSurface(zoneTexte, NULL, SDL_GetVideoSurface(), &positionChar);
-	SDL_FreeSurface(zoneTexte);
-
-	TTF_CloseFont(police);
+    int longTexte = strlen(texte);
+    char * nouvTexte = (char*)malloc((longTexte+1)*sizeof(char)); // chaine de travail
+    
+    int i = 0;
+    
+    // On initialise la chaine de travail
+    strcpy(nouvTexte, "");
+    
+    // On parcourt la chaine principale caractère par caractère
+    while(texte[i] != '\0')
+    {
+        // Si c'est un saut de ligne, on écrit la ligne et on passe à la suivante
+        if(texte[i] == '\n')
+        {
+            EcrireLigneTexte(nouvTexte, taille, positionTexte, cheminPolice);
+            positionTexte.y += taille;
+            strcpy(nouvTexte, "");
+        }
+        // Sinon, on ajoute le caractère à la chaine de travail (ligne en cours)
+        else
+        {
+            AjouterCharFin(nouvTexte, texte[i]);
+        }
+        
+        // On passe au caractère suivant et si l'on est à la fin, on écrit la ligne.
+        i++;
+        if(texte[i] == '\0')
+            EcrireLigneTexte(nouvTexte, taille, positionTexte, cheminPolice);
+    }
+    
+    // Libération chaine de travail
+    free(nouvTexte);
 }
 
-void EcrireTexte(char * texte,int taille, SDL_Rect positionTexte)
+void EcrireLigneTexte(char * texte,int taille, SDL_Rect positionTexte, char * cheminPolice)
 {
 	SDL_Surface * zoneTexte;
-	TTF_Font * police = chargerPoliceEcriture("default.ttf", taille);
+	TTF_Font * police = chargerPoliceEcriture(cheminPolice, taille);
 	SDL_Color couleur = {255,255,255};
-
+    
 	zoneTexte = TTF_RenderUTF8_Blended(police, texte, couleur);
 	SDL_BlitSurface(zoneTexte, NULL, SDL_GetVideoSurface(), &positionTexte);
 	SDL_FreeSurface(zoneTexte);
-
+    
 	TTF_CloseFont(police);
 }
 
@@ -89,6 +113,36 @@ Uint32 convertSDL_Color(SDL_Color pCouleur)
 {
 
 	return SDL_MapRGB(SDL_GetVideoSurface()->format, pCouleur.r, pCouleur.g, pCouleur.b);
+}
+
+void afficherCoordClic(SDL_Rect * pPosClic, int pTaille, int pAbs, int pOrd, char * pPolice)
+{
+    SDL_Rect posTexte;
+    char texte[25];
+    
+    sprintf(texte, "x : %d ; y : %d", pPosClic->x, pPosClic->y);
+    
+    posTexte.x = pAbs;
+    posTexte.y = pOrd;
+    EcrireLigneTexte(texte, pTaille, posTexte, pPolice);
+}
+
+void afficherRectangle(int pAbs, int pOrd, int pLarg, int pHaut, SDL_Color pCouleur)
+{
+    SDL_Rect posRectangle;
+    SDL_Rect couleurRect;
+    SDL_Surface * rectangle = SDL_CreateRGBSurface(SDL_HWSURFACE, pLarg, pHaut, 32, 0, 0, 0, 0);
+    rectangle = SDL_DisplayFormat(rectangle);
+    
+    couleurRect.x = 0;
+    couleurRect.y = 0;
+    SDL_FillRect(rectangle, &couleurRect, convertSDL_Color(pCouleur));
+    
+    posRectangle.x = pAbs;
+    posRectangle.y = pOrd;
+    SDL_BlitSurface(rectangle, NULL, SDL_GetVideoSurface(), &posRectangle);
+    
+    SDL_FreeSurface(rectangle);
 }
 
 void EffacerEcran(void)
