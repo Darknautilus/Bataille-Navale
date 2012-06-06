@@ -1,3 +1,5 @@
+#include <string.h>
+
 #include "menu.h"
 
 #include "../model/champSaisie.h"
@@ -13,9 +15,20 @@
 #include "SDLImage.h"
 
 #include "../ctrl/utilsSDL.h"
+#include "../ctrl/fichierDebug.h"
 
 #include "../test/test.h"
 #include "../test/view/testVue.h"
+
+#include "../model/bateau.h"
+
+const TtypeBat tabTypesBat[KTAILLEMAXBAT] = {
+    {VOILIER,"Voilier"},
+    {REMORQUEUR,"Remorqueur"},
+    {CARGOT,"Cargot"},
+    {SOUSMARIN,"Sous-marin"},
+    {PORTEAVION,"Porte-avion"}
+};
 
 void AfficherMenuAccueil(void)
 {
@@ -40,7 +53,7 @@ void AfficherMenuAccueil(void)
     positionTexte.y = 700;
     EcrireTexte("Par Aurelien Bertron\net Benoit Sauvere", 20, positionTexte, "default.ttf");
     
-    positionTexte.x = 223;
+    positionTexte.x = 240;
     positionTexte.y = 539;
     EcrireTexte("Appuyez sur espace pour continuer", 25, positionTexte, "default.ttf");
     
@@ -164,38 +177,62 @@ int AfficherMenuRacine(void)
 	return choixMenu;
 }
 
-Tparam * MenuNouvellePartie(void)
+void MenuNouvellePartie(Tparam * parametre)
 {
+    // Champs de saisie
 	ChampSaisie * champPseudoHumain, * champPseudoIA;
+    ChampSaisie * paramNbBat[K_NBTYPEBATEAUX]; // Choix du nombre de bateaux (tableau de champs)
+    
 	int continuer = 1;
+    int i;
+    
+    // Informations de positions
 	SDL_Rect positionBoutonOK, positionBoutonParam, positionTexte;
+    
+    // Informations pour AttendreEvent()
 	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    int controleEvent;
+    
+    // Boutons
 	SDL_Bouton * boutonOK;
 	SDL_Bouton * boutonParam;
-	//Image * imageFond = CreerImage("menuNouvellePartie.png", 0, 0);
-	Tparam * paramPartie;
+    
+    
+    int * nbInstancesbat;
+    char chaineInstance[3];
 
-	int controleEvent;
+    // --------------------------------------------------------------------
 
+    // Initialisation des champs de saisie
 	champPseudoHumain = CreerChamp(30, 20, 230, 150);
 	champPseudoIA = CreerChamp(30, 20, 230, 200);
-
-	positionBoutonParam.x = 230;
-	positionBoutonParam.y = 300;
+    InitTexte(champPseudoHumain, "Anonyme");
+	InitTexte(champPseudoIA, "GlaDos");
+    
+    // Champs du nombre d'instances de chaque bateaux : récupération des valeurs déjà paramétrées et initialisation des champs
+    nbInstancesbat = getNBInstances(parametre);
+    for(i=0;i<K_NBTYPEBATEAUX;i++)
+    {
+        paramNbBat[i] = CreerChamp(2, 20, 279, 372+i*40);
+        sprintf(chaineInstance, "%d", nbInstancesbat[i]);
+        InitTexte(paramNbBat[i], chaineInstance);
+    }
+    
+    // Positionnement des boutons
+	positionBoutonParam.x = 360;
+	positionBoutonParam.y = 622;
 	boutonParam = CreerBouton("Plus de parametres", &positionBoutonParam, 25);
-	positionBoutonOK.x = 230;
-	positionBoutonOK.y = 350;
+	positionBoutonOK.x = 360;
+	positionBoutonOK.y = 682;
 	boutonOK = CreerBouton("Demarrer la partie", &positionBoutonOK, 25);
 
-
-	InitTexte(champPseudoHumain, "Anonyme");
-	InitTexte(champPseudoIA, "GlaDos");
+    // --------------------------------------------------------------------
 
 	while (continuer)
 	{
+        // Affichage de tous les objets
         EffacerEcran();
-		//AfficherImage(imageFond);
         positionTexte.x = 300;
         positionTexte.y = 15;
         EcrireTexte("Nouvelle Partie", 50, positionTexte, "default.ttf");
@@ -205,15 +242,29 @@ Tparam * MenuNouvellePartie(void)
         positionTexte.x = 10;
         positionTexte.y = 200;
         EcrireTexte("Pseudo IA :", 26, positionTexte, "default.ttf");
+        positionTexte.x = 86;
+        positionTexte.y = 297;
+        EcrireTexte("Nombre de bateaux :", 25, positionTexte, "default.ttf");
 
 		AfficherChamp(champPseudoHumain);
 		AfficherChamp(champPseudoIA);
+        
+        for(i=0;i<K_NBTYPEBATEAUX;i++)
+        {
+            positionTexte.x = 89;
+            positionTexte.y = 372+i*40;
+            EcrireTexte(tabTypesBat[i].nomType, 25, positionTexte, "default.ttf");
+            AfficherChamp(paramNbBat[i]);
+        }
 		AfficherBouton(boutonOK);
 		AfficherBouton(boutonParam);
 		SDL_Flip(SDL_GetVideoSurface());
-
+        
+        
+        // Traitement de l'événement
 		controleEvent = AttendreEvent(positionClic, touche);
-
+        
+        // Événement souris
 		if(controleEvent == 1)
 		{
 			if(ClicSurChamp(champPseudoHumain, positionClic))
@@ -227,33 +278,134 @@ Tparam * MenuNouvellePartie(void)
 				ChangeFocus(champPseudoIA, CHAMP_ACTIF);
 				EditerChamp(champPseudoIA);
 			}
+            
+            else if(ClicSurBouton(boutonParam, positionClic))
+            {
+                MenuParam(parametre);
+            }
 
 			else if(ClicSurBouton(boutonOK, positionClic))
 			{
 				EcranGrille(champPseudoHumain);
 			}
+            else
+            {
+                for(i=0;i<K_NBTYPEBATEAUX;i++)
+                {
+                    if(ClicSurChamp(paramNbBat[i], positionClic))
+                    {
+                        ChangeFocus(paramNbBat[i], CHAMP_ACTIF);
+                        EditerChamp(paramNbBat[i]);
+                        parametre->nombreInstanceBateaux[i] = strtol(paramNbBat[i]->chaine, NULL, 10);
+                    }
+                }
+                afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
+                SDL_Flip(SDL_GetVideoSurface());
+            }
 
 		}
-
+        
+        // Événement clavier
 		if(controleEvent == 2 && ToucheSpec(touche) == SDLK_ESCAPE)
 			continuer = 0;
 	}
 
+    // --------------------------------------------------------------------
+    
 	free(positionClic);
 	free(touche);
 	LibererChamp(champPseudoHumain);
 	LibererChamp(champPseudoIA);
 	LibererBouton(boutonOK);
 	LibererBouton(boutonParam);
-	//LibererImage(imageFond);
-
-	return paramPartie;
+    
+    for(i=0;i<K_NBTYPEBATEAUX;i++)
+    {
+        LibererChamp(paramNbBat[i]);
+    }
+    
 }
 
-Tparam * MenuParam(void)
+void MenuParam(Tparam * parametre)
 {
+    int continuer = 1;
+    int i,j;
+    
+    SDL_Bouton * boutonRetour;
+    SDL_Rect positionBouton, positionTexte;
+    
+    int nbBat;
+    
+    char labelColonneTypes[KLONGMAXNOMTYPE];
+    
+    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+    
+    // Attention : Tableau à double entrée de pointeurs sur ChampSaisie
+    ChampSaisie *** tabChamp = (ChampSaisie***)malloc(K_NBTYPEBATEAUX * sizeof(ChampSaisie**));
+    for(i=0;i<K_NBTYPEBATEAUX;i++)
+    {
+        nbBat = parametre->nombreInstanceBateaux[i]; // getNbInstancesType ne fonctionne pas avec un entier (pourquoi?)
+        tabChamp[i] = (ChampSaisie**)malloc(nbBat*sizeof(ChampSaisie*));
+        for(j=0;j<nbBat;j++)
+        {
+            tabChamp[i][j] = CreerChamp(K_LGNOM, 15, 10+i*200, 50+j*40);
+            InitTexte(tabChamp[i][j], "Champ");
+        }
+    }
+    
+    positionBouton.x = 360;
+    positionBouton.y = 622;
+    boutonRetour = CreerBouton("Retour", &positionBouton, 25);
+    
+    while (continuer)
+    {
+        EffacerEcran();
+        AfficherBouton(boutonRetour);
+        
+        for(i=0;i<K_NBTYPEBATEAUX;i++)
+        {
+            positionTexte.x = 20+i*200;
+            positionTexte.y = 10;
+            
+            strcpy(labelColonneTypes,tabTypesBat[i].nomType);
+            strcat(labelColonneTypes, "s");
+            
+            EcrireTexte(labelColonneTypes, 25, positionTexte, "default.ttf");
+            
+            nbBat = parametre->nombreInstanceBateaux[i];
+            for(j=0;j<nbBat;j++)
+            {
+                AfficherChamp(tabChamp[i][j]);
+            }
+        }
+        
+        SDL_Flip(SDL_GetVideoSurface());
+        
+        AttendreEvent(positionClic, NULL);
+        
+        if(ClicSurBouton(boutonRetour, positionClic))
+            continuer = 0;
+        else {
+            afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
+            SDL_Flip(SDL_GetVideoSurface());
+        }
+    }
 
-
+    LibererBouton(boutonRetour);
+    
+    for(i=0;i<K_NBTYPEBATEAUX;i++)
+    {
+        nbBat = parametre->nombreInstanceBateaux[i];
+        for(j=0;j<nbBat;j++)
+        {
+            LibererChamp(tabChamp[i][j]);
+        }
+        
+        free(tabChamp[i]);
+    }
+    free(tabChamp);
+    
+    free(positionClic);
 }
 
 void EcranGrille(ChampSaisie * champ)

@@ -9,9 +9,9 @@ void AfficherMenuAccueil(void);
 
 int AfficherMenuRacine(void);
 
-Tparam * MenuNouvellePartie(void);
+void MenuNouvellePartie(Tparam * parametre);
 
-Tparam * MenuParam(void);
+void MenuParam(Tparam * parametre);
 
 void EcranGrille(ChampSaisie * champ);
 

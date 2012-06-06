@@ -45,6 +45,8 @@ int main(int argc, char ** argv)
 	int continuer = 1;
 
 	ecran = DemarrerSDL(1024, 768, "Bataille Navale");
+    
+    Tparam * parametrePartie;
 
     init_debug();
 
@@ -52,12 +54,13 @@ int main(int argc, char ** argv)
 
 	while (continuer)
 	{
+        parametrePartie = newTParam(1);
 		choixMenu = AfficherMenuRacine();
 
         switch (choixMenu)
         {
             case 1: // Nouvelle Partie
-                MenuNouvellePartie();
+                MenuNouvellePartie(parametrePartie);
                 break;
 
             case 2: // Charger partie
@@ -83,6 +86,8 @@ int main(int argc, char ** argv)
 
 	ArreterSDL();
 	detruire_debug();
+    
+    free(parametrePartie);
 
 	return 0;
 }

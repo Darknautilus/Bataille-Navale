@@ -11,6 +11,7 @@
 #define _BATEAU_H
 
 #define KTAILLEMAXBAT 5 /**< \brief Taille maximale d'un bateau */
+#define KLONGMAXNOMTYPE 20 /**< \brief Longueur maximale du n9om d'un type */
 
 /**
  * \enum ETypeBat
@@ -25,6 +26,18 @@ typedef enum {
     SOUSMARIN=4,
     PORTEAVION=5
 } ETypeBat;
+
+/**
+ * \struct TtypeBat
+ * \brief Types de bateaux et noms
+ *
+ * DŽfinit le type du bateau et le nom du type (vise ˆ remplacer ETypeBat)
+*/
+typedef struct
+{
+    ETypeBat typeBat;
+    char * nomType;
+} TtypeBat;
 
 /**
  * \enum ESens
