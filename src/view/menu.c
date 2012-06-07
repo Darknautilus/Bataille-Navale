@@ -13,6 +13,7 @@
 #include "vueBateau.h"
 #include "SDLButton.h"
 #include "SDLImage.h"
+#include "SDLRectangle.h"
 
 #include "../ctrl/utilsSDL.h"
 #include "../ctrl/fichierDebug.h"
@@ -36,11 +37,14 @@ void AfficherMenuAccueil(void)
     int controle;
     SDL_Rect positionTexte;
     SDL_Color couleurRectangleImages = {255,255,255};
+    Rectangle * rectLogos;
     
     SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
     SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
     
-    afficherRectangle(10, 10, 231, 110, couleurRectangleImages);
+    rectLogos = creerRectangle(10, 10, 231, 110);
+    
+    afficherRectangle(rectLogos);
     Image * imageIUT = CreerImage("iutBlagnac.jpg", 15, 15);
     Image * imageUniv = CreerImage("univMirail.gif", 115, 15);
     Image * imageBateau = CreerImage("bateau.png", 454, 418);
@@ -94,6 +98,7 @@ void AfficherMenuAccueil(void)
     LibererImage(imageIUT);
     LibererImage(imageUniv);
     LibererImage(imageBateau);
+    libererRectangle(rectLogos);
 	free(touche);
     free(positionClic);
 }
@@ -331,7 +336,7 @@ void MenuParam(Tparam * parametre)
     int continuer = 1;
     int i,j;
     
-    SDL_Bouton * boutonRetour;
+    SDL_Bouton * boutonAnnuler, * boutonValider;
     SDL_Rect positionBouton, positionTexte;
     
     int nbBat;
@@ -348,24 +353,32 @@ void MenuParam(Tparam * parametre)
         tabChamp[i] = (ChampSaisie**)malloc(nbBat*sizeof(ChampSaisie*));
         for(j=0;j<nbBat;j++)
         {
-            tabChamp[i][j] = CreerChamp(K_LGNOM, 15, 10+i*200, 50+j*40);
+            tabChamp[i][j] = CreerChamp(K_LGNOM, 15, 10+i*200, 100+j*40);
             InitTexte(tabChamp[i][j], "Champ");
         }
     }
     
-    positionBouton.x = 360;
-    positionBouton.y = 622;
-    boutonRetour = CreerBouton("Retour", &positionBouton, 25);
+    positionBouton.x = 303;
+    positionBouton.y = 682;
+    boutonValider = CreerBouton("Valider", &positionBouton, 25);
+    positionBouton.x = 500;
+    positionBouton.y = 682;
+    boutonAnnuler = CreerBouton("Annuler", &positionBouton, 25);
     
     while (continuer)
     {
         EffacerEcran();
-        AfficherBouton(boutonRetour);
+        AfficherBouton(boutonValider);
+        AfficherBouton(boutonAnnuler);
+        
+        positionTexte.x = 259;
+        positionTexte.y = 10;
+        EcrireTexte("Noms et couleurs des bateaux", 35, positionTexte, "default.ttf");
         
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
             positionTexte.x = 20+i*200;
-            positionTexte.y = 10;
+            positionTexte.y = 60;
             
             strcpy(labelColonneTypes,tabTypesBat[i].nomType);
             strcat(labelColonneTypes, "s");
@@ -383,7 +396,7 @@ void MenuParam(Tparam * parametre)
         
         AttendreEvent(positionClic, NULL);
         
-        if(ClicSurBouton(boutonRetour, positionClic))
+        if(ClicSurBouton(boutonAnnuler, positionClic))
             continuer = 0;
         else {
             afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
@@ -391,7 +404,8 @@ void MenuParam(Tparam * parametre)
         }
     }
 
-    LibererBouton(boutonRetour);
+    LibererBouton(boutonValider);
+    LibererBouton(boutonAnnuler);
     
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {

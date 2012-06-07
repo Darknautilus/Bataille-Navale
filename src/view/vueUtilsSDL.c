@@ -127,24 +127,6 @@ void afficherCoordClic(SDL_Rect * pPosClic, int pTaille, int pAbs, int pOrd, cha
     EcrireLigneTexte(texte, pTaille, posTexte, pPolice);
 }
 
-void afficherRectangle(int pAbs, int pOrd, int pLarg, int pHaut, SDL_Color pCouleur)
-{
-    SDL_Rect posRectangle;
-    SDL_Rect couleurRect;
-    SDL_Surface * rectangle = SDL_CreateRGBSurface(SDL_HWSURFACE, pLarg, pHaut, 32, 0, 0, 0, 0);
-    rectangle = SDL_DisplayFormat(rectangle);
-    
-    couleurRect.x = 0;
-    couleurRect.y = 0;
-    SDL_FillRect(rectangle, &couleurRect, convertSDL_Color(pCouleur));
-    
-    posRectangle.x = pAbs;
-    posRectangle.y = pOrd;
-    SDL_BlitSurface(rectangle, NULL, SDL_GetVideoSurface(), &posRectangle);
-    
-    SDL_FreeSurface(rectangle);
-}
-
 void EffacerEcran(void)
 {
 	SDL_FillRect(SDL_GetVideoSurface(), NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, 0, 0, 0));

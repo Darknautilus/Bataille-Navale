@@ -81,17 +81,6 @@ Uint32 convertSDL_Color(SDL_Color pCouleur);
 void afficherCoordClic(SDL_Rect * pPosClic, int pTaille, int pAbs, int pOrd, char * pPolice);
 
 /**
- * \brief Affiche un rectangle
- *
- * \param[in] pAbs Abscisse du rectangle
- * \param[in] pOrd Ordonnee du rectangle
- * \param[in] pLarg Largeur du rectangle
- * \param[in] pHaut Hauteur du rectangle
- * \param[in] pCouleur Couleur du rectangle
-*/
-void afficherRectangle(int pAbs, int pOrd, int pLarg, int pHaut, SDL_Color pCouleur);
-
-/**
  * \brief Efface l'écran
 */
 void EffacerEcran(void);
