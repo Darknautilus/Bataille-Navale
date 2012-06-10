@@ -14,6 +14,7 @@
 #include "SDLButton.h"
 #include "SDLImage.h"
 #include "SDLRectangle.h"
+#include "vueSDLMsgBox.h"
 
 #include "../ctrl/utilsSDL.h"
 #include "../ctrl/fichierDebug.h"
@@ -23,6 +24,8 @@
 
 #include "../model/bateau.h"
 #include "../model/parametre.h"
+#include "../model/random.h"
+#include "../model/couleurs.h"
 
 const TtypeBat tabTypesBat[KTAILLEMAXBAT] = {
     {VOILIER,"Voilier"},
@@ -191,7 +194,7 @@ void MenuNouvellePartie(Tparam * parametre)
     
 	int continuer = 1;
     int i;
-    int nbInstChange = 0;
+    int nbInstChange = 1;
     
     // Informations de positions
 	SDL_Rect positionBouton, positionTexte;
@@ -211,6 +214,7 @@ void MenuNouvellePartie(Tparam * parametre)
     FILE * descFicParam;
     int * nbInstancesbat;
     char chaineInstance[3];
+    char nomBatIA[K_LGNOM];
 
     // --------------------------------------------------------------------
 
@@ -321,7 +325,28 @@ void MenuNouvellePartie(Tparam * parametre)
 
 			else if(ClicSurBouton(boutonOK, positionClic))
 			{
-				EcranGrille(champPseudoHumain);
+                if(!nbInstChange)
+                {
+                    descFicParam = fopen("dicoNoms.dat", "r");
+                    if(descFicParam == NULL)
+                        dgFatal("dicoNoms.dat non trouve");
+                
+                    for(i=0;i<getNbBat(parametre);i++)
+                    {
+                        choixMotHasard(nomBatIA, descFicParam, K_LGNOM);
+                        setInfoBateau(&(parametre->bateauxMachine[i]), nomBatIA, nombreAleatoire(1, KCOULEURS_NBCOULMAX-1), i);
+                    }
+                    fclose(descFicParam);
+                
+                    strcpy(parametre->nomJoueur, champPseudoHumain->chaine);
+                    strcpy(parametre->nomMachine, champPseudoIA->chaine);
+                
+                    continuer = 0;
+                }
+                else
+                {
+                    // Boite Message (non finalise)
+                }
 			}
             else if(ClicSurBouton(boutonEnregistrerParam, positionClic))
             {
@@ -341,6 +366,7 @@ void MenuNouvellePartie(Tparam * parametre)
                 resetInfoBateau(parametre);
                 chargerParam(descFicParam, parametre);
                 fclose(descFicParam);
+                nbInstChange = 0;
             }
             else if(ClicSurBouton(boutonRetablirDefaut, positionClic))
             {
@@ -352,6 +378,7 @@ void MenuNouvellePartie(Tparam * parametre)
                 chargerParam(descFicParam, parametre);
                 dgInfo(parametre->bateauxJoueur[0].nomBateau);
                 fclose(descFicParam);
+                nbInstChange = 0;
             }
             else
             {
@@ -511,8 +538,7 @@ void MenuParam(Tparam * parametre)
                 nbBat = parametre->nombreInstanceBateaux[i];
                 for(j=0;j<nbBat;j++)
                 {
-                    strcpy(parametre->bateauxJoueur[getNumBat(i, j, parametre)].nomBateau, tabChamp[i][j]->chaine);
-                    parametre->bateauxJoueur[getNumBat(i, j, parametre)].couleur = tabRectChoixCoul[i][j]->couleur;
+                    setInfoBateau(&(parametre->bateauxJoueur[getNumBat(i, j, parametre)]), tabChamp[i][j]->chaine, tabRectChoixCoul[i][j]->couleur, i);
                 }
             }
             continuer = 0;

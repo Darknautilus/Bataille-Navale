@@ -86,8 +86,8 @@ void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
 typedef struct
 {
     int * nombreInstanceBateaux;    /**< Nombre d'instances de chaque type de bateau */
-    char nomJoueur[K_LGNOM];        /**< Nom du joueur (à déplacer) */
-    char nomMachine[K_LGNOM];       /**< Nom de l'IA (à déplacer) */
+    char nomJoueur[K_LGNOM];        /**< Nom du joueur */
+    char nomMachine[K_LGNOM];       /**< Nom de l'IA */
     TInfoBateau * bateauxJoueur;    /**< Tableau dynamique des bateaux du joueur */
     TInfoBateau * bateauxMachine;   /**< Tableau dynamique des bateaux de la machine */
 }Tparam;
@@ -171,7 +171,6 @@ void chargerParam(FILE * pDesc, Tparam * pParam);
  * pDesc est un descriteur de fichier ouvert en Žcriture
 */
 void memParam(const Tparam * pParam, FILE * pDesc);
-
 
 void libererParam(Tparam * pParam);
 

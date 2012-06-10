@@ -1,6 +1,7 @@
 #include "../model/champSaisie.h"
 #include "../model/parametre.h"
 #include "../model/grille.h"
+#include "../model/random.h"
 
 #include "../view/vueUtilsSDL.h"
 #include "../view/menu.h"
@@ -49,6 +50,7 @@ int main(int argc, char ** argv)
     Tparam * parametrePartie;
 
     init_debug();
+    initRandom();
 
 	AfficherMenuAccueil();
 
@@ -87,7 +89,7 @@ int main(int argc, char ** argv)
 	ArreterSDL();
 	detruire_debug();
     
-    free(parametrePartie);
+    libererParam(parametrePartie);
 
 	return 0;
 }
