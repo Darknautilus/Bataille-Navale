@@ -11,12 +11,12 @@ Grille * InsertBateau(Grille * grille, TBateau * bat)
 	Coord coordCaseGrille;
 
 	// détermine si le bateau est en dehors de la grille
-	if ( (bat->position.direction == HORIZONTAL && bat->position.x + bat->type > grille->NbLin) ||
-	(bat->position.direction == VERTICAL && bat->position.y + bat->type > grille->NbCol) )
+	if ( (bat->position.direction == HORIZONTAL && bat->position.x + getTypeBateau(bat) > grille->NbLin) ||
+	(bat->position.direction == VERTICAL && bat->position.y + getTypeBateau(bat) > grille->NbCol) )
 		return NULL;
 
 	// détermine si le bateau est plaçé sur un autre bateau et l'insère si tout va bien
-	for(i=0;i<bat->type;i++)
+	for(i=0;i<getTypeBateau(bat);i++)
 	{
 		if(bat->position.direction == HORIZONTAL)
 		{

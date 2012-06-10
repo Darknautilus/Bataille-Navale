@@ -12,7 +12,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "bateau.h"
+#include "couleurs.h"
 
 #define K_NBTYPEBATEAUX KTAILLEMAXBAT /**< \brief Nombre de types de bateaux */
 #define K_LGNOM 25 /**< \brief Longueur maximale du nom du bateau */
@@ -25,10 +27,11 @@
 */
 typedef struct
 {
-	int couleur;/**< Indice dans la table des couleurs */
-	ETypeBat type;/**< Type du bateau */
-	char nomBateau[K_LGNOM];/**< Nom du bateau */
-}	TInfoBateau;
+	Couleur couleur;                /**< Indice dans la table des couleurs */
+	ETypeBat type;              /**< Type du bateau */
+	char nomBateau[K_LGNOM];    /**< Nom du bateau */
+}
+TInfoBateau;
 
 //***************************
 /**
@@ -37,9 +40,9 @@ typedef struct
  * \param[in] pB Un pointeur sur les informations du bateau
  * \return Le numéro de la couleur
  *
- * Donne l'index de la couleur de l'info bateau pB dans la table des couleurs de couleurs.h/.c
+ * Retourne un objet de type Couleur
 */
-int getCouleur(const TInfoBateau * pB);
+Couleur getCouleur(const TInfoBateau * pB);
 
 //***************************
 /**
@@ -81,14 +84,12 @@ void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
  * \brief Les paramtres d'une partie
  *
  * Ces paramtres seront ceux Žcrits dans un fichier.
- * Les noms du joueur et de la machine devront tre dŽplacŽs dans la structure Tpartie
+ * Les noms du joueur et de la machine devront être déplacés dans la structure Tpartie
 */
 typedef struct
 {
-    int * nombreInstanceBateaux;    /**< Nombre d'instances de chaque type de bateau */
-    char nomJoueur[K_LGNOM];        /**< Nom du joueur */
-    char nomMachine[K_LGNOM];       /**< Nom de l'IA */
-    TInfoBateau * bateauxJoueur;    /**< Tableau dynamique des bateaux du joueur */
+    int * nombreInstanceBateaux;    /**< Tableau d'entiers : Nombre d'instances de chaque type de bateau */
+    TInfoBateau * bateauxJoueur;    /**< Tableau dynamique des bateaux du joueur. Il est à noter que les id déclaré sont fait dans par taille de bateau croissante.*/
     TInfoBateau * bateauxMachine;   /**< Tableau dynamique des bateaux de la machine */
 }Tparam;
 
@@ -96,12 +97,12 @@ typedef struct
 /**
  * \brief Constructeur de Tparam
  *
- * \param[in] pNbInstances Nombre d'instances de bateaux pour chaque type
+ * \param[in] pNbInstances Nombre d'instances de bateaux pour chaque type (tableau dynamique d'entiers)
  * \return Des paramtres initialisés
  *
  * Attention, à appeler avant toute manipulation de paramtres (mme chargerParam)
  */
-Tparam * newTParam(int pNbInstances);
+Tparam * newTParam(int *pNbInstances);
 
 //***************************
 /**
@@ -187,6 +188,23 @@ void libererParam(Tparam * pParam);
 */
 void setIemeInfoBateauTParam(int pIdBateau , Tparam * pP, const char pNom[], int pCouleur , ETypeBat pType);
 
+//***************************
+
+/**
+    Retire nb bateau(x) de la liste d'un type donné.
+    \param param La structure parametre à modifier
+    \param nb Le nombre de TInfoBateau du type à supprimer
+    \param type Le type de bateau à supprimer
+**/
+void retierInfoBateauxType(Tparam *param, int nb, ETypeBat type);
+
+//***************************
+
+/**
+    Détruit la strucutre paramètre ainsi que toute les ressources qu'elle contient.
+    \param param Le paramètre à libérer
+**/
+void libererParam(Tparam *param);
 
 
 #endif

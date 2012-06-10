@@ -10,8 +10,8 @@
 #ifndef _BATEAU_H
 #define _BATEAU_H
 
-#define KTAILLEMAXBAT 5 /**< \brief Taille maximale d'un bateau */
-#define KLONGMAXNOMTYPE 20 /**< \brief Longueur maximale du n9om d'un type */
+#define KTAILLEMAXBAT 5      /**< \brief Taille maximale d'un bateau */
+#define KLONGMAXNOMTYPE 20   /**< \brief Longueur maximale du nom d'un type */
 
 /**
  * \enum ETypeBat
@@ -24,7 +24,8 @@ typedef enum {
     REMORQUEUR=2,
     CARGOT=3,
     SOUSMARIN=4,
-    PORTEAVION=5
+    PORTEAVION=5,
+    NONE=0
 } ETypeBat;
 
 /**
@@ -37,7 +38,8 @@ typedef struct
 {
     ETypeBat typeBat;
     char * nomType;
-} TtypeBat;
+}
+TtypeBat;
 
 /**
  * \enum ESens
@@ -48,7 +50,8 @@ typedef struct
 typedef enum {
     HORIZONTAL,
     VERTICAL
-} ESens;
+}
+ESens;
 
 /**
  * \enum EEtat
@@ -63,10 +66,11 @@ typedef enum {INTACT, TOUCHE, COULE} EEtat;
 */
 typedef struct
 {
-	ESens direction; /**< Sens/Direction du bateau */
-	int x; /**< Num colonne dans la grille (point en haut à gauche du bateau) */
-	int y; /**< Num ligne dans la grille (point en haut à gauche du bateau) */
-}	TPosition;
+	ESens direction;   /**< Sens/Direction du bateau */
+	int x;             /**< Num colonne dans la grille (point en haut à gauche du bateau) */
+	int y;             /**< Num ligne dans la grille (point en haut à gauche du bateau) */
+}
+TPosition;
 
 /**
  * \struct TBateau
@@ -74,19 +78,17 @@ typedef struct
 */
 typedef struct
 {
-	int idBateau; /**< Numéro du bateau (voir paramtres) */
-	TPosition position; /**< Position du bateau dans la grille */
-	ETypeBat type; /**< Type/Taille du bateau */
+	int idBateau;              /**< Numéro du bateau (voir paramtres) */
+	TPosition position;        /**< Position du bateau dans la grille */
 	EEtat etat[KTAILLEMAXBAT]; /**< Tableau d'état du bateau, renseigne l'état de chaque case du bateau */
-}	TBateau;
+}
+TBateau;
 
 /**
  * Crée un bateau.
- * \param pos La position du bateau
- * \param type Le type du bateau
- * \return Une strucutre Bateau correctement initialisŽe.
+ * \return Une strucutre Bateau correctement initialisée et vide.
 */
-TBateau * creerBateau(TPosition pos, ETypeBat type);
+TBateau * CreerBateau();
 
 /**
  * \brief Récupre l'id du bateau
@@ -146,6 +148,13 @@ int getPosYBateau(TBateau *bat);
  * \return Un élément de l'enumération ESens.
 */
 ESens getSensBateau(TBateau *bat);
+
+/**
+ * Retourne le type d'un bateau.
+ * \param bat Un pointeur sur le bateau en question.
+ * \return Un élément de l'enumération ETypeBat.
+*/
+ETypeBat getTypeBateau(TBateau *bat);
 
 /**
  * Libre le bateau en mŽmoire

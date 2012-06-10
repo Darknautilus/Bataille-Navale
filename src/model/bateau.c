@@ -11,15 +11,21 @@
 
 #include "parametre.h"
 
-TBateau * creerBateau(TPosition pos, ETypeBat type)
+#include "partie.h"
+
+TBateau * CreerBateau()
 {
 	int i;
 	TBateau * bat = (TBateau*) malloc(sizeof(TBateau));
 
-	bat->position = pos;
-	bat->type = type;
+    TPosition pos;
+    pos.x = 0;
+    pos.y = 0;
+    pos.direction = HORIZONTAL;
 
-	for (i=0; i<type; i++)
+    bat->position = pos;
+
+	for (i=0; i<KTAILLEMAXBAT; i++)
 	{
 		bat->etat[i] = INTACT;
 	}
@@ -41,10 +47,11 @@ void toucherBateau(TBateau * bat, int posTouch)
     //Si le bateau est coule
 	if (estCoule(bat))
 	{
-		for (i=0; i < bat->type; i++)
+		for (i=0; i < getTypeBateau(bat); i++)
 		{
 			bat->etat[i] = COULE;
 		}
+
 	}
 
 }
@@ -52,9 +59,9 @@ void toucherBateau(TBateau * bat, int posTouch)
 int nbCoupsBateau(TBateau * bat)
 {
 	int i;
-	int nbCoups = bat->type;
+	int nbCoups = getTypeBateau(bat);
 
-	for (i=0; i<bat->type; i++)
+	for (i=0; i<getTypeBateau(bat); i++)
 	{
 		if (bat->etat[i] != INTACT)
 			nbCoups--;
@@ -70,7 +77,7 @@ TPosition getPosBateau(TBateau * bat)
 
 int estCoule(TBateau * bat){
 
-    int longBateau = bat->type; //On récupère la longueur du bateau
+    int longBateau = getTypeBateau(bat); //On récupère la longueur du bateau
     int i = 0;
 
     int resultat = 1; //Par défaut non coulé
@@ -100,6 +107,10 @@ int getPosYBateau(TBateau *bat){
 
 ESens getSensBateau(TBateau *bat){
     return bat->position.direction;
+}
+
+ETypeBat getTypeBateau(TBateau *bat){
+    return getType(getInfoBateau(bat->idBateau, globalPartie->parametres));
 }
 
 void LibererBateau(TBateau * bat)

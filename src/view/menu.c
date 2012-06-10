@@ -3,6 +3,7 @@
 #include "menu.h"
 
 #include "../model/champSaisie.h"
+#include "../model/partie.h"
 
 // Permet la portabilité du programme
 #include "includeSDL.h"
@@ -18,6 +19,7 @@
 
 #include "../ctrl/utilsSDL.h"
 #include "../ctrl/fichierDebug.h"
+#include "../ctrl/CtrlGrille.h"
 
 #include "../test/test.h"
 #include "../test/view/testVue.h"
@@ -27,7 +29,7 @@
 #include "../model/random.h"
 #include "../model/couleurs.h"
 
-const TtypeBat tabTypesBat[KTAILLEMAXBAT] = {
+const TtypeBat tabTypesBat[K_NBTYPEBATEAUX] = {
     {VOILIER,"Voilier"},
     {REMORQUEUR,"Remorqueur"},
     {CARGOT,"Cargot"},
@@ -41,30 +43,32 @@ void AfficherMenuAccueil(void)
     int controle;
     SDL_Rect positionTexte;
     SDL_Color couleurRectangleImages = {255,255,255};
+
     Rectangle * rectLogos;
-    
+
     SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
     SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
-    
+
     rectLogos = creerRectangle(10, 10, 231, 110);
-    
+
     afficherRectangle(rectLogos);
+
     Image * imageIUT = CreerImage("iutBlagnac.jpg", 15, 15);
     Image * imageUniv = CreerImage("univMirail.gif", 115, 15);
     Image * imageBateau = CreerImage("bateau.png", 454, 418);
-    
+
     positionTexte.x = 219;
     positionTexte.y = 282;
     EcrireLigneTexte("Bataille Navale", 70, positionTexte, "default.ttf");
-    
+
     positionTexte.x = 15;
     positionTexte.y = 700;
     EcrireTexte("Par Aurelien Bertron\net Benoit Sauvere", 20, positionTexte, "default.ttf");
-    
+
     positionTexte.x = 240;
     positionTexte.y = 539;
     EcrireTexte("Appuyez sur espace pour continuer", 25, positionTexte, "default.ttf");
-    
+
 
     AfficherImage(imageIUT);
     AfficherImage(imageUniv);
@@ -115,7 +119,7 @@ int AfficherMenuRacine(void)
     SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 
 	Image * imagePuce = CreerImage("puceMenu.png", 100, 200);
-    
+
     SDL_Rect positionTexte;
 
 	SDL_EnableUNICODE(SDL_ENABLE);
@@ -124,7 +128,7 @@ int AfficherMenuRacine(void)
     {
         EffacerEcran();
         AfficherImage(imagePuce);
-        
+
         positionTexte.x = 170;
         positionTexte.y = 210;
         EcrireTexte("- Nouvelle Partie", 30, positionTexte, "default.ttf");
@@ -191,27 +195,30 @@ void MenuNouvellePartie(Tparam * parametre)
     // Champs de saisie
 	ChampSaisie * champPseudoHumain, * champPseudoIA;
     ChampSaisie * paramNbBat[K_NBTYPEBATEAUX]; // Choix du nombre de bateaux (tableau de champs)
-    
+
 	int continuer = 1;
     int i;
+
     int nbInstChange = 1;
-    
+
     // Informations de positions
 	SDL_Rect positionBouton, positionTexte;
-    
+
     // Informations pour AttendreEvent()
 	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
     int controleEvent;
-    
+
     // Boutons
 	SDL_Bouton * boutonOK;
 	SDL_Bouton * boutonParam;
+
     SDL_Bouton * boutonChargerParam;
     SDL_Bouton * boutonRetablirDefaut;
     SDL_Bouton * boutonEnregistrerParam;
-    
+
     FILE * descFicParam;
+
     int * nbInstancesbat;
     char chaineInstance[3];
     char nomBatIA[K_LGNOM];
@@ -223,20 +230,20 @@ void MenuNouvellePartie(Tparam * parametre)
 	champPseudoIA = CreerChamp(30, 20, 230, 200);
     InitTexte(champPseudoHumain, "Anonyme");
 	InitTexte(champPseudoIA, "GlaDos");
-    
+
     // Champs du nombre d'instances de chaque bateaux : récupération des valeurs déjà paramétrées et initialisation des champs
     nbInstancesbat = getNBInstances(parametre);
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {
         paramNbBat[i] = CreerChamp(2, 20, 279, 372+i*40);
     }
-    
+
     for(i=0;i<getNbBat(parametre);i++)
     {
         strcpy(parametre->bateauxJoueur[i].nomBateau, "Nom :");
-        parametre->bateauxJoueur[i].couleur = 0;
+        parametre->bateauxJoueur[i].couleur = getCouleurFromNum(0);
     }
-    
+
     // Positionnement des boutons
 	positionBouton.x = 360;
 	positionBouton.y = 622;
@@ -275,7 +282,7 @@ void MenuNouvellePartie(Tparam * parametre)
 
 		AfficherChamp(champPseudoHumain);
 		AfficherChamp(champPseudoIA);
-        
+
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
             positionTexte.x = 89;
@@ -290,13 +297,13 @@ void MenuNouvellePartie(Tparam * parametre)
         AfficherBouton(boutonChargerParam);
         AfficherBouton(boutonEnregistrerParam);
         AfficherBouton(boutonRetablirDefaut);
-        
+
 		SDL_Flip(SDL_GetVideoSurface());
-        
-        
+
+
         // Traitement de l'événement
 		controleEvent = AttendreEvent(positionClic, touche);
-        
+
         // Événement souris
 		if(controleEvent == 1)
 		{
@@ -311,7 +318,7 @@ void MenuNouvellePartie(Tparam * parametre)
 				ChangeFocus(champPseudoIA, CHAMP_ACTIF);
 				EditerChamp(champPseudoIA);
 			}
-            
+
             else if(ClicSurBouton(boutonParam, positionClic))
             {
                 if(nbInstChange)
@@ -319,41 +326,56 @@ void MenuNouvellePartie(Tparam * parametre)
                     resetInfoBateau(parametre);
                     nbInstChange = 0;
                 }
-                
+
                 MenuParam(parametre);
             }
 
 			else if(ClicSurBouton(boutonOK, positionClic))
 			{
+
                 if(!nbInstChange)
                 {
                     descFicParam = fopen("dicoNoms.dat", "r");
                     if(descFicParam == NULL)
                         dgFatal("dicoNoms.dat non trouve");
-                
+
                     for(i=0;i<getNbBat(parametre);i++)
                     {
                         choixMotHasard(nomBatIA, descFicParam, K_LGNOM);
                         setInfoBateau(&(parametre->bateauxMachine[i]), nomBatIA, nombreAleatoire(1, KCOULEURS_NBCOULMAX-1), i);
                     }
                     fclose(descFicParam);
-                
-                    strcpy(parametre->nomJoueur, champPseudoHumain->chaine);
-                    strcpy(parametre->nomMachine, champPseudoIA->chaine);
-                
+
+
+                    /*      / \
+                    //     / | \
+                    //    /  |  \    globalPartie est une variable GLOBALE
+                    //   /___o___\
+                    */
+                    globalPartie = initialiser(parametre);
+
+                    strcpy(globalPartie->joueur->nomJ, champPseudoHumain->chaine);
+                    strcpy(globalPartie->machine->nomJ, champPseudoIA->chaine);
+
+
+                    EcranGrille(champPseudoHumain);
+
                     continuer = 0;
                 }
                 else
                 {
                     // Boite Message (non finalise)
                 }
+
+
+
 			}
             else if(ClicSurBouton(boutonEnregistrerParam, positionClic))
             {
                 descFicParam = fopen("paramUser.dat", "w");
                 if(descFicParam == NULL)
                     dgFatal("paramUser.dat non trouve");
-                
+
                 memParam(parametre, descFicParam);
                 fclose(descFicParam);
             }
@@ -362,7 +384,7 @@ void MenuNouvellePartie(Tparam * parametre)
                 descFicParam = fopen("paramUser.dat", "r");
                 if(descFicParam == NULL)
                     dgFatal("paramUser.dat non trouve");
-                
+
                 resetInfoBateau(parametre);
                 chargerParam(descFicParam, parametre);
                 fclose(descFicParam);
@@ -373,7 +395,7 @@ void MenuNouvellePartie(Tparam * parametre)
                 descFicParam = fopen("paramOrigin.dat", "r");
                 if(descFicParam == NULL)
                     dgFatal("paramOrigin.dat non trouve");
-                
+
                 resetInfoBateau(parametre);
                 chargerParam(descFicParam, parametre);
                 dgInfo(parametre->bateauxJoueur[0].nomBateau);
@@ -397,14 +419,14 @@ void MenuNouvellePartie(Tparam * parametre)
             }
 
 		}
-        
+
         // Événement clavier
 		if(controleEvent == 2 && ToucheSpec(touche) == SDLK_ESCAPE)
 			continuer = 0;
 	}
 
     // --------------------------------------------------------------------
-    
+
 	free(positionClic);
 	free(touche);
 	LibererChamp(champPseudoHumain);
@@ -414,31 +436,32 @@ void MenuNouvellePartie(Tparam * parametre)
     LibererBouton(boutonChargerParam);
     LibererBouton(boutonEnregistrerParam);
     LibererBouton(boutonRetablirDefaut);
-    
+
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {
         LibererChamp(paramNbBat[i]);
     }
-    
+
 }
 
 void MenuParam(Tparam * parametre)
 {
     int continuer = 1;
     int i,j;
-        
+
     SDL_Bouton * boutonAnnuler, * boutonValider;
+
     SDL_Rect positionBouton, positionTexte;
-    
+
     int nbBat;
-    
+
     int absInfoBat;
     int ordInfoBat; // = 0 si tous les champs tiennent sur une ligne (nbBat <= 3) et vaut 30 sinon
-    
+
     char labelColonneTypes[KLONGMAXNOMTYPE];
-    
+
     SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
-    
+
     // Attention : Tableau à double entrée de pointeurs sur ChampSaisie
     ChampSaisie *** tabChamp = (ChampSaisie***)malloc(K_NBTYPEBATEAUX * sizeof(ChampSaisie**));
     // De même pour les rectangles de couleur
@@ -446,7 +469,7 @@ void MenuParam(Tparam * parametre)
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {
         nbBat = parametre->nombreInstanceBateaux[i]; // getNbInstancesType ne fonctionne pas avec un entier (pourquoi?)
-        
+
         tabChamp[i] = (ChampSaisie**)malloc(nbBat*sizeof(ChampSaisie*));
         tabRectChoixCoul[i] = (Rectangle**)malloc(nbBat*sizeof(Rectangle*));
         for(j=0;j<nbBat;j++)
@@ -461,47 +484,47 @@ void MenuParam(Tparam * parametre)
                 ordInfoBat = 100+i*120;
                 absInfoBat = 230+j*245;
             }
-            
+
             tabChamp[i][j] = CreerChamp(K_LGNOM, 15, absInfoBat+30, ordInfoBat);
             tabRectChoixCoul[i][j] = creerRectangle(absInfoBat, ordInfoBat, 25, 25);
-            
+
             if(j < parametre->nombreInstanceBateaux[i])
             {
                 strcpy(tabChamp[i][j]->chaine, parametre->bateauxJoueur[getNumBat(i, j, parametre)].nomBateau);
-                tabRectChoixCoul[i][j]->couleur = parametre->bateauxJoueur[getNumBat(i, j, parametre)].couleur;
+                tabRectChoixCoul[i][j]->couleur = getNumFromColor(parametre->bateauxJoueur[getNumBat(i, j, parametre)].couleur);
             }
             else
                 strcpy(tabChamp[i][j]->chaine, "Nom :");
         }
     }
-    
+
     positionBouton.x = 303;
     positionBouton.y = 682;
     boutonValider = CreerBouton("Valider", &positionBouton, 25);
     positionBouton.x = 500;
     positionBouton.y = 682;
     boutonAnnuler = CreerBouton("Annuler", &positionBouton, 25);
-    
+
     while (continuer)
     {
         EffacerEcran();
         AfficherBouton(boutonValider);
         AfficherBouton(boutonAnnuler);
-        
+
         positionTexte.x = 259;
         positionTexte.y = 10;
         EcrireTexte("Noms et couleurs des bateaux", 35, positionTexte, "default.ttf");
-        
+
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
             positionTexte.x = 20;
             positionTexte.y = 100+i*120;
-            
+
             strcpy(labelColonneTypes,tabTypesBat[i].nomType);
             strcat(labelColonneTypes, "s");
-            
+
             EcrireTexte(labelColonneTypes, 25, positionTexte, "default.ttf");
-            
+
             nbBat = parametre->nombreInstanceBateaux[i];
             for(j=0;j<nbBat;j++)
             {
@@ -509,11 +532,11 @@ void MenuParam(Tparam * parametre)
                 afficherRectangle(tabRectChoixCoul[i][j]);
             }
         }
-        
+
         SDL_Flip(SDL_GetVideoSurface());
-        
+
         AttendreEvent(positionClic, NULL);
-        
+
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
             nbBat = parametre->nombreInstanceBateaux[i];
@@ -528,8 +551,9 @@ void MenuParam(Tparam * parametre)
                     incrCouleurRectangle(tabRectChoixCoul[i][j]);
             }
         }
-        
+
         if(ClicSurBouton(boutonAnnuler, positionClic))
+
             continuer = 0;
         else if(ClicSurBouton(boutonValider, positionClic))
         {
@@ -552,7 +576,7 @@ void MenuParam(Tparam * parametre)
 
     LibererBouton(boutonValider);
     LibererBouton(boutonAnnuler);
-    
+
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {
         nbBat = parametre->nombreInstanceBateaux[i];
@@ -561,73 +585,13 @@ void MenuParam(Tparam * parametre)
             LibererChamp(tabChamp[i][j]);
             libererRectangle(tabRectChoixCoul[i][j]);
         }
-        
+
         free(tabChamp[i]);
         free(tabRectChoixCoul[i]);
     }
     free(tabChamp);
+
     free(tabRectChoixCoul);
-    
-    free(positionClic);
-}
 
-void EcranGrille(ChampSaisie * champ)
-{
-    Grille * grilleJoueur;
-    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
-    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
-	SDL_Rect positionTexte;
-    int controleEvent;
-    Coord coord;
-    CaseGrille caseGrille;
-	TBateau * bat;
-	TPosition posBat = {HORIZONTAL,2,2};
-
-    int continuer = 1;
-
-
-    grilleJoueur = CreerGrille(10, 10);
-
-	bat = creerBateau(posBat, CARGOT);
-	toucherBateau(bat, 1);
-
-    EffacerEcran();
-    afficherGrille(grilleJoueur, 40, 100);
-	InsertBateau(grilleJoueur, bat);
-
-	positionTexte.x = 40;
-	positionTexte.y = 20;
-
-    EcrireLigneTexte(champ->chaine, 40, positionTexte, "default.ttf");
-
-    while (continuer)
-    {
-        SDL_Flip(SDL_GetVideoSurface());
-        controleEvent = AttendreEvent(positionClic, touche);
-        if(controleEvent == 2)
-        {
-            if(ToucheSpec(touche) == SDLK_ESCAPE)
-                continuer = 0;
-        }
-        else
-        {
-            coord = ClicCaseGrille(grilleJoueur, positionClic);
-            caseGrille = Consulter(grilleJoueur, coord);
-            if(ClicDansGrille(grilleJoueur, positionClic))
-            {
-                if(caseGrille.etatCase == GRILLE_CASE_NORMAL)
-                    grilleJoueur = SetEtatCase(grilleJoueur, coord, GRILLE_CASE_TOUCHE);
-                else if(caseGrille.etatCase == GRILLE_CASE_TOUCHE)
-                    grilleJoueur = SetEtatCase(grilleJoueur, coord, GRILLE_CASE_NORMAL);
-
-                updateGrille(grilleJoueur, coord);
-            }
-        }
-    }
-
-    LibererGrille(grilleJoueur);
-	LibererBateau(bat);
-
-    free(touche);
     free(positionClic);
 }

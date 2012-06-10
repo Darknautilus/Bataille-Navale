@@ -19,8 +19,14 @@ void controleurParametreVersionTest(Tparam *param)
 
 void TestParam(void)
 {
-	Tparam * param = newTParam(1);
-	Tparam * paramLu = newTParam(1);
+    int i;
+    int * unBateauChaqueType = malloc (sizeof(int) * K_NBTYPEBATEAUX);
+    for(i = 0 ; i < K_NBTYPEBATEAUX ; i++){
+        unBateauChaqueType[i] = 1;
+    }
+
+	Tparam * param = newTParam(unBateauChaqueType);
+	Tparam * paramLu = newTParam(unBateauChaqueType);
 	FILE * ficParam;
 
 	printf("\n\nAjout des bateaux\n");
