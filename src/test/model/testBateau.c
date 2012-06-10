@@ -12,7 +12,7 @@ int testEstCoule(){
     int resultat = 1;
 
     //On créer un remorqueur (2 cases)
-    TBateau *bat = creerBateau(pos, REMORQUEUR);
+    TBateau *bat = CreerBateau();
 
     if(estCoule(bat)){
         resultat = 0;
@@ -63,7 +63,7 @@ int testCreerBateau(){
     pos.x=99;
     pos.y=22;
 
-    TBateau* bat = creerBateau(pos, type);
+    TBateau* bat = CreerBateau();
 
     //=================================================
 
@@ -76,7 +76,7 @@ int testCreerBateau(){
     //=================================================
 
     //Vérification que le type correspond
-    if(bat->type != type){
+    if(getTypeBateau(bat) != type){
         printf("[NOK] Type invalide.\n");
         resultat = 0;
     }
@@ -114,7 +114,7 @@ int testToucheBateau(){
     pos.x=99;
     pos.y=22;
 
-    TBateau *bat = creerBateau(pos, type);
+    TBateau *bat = CreerBateau();
 
     //=================================================
 
@@ -161,7 +161,7 @@ int testGetPosBateau(){
     pos.x=99;
     pos.y=22;
 
-    TBateau *bat = creerBateau(pos, type);
+    TBateau *bat = CreerBateau();
 
     if(getPosBateau(bat).x != 99 || getPosBateau(bat).y != 22){
         printf("[NOK] Erreur dans les valeurs retournees par getPosBateau.");

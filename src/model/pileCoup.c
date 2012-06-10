@@ -3,13 +3,13 @@
 
 #include "pileCoup.h"
 
-Pile CreerPile(void)
+Pile* CreerPile(void)
 {
 	return NULL;
 }
 
 int PileVide(Pile pPile)
-{	
+{
 	return pPile == NULL;
 }
 
@@ -21,19 +21,19 @@ Pile Empiler(Pile pPile, Coup * pElem)
 		printf("Erreur allocation memoire : Empiler()");
 		exit(1);
 	}
-	
+
 	N->Info = pElem;
 	N->Lien = pPile;
-	
+
 	return N;
 }
 
 Pile Depiler(Pile pPile)
 {
 	struct Cellule * N = pPile->Lien;
-	
+
 	free(pPile);
-	
+
 	return N;
 }
 

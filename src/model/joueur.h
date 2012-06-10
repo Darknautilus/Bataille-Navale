@@ -3,6 +3,8 @@
 
 #define KLGNOMJ 25
 
+#include "bateau.h"
+
 /**
  * \enum ETypeBat
  * \brief Types de bateaux
@@ -19,12 +21,13 @@ typedef enum {HUMAIN,MACHINE,UNDEF} ETypeJoueur;
 */
 typedef struct
 {
-	ETypeJoueur type;
-	char nomJ[KLGNOMJ];
+	ETypeJoueur type;     /** Type de joueur **/
+	char nomJ[KLGNOMJ];   /** Nom du joueur **/
+	TBateau* *mesBateaux;  /** Tableau dynamique de bateaux **/
 }Joueur;
 
 
-Joueur * nouvJoueur(void);
+Joueur * CreerJoueur(void);
 
 int getTypeJoueur(const Joueur * pJoueur);
 

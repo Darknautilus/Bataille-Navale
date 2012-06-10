@@ -1,11 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "joueur.h"
 
-Joueur * nouvJoueur(void)
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+Joueur * CreerJoueur(void)
 {
 	Joueur *joueur = (Joueur*)malloc(sizeof(Joueur));
 	joueur->type = UNDEF;
+
+    joueur->mesBateaux = NULL;
+
+    strcpy(joueur->nomJ, "");
 
 	return joueur;
 }

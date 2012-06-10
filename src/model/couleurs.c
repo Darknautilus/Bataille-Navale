@@ -54,5 +54,23 @@ void getNom (Couleur pCouleur, char pNom[])
 	strcpy(pNom,pCouleur.nom);
 }
 
+int getNumFromColor(Couleur color){
 
+    int i, trouve;
+    int result;
+    trouve = 0;
 
+    //On parcourt les couleurs
+    while(!trouve && i < KCOULEURS_NBCOULMAX){
+
+        //Si la lettre correspond
+        if(tableCouleurs[i].lettre == color.lettre){
+            trouve = 1;
+            result = i;
+        }
+
+        i++;
+    }
+
+    return result;
+}

@@ -2,6 +2,7 @@
 #include "../model/parametre.h"
 #include "../model/grille.h"
 #include "../model/random.h"
+#include "../model/partie.h"
 
 #include "../view/vueUtilsSDL.h"
 #include "../view/menu.h"
@@ -44,10 +45,11 @@ int main(int argc, char ** argv)
 
 	int choixMenu;
 	int continuer = 1;
+	int i;
 
 	ecran = DemarrerSDL(1024, 768, "Bataille Navale");
-    
-    Tparam * parametrePartie;
+
+    Tparam * parametrePartie = malloc (sizeof(Tparam));
 
     init_debug();
     initRandom();
@@ -56,7 +58,13 @@ int main(int argc, char ** argv)
 
 	while (continuer)
 	{
-        parametrePartie = newTParam(1);
+	    //On créer un tableau d'entier
+	    int * nbType = malloc (sizeof(int) * K_NBTYPEBATEAUX);
+	    for(i = 0 ; i < K_NBTYPEBATEAUX ; i++){
+            nbType[i]=1;
+	    }
+
+        parametrePartie = newTParam(nbType);
 		choixMenu = AfficherMenuRacine();
 
         switch (choixMenu)
@@ -88,8 +96,9 @@ int main(int argc, char ** argv)
 
 	ArreterSDL();
 	detruire_debug();
-    
+
     libererParam(parametrePartie);
+
 
 	return 0;
 }

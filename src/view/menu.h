@@ -13,6 +13,4 @@ void MenuNouvellePartie(Tparam * parametre);
 
 void MenuParam(Tparam * parametre);
 
-void EcranGrille(ChampSaisie * champ);
-
 #endif

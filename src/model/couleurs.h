@@ -36,5 +36,12 @@ SDL_Color getColor (Couleur pCouleur);
 char getChar (Couleur pCouleur);
 void getNom (Couleur pCouleur, char pNom[]);
 
+/**
+    Recupère l'index d'une couleur dans le tableau des coueleurs depuis la structure color.
+    \param color La couleur en question
+    \return L'index de la couleur dans le tableau des couleurs
+*/
+int getNumFromColor(Couleur color);
+
 #endif
 
