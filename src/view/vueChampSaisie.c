@@ -62,6 +62,8 @@ void EditerChamp(ChampSaisie * champ)
 	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 
 	SDL_EnableUNICODE(SDL_ENABLE);
+    
+    ChangeFocus(champ, CHAMP_ACTIF);
 
 	while (continuer)
 	{

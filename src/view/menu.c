@@ -192,10 +192,6 @@ void MenuNouvellePartie(Tparam * parametre)
 	ChampSaisie * champPseudoHumain, * champPseudoIA;
     ChampSaisie * paramNbBat[K_NBTYPEBATEAUX]; // Choix du nombre de bateaux (tableau de champs)
     
-	int continuer = 1;
-    int i;
-    int nbInstChange = 1;
-    
     // Informations de positions
 	SDL_Rect positionBouton, positionTexte;
     
@@ -211,6 +207,10 @@ void MenuNouvellePartie(Tparam * parametre)
     SDL_Bouton * boutonRetablirDefaut;
     SDL_Bouton * boutonEnregistrerParam;
     
+    // Autres
+    int continuer = 1;
+    int i;
+    int nbInstChange = 1;
     FILE * descFicParam;
     int * nbInstancesbat;
     char chaineInstance[3];
@@ -271,11 +271,12 @@ void MenuNouvellePartie(Tparam * parametre)
         EcrireTexte("Pseudo IA :", 26, positionTexte, "default.ttf");
         positionTexte.x = 86;
         positionTexte.y = 297;
-        EcrireTexte("Nombre de bateaux :", 25, positionTexte, "default.ttf");
+        EcrireTexte("Nombre de bateaux (6 max):", 25, positionTexte, "default.ttf");
 
 		AfficherChamp(champPseudoHumain);
 		AfficherChamp(champPseudoIA);
         
+        // Champs pour le choix du nombre d'instance de chaque type
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
             positionTexte.x = 89;
@@ -285,6 +286,7 @@ void MenuNouvellePartie(Tparam * parametre)
             InitTexte(paramNbBat[i], chaineInstance);
             AfficherChamp(paramNbBat[i]);
         }
+        
 		AfficherBouton(boutonOK);
 		AfficherBouton(boutonParam);
         AfficherBouton(boutonChargerParam);
@@ -302,25 +304,23 @@ void MenuNouvellePartie(Tparam * parametre)
 		{
 			if(ClicSurChamp(champPseudoHumain, positionClic))
 			{
-				ChangeFocus(champPseudoHumain, CHAMP_ACTIF);
 				EditerChamp(champPseudoHumain);
 			}
 
 			else if(ClicSurChamp(champPseudoIA, positionClic))
 			{
-				ChangeFocus(champPseudoIA, CHAMP_ACTIF);
 				EditerChamp(champPseudoIA);
 			}
             
             else if(ClicSurBouton(boutonParam, positionClic))
             {
                 if(nbInstChange)
-                {
                     resetInfoBateau(parametre);
-                    nbInstChange = 0;
-                }
                 
                 MenuParam(parametre);
+                
+                if(infoBateauValide(parametre))
+                   nbInstChange = 0;
             }
 
 			else if(ClicSurBouton(boutonOK, positionClic))
@@ -376,7 +376,6 @@ void MenuNouvellePartie(Tparam * parametre)
                 
                 resetInfoBateau(parametre);
                 chargerParam(descFicParam, parametre);
-                dgInfo(parametre->bateauxJoueur[0].nomBateau);
                 fclose(descFicParam);
                 nbInstChange = 0;
             }
@@ -482,6 +481,8 @@ void MenuParam(Tparam * parametre)
     positionBouton.y = 682;
     boutonAnnuler = CreerBouton("Annuler", &positionBouton, 25);
     
+    // --------------------------------------------------------------------
+    
     while (continuer)
     {
         EffacerEcran();
@@ -511,6 +512,8 @@ void MenuParam(Tparam * parametre)
         }
         
         SDL_Flip(SDL_GetVideoSurface());
+        
+        // --------------------------------------------------------------------
         
         AttendreEvent(positionClic, NULL);
         
@@ -549,6 +552,8 @@ void MenuParam(Tparam * parametre)
             SDL_Flip(SDL_GetVideoSurface());
         }
     }
+    
+    // --------------------------------------------------------------------
 
     LibererBouton(boutonValider);
     LibererBouton(boutonAnnuler);

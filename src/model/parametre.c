@@ -172,6 +172,25 @@ void memParam(const Tparam * pParam, FILE * pDesc)
 	fwrite(pParam->bateauxMachine, sizeof(TInfoBateau), nombreBat, pDesc);
 }
 
+int infoBateauValide(const Tparam * pParam)
+{
+    int estValide = 1;
+    int i = 0;
+    int nbBat;
+    
+    i = 0;
+    nbBat = getNbBat(pParam);
+    while (estValide && i < nbBat)
+    {
+        if(strcmp(pParam->bateauxJoueur[i].nomBateau, "") == 0 || strcmp(pParam->bateauxJoueur[i].nomBateau, "Nom :") == 0 ||
+           pParam->bateauxJoueur[i].couleur == 0)
+            estValide = 0;
+        i++;
+    }
+    
+    return estValide;
+}
+
 void libererParam(Tparam * pParam)
 {
     free(pParam->nombreInstanceBateaux);

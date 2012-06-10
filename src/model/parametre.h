@@ -172,6 +172,8 @@ void chargerParam(FILE * pDesc, Tparam * pParam);
 */
 void memParam(const Tparam * pParam, FILE * pDesc);
 
+int infoBateauValide(const Tparam * pParam);
+
 void libererParam(Tparam * pParam);
 
 
