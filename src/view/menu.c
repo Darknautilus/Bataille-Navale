@@ -22,6 +22,7 @@
 #include "../test/view/testVue.h"
 
 #include "../model/bateau.h"
+#include "../model/parametre.h"
 
 const TtypeBat tabTypesBat[KTAILLEMAXBAT] = {
     {VOILIER,"Voilier"},
@@ -190,9 +191,10 @@ void MenuNouvellePartie(Tparam * parametre)
     
 	int continuer = 1;
     int i;
+    int nbInstChange = 0;
     
     // Informations de positions
-	SDL_Rect positionBoutonOK, positionBoutonParam, positionTexte;
+	SDL_Rect positionBouton, positionTexte;
     
     // Informations pour AttendreEvent()
 	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
@@ -202,8 +204,11 @@ void MenuNouvellePartie(Tparam * parametre)
     // Boutons
 	SDL_Bouton * boutonOK;
 	SDL_Bouton * boutonParam;
+    SDL_Bouton * boutonChargerParam;
+    SDL_Bouton * boutonRetablirDefaut;
+    SDL_Bouton * boutonEnregistrerParam;
     
-    
+    FILE * descFicParam;
     int * nbInstancesbat;
     char chaineInstance[3];
 
@@ -220,17 +225,30 @@ void MenuNouvellePartie(Tparam * parametre)
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {
         paramNbBat[i] = CreerChamp(2, 20, 279, 372+i*40);
-        sprintf(chaineInstance, "%d", nbInstancesbat[i]);
-        InitTexte(paramNbBat[i], chaineInstance);
+    }
+    
+    for(i=0;i<getNbBat(parametre);i++)
+    {
+        strcpy(parametre->bateauxJoueur[i].nomBateau, "Nom :");
+        parametre->bateauxJoueur[i].couleur = 0;
     }
     
     // Positionnement des boutons
-	positionBoutonParam.x = 360;
-	positionBoutonParam.y = 622;
-	boutonParam = CreerBouton("Plus de parametres", &positionBoutonParam, 25);
-	positionBoutonOK.x = 360;
-	positionBoutonOK.y = 682;
-	boutonOK = CreerBouton("Demarrer la partie", &positionBoutonOK, 25);
+	positionBouton.x = 360;
+	positionBouton.y = 622;
+	boutonParam = CreerBouton("Plus de parametres", &positionBouton, 25);
+	positionBouton.x = 360;
+	positionBouton.y = 682;
+	boutonOK = CreerBouton("Demarrer la partie", &positionBouton, 25);
+    positionBouton.x = 630;
+    positionBouton.y = 389;
+    boutonChargerParam = CreerBouton("Utiliser parametres par defaut", &positionBouton, 20);
+    positionBouton.x = 630;
+    positionBouton.y = 330;
+    boutonEnregistrerParam = CreerBouton("Enregistrer les parametres", &positionBouton, 20);
+    positionBouton.x = 630;
+    positionBouton.y = 480;
+    boutonRetablirDefaut = CreerBouton("Retablir parametres d'origine", &positionBouton, 20);
 
     // --------------------------------------------------------------------
 
@@ -259,10 +277,16 @@ void MenuNouvellePartie(Tparam * parametre)
             positionTexte.x = 89;
             positionTexte.y = 372+i*40;
             EcrireTexte(tabTypesBat[i].nomType, 25, positionTexte, "default.ttf");
+            sprintf(chaineInstance, "%d", nbInstancesbat[i]);
+            InitTexte(paramNbBat[i], chaineInstance);
             AfficherChamp(paramNbBat[i]);
         }
 		AfficherBouton(boutonOK);
 		AfficherBouton(boutonParam);
+        AfficherBouton(boutonChargerParam);
+        AfficherBouton(boutonEnregistrerParam);
+        AfficherBouton(boutonRetablirDefaut);
+        
 		SDL_Flip(SDL_GetVideoSurface());
         
         
@@ -286,6 +310,12 @@ void MenuNouvellePartie(Tparam * parametre)
             
             else if(ClicSurBouton(boutonParam, positionClic))
             {
+                if(nbInstChange)
+                {
+                    resetInfoBateau(parametre);
+                    nbInstChange = 0;
+                }
+                
                 MenuParam(parametre);
             }
 
@@ -293,6 +323,36 @@ void MenuNouvellePartie(Tparam * parametre)
 			{
 				EcranGrille(champPseudoHumain);
 			}
+            else if(ClicSurBouton(boutonEnregistrerParam, positionClic))
+            {
+                descFicParam = fopen("paramUser.dat", "w");
+                if(descFicParam == NULL)
+                    dgFatal("paramUser.dat non trouve");
+                
+                memParam(parametre, descFicParam);
+                fclose(descFicParam);
+            }
+            else if(ClicSurBouton(boutonChargerParam, positionClic))
+            {
+                descFicParam = fopen("paramUser.dat", "r");
+                if(descFicParam == NULL)
+                    dgFatal("paramUser.dat non trouve");
+                
+                resetInfoBateau(parametre);
+                chargerParam(descFicParam, parametre);
+                fclose(descFicParam);
+            }
+            else if(ClicSurBouton(boutonRetablirDefaut, positionClic))
+            {
+                descFicParam = fopen("paramOrigin.dat", "r");
+                if(descFicParam == NULL)
+                    dgFatal("paramOrigin.dat non trouve");
+                
+                resetInfoBateau(parametre);
+                chargerParam(descFicParam, parametre);
+                dgInfo(parametre->bateauxJoueur[0].nomBateau);
+                fclose(descFicParam);
+            }
             else
             {
                 for(i=0;i<K_NBTYPEBATEAUX;i++)
@@ -302,6 +362,7 @@ void MenuNouvellePartie(Tparam * parametre)
                         ChangeFocus(paramNbBat[i], CHAMP_ACTIF);
                         EditerChamp(paramNbBat[i]);
                         parametre->nombreInstanceBateaux[i] = strtol(paramNbBat[i]->chaine, NULL, 10);
+                        nbInstChange = 1;
                     }
                 }
                 afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
@@ -323,6 +384,9 @@ void MenuNouvellePartie(Tparam * parametre)
 	LibererChamp(champPseudoIA);
 	LibererBouton(boutonOK);
 	LibererBouton(boutonParam);
+    LibererBouton(boutonChargerParam);
+    LibererBouton(boutonEnregistrerParam);
+    LibererBouton(boutonRetablirDefaut);
     
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {
@@ -335,11 +399,14 @@ void MenuParam(Tparam * parametre)
 {
     int continuer = 1;
     int i,j;
-    
+        
     SDL_Bouton * boutonAnnuler, * boutonValider;
     SDL_Rect positionBouton, positionTexte;
     
     int nbBat;
+    
+    int absInfoBat;
+    int ordInfoBat; // = 0 si tous les champs tiennent sur une ligne (nbBat <= 3) et vaut 30 sinon
     
     char labelColonneTypes[KLONGMAXNOMTYPE];
     
@@ -347,14 +414,37 @@ void MenuParam(Tparam * parametre)
     
     // Attention : Tableau à double entrée de pointeurs sur ChampSaisie
     ChampSaisie *** tabChamp = (ChampSaisie***)malloc(K_NBTYPEBATEAUX * sizeof(ChampSaisie**));
+    // De même pour les rectangles de couleur
+    Rectangle *** tabRectChoixCoul = (Rectangle***)malloc(K_NBTYPEBATEAUX * sizeof(Rectangle**));
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {
         nbBat = parametre->nombreInstanceBateaux[i]; // getNbInstancesType ne fonctionne pas avec un entier (pourquoi?)
+        
         tabChamp[i] = (ChampSaisie**)malloc(nbBat*sizeof(ChampSaisie*));
+        tabRectChoixCoul[i] = (Rectangle**)malloc(nbBat*sizeof(Rectangle*));
         for(j=0;j<nbBat;j++)
         {
-            tabChamp[i][j] = CreerChamp(K_LGNOM, 15, 10+i*200, 100+j*40);
-            InitTexte(tabChamp[i][j], "Champ");
+            if(j >= 3)
+            {
+                ordInfoBat = 140+i*120;
+                absInfoBat = 230+(j-3)*245;
+            }
+            else
+            {
+                ordInfoBat = 100+i*120;
+                absInfoBat = 230+j*245;
+            }
+            
+            tabChamp[i][j] = CreerChamp(K_LGNOM, 15, absInfoBat+30, ordInfoBat);
+            tabRectChoixCoul[i][j] = creerRectangle(absInfoBat, ordInfoBat, 25, 25);
+            
+            if(j < parametre->nombreInstanceBateaux[i])
+            {
+                strcpy(tabChamp[i][j]->chaine, parametre->bateauxJoueur[getNumBat(i, j, parametre)].nomBateau);
+                tabRectChoixCoul[i][j]->couleur = parametre->bateauxJoueur[getNumBat(i, j, parametre)].couleur;
+            }
+            else
+                strcpy(tabChamp[i][j]->chaine, "Nom :");
         }
     }
     
@@ -377,8 +467,8 @@ void MenuParam(Tparam * parametre)
         
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
-            positionTexte.x = 20+i*200;
-            positionTexte.y = 60;
+            positionTexte.x = 20;
+            positionTexte.y = 100+i*120;
             
             strcpy(labelColonneTypes,tabTypesBat[i].nomType);
             strcat(labelColonneTypes, "s");
@@ -389,6 +479,7 @@ void MenuParam(Tparam * parametre)
             for(j=0;j<nbBat;j++)
             {
                 AfficherChamp(tabChamp[i][j]);
+                afficherRectangle(tabRectChoixCoul[i][j]);
             }
         }
         
@@ -396,9 +487,38 @@ void MenuParam(Tparam * parametre)
         
         AttendreEvent(positionClic, NULL);
         
+        for(i=0;i<K_NBTYPEBATEAUX;i++)
+        {
+            nbBat = parametre->nombreInstanceBateaux[i];
+            for(j=0;j<nbBat;j++)
+            {
+                if(ClicSurChamp(tabChamp[i][j], positionClic))
+                {
+                    ChangeFocus(tabChamp[i][j], CHAMP_ACTIF);
+                    EditerChamp(tabChamp[i][j]);
+                }
+                else if(clicSurRectangle(tabRectChoixCoul[i][j], positionClic))
+                    incrCouleurRectangle(tabRectChoixCoul[i][j]);
+            }
+        }
+        
         if(ClicSurBouton(boutonAnnuler, positionClic))
             continuer = 0;
-        else {
+        else if(ClicSurBouton(boutonValider, positionClic))
+        {
+            for(i=0;i<K_NBTYPEBATEAUX;i++)
+            {
+                nbBat = parametre->nombreInstanceBateaux[i];
+                for(j=0;j<nbBat;j++)
+                {
+                    strcpy(parametre->bateauxJoueur[getNumBat(i, j, parametre)].nomBateau, tabChamp[i][j]->chaine);
+                    parametre->bateauxJoueur[getNumBat(i, j, parametre)].couleur = tabRectChoixCoul[i][j]->couleur;
+                }
+            }
+            continuer = 0;
+        }
+        else
+        {
             afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
             SDL_Flip(SDL_GetVideoSurface());
         }
@@ -413,11 +533,14 @@ void MenuParam(Tparam * parametre)
         for(j=0;j<nbBat;j++)
         {
             LibererChamp(tabChamp[i][j]);
+            libererRectangle(tabRectChoixCoul[i][j]);
         }
         
         free(tabChamp[i]);
+        free(tabRectChoixCoul[i]);
     }
     free(tabChamp);
+    free(tabRectChoixCoul);
     
     free(positionClic);
 }

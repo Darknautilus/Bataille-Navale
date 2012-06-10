@@ -19,6 +19,8 @@ void afficherRectangle(Rectangle * pRect);
 
 int clicSurRectangle(Rectangle * pRect, SDL_Rect * pPosClic);
 
+void incrCouleurRectangle(Rectangle * pRect);
+
 void libererRectangle(Rectangle * pRect);
 
 #endif //SDL_RECTANGLE_H

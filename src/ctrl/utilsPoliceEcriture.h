@@ -18,6 +18,6 @@
     \param pTailleEcriture Un entier contenant la taille de la police.
     \return Une structure TTF_Font contenant la police chargée.
 */
-TTF_Font SDLCALL* chargerPoliceEcriture(const char pChemin[], int pTailleEcriture);
+TTF_Font * chargerPoliceEcriture(const char pChemin[], int pTailleEcriture);
 
 #endif

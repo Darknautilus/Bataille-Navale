@@ -41,6 +41,14 @@ int clicSurRectangle(Rectangle * pRect, SDL_Rect * pPosClic)
 		return 0;
 }
 
+void incrCouleurRectangle(Rectangle * pRect)
+{
+    if(pRect->couleur == KCOULEURS_NBCOULMAX-1)
+        pRect->couleur = 0;
+    else
+        pRect->couleur++;
+}
+
 void libererRectangle(Rectangle * pRect)
 {
     SDL_FreeSurface(pRect->zoneRectangle);

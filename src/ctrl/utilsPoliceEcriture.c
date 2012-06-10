@@ -16,12 +16,16 @@
 #include <stdlib.h>
 #include <string.h>
 
-TTF_Font SDLCALL* chargerPoliceEcriture(const char pChemin[], int pTailleEcriture){
-
+TTF_Font * chargerPoliceEcriture(const char pChemin[], int pTailleEcriture)
+{
+    TTF_Font * police;
     char * chemin = malloc(sizeof(FONT_REP) + sizeof(char)*strlen(pChemin));
 
     strcpy(chemin, FONT_REP);
     strcat(chemin, pChemin);
-
-    return TTF_OpenFont(chemin, pTailleEcriture);
+    
+    police = TTF_OpenFont(chemin, pTailleEcriture);
+    free(chemin);
+    
+    return police;
 }

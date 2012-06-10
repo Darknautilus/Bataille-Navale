@@ -9,6 +9,8 @@
 
 #include "parametre.h"
 
+#include "../view/includeSDL.h"
+
 #include <stdlib.h>
 #include <string.h>
 #include <string.h>
@@ -98,6 +100,35 @@ int getNbBat(const Tparam * pParam)
 	return nombreBat;
 }
 
+int getNumBat(ETypeBat pTypeBat, int pNumBatType, Tparam * pParam)
+{
+    int i, numBat;
+    
+    numBat = 0;
+    for(i=0;i<pTypeBat;i++)
+        numBat += pParam->nombreInstanceBateaux[i];
+    
+    numBat+= pNumBatType;
+    return numBat;
+}
+
+void resetInfoBateau(Tparam * pParam)
+{
+    int i;
+    
+    free(pParam->bateauxJoueur);
+    free(pParam->bateauxMachine);
+    
+    pParam->bateauxJoueur = (TInfoBateau*)malloc(getNbBat(pParam) * sizeof(TInfoBateau));
+    pParam->bateauxMachine = (TInfoBateau*)malloc(getNbBat(pParam) * sizeof(TInfoBateau));
+    
+    for(i=0;i<getNbBat(pParam);i++)
+    {
+        strcpy(pParam->bateauxJoueur[i].nomBateau, "Nom :");
+        pParam->bateauxJoueur[i].couleur = 0; // Blanc
+    }
+}
+
 //***************************
 
 TInfoBateau * getInfoBateau(int pNum ,const Tparam * pParam)
@@ -111,7 +142,6 @@ TInfoBateau * getInfoBateau(int pNum ,const Tparam * pParam)
 
 	return infoBat;
 }
-
 
 
 //***************************
@@ -140,6 +170,14 @@ void memParam(const Tparam * pParam, FILE * pDesc)
 	fwrite(pParam->bateauxJoueur, sizeof(TInfoBateau), nombreBat, pDesc);
 
 	fwrite(pParam->bateauxMachine, sizeof(TInfoBateau), nombreBat, pDesc);
+}
+
+void libererParam(Tparam * pParam)
+{
+    free(pParam->nombreInstanceBateaux);
+    free(pParam->bateauxJoueur);
+    free(pParam->bateauxMachine);
+    free(pParam);
 }
 
 //***************************

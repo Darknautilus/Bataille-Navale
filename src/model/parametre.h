@@ -112,6 +112,8 @@ Tparam * newTParam(int pNbInstances);
 */
 int *getNBInstances (const Tparam * pParam);
 
+int getNumBat(ETypeBat pTypeBat, int pNumBatType, Tparam * pParam);
+
 //***************************
 /**
  * \brief Donne les informations sur le pNum eme bateau des parametres de la partie
@@ -145,7 +147,7 @@ int getNbInstancesType (const Tparam * pParam, ETypeBat pType);
 int getNbBat(const Tparam * pParam);
 
 
-
+void resetInfoBateau(Tparam * pParam);
 
 
 //***************************
@@ -169,6 +171,9 @@ void chargerParam(FILE * pDesc, Tparam * pParam);
  * pDesc est un descriteur de fichier ouvert en Žcriture
 */
 void memParam(const Tparam * pParam, FILE * pDesc);
+
+
+void libererParam(Tparam * pParam);
 
 
 //***************************
