@@ -29,7 +29,6 @@ void EcranGrille(ChampSaisie * champ)
     Coord coord;
     CaseGrille caseGrille;
 	TBateau * bat;
-	TPosition posBat = {HORIZONTAL,2,2};
 
     int continuer = 1;
 
@@ -60,10 +59,10 @@ void EcranGrille(ChampSaisie * champ)
         }
         else
         {
-            coord = ClicCaseGrille(grilleJoueur, positionClic);
-            caseGrille = Consulter(grilleJoueur, coord);
             if(ClicDansGrille(grilleJoueur, positionClic))
             {
+                coord = ClicCaseGrille(grilleJoueur, positionClic);
+                caseGrille = Consulter(grilleJoueur, coord);
                 if(caseGrille.etatCase == GRILLE_CASE_NORMAL)
                     grilleJoueur = SetEtatCase(grilleJoueur, coord, GRILLE_CASE_TOUCHE);
                 else if(caseGrille.etatCase == GRILLE_CASE_TOUCHE)

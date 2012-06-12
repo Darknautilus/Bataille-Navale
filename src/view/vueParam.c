@@ -24,7 +24,7 @@ void AfficherParamTest(Tparam * param)
 	printf("\n\tId\tNom\tCouleur\tType\n");
 	for(i=0;i<getNbBat(param);i++)
 	{
-		getNom(getCouleur(&(param->bateauxJoueur[i])), nomCouleur);
+		getNom(getCouleurFromNum(param->bateauxJoueur[i].couleur), nomCouleur);
 		printf("\t%d\t%s\t%s\t%d\n", i, param->bateauxJoueur[i].nomBateau, nomCouleur, getType(&(param->bateauxJoueur[i])));
 	}
 
@@ -33,7 +33,7 @@ void AfficherParamTest(Tparam * param)
 	printf("\n\tId\tNom\tCouleur\tType\n");
 	for(i=0;i<getNbBat(param);i++)
 	{
-		getNom(getCouleur(&(param->bateauxMachine[i])), nomCouleur);
+		getNom(getCouleurFromNum(param->bateauxJoueur[i].couleur), nomCouleur);
 		printf("\t%d\t%s\t%s\t%d\n", i+getNbBat(param), param->bateauxMachine[i].nomBateau, nomCouleur, getType(&(param->bateauxMachine[i])));
 	}
 }

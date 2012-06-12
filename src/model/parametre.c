@@ -21,7 +21,7 @@
 
 //***************************
 
-Couleur getCouleur(const TInfoBateau * pB)
+int getCouleur(const TInfoBateau * pB)
 {
 	return pB->couleur;
 }
@@ -45,7 +45,7 @@ void getBNom(const TInfoBateau * pB, char pNom[])
 
 void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType)
 {
-	pB->couleur=getCouleurFromNum(pCouleur);
+	pB->couleur=pCouleur;
 	pB->type=pType;
 	strcpy(pB->nomBateau,pNom);
 }
@@ -122,7 +122,7 @@ int getNumBat(ETypeBat pTypeBat, int pNumBatType, Tparam * pParam)
 
 void resetInfoBateau(Tparam * pParam)
 {
-    int i;
+    int i,j,traite;
 
     free(pParam->bateauxJoueur);
     free(pParam->bateauxMachine);
@@ -130,11 +130,13 @@ void resetInfoBateau(Tparam * pParam)
     pParam->bateauxJoueur = (TInfoBateau*)malloc(getNbBat(pParam) * sizeof(TInfoBateau));
     pParam->bateauxMachine = (TInfoBateau*)malloc(getNbBat(pParam) * sizeof(TInfoBateau));
 
+    //On remplis les nouveaux bateaux avec les infos
     for(i=0;i<getNbBat(pParam);i++)
     {
         strcpy(pParam->bateauxJoueur[i].nomBateau, "Nom :");
-        pParam->bateauxJoueur[i].couleur = getCouleurFromNum(0); // Blanc
+        pParam->bateauxJoueur[i].couleur = 0; // Blanc
     }
+
 }
 
 //***************************
@@ -216,7 +218,7 @@ void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam, const char pNom[],
     //C'est un bateau du joueur
 	if (pIdBateau<getNbBat(pParam))
 	{
-		pParam->bateauxJoueur[pIdBateau].couleur = getCouleurFromNum(pCouleur);
+		pParam->bateauxJoueur[pIdBateau].couleur = pCouleur;
 		pParam->bateauxJoueur[pIdBateau].type=pType;
 		strcpy(pParam->bateauxJoueur[pIdBateau].nomBateau ,pNom);
 	}
@@ -224,7 +226,7 @@ void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam, const char pNom[],
     //Sinon c'est un bateau de l'IA
 	else
 	{
-		pParam->bateauxMachine[pIdBateau-getNbBat(pParam)].couleur= getCouleurFromNum(pCouleur);
+		pParam->bateauxMachine[pIdBateau-getNbBat(pParam)].couleur= pCouleur;
 		pParam->bateauxMachine[pIdBateau-getNbBat(pParam)].type=pType;
 		strcpy(pParam->bateauxMachine[pIdBateau-getNbBat(pParam)].nomBateau, pNom);
 	}
