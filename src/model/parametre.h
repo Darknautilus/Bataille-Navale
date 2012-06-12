@@ -27,7 +27,7 @@
 */
 typedef struct
 {
-	Couleur couleur;                /**< Indice dans la table des couleurs */
+	int couleur;                /**< Indice dans la table des couleurs */
 	ETypeBat type;              /**< Type du bateau */
 	char nomBateau[K_LGNOM];    /**< Nom du bateau */
 }
@@ -40,9 +40,9 @@ TInfoBateau;
  * \param[in] pB Un pointeur sur les informations du bateau
  * \return Le numéro de la couleur
  *
- * Retourne un objet de type Couleur
+ * Retourne l'index de la couleur dans le tableau d'anglais.
 */
-Couleur getCouleur(const TInfoBateau * pB);
+int getCouleur(const TInfoBateau * pB);
 
 //***************************
 /**

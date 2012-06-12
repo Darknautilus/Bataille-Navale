@@ -48,3 +48,12 @@ TPartie* initialiser(Tparam *param){
     return partie;
 
 }
+
+
+int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
+
+
+
+
+
+}

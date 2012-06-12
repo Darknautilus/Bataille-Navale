@@ -241,7 +241,7 @@ void MenuNouvellePartie(Tparam * parametre)
     for(i=0;i<getNbBat(parametre);i++)
     {
         strcpy(parametre->bateauxJoueur[i].nomBateau, "Nom :");
-        parametre->bateauxJoueur[i].couleur = getCouleurFromNum(0);
+        parametre->bateauxJoueur[i].couleur = 0;
     }
 
     // Positionnement des boutons
@@ -323,6 +323,7 @@ void MenuNouvellePartie(Tparam * parametre)
             {
                 if(nbInstChange)
                 {
+
                     resetInfoBateau(parametre);
                     nbInstChange = 0;
                 }
@@ -491,7 +492,7 @@ void MenuParam(Tparam * parametre)
             if(j < parametre->nombreInstanceBateaux[i])
             {
                 strcpy(tabChamp[i][j]->chaine, parametre->bateauxJoueur[getNumBat(i, j, parametre)].nomBateau);
-                tabRectChoixCoul[i][j]->couleur = getNumFromColor(parametre->bateauxJoueur[getNumBat(i, j, parametre)].couleur);
+                tabRectChoixCoul[i][j]->couleur = parametre->bateauxJoueur[getNumBat(i, j, parametre)].couleur;
             }
             else
                 strcpy(tabChamp[i][j]->chaine, "Nom :");

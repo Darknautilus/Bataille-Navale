@@ -39,7 +39,15 @@ extern TPartie *globalPartie;
 TPartie* initialiser(Tparam *param);
 
 
-
+/**
+ * Cette fonction réalise un tir (aussi bien pour la machine que pour le joueur).
+ *
+ * \param partie La partie concernée.
+ * \param cible Les coordonnées où l'on tire.
+ * \param estJoueur Booléen indiquant si c'est un coup pour le joueur ou non.
+ * \return Retourne le résultat de l'action (1 = touché, 0 = raté)
+**/
+int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur);
 
 
 
