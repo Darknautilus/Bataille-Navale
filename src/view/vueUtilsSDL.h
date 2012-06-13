@@ -3,6 +3,8 @@
 
 #include "includeSDL.h"
 
+void ecranVictoire(void);
+
 /**
  * \brief Permet d'écrire du texte en blanc
  *

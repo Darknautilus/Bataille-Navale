@@ -5,11 +5,12 @@
 #include "../model/partie.h"
 
 #include "../view/vueUtilsSDL.h"
-#include "../view/menu.h"
 #include "../view/vueGrille.h"
 #include "../view/vueChampSaisie.h"
 #include "../view/vueRegles.h"
 #include "../view/includeSDL.h"
+
+#include "../ctrl/menu.h"
 
 #include "utilsSDL.h"
 #include "fichierDebug.h"
@@ -93,6 +94,8 @@ int main(int argc, char ** argv)
                 break;
         }
     }
+    
+    ecranVictoire();
 
 	ArreterSDL();
 	detruire_debug();

@@ -28,6 +28,7 @@
 #include "../model/parametre.h"
 #include "../model/random.h"
 #include "../model/couleurs.h"
+#include "../model/utilsModel.h"
 
 const TtypeBat tabTypesBat[K_NBTYPEBATEAUX] = {
     {VOILIER,"Voilier"},
@@ -333,9 +334,7 @@ void MenuNouvellePartie(Tparam * parametre)
 
                 if(!nbInstChange)
                 {
-                    descFicParam = fopen("dicoNoms.dat", "r");
-                    if(descFicParam == NULL)
-                        dgFatal("dicoNoms.dat non trouve");
+                    descFicParam = ouvrirFichierRessources("dicoNoms.dat", "r");
 
                     for(i=0;i<getNbBat(parametre);i++)
                     {
@@ -370,7 +369,7 @@ void MenuNouvellePartie(Tparam * parametre)
 			}
             else if(ClicSurBouton(boutonEnregistrerParam, positionClic))
             {
-                descFicParam = fopen("paramUser.dat", "w");
+                descFicParam = fopen("ressources/paramUser.dat", "w");
                 if(descFicParam == NULL)
                     dgFatal("paramUser.dat non trouve");
 
