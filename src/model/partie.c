@@ -23,13 +23,11 @@ TPartie* initialiser(Tparam *param){
     partie->scorePlayer = 0;
 
     //On compte le nombre de bateaux à allouer
-    for(i = 0 ; i < K_NBTYPEBATEAUX ; i++){
-        nombreBateaux += partie->parametres->nombreInstanceBateaux[i];
-    }
+    nombreBateaux = getNbBat(param);
 
     //On alloue
-    partie->joueur->mesBateaux = malloc( sizeof(TBateau) * nombreBateaux );
-    partie->machine->mesBateaux = malloc( sizeof(TBateau) * nombreBateaux );
+    partie->joueur->mesBateaux = malloc( sizeof(TBateau*) * nombreBateaux );
+    partie->machine->mesBateaux = malloc( sizeof(TBateau*) * nombreBateaux );
 
     //=========== Préparation ===================================
 
@@ -56,4 +54,10 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
 
 
+}
+
+void libererPartie(TPartie * pPartie)
+{
+    free(pPartie->joueur->mesBateaux);
+    free(pPartie->machine->mesBateaux);
 }
