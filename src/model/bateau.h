@@ -10,6 +10,8 @@
 #ifndef _BATEAU_H
 #define _BATEAU_H
 
+#include "grille.h"
+
 #define KTAILLEMAXBAT 5      /**< \brief Taille maximale d'un bateau */
 #define KLONGMAXNOMTYPE 20   /**< \brief Longueur maximale du nom d'un type */
 
@@ -40,6 +42,8 @@ typedef struct
     char * nomType;
 }
 TtypeBat;
+
+extern const TtypeBat tabTypesBat[KTAILLEMAXBAT];
 
 /**
  * \enum ESens
@@ -81,6 +85,7 @@ typedef struct
 	int idBateau;              /**< Numéro du bateau (voir paramtres) */
 	TPosition position;        /**< Position du bateau dans la grille */
 	EEtat etat[KTAILLEMAXBAT]; /**< Tableau d'état du bateau, renseigne l'état de chaque case du bateau */
+    int estPlace;
 }
 TBateau;
 
@@ -155,6 +160,8 @@ ESens getSensBateau(TBateau *bat);
  * \return Un élément de l'enumération ETypeBat.
 */
 ETypeBat getTypeBateau(TBateau *bat);
+
+int estPlacable(TBateau * bat, Grille * grille);
 
 /**
  * Libre le bateau en mŽmoire

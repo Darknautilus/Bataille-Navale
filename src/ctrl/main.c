@@ -11,7 +11,7 @@
 #include "../view/includeSDL.h"
 
 #include "../ctrl/menu.h"
-
+#include "jeu.h"
 #include "utilsSDL.h"
 #include "fichierDebug.h"
 
@@ -47,6 +47,7 @@ int main(int argc, char ** argv)
 	int choixMenu;
 	int continuer = 1;
 	int i;
+    int partiePrete;
 
 	ecran = DemarrerSDL(1024, 768, "Bataille Navale");
 
@@ -71,7 +72,9 @@ int main(int argc, char ** argv)
         switch (choixMenu)
         {
             case 1: // Nouvelle Partie
-                MenuNouvellePartie(parametrePartie);
+                partiePrete = MenuNouvellePartie(parametrePartie);
+                if(partiePrete)
+                    menuPlacementBat();
                 break;
 
             case 2: // Charger partie

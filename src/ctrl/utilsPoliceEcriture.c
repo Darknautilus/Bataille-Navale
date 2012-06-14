@@ -16,10 +16,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-TTF_Font * chargerPoliceEcriture(const char pChemin[], int pTailleEcriture)
+TTF_Font * chargerPoliceEcriture(const char * pChemin, int pTailleEcriture)
 {
     TTF_Font * police;
-    char * chemin = malloc(sizeof(FONT_REP) + sizeof(char)*strlen(pChemin));
+    char * chemin = (char*)malloc(sizeof(char)*(strlen(pChemin) + strlen(FONT_REP)));
 
     strcpy(chemin, FONT_REP);
     strcat(chemin, pChemin);

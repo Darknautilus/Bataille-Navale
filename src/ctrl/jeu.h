@@ -5,4 +5,6 @@
 
 void jeu(Tparam * pParam);
 
+void menuPlacementBat(void);
+
 #endif

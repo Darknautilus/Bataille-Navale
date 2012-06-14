@@ -40,6 +40,9 @@ TPartie* initialiser(Tparam *param){
 
         partie->joueur->mesBateaux[i]->idBateau = i;
         partie->machine->mesBateaux[i]->idBateau = i + nombreBateaux;
+        
+        partie->joueur->mesBateaux[i]->estPlace = 0;
+        partie->machine->mesBateaux[i]->estPlace = 0;
     }
 
 

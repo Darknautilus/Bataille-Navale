@@ -8,10 +8,16 @@
 */
 
 #include "bateau.h"
-
 #include "parametre.h"
-
 #include "partie.h"
+
+const TtypeBat tabTypesBat[KTAILLEMAXBAT] = {
+    {VOILIER,"Voilier"},
+    {REMORQUEUR,"Remorqueur"},
+    {CARGOT,"Cargot"},
+    {SOUSMARIN,"Sous-marin"},
+    {PORTEAVION,"Porte-avion"}
+};
 
 TBateau * CreerBateau()
 {
@@ -19,8 +25,8 @@ TBateau * CreerBateau()
 	TBateau * bat = (TBateau*) malloc(sizeof(TBateau));
 
     TPosition pos;
-    pos.x = 0;
-    pos.y = 0;
+    pos.x = 1;
+    pos.y = 1;
     pos.direction = HORIZONTAL;
 
     bat->position = pos;
@@ -111,6 +117,38 @@ ESens getSensBateau(TBateau *bat){
 
 ETypeBat getTypeBateau(TBateau *bat){
     return getType(getInfoBateau(bat->idBateau, globalPartie->parametres));
+}
+
+int estPlacable(TBateau * bat, Grille * grille)
+{
+    int estPlacable = 1;
+    int i;
+    Coord coordCaseGrille;
+    
+    // détermine si le bateau est en dehors de la grille
+	if ( (bat->position.direction == HORIZONTAL && bat->position.x + getTypeBateau(bat) > grille->NbLin) ||
+        (bat->position.direction == VERTICAL && bat->position.y + getTypeBateau(bat) > grille->NbCol) )
+        estPlacable = 0;
+    
+    // détermine si le bateau est plaçé sur un autre bateau
+    for(i=0;i<getTypeBateau(bat) && estPlacable;i++)
+    {
+        if(bat->position.direction == HORIZONTAL)
+		{
+			coordCaseGrille.noCol = bat->position.x + i;
+			coordCaseGrille.noLin = bat->position.y;
+		}
+		else
+		{
+			coordCaseGrille.noCol = bat->position.x;
+			coordCaseGrille.noLin = bat->position.y + i;
+		}
+        
+		if(Consulter(grille, coordCaseGrille).estOccupe)
+			estPlacable = 0;
+    }
+    
+    return estPlacable;
 }
 
 void LibererBateau(TBateau * bat)

@@ -30,14 +30,6 @@
 #include "../model/couleurs.h"
 #include "../model/utilsModel.h"
 
-const TtypeBat tabTypesBat[K_NBTYPEBATEAUX] = {
-    {VOILIER,"Voilier"},
-    {REMORQUEUR,"Remorqueur"},
-    {CARGOT,"Cargot"},
-    {SOUSMARIN,"Sous-marin"},
-    {PORTEAVION,"Porte-avion"}
-};
-
 void AfficherMenuAccueil(void)
 {
 	int continuer = 1;
@@ -190,7 +182,7 @@ int AfficherMenuRacine(void)
 	return choixMenu;
 }
 
-void MenuNouvellePartie(Tparam * parametre)
+int MenuNouvellePartie(Tparam * parametre)
 {
     // Champs de saisie
 	ChampSaisie * champPseudoHumain, * champPseudoIA;
@@ -221,6 +213,8 @@ void MenuNouvellePartie(Tparam * parametre)
     int * nbInstancesbat;
     char chaineInstance[3];
     char nomBatIA[K_LGNOM];
+    
+    int partiePrete = 0;
 
     // --------------------------------------------------------------------
 
@@ -357,6 +351,7 @@ void MenuNouvellePartie(Tparam * parametre)
 
                     EcranGrille(champPseudoHumain);
 
+                    partiePrete = 1;
                     continuer = 0;
                 }
                 else
@@ -369,19 +364,16 @@ void MenuNouvellePartie(Tparam * parametre)
 			}
             else if(ClicSurBouton(boutonEnregistrerParam, positionClic))
             {
-                descFicParam = fopen("ressources/paramUser.dat", "w");
-                if(descFicParam == NULL)
-                    dgFatal("paramUser.dat non trouve");
-
-                memParam(parametre, descFicParam);
-                fclose(descFicParam);
+                if(!nbInstChange)
+                {
+                    descFicParam = ouvrirFichierRessources("paramUser.dat", "w");
+                    memParam(parametre, descFicParam);
+                    fclose(descFicParam);
+                }
             }
             else if(ClicSurBouton(boutonChargerParam, positionClic))
             {
-                descFicParam = fopen("paramUser.dat", "r");
-                if(descFicParam == NULL)
-                    dgFatal("paramUser.dat non trouve");
-
+                descFicParam = ouvrirFichierRessources("paramUser.dat", "r");
                 resetInfoBateau(parametre);
                 chargerParam(descFicParam, parametre);
                 fclose(descFicParam);
@@ -389,10 +381,7 @@ void MenuNouvellePartie(Tparam * parametre)
             }
             else if(ClicSurBouton(boutonRetablirDefaut, positionClic))
             {
-                descFicParam = fopen("paramOrigin.dat", "r");
-                if(descFicParam == NULL)
-                    dgFatal("paramOrigin.dat non trouve");
-
+                descFicParam = ouvrirFichierRessources("paramOrigin.dat", "r");
                 resetInfoBateau(parametre);
                 chargerParam(descFicParam, parametre);
                 fclose(descFicParam);
@@ -438,6 +427,7 @@ void MenuNouvellePartie(Tparam * parametre)
         LibererChamp(paramNbBat[i]);
     }
 
+    return partiePrete;
 }
 
 void MenuParam(Tparam * parametre)
