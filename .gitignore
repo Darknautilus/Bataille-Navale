@@ -170,6 +170,7 @@ pip-log.txt
 lib
 *.o
 *.cbp
+*.cbTemp
 *.depend
 *.exe
 *.layout
