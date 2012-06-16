@@ -7,6 +7,10 @@ void jeu(Tparam * pParam);
 
 void menuPlacementChoixBat(void);
 
-void menuPlacementGrille(TBateau * pBat);
+int menuPlacementGrille(TBateau * pBat);
+
+int changerSensBat(int pSensBat);
+
+int placementBatValide(void);
 
 #endif

@@ -32,22 +32,23 @@ Grille * CreerGrille(int nbLin, int nbCol)
 		nouvGrille->NbCol = nbCol;
 
 		// Allocation du tableau de lignes
-		nouvGrille->TabLignes = (Ligne*) malloc(nbLin * sizeof(Ligne));
-		if(nouvGrille->TabLignes == NULL)
+		nouvGrille->Matrice = (Ligne*) malloc(nbLin * sizeof(Ligne));
+		if(nouvGrille->Matrice == NULL)
 			return NULL;
 
 		// Parcours des lignes
-		for(i=0; i<nbLin; i++)
+		for(i=0; i<nbCol; i++)
 		{
-			nouvGrille->TabLignes[i] = (CaseGrille*) malloc(nbCol * sizeof(CaseGrille));
-			if(nouvGrille->TabLignes[i] == NULL)
+			nouvGrille->Matrice[i] = (CaseGrille*) malloc(nbLin * sizeof(CaseGrille));
+			if(nouvGrille->Matrice[i] == NULL)
 				return NULL;
 			
 			// Et on initialise
-			for(j=0; j<nbCol; j++)
+			for(j=0; j<nbLin; j++)
 			{
-				nouvGrille->TabLignes[i][j].etatCase = GRILLE_CASE_NORMAL;
-				nouvGrille->TabLignes[i][j].couleur = KIDCOULDEFAUT;
+				nouvGrille->Matrice[i][j].etatCase = GRILLE_CASE_NORMAL;
+				nouvGrille->Matrice[i][j].couleur = KIDCOULDEFAUT;
+                nouvGrille->Matrice[i][j].estOccupe = 0;
 			}
 		}
 
@@ -61,14 +62,14 @@ Grille * CreerGrille(int nbLin, int nbCol)
 	return grille;
 }
 
-CaseGrille Consulter(Grille * grille, Coord coord)
+CaseGrille * Consulter(Grille * grille, Coord coord)
 {
-	return grille->TabLignes[coord.noLin-1][coord.noCol-1];
+	return &(grille->Matrice[coord.noCol-1][coord.noLin-1]);
 }
 
 Grille * SetEtatCase(Grille * grille, Coord coord, EtatCase etat)
 {
-	grille->TabLignes[coord.noLin-1][coord.noCol-1].etatCase = etat;
+	grille->Matrice[coord.noCol-1][coord.noLin-1].etatCase = etat;
 
 	return grille;
 }
@@ -77,11 +78,11 @@ Grille * EffacerGrille(Grille * grille)
 {
 	int i,j;
 
-	for(i=0;i<grille->NbLin;i++)
+	for(i=0;i<grille->NbCol;i++)
 	{
-		for(j=0;j<grille->NbCol;j++)
+		for(j=0;j<grille->NbLin;j++)
 		{
-			grille->TabLignes[i][j].etatCase = GRILLE_CASE_NORMAL;
+			grille->Matrice[i][j].etatCase = GRILLE_CASE_NORMAL;
 		}
 	}
 
@@ -92,9 +93,9 @@ void LibererGrille(Grille * grille)
 {
 	int i;
 
-	for(i=0;i<grille->NbLin;i++)
-		free(grille->TabLignes[i]);
+	for(i=0;i<grille->NbCol;i++)
+		free(grille->Matrice[i]);
 
-	free(grille->TabLignes);
+	free(grille->Matrice);
 	free(grille);
 }

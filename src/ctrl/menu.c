@@ -348,9 +348,6 @@ int MenuNouvellePartie(Tparam * parametre)
                     strcpy(globalPartie->joueur->nomJ, champPseudoHumain->chaine);
                     strcpy(globalPartie->machine->nomJ, champPseudoIA->chaine);
 
-
-                    EcranGrille(champPseudoHumain);
-
                     partiePrete = 1;
                     continuer = 0;
                 }
@@ -543,8 +540,8 @@ void MenuParam(Tparam * parametre)
         }
 
         if(ClicSurBouton(boutonAnnuler, positionClic))
-
             continuer = 0;
+        
         else if(ClicSurBouton(boutonValider, positionClic))
         {
             for(i=0;i<K_NBTYPEBATEAUX;i++)
@@ -552,7 +549,7 @@ void MenuParam(Tparam * parametre)
                 nbBat = parametre->nombreInstanceBateaux[i];
                 for(j=0;j<nbBat;j++)
                 {
-                    setInfoBateau(&(parametre->bateauxJoueur[getNumBat(i, j, parametre)]), tabChamp[i][j]->chaine, tabRectChoixCoul[i][j]->couleur, i);
+                    setInfoBateau(&(parametre->bateauxJoueur[getNumBat(i, j, parametre)]), tabChamp[i][j]->chaine, tabRectChoixCoul[i][j]->couleur, i+1);
                 }
             }
             continuer = 0;

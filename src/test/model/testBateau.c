@@ -8,7 +8,6 @@
 */
 int testEstCoule(){
 
-    TPosition pos;
     int resultat = 1;
 
     //On créer un remorqueur (2 cases)
@@ -154,7 +153,6 @@ int testToucheBateau(){
 int testGetPosBateau(){
 
     int resultat = 1;
-    int type = REMORQUEUR;
 
     TPosition pos;
 

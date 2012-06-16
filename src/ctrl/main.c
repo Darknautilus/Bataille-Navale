@@ -10,10 +10,11 @@
 #include "../view/vueRegles.h"
 #include "../view/includeSDL.h"
 
-#include "../ctrl/menu.h"
+#include "menu.h"
 #include "jeu.h"
 #include "utilsSDL.h"
 #include "fichierDebug.h"
+#include "CtrlGrille.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -55,6 +56,8 @@ int main(int argc, char ** argv)
 
     init_debug();
     initRandom();
+    
+    //EcranGrille(NULL);
 
 	AfficherMenuAccueil();
 

@@ -122,7 +122,7 @@ int getNumBat(ETypeBat pTypeBat, int pNumBatType, Tparam * pParam)
 
 void resetInfoBateau(Tparam * pParam)
 {
-    int i,j,traite;
+    int i;
 
     free(pParam->bateauxJoueur);
     free(pParam->bateauxMachine);

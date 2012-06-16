@@ -8,10 +8,17 @@
 *** À réaliser ***
 
 - Interface (En partie fait, attente du dev des autres modules)
-- Paramétrage
-- Pile des coups
+- Paramétrage [FAIT]
+- Pile des coups [FAIT]
 - IA
 
-- Bateaux (À faire en priorité !)
+- Bateaux (À faire en priorité !) [FAIT]
 - Règles et comptage des points
 - Sauvegardes / Restaurations
+
+
+*** Versions futures ***
+
+Modifier AttendreEvent() pour prendre en compte les déplacements de la souris
+Revoir la conception générale
+Faire les boites de dialogue (pop-up)

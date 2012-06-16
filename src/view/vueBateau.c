@@ -2,6 +2,8 @@
 
 #include "../model/grille.h"
 #include "../model/bateau.h"
+#include "../model/parametre.h"
+#include "../model/partie.h"
 
 #include <stdlib.h>
 
@@ -10,13 +12,23 @@ Grille * InsertBateau(Grille * grille, TBateau * bat)
 {
 	int i;
 	Coord coordCaseGrille;
-
-	if(!estPlacable(bat, grille))
-        return NULL;
-
-	// détermine si le bateau est plaçé sur un autre bateau et l'insère si tout va bien
+    
 	for(i=0;i<getTypeBateau(bat);i++)
 	{
+        if(bat->position.direction == VERTICAL)
+        {
+            coordCaseGrille.noCol = bat->position.x;
+            coordCaseGrille.noLin = bat->position.y+i;
+        }
+        else if(bat->position.direction == HORIZONTAL)
+        {
+            coordCaseGrille.noCol = bat->position.x+i;
+            coordCaseGrille.noLin = bat->position.y;
+        }
+        
+        Consulter(grille, coordCaseGrille)->estOccupe = 1;
+        Consulter(grille, coordCaseGrille)->couleur = getInfoBateau(bat->idBateau, partie_Param())->couleur;
+        
 		if(bat->etat[i] == TOUCHE)
 			grille = SetEtatCase(grille, coordCaseGrille, GRILLE_CASE_TOUCHE);
 		else if(bat->etat[i] == COULE)
