@@ -74,7 +74,7 @@ int main(int argc, char ** argv)
             case 1: // Nouvelle Partie
                 partiePrete = MenuNouvellePartie(parametrePartie);
                 if(partiePrete)
-                    menuPlacementBat();
+                    menuPlacementChoixBat();
                 break;
 
             case 2: // Charger partie

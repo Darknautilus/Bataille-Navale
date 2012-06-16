@@ -10,11 +10,11 @@
 #ifndef _PARAM_H
 #define _PARAM_H
 
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "bateau.h"
 #include "couleurs.h"
+
+#include <stdio.h>
+#include <stdlib.h>
 
 #define K_NBTYPEBATEAUX KTAILLEMAXBAT /**< \brief Nombre de types de bateaux */
 #define K_LGNOM 25 /**< \brief Longueur maximale du nom du bateau */

@@ -6,6 +6,7 @@
 #include "../view/vueUtilsSDL.h"
 #include "../view/SDLButton.h"
 #include "../view/SDLRectangle.h"
+#include "../view/vueGrille.h"
 
 #include "menu.h"
 
@@ -16,12 +17,13 @@ void jeu(Tparam * pParam)
     
 }
 
-void menuPlacementBat(void)
+void menuPlacementChoixBat(void)
 {
     int continuer = 1;
     int i, j;
     int nbBat;
     int absInfoBat, ordInfoBat;
+    int cptBat;
     
     char labelColonneTypes[KLONGMAXNOMTYPE];
     
@@ -36,7 +38,7 @@ void menuPlacementBat(void)
     Rectangle *** tabRectChoixCoul = (Rectangle***)malloc(K_NBTYPEBATEAUX * sizeof(Rectangle**));
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {
-        nbBat = getNbInstancesType(globalPartie->parametres, i);
+        nbBat = globalPartie->parametres->nombreInstanceBateaux[i];
         tabRectChoixCoul[i] = (Rectangle**)malloc(nbBat*sizeof(Rectangle*));
         
         for(j=0;j<nbBat;j++)
@@ -84,7 +86,7 @@ void menuPlacementBat(void)
             
             EcrireTexte(labelColonneTypes, 25, positionTexte, "default.ttf");
             
-            nbBat = getNbInstancesType(globalPartie->parametres, i);
+            nbBat = globalPartie->parametres->nombreInstanceBateaux[i];
             for(j=0;j<nbBat;j++)
             {
                 afficherRectangle(tabRectChoixCoul[i][j]);
@@ -95,13 +97,69 @@ void menuPlacementBat(void)
         
         controleEvent = AttendreEvent(positionClic, NULL);
         
+        cptBat = 0;
         if(controleEvent == 1)
         {
+            for(i=0;i<K_NBTYPEBATEAUX;i++)
+            {
+                nbBat = globalPartie->parametres->nombreInstanceBateaux[i];
+                for(j=0;j<nbBat;j++)
+                {
+                    if(clicSurRectangle(tabRectChoixCoul[i][j], positionClic))
+                        menuPlacementGrille(partie_JHumain()->mesBateaux[cptBat]);
+                    
+                    cptBat++;
+                }
+            }
             afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
             SDL_Flip(SDL_GetVideoSurface());
         }
     }
     
     LibererBouton(boutonValider);
+    free(positionClic);
+}
+
+void menuPlacementGrille(TBateau * pBat)
+{
+    int continuer = 1;
+    int i, j;
+    
+    char * titreFenetre = (char*)malloc((strlen("Placement de ")+strlen(partie_Param()->bateauxJoueur[pBat->idBateau].nomBateau))*sizeof(char));
+    
+    SDL_Rect positionTexte;
+    
+    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+    int controleEvent;
+    
+    while (continuer)
+    {
+        EffacerEcran();
+        afficherGrille(partie_Grille(), 111, 185);
+        
+        positionTexte.x = 340;
+        positionTexte.y = 30;
+        strcpy(titreFenetre, "Placement de ");
+        strcat(titreFenetre, partie_Param()->bateauxJoueur[pBat->idBateau].nomBateau);
+        EcrireTexte(titreFenetre, 30, positionTexte, "default.ttf");
+        
+        SDL_Flip(SDL_GetVideoSurface());
+        
+        controleEvent = AttendreEvent(positionClic, touche);
+        if(controleEvent == 2)
+        {
+            if(ToucheSpec(touche) == SDLK_ESCAPE)
+                continuer = 0;
+        }
+        else if(controleEvent == 1)
+        {
+            afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
+            SDL_Flip(SDL_GetVideoSurface());
+        }
+    }
+    
+    free(titreFenetre);
+    free(touche);
     free(positionClic);
 }

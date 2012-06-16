@@ -2,6 +2,36 @@
 
 TPartie *globalPartie = NULL;
 
+Joueur * partie_JHumain()
+{
+    return globalPartie->joueur;
+}
+
+Joueur * partie_JMachine()
+{
+    return globalPartie->machine;
+}
+
+Tparam * partie_Param()
+{
+    return globalPartie->parametres;
+}
+
+Pile * partie_PileCoups()
+{
+    return globalPartie->pileCoups;
+}
+
+Grille * partie_Grille()
+{
+    return globalPartie->grille;
+}
+
+int partie_Score()
+{
+    return globalPartie->scorePlayer;
+}
+
 TPartie* initialiser(Tparam *param){
 
     int i = 0;
@@ -14,7 +44,7 @@ TPartie* initialiser(Tparam *param){
     partie->joueur = CreerJoueur();
     partie->machine = CreerJoueur();
 
-    partie->grille = CreerGrille(KLARGCASE, KHAUTEURCASE);
+    partie->grille = CreerGrille(10,10);
 
     partie->parametres = param;
 

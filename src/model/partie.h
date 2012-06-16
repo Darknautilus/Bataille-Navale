@@ -29,6 +29,15 @@ typedef struct
 **/
 extern TPartie *globalPartie;
 
+/**
+ * Getters de la structure TPartie
+*/
+Joueur * partie_JHumain();
+Joueur * partie_JMachine();
+Tparam * partie_Param();
+Pile * partie_PileCoups();
+Grille * partie_Grille();
+int partie_Score();
 
 
 /**
