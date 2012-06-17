@@ -5,7 +5,7 @@
 
 void jeu(Tparam * pParam);
 
-void menuPlacementChoixBat(void);
+int menuPlacementChoixBat(void);
 
 int menuPlacementGrille(TBateau * pBat);
 

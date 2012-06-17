@@ -19,16 +19,23 @@ void jeu(Tparam * pParam)
 {
     globalPartie = initialiser(pParam);
     
+    if(menuPlacementChoixBat())
+    {
+        // On place les bateaux de la machine et on y va !
+    }
     
+    libererPartie();
 }
 
-void menuPlacementChoixBat(void)
+int menuPlacementChoixBat(void)
 {
     int continuer = 1;
     int i, j;
     int nbBat;
     int absInfoBat, ordInfoBat;
     int cptBat;
+    
+    int retour = 1;
     
     char nomBateau[K_LGNOM];
     
@@ -40,6 +47,7 @@ void menuPlacementChoixBat(void)
     int controleEvent;
     
     SDL_Bouton * boutonValider;
+    SDL_Bouton * boutonAnnuler;
     SDL_Rect positionBouton;
     
     Rectangle *** tabRectChoixBat = (Rectangle***)malloc(K_NBTYPEBATEAUX * sizeof(Rectangle**));
@@ -71,14 +79,18 @@ void menuPlacementChoixBat(void)
         }
     }
     
-    positionBouton.x = 424;
+    positionBouton.x = 324;
     positionBouton.y = 682;
     boutonValider = CreerBouton("Valider", &positionBouton, 25);
+    positionBouton.x = 524;
+    positionBouton.y = 682;
+    boutonAnnuler = CreerBouton("Annuler", &positionBouton, 25);
     
     while(continuer)
     {
         EffacerEcran();
         
+        AfficherBouton(boutonAnnuler);
         if(placementBatValide())
             strcpy(boutonValider->texte, "Valider");
         else
@@ -123,7 +135,8 @@ void menuPlacementChoixBat(void)
                 {
                     if(clicSurRectangle(tabRectChoixBat[i][j], positionClic) && !placementBatValide())
                     {
-                        menuPlacementGrille(partie_JHumain()->mesBateaux[cptBat]);
+                        if(!(partie_JHumain()->mesBateaux[cptBat]->estPlace))
+                            menuPlacementGrille(partie_JHumain()->mesBateaux[cptBat]);
                     }
                     cptBat++;
                 }
@@ -133,14 +146,33 @@ void menuPlacementChoixBat(void)
             {
                 if(placementBatValide())
                 {
-                    // On place les bateaux de la machine et on y va !
+                    continuer = 0;
                 }
+            }
+            else if(ClicSurBouton(boutonAnnuler, positionClic))
+            {
+                retour = 0;
+                continuer = 0;
             }
         }
     }
     
     LibererBouton(boutonValider);
+    LibererBouton(boutonAnnuler);
     free(positionClic);
+    
+    for(i=0;i<K_NBTYPEBATEAUX;i++)
+    {
+        nbBat = globalPartie->parametres->nombreInstanceBateaux[i];
+        for(j=0;j<nbBat;j++)
+        {
+            libererRectangle(tabRectChoixBat[i][j]);
+        }
+        free(tabRectChoixBat[i]);
+    }
+    free(tabRectChoixBat);
+    
+    return retour;
 }
 
 int menuPlacementGrille(TBateau * pBat)

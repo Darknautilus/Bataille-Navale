@@ -25,7 +25,7 @@ typedef struct Cellule * Pile;
  R : retourne une pile initialisee
  Prec : -
  */
-Pile* CreerPile(void);
+Pile CreerPile(void);
 
 /*
  N : PileVide

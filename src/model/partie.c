@@ -17,7 +17,7 @@ Tparam * partie_Param()
     return globalPartie->parametres;
 }
 
-Pile * partie_PileCoups()
+Pile partie_PileCoups()
 {
     return globalPartie->pileCoups;
 }
@@ -89,8 +89,24 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
 }
 
-void libererPartie(TPartie * pPartie)
+void libererPartie(void)
 {
-    free(pPartie->joueur->mesBateaux);
-    free(pPartie->machine->mesBateaux);
+    int i;
+    int nombreBateaux = getNbBat(partie_Param());
+    
+    for(i=0;i<nombreBateaux;i++)
+    {
+        LibererBateau(partie_JHumain()->mesBateaux[i]);
+        LibererBateau(partie_JMachine()->mesBateaux[i]);
+    }
+    
+    LibererJoueur(partie_JHumain());
+    LibererJoueur(partie_JMachine());
+    LibererGrille(partie_Grille());
+    libererParam(partie_Param());
+    
+    while(!PileVide(partie_PileCoups()))
+        Depiler(partie_PileCoups());
+    
+    free(globalPartie);
 }

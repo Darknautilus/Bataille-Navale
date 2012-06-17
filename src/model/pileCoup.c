@@ -3,7 +3,7 @@
 
 #include "pileCoup.h"
 
-Pile* CreerPile(void)
+Pile CreerPile(void)
 {
 	return NULL;
 }

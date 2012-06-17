@@ -18,7 +18,7 @@ typedef struct
     Joueur *joueur;
     Joueur *machine;
     Tparam *parametres;
-    Pile *pileCoups;
+    Pile pileCoups;
     Grille *grille;
     int scorePlayer;
 } TPartie;
@@ -35,7 +35,7 @@ extern TPartie *globalPartie;
 Joueur * partie_JHumain();
 Joueur * partie_JMachine();
 Tparam * partie_Param();
-Pile * partie_PileCoups();
+Pile partie_PileCoups();
 Grille * partie_Grille();
 int partie_Score();
 
@@ -61,7 +61,7 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur);
 
 
 
-
+void libererPartie(void);
 
 
 
