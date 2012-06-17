@@ -331,7 +331,6 @@ int MenuNouvellePartie(Tparam * parametre)
                 {
                     descFicParam = ouvrirFichierRessources("dicoNoms.dat", "r");
                     
-                    dgInfo("Parametres machine :");
                     nbBat = 0;
                     for(i=0;i<K_NBTYPEBATEAUX;i++)
                     {
@@ -339,7 +338,6 @@ int MenuNouvellePartie(Tparam * parametre)
                         {
                             choixMotHasard(nomBatIA, descFicParam, K_LGNOM);
                             setInfoBateau(&(parametre->bateauxMachine[nbBat]), nomBatIA, nombreAleatoire(1, KCOULEURS_NBCOULMAX-1), tabTypesBat[i].typeBat);
-                            dgInfo(parametre->bateauxMachine[nbBat].nomBateau);
                             nbBat++;
                             
                         }

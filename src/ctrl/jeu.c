@@ -331,7 +331,6 @@ void placementAleatBat(Joueur * pJoueur)
     int abscisse;
     int ordonnee;
     
-    dgInfo("Bateaux placés :");
     // On place les bateaux tant que tous ne sont pas places
     while(!placementBatValide(pJoueur))
     {
@@ -348,7 +347,6 @@ void placementAleatBat(Joueur * pJoueur)
                 {
                     pJoueur->mesBateaux[i]->estPlace = 1;
                     InsertBateau(globalPartie->grilleMachine, pJoueur->mesBateaux[i]);
-                    dgInfo(getInfoBateau(pJoueur->mesBateaux[i]->idBateau, partie_Param())->nomBateau);
                 }
             }
         }
