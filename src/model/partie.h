@@ -20,6 +20,7 @@ typedef struct
     Tparam *parametres;
     Pile pileCoups;
     Grille *grille;
+    Grille *grilleMachine;
     int scorePlayer;
 } TPartie;
 

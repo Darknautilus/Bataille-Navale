@@ -174,6 +174,28 @@ void afficherCoordClic(SDL_Rect * pPosClic, int pTaille, int pAbs, int pOrd, cha
     EcrireLigneTexte(texte, pTaille, posTexte, pPolice);
 }
 
+void pause(void)
+{
+	int continuer = 1;
+	SDL_Event event;
+    
+	while(continuer)
+	{
+		SDL_WaitEvent(&event);
+		switch(event.type)
+		{
+			case SDL_QUIT:
+				exit(EXIT_FAILURE);
+                break;
+                
+			case SDL_KEYDOWN:
+				continuer = 0;
+                break;
+        }
+    }
+    
+}
+
 void EffacerEcran(void)
 {
 	SDL_FillRect(SDL_GetVideoSurface(), NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, 0, 0, 0));

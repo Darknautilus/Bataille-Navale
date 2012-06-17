@@ -45,6 +45,7 @@ TPartie* initialiser(Tparam *param){
     partie->machine = CreerJoueur();
 
     partie->grille = CreerGrille(10,10);
+    partie->grilleMachine = CreerGrille(10, 10);
 
     partie->parametres = param;
 

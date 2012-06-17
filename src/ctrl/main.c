@@ -19,28 +19,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void pause()
-{
-	int continuer = 1;
-	SDL_Event event;
-
-	while(continuer)
-	{
-		SDL_WaitEvent(&event);
-		switch(event.type)
-		{
-			case SDL_QUIT:
-				exit(EXIT_FAILURE);
-			break;
-
-			case SDL_KEYDOWN:
-				continuer = 0;
-			break;
-        }
-    }
-
-}
-
 int main(int argc, char ** argv)
 {
 	SDL_Surface * ecran;

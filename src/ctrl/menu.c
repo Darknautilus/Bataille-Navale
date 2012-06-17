@@ -206,8 +206,9 @@ int MenuNouvellePartie(Tparam * parametre)
     
     // Autres
     int continuer = 1;
-    int i;
+    int i, j;
     int nbInstChange = 1;
+    int nbBat;
     FILE * descFicParam;
 
     int * nbInstancesbat;
@@ -329,11 +330,19 @@ int MenuNouvellePartie(Tparam * parametre)
                 if(!nbInstChange)
                 {
                     descFicParam = ouvrirFichierRessources("dicoNoms.dat", "r");
-
-                    for(i=0;i<getNbBat(parametre);i++)
+                    
+                    dgInfo("Parametres machine :");
+                    nbBat = 0;
+                    for(i=0;i<K_NBTYPEBATEAUX;i++)
                     {
-                        choixMotHasard(nomBatIA, descFicParam, K_LGNOM);
-                        setInfoBateau(&(parametre->bateauxMachine[i]), nomBatIA, nombreAleatoire(1, KCOULEURS_NBCOULMAX-1), i);
+                        for(j=0;j<nbInstancesbat[i];j++)
+                        {
+                            choixMotHasard(nomBatIA, descFicParam, K_LGNOM);
+                            setInfoBateau(&(parametre->bateauxMachine[nbBat]), nomBatIA, nombreAleatoire(1, KCOULEURS_NBCOULMAX-1), tabTypesBat[i].typeBat);
+                            dgInfo(parametre->bateauxMachine[nbBat].nomBateau);
+                            nbBat++;
+                            
+                        }
                     }
                     fclose(descFicParam);
 

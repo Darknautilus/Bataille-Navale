@@ -43,7 +43,7 @@ typedef struct
 }
 TtypeBat;
 
-extern const TtypeBat tabTypesBat[KTAILLEMAXBAT+1];
+extern const TtypeBat tabTypesBat[KTAILLEMAXBAT];
 
 /**
  * \enum ESens

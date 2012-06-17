@@ -11,7 +11,7 @@
 #include "parametre.h"
 #include "partie.h"
 
-const TtypeBat tabTypesBat[KTAILLEMAXBAT+1] = {
+const TtypeBat tabTypesBat[KTAILLEMAXBAT] = {
     {VOILIER,"Voilier"},
     {REMORQUEUR,"Remorqueur"},
     {CARGOT,"Cargot"},
@@ -28,7 +28,9 @@ TBateau * CreerBateau()
 {
 	int i;
 	TBateau * bat = (TBateau*) malloc(sizeof(TBateau));
-
+    
+    bat->estPlace = 0;
+    
     TPosition pos;
     pos.x = 1;
     pos.y = 1;

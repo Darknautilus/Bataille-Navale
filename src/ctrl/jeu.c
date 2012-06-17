@@ -3,6 +3,7 @@
 #include "../model/parametre.h"
 #include "../model/partie.h"
 #include "../model/bateau.h"
+#include "../model/random.h"
 
 #include "../view/vueUtilsSDL.h"
 #include "../view/SDLButton.h"
@@ -22,6 +23,11 @@ void jeu(Tparam * pParam)
     if(menuPlacementChoixBat())
     {
         // On place les bateaux de la machine et on y va !
+        placementAleatBat(partie_JMachine());
+        EffacerEcran();
+        afficherGrille(globalPartie->grilleMachine, 50, 50);
+        SDL_Flip(SDL_GetVideoSurface());
+        pause();
     }
     
     libererPartie();
@@ -91,7 +97,7 @@ int menuPlacementChoixBat(void)
         EffacerEcran();
         
         AfficherBouton(boutonAnnuler);
-        if(placementBatValide())
+        if(placementBatValide(partie_JHumain()))
             strcpy(boutonValider->texte, "Valider");
         else
             strcpy(boutonValider->texte, "");
@@ -133,7 +139,7 @@ int menuPlacementChoixBat(void)
                 nbBat = globalPartie->parametres->nombreInstanceBateaux[i];
                 for(j=0;j<nbBat;j++)
                 {
-                    if(clicSurRectangle(tabRectChoixBat[i][j], positionClic) && !placementBatValide())
+                    if(clicSurRectangle(tabRectChoixBat[i][j], positionClic) && !placementBatValide(partie_JHumain()))
                     {
                         if(!(partie_JHumain()->mesBateaux[cptBat]->estPlace))
                             menuPlacementGrille(partie_JHumain()->mesBateaux[cptBat]);
@@ -144,7 +150,7 @@ int menuPlacementChoixBat(void)
             
             if(ClicSurBouton(boutonValider, positionClic))
             {
-                if(placementBatValide())
+                if(placementBatValide(partie_JHumain()))
                 {
                     continuer = 0;
                 }
@@ -212,7 +218,6 @@ int menuPlacementGrille(TBateau * pBat)
     boutonAnnuler = CreerBouton("Annuler", &positionBouton, 25);
     
     batInser = CreerBateau();
-    batInser->estPlace = 0;
     batInser->idBateau = pBat->idBateau;
         
     while (continuer)
@@ -305,16 +310,47 @@ int changerSensBat(int pSensBat)
         return 0;
 }
 
-int placementBatValide(void)
+int placementBatValide(Joueur * pJoueur)
 {
     int i;
     int retour = 1;
     
     for(i=0;i<getNbBat(partie_Param());i++)
     {
-        if(!(partie_JHumain()->mesBateaux[i]->estPlace))
+        if(!(pJoueur->mesBateaux[i]->estPlace))
             retour = 0;
     }
     
     return retour;
+}
+
+void placementAleatBat(Joueur * pJoueur)
+{
+    int i;
+    int sens;
+    int abscisse;
+    int ordonnee;
+    
+    dgInfo("Bateaux placés :");
+    // On place les bateaux tant que tous ne sont pas places
+    while(!placementBatValide(pJoueur))
+    {
+        for(i=0;i<getNbBat(partie_Param());i++)
+        {
+            if(!(pJoueur->mesBateaux[i]->estPlace))
+            {
+                sens = nombreAleatoire(0, 1);
+                abscisse = nombreAleatoire(1, 10);
+                ordonnee = nombreAleatoire(1, 10);
+            
+                setPosBat(pJoueur->mesBateaux[i], tabSensBat[sens].sensBat, abscisse, ordonnee);
+                if(estPlacable(pJoueur->mesBateaux[i], globalPartie->grilleMachine))
+                {
+                    pJoueur->mesBateaux[i]->estPlace = 1;
+                    InsertBateau(globalPartie->grilleMachine, pJoueur->mesBateaux[i]);
+                    dgInfo(getInfoBateau(pJoueur->mesBateaux[i]->idBateau, partie_Param())->nomBateau);
+                }
+            }
+        }
+    }
 }
