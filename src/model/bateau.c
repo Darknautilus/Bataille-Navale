@@ -28,9 +28,9 @@ TBateau * CreerBateau()
 {
 	int i;
 	TBateau * bat = (TBateau*) malloc(sizeof(TBateau));
-    
+
     bat->estPlace = 0;
-    
+
     TPosition pos;
     pos.x = 1;
     pos.y = 1;
@@ -138,14 +138,14 @@ int estPlacable(TBateau * bat, Grille * grille)
     int estPlacable = 1;
     int i;
     Coord coordCaseGrille;
-        
+
     ETypeBat typeBat = getInfoBateau(bat->idBateau, partie_Param())->type;
-    
+
     // détermine si le bateau est en dehors de la grille
 	if ( (bat->position.direction == HORIZONTAL && bat->position.x + (typeBat-1) > grille->NbLin) ||
         (bat->position.direction == VERTICAL && bat->position.y + (typeBat-1) > grille->NbCol) )
         estPlacable = 0;
-    
+
     // détermine si le bateau est plaçé sur un autre bateau
     for(i=0;i<typeBat && estPlacable;i++)
     {
@@ -159,11 +159,11 @@ int estPlacable(TBateau * bat, Grille * grille)
 			coordCaseGrille.noCol = bat->position.x;
 			coordCaseGrille.noLin = bat->position.y + i;
 		}
-        
-		if(Consulter(grille, coordCaseGrille)->estOccupe)
+
+		if(Consulter(grille, coordCaseGrille)->idBateauOccupe > -1)
 			estPlacable = 0;
     }
-    
+
     return estPlacable;
 }
 

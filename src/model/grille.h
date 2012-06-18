@@ -26,7 +26,7 @@
 typedef enum {
     GRILLE_CASE_NORMAL, /**< Fond case normal */
     GRILLE_CASE_TOUCHE, /**< Ajout d'un signal "touché" */
-    GRILLE_CASE_COULE /**< Ajout d'un signal "coulé" */
+    GRILLE_CASE_COULE   /**< Ajout d'un signal "coulé" */
 } EtatCase;
 
 /**
@@ -35,9 +35,9 @@ typedef enum {
 */
 typedef struct
 {
-    EtatCase etatCase; /**< État de la case */
-	int couleur; /**< Numéro de la couleur dans la table des couleurs */
-	int estOccupe; /**< Vaut 1 si un bateau est placé sur la case et 0 sinon */
+    EtatCase etatCase;      /**< État de la case */
+	int couleur;            /**< Numéro de la couleur dans la table des couleurs */
+	int idBateauOccupe;     /**< Id du bateau qui occupe la case. */
 }
 CaseGrille;
 
@@ -53,11 +53,11 @@ typedef CaseGrille * Ligne;
 */
 typedef struct
 {
-	Ligne * Matrice;/**< Tableau dynamique de lignes */
-	int NbLin;/**< Nombre de lignes de la matrice */
-	int NbCol;/**< Nombre de colonnes de la matrice */
-	int abscisse;/**< Abscisse de la grille à l'écran */
-	int ordonnee;/**< Ordonnée de la grille à l'écran */
+	Ligne * Matrice;  /**< Tableau dynamique de lignes */
+	int NbLin;        /**< Nombre de lignes de la matrice */
+	int NbCol;        /**< Nombre de colonnes de la matrice */
+	int abscisse;     /**< Abscisse de la grille à l'écran */
+	int ordonnee;     /**< Ordonnée de la grille à l'écran */
 }
 Grille;
 

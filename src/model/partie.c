@@ -95,6 +95,9 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
     Coup *tir = CreerCoup(joueur, cible);
     globalPartie->pileCoups = Empiler(globalPartie->pileCoups, tir);
 
+
+
+
 }
 
 void libererPartie(void)
