@@ -3,12 +3,7 @@
 
 #include "grille.h"
 #include "joueur.h"
-
-typedef struct
-{
-	Joueur carJoueur;
-	Coord coordTir;
-}Coup;
+#include "Coups.h"
 
 struct Cellule
 {

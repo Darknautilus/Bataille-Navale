@@ -12,7 +12,7 @@ Grille * InsertBateau(Grille * grille, TBateau * bat)
 {
 	int i;
 	Coord coordCaseGrille;
-    
+
 	for(i=0;i<getTypeBateau(bat);i++)
 	{
         if(bat->position.direction == VERTICAL)
@@ -25,10 +25,10 @@ Grille * InsertBateau(Grille * grille, TBateau * bat)
             coordCaseGrille.noCol = bat->position.x+i;
             coordCaseGrille.noLin = bat->position.y;
         }
-        
-        Consulter(grille, coordCaseGrille)->estOccupe = 1;
+
+        Consulter(grille, coordCaseGrille)->idBateauOccupe = bat->idBateau;
         Consulter(grille, coordCaseGrille)->couleur = getInfoBateau(bat->idBateau, partie_Param())->couleur;
-        
+
 		if(bat->etat[i] == TOUCHE)
 			grille = SetEtatCase(grille, coordCaseGrille, GRILLE_CASE_TOUCHE);
 		else if(bat->etat[i] == COULE)

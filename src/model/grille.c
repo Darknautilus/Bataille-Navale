@@ -12,6 +12,7 @@
 
 #include "grille.h"
 #include "couleurs.h"
+#include "bateau.h"
 
 Grille * CreerGrille(int nbLin, int nbCol)
 {
@@ -42,13 +43,13 @@ Grille * CreerGrille(int nbLin, int nbCol)
 			nouvGrille->Matrice[i] = (CaseGrille*) malloc(nbLin * sizeof(CaseGrille));
 			if(nouvGrille->Matrice[i] == NULL)
 				return NULL;
-			
+
 			// Et on initialise
 			for(j=0; j<nbLin; j++)
 			{
 				nouvGrille->Matrice[i][j].etatCase = GRILLE_CASE_NORMAL;
 				nouvGrille->Matrice[i][j].couleur = KIDCOULDEFAUT;
-                nouvGrille->Matrice[i][j].estOccupe = 0;
+                nouvGrille->Matrice[i][j].idBateauOccupe = -1;
 			}
 		}
 
@@ -72,6 +73,12 @@ Grille * SetEtatCase(Grille * grille, Coord coord, EtatCase etat)
 	grille->Matrice[coord.noCol-1][coord.noLin-1].etatCase = etat;
 
 	return grille;
+}
+
+TBateau* getBateauSurCase(Grille *grille, Coord coord){
+
+
+
 }
 
 Grille * EffacerGrille(Grille * grille)

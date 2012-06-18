@@ -58,25 +58,25 @@ TPartie* initialiser(Tparam *param){
 
     partie->scorePlayer = 0;
 
-    //On compte le nombre de bateaux � allouer
+    //On compte le nombre de bateaux à allouer
     nombreBateaux = getNbBat(param);
 
     //On alloue
     partie->joueur->mesBateaux = malloc( sizeof(TBateau*) * nombreBateaux );
     partie->machine->mesBateaux = malloc( sizeof(TBateau*) * nombreBateaux );
 
-    //=========== Pr�paration ===================================
+    //=========== Préparation ===================================
 
-    //Pr�paration des bateaux
+    //Préparation des bateaux
 
-    //Cr�ation des structures et ajout des id
+    //Création des structures et ajout des id
     for(i = 0 ; i < nombreBateaux ; i++){
         partie->joueur->mesBateaux[i] = CreerBateau();
         partie->machine->mesBateaux[i] = CreerBateau();
 
         partie->joueur->mesBateaux[i]->idBateau = i;
         partie->machine->mesBateaux[i]->idBateau = i + nombreBateaux;
-        
+
         partie->joueur->mesBateaux[i]->estPlace = 0;
         partie->machine->mesBateaux[i]->estPlace = 0;
     }
@@ -90,6 +90,16 @@ TPartie* initialiser(Tparam *param){
 int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
 
+    //Traiter pile de coup
+    //Modifier etat bateau
+    //Vérifier les règles
+    //  - Bateau touché => coulé
+
+    //On ajoute le coup à la pile de coups
+    Joueur *joueur = partie->joueur;
+    Coup *tir = CreerCoup(joueur, cible);
+    globalPartie->pileCoups = Empiler(globalPartie->pileCoups, tir);
+
 
 
 
@@ -99,20 +109,20 @@ void libererPartie(void)
 {
     int i;
     int nombreBateaux = getNbBat(partie_Param());
-    
+
     for(i=0;i<nombreBateaux;i++)
     {
         LibererBateau(partie_JHumain()->mesBateaux[i]);
         LibererBateau(partie_JMachine()->mesBateaux[i]);
     }
-    
+
     LibererJoueur(partie_JHumain());
     LibererJoueur(partie_JMachine());
     LibererGrille(partie_Grille());
     libererParam(partie_Param());
-    
+
     while(!PileVide(partie_PileCoups()))
         Depiler(partie_PileCoups());
-    
+
     free(globalPartie);
 }

@@ -4,7 +4,7 @@
  *   \date 13 mai 2012
  *   \brief Module Bateau Headers
  *
- *   Contient les dŽclaration du module Bateau
+ *   Contient les déclaration du module Bateau
 */
 
 #ifndef _BATEAU_H
@@ -34,7 +34,7 @@ typedef enum {
  * \struct TtypeBat
  * \brief Types de bateaux et noms
  *
- * DŽfinit le type du bateau et le nom du type (vise ˆ remplacer ETypeBat)
+ * Définit le type du bateau et le nom du type (vise à remplacer ETypeBat)
 */
 typedef struct
 {
