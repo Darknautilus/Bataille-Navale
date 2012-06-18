@@ -27,6 +27,11 @@ Grille * partie_Grille()
     return globalPartie->grille;
 }
 
+Grille * partie_GrilleMachine()
+{
+    return globalPartie->grilleMachine;
+}
+
 int partie_Score()
 {
     return globalPartie->scorePlayer;

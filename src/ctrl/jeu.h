@@ -10,6 +10,8 @@ int menuPlacementChoixBat(void);
 
 int menuPlacementGrille(TBateau * pBat);
 
+int ecranJeu(void);
+
 int changerSensBat(int pSensBat);
 
 int placementBatValide(Joueur * pJoueur);

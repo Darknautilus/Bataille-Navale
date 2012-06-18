@@ -1,10 +1,10 @@
 /**
  * \file grille.h
- * \author Aurélien Bertron
+ * \author Aurelien Bertron
  * \date 21 avril 2012
- * \brief Header modèle grille
+ * \brief Header modele grille
  *
- * Contient les types et en-têtes des fonctions du module de grille
+ * Contient les types et en-tetes des fonctions du module de grille
  *
  */
 
@@ -21,12 +21,13 @@
 
 /**
  * \enum EtatCase
- * \brief Définit l'aspect de la case
+ * \brief Definit l'aspect de la case
 */
 typedef enum {
     GRILLE_CASE_NORMAL, /**< Fond case normal */
-    GRILLE_CASE_TOUCHE, /**< Ajout d'un signal "touché" */
-    GRILLE_CASE_COULE /**< Ajout d'un signal "coulé" */
+    GRILLE_CASE_TOUCHE, /**< Ajout d'un signal "touche" */
+    GRILLE_CASE_COULE, /**< Ajout d'un signal "coule" */
+    GRILLE_CASE_EAU /**< Ajout d'un signal "a l'eau" */
 } EtatCase;
 
 /**
@@ -35,9 +36,9 @@ typedef enum {
 */
 typedef struct
 {
-    EtatCase etatCase; /**< État de la case */
-	int couleur; /**< Numéro de la couleur dans la table des couleurs */
-	int estOccupe; /**< Vaut 1 si un bateau est placé sur la case et 0 sinon */
+    EtatCase etatCase; /**< Etat de la case */
+	int couleur; /**< Numero de la couleur dans la table des couleurs */
+	int estOccupe; /**< Vaut 1 si un bateau est place sur la case et 0 sinon */
 }
 CaseGrille;
 
