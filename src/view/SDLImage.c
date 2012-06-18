@@ -6,6 +6,7 @@
 
 Image * CreerImage(char * pChemin, int pAbscisse, int pOrdonnee)
 {
+    char * mesErreur;
 	Image * nouvImage = (Image*)malloc(sizeof(Image));
 
     //On alloue une variable pouvant contenir le chemin vers le dossier image + celui de l'image
@@ -17,7 +18,12 @@ Image * CreerImage(char * pChemin, int pAbscisse, int pOrdonnee)
 	nouvImage->zoneImage = IMG_Load(chemin);
 
     if(nouvImage->zoneImage == NULL){
-        dgFatal("Impossible de charger une image");
+        mesErreur = (char*)malloc((strlen(chemin) + 30)*sizeof(char));
+        strcpy(mesErreur, chemin);
+        strcat(mesErreur, " : Impossible de charger une image");
+        dgFatal(mesErreur);
+        free(mesErreur);
+        exit(EXIT_FAILURE);
     }
 
 	nouvImage->longueur = nouvImage->zoneImage->w;

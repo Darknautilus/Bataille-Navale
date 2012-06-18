@@ -3,6 +3,8 @@
 
 #include "includeSDL.h"
 
+void ecranVictoire(void);
+
 /**
  * \brief Permet d'écrire du texte en blanc
  *
@@ -79,6 +81,11 @@ Uint32 convertSDL_Color(SDL_Color pCouleur);
  * \param[in] pPolice Police du texte
 */
 void afficherCoordClic(SDL_Rect * pPosClic, int pTaille, int pAbs, int pOrd, char * pPolice);
+
+/**
+ * \brief Met le programme en pause et attend qu'une touche soit pressée
+*/
+void pause(void);
 
 /**
  * \brief Efface l'écran

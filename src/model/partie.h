@@ -20,6 +20,7 @@ typedef struct
     Tparam *parametres;
     Pile pileCoups;
     Grille *grille;
+    Grille *grilleMachine;
     int scorePlayer;
 } TPartie;
 
@@ -29,6 +30,15 @@ typedef struct
 **/
 extern TPartie *globalPartie;
 
+/**
+ * Getters de la structure TPartie
+*/
+Joueur * partie_JHumain();
+Joueur * partie_JMachine();
+Tparam * partie_Param();
+Pile partie_PileCoups();
+Grille * partie_Grille();
+int partie_Score();
 
 
 /**
@@ -52,7 +62,7 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur);
 
 
 
-
+void libererPartie(void);
 
 
 

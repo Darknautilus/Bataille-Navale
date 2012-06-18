@@ -26,7 +26,7 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 	TTF_Font * policeGrille;
 	SDL_Color couleurBlanche = {255,255,255};
 	Coord coord;
-    CaseGrille contenuCaseGrille;
+    CaseGrille * contenuCaseGrille;
 
 	int i,j;
 	char * labelLin = (char*)malloc(2*sizeof(char));
@@ -44,26 +44,26 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
     // Parcours de la matrice/grille
 
     // Parcours des lignes
-	for(i=0;i<grille->NbLin;i++)
+	for(i=0;i<grille->NbCol;i++)
 	{
-        // Écriture du numéro de ligne
-        sprintf(labelLin, "%c", 'A'+i);
-		numCase = TTF_RenderText_Blended(policeGrille, labelLin, couleurBlanche);
-		positionNumCase.x = abscisse - KLARGCASE;
-		positionNumCase.y = ordonnee + i * (KHAUTEURCASE + KESP_CASE_VERT);
-		SDL_BlitSurface(numCase, NULL, SDL_GetVideoSurface(), &positionNumCase);
+        // Écriture du numéro de colonne
+        sprintf(labelCol, "%d", i+1);
+        numCase = TTF_RenderText_Blended(policeGrille, labelCol, couleurBlanche);
+        positionNumCase.x = abscisse + i*(KLARGCASE + KESP_CASE_HORI);
+        positionNumCase.y = ordonnee - KHAUTEURCASE;
+        SDL_BlitSurface(numCase, NULL, SDL_GetVideoSurface(), &positionNumCase);
 
         // Parcours des colonnes
-		for (j=0; j<grille->NbCol; j++)
+		for (j=0; j<grille->NbLin; j++)
 		{
             // Si l'on est à la première ligne
             if(i == 0)
             {
-                // Écriture du numéro de colonne
-                sprintf(labelCol, "%d", j+1);
-                numCase = TTF_RenderText_Blended(policeGrille, labelCol, couleurBlanche);
-                positionNumCase.x = abscisse + j*(KLARGCASE + KESP_CASE_HORI);
-                positionNumCase.y = ordonnee - KHAUTEURCASE;
+                // Écriture du numéro de ligne
+                sprintf(labelLin, "%c", 'A'+j);
+                numCase = TTF_RenderText_Blended(policeGrille, labelLin, couleurBlanche);
+                positionNumCase.x = abscisse - KLARGCASE;
+                positionNumCase.y = ordonnee + j * (KHAUTEURCASE + KESP_CASE_VERT);
                 SDL_BlitSurface(numCase, NULL, SDL_GetVideoSurface(), &positionNumCase);
             }
 
@@ -72,15 +72,15 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 			coord.noCol = i+1;
 			coord.noLin = j+1;
 
-			positionCaseGrille.x = j*(KLARGCASE + KESP_CASE_HORI) + abscisse;
-			positionCaseGrille.y = i*(KHAUTEURCASE + KESP_CASE_VERT) + ordonnee;
+			positionCaseGrille.x = i*(KLARGCASE + KESP_CASE_HORI) + abscisse;
+			positionCaseGrille.y = j*(KHAUTEURCASE + KESP_CASE_VERT) + ordonnee;
 
 			contenuCaseGrille = Consulter(grille, coord);
 
-			SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille.couleur))));
+			SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille->couleur))));
 			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 
-			switch(contenuCaseGrille.etatCase)
+			switch(contenuCaseGrille->etatCase)
 			{
 				case GRILLE_CASE_TOUCHE:
 					caseGrille = creerSDLImage("caseBateauTouche.png");
@@ -98,9 +98,6 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 		}
 	}
 
-    // Mise à jour de l'écran pour faire apparaître la grille
-	SDL_Flip(SDL_GetVideoSurface());
-
     // Fin du sous-programme
 	free(labelCol);
 	free(labelLin);
@@ -114,7 +111,7 @@ void updateGrille(Grille * grille, Coord coord)
 {
 	SDL_Surface * caseGrille;
 	SDL_Rect positionCaseGrille;
-    CaseGrille contenuCaseGrille;
+    CaseGrille * contenuCaseGrille;
 
 	positionCaseGrille.x = grille->abscisse + (KLARGCASE + KESP_CASE_HORI) * (coord.noCol-1);
 	positionCaseGrille.y = grille->ordonnee + (KHAUTEURCASE + KESP_CASE_VERT) * (coord.noLin-1);
@@ -124,10 +121,10 @@ void updateGrille(Grille * grille, Coord coord)
 
 	contenuCaseGrille = Consulter(grille, coord);
 
-	SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille.couleur))));
+	SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille->couleur))));
 	SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 
-	switch(contenuCaseGrille.etatCase)
+	switch(contenuCaseGrille->etatCase)
 	{
 		case GRILLE_CASE_TOUCHE:
 			caseGrille = creerSDLImage("caseBateauTouche.png");
@@ -143,7 +140,6 @@ void updateGrille(Grille * grille, Coord coord)
 			break;
 	}
 
-	SDL_Flip(SDL_GetVideoSurface());
 	SDL_FreeSurface(caseGrille);
 }
 

@@ -1,6 +1,9 @@
 #include "vueBateau.h"
 
 #include "../model/grille.h"
+#include "../model/bateau.h"
+#include "../model/parametre.h"
+#include "../model/partie.h"
 
 #include <stdlib.h>
 
@@ -9,29 +12,23 @@ Grille * InsertBateau(Grille * grille, TBateau * bat)
 {
 	int i;
 	Coord coordCaseGrille;
-
-	// détermine si le bateau est en dehors de la grille
-	if ( (bat->position.direction == HORIZONTAL && bat->position.x + getTypeBateau(bat) > grille->NbLin) ||
-	(bat->position.direction == VERTICAL && bat->position.y + getTypeBateau(bat) > grille->NbCol) )
-		return NULL;
-
-	// détermine si le bateau est plaçé sur un autre bateau et l'insère si tout va bien
+    
 	for(i=0;i<getTypeBateau(bat);i++)
 	{
-		if(bat->position.direction == HORIZONTAL)
-		{
-			coordCaseGrille.noCol = bat->position.x + i;
-			coordCaseGrille.noLin = bat->position.y;
-		}
-		else
-		{
-			coordCaseGrille.noCol = bat->position.x;
-			coordCaseGrille.noLin = bat->position.y + i;
-		}
-
-		if(Consulter(grille, coordCaseGrille).estOccupe)
-			return NULL;
-
+        if(bat->position.direction == VERTICAL)
+        {
+            coordCaseGrille.noCol = bat->position.x;
+            coordCaseGrille.noLin = bat->position.y+i;
+        }
+        else if(bat->position.direction == HORIZONTAL)
+        {
+            coordCaseGrille.noCol = bat->position.x+i;
+            coordCaseGrille.noLin = bat->position.y;
+        }
+        
+        Consulter(grille, coordCaseGrille)->estOccupe = 1;
+        Consulter(grille, coordCaseGrille)->couleur = getInfoBateau(bat->idBateau, partie_Param())->couleur;
+        
 		if(bat->etat[i] == TOUCHE)
 			grille = SetEtatCase(grille, coordCaseGrille, GRILLE_CASE_TOUCHE);
 		else if(bat->etat[i] == COULE)

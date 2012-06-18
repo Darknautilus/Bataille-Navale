@@ -8,19 +8,32 @@
 */
 
 #include "bateau.h"
-
 #include "parametre.h"
-
 #include "partie.h"
+
+const TtypeBat tabTypesBat[KTAILLEMAXBAT] = {
+    {VOILIER,"Voilier"},
+    {REMORQUEUR,"Remorqueur"},
+    {CARGOT,"Cargot"},
+    {SOUSMARIN,"Sous-marin"},
+    {PORTEAVION,"Porte-avion"}
+};
+
+const TSensBat tabSensBat[2] = {
+    {HORIZONTAL,"Horizontal"},
+    {VERTICAL,"Vertical"}
+};
 
 TBateau * CreerBateau()
 {
 	int i;
 	TBateau * bat = (TBateau*) malloc(sizeof(TBateau));
-
+    
+    bat->estPlace = 0;
+    
     TPosition pos;
-    pos.x = 0;
-    pos.y = 0;
+    pos.x = 1;
+    pos.y = 1;
     pos.direction = HORIZONTAL;
 
     bat->position = pos;
@@ -111,6 +124,47 @@ ESens getSensBateau(TBateau *bat){
 
 ETypeBat getTypeBateau(TBateau *bat){
     return getType(getInfoBateau(bat->idBateau, globalPartie->parametres));
+}
+
+void setPosBat(TBateau * pBat, ESens pSens, int pAbs, int pOrd)
+{
+    pBat->position.direction = pSens;
+    pBat->position.x = pAbs;
+    pBat->position.y = pOrd;
+}
+
+int estPlacable(TBateau * bat, Grille * grille)
+{
+    int estPlacable = 1;
+    int i;
+    Coord coordCaseGrille;
+        
+    ETypeBat typeBat = getInfoBateau(bat->idBateau, partie_Param())->type;
+    
+    // détermine si le bateau est en dehors de la grille
+	if ( (bat->position.direction == HORIZONTAL && bat->position.x + (typeBat-1) > grille->NbLin) ||
+        (bat->position.direction == VERTICAL && bat->position.y + (typeBat-1) > grille->NbCol) )
+        estPlacable = 0;
+    
+    // détermine si le bateau est plaçé sur un autre bateau
+    for(i=0;i<typeBat && estPlacable;i++)
+    {
+        if(bat->position.direction == HORIZONTAL)
+		{
+			coordCaseGrille.noCol = bat->position.x + i;
+			coordCaseGrille.noLin = bat->position.y;
+		}
+		else if(bat->position.direction == VERTICAL)
+		{
+			coordCaseGrille.noCol = bat->position.x;
+			coordCaseGrille.noLin = bat->position.y + i;
+		}
+        
+		if(Consulter(grille, coordCaseGrille)->estOccupe)
+			estPlacable = 0;
+    }
+    
+    return estPlacable;
 }
 
 void LibererBateau(TBateau * bat)

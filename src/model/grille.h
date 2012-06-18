@@ -53,7 +53,7 @@ typedef CaseGrille * Ligne;
 */
 typedef struct
 {
-	Ligne * TabLignes;/**< Tableau dynamique de lignes */
+	Ligne * Matrice;/**< Tableau dynamique de lignes */
 	int NbLin;/**< Nombre de lignes de la matrice */
 	int NbCol;/**< Nombre de colonnes de la matrice */
 	int abscisse;/**< Abscisse de la grille à l'écran */
@@ -99,7 +99,7 @@ Grille * CreerGrille(int nbLin, int nbCol);
  * Récupère une case de la grille.
  * Attention, ligne et colonne doivent etre coherents avec les dimensions de la grilles
 */
-CaseGrille Consulter(Grille * grille, Coord coord);
+CaseGrille * Consulter(Grille * grille, Coord coord);
 
 /**
  * \brief Définit l'état d'une case

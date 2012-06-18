@@ -27,26 +27,20 @@ void EcranGrille(ChampSaisie * champ)
 	SDL_Rect positionTexte;
     int controleEvent;
     Coord coord;
-    CaseGrille caseGrille;
-	TBateau * bat;
+    CaseGrille * caseGrille;
 
     int continuer = 1;
 
 
     grilleJoueur = CreerGrille(10, 10);
 
-	bat = CreerBateau();
-	bat->idBateau=1;
-	toucherBateau(bat, 1);
 
     EffacerEcran();
     afficherGrille(grilleJoueur, 40, 100);
-	InsertBateau(grilleJoueur, bat);
 
 	positionTexte.x = 40;
 	positionTexte.y = 20;
 
-    EcrireLigneTexte(champ->chaine, 40, positionTexte, "default.ttf");
 
     while (continuer)
     {
@@ -63,9 +57,9 @@ void EcranGrille(ChampSaisie * champ)
             {
                 coord = ClicCaseGrille(grilleJoueur, positionClic);
                 caseGrille = Consulter(grilleJoueur, coord);
-                if(caseGrille.etatCase == GRILLE_CASE_NORMAL)
+                if(caseGrille->etatCase == GRILLE_CASE_NORMAL)
                     grilleJoueur = SetEtatCase(grilleJoueur, coord, GRILLE_CASE_TOUCHE);
-                else if(caseGrille.etatCase == GRILLE_CASE_TOUCHE)
+                else if(caseGrille->etatCase == GRILLE_CASE_TOUCHE)
                     grilleJoueur = SetEtatCase(grilleJoueur, coord, GRILLE_CASE_NORMAL);
 
                 updateGrille(grilleJoueur, coord);
@@ -74,7 +68,6 @@ void EcranGrille(ChampSaisie * champ)
     }
 
     LibererGrille(grilleJoueur);
-	LibererBateau(bat);
 
     free(touche);
     free(positionClic);

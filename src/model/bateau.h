@@ -10,6 +10,8 @@
 #ifndef _BATEAU_H
 #define _BATEAU_H
 
+#include "grille.h"
+
 #define KTAILLEMAXBAT 5      /**< \brief Taille maximale d'un bateau */
 #define KLONGMAXNOMTYPE 20   /**< \brief Longueur maximale du nom d'un type */
 
@@ -41,6 +43,8 @@ typedef struct
 }
 TtypeBat;
 
+extern const TtypeBat tabTypesBat[KTAILLEMAXBAT];
+
 /**
  * \enum ESens
  * \brief Sens du bateau
@@ -52,6 +56,15 @@ typedef enum {
     VERTICAL
 }
 ESens;
+
+typedef struct
+{
+    ESens sensBat;
+    char * libSens;
+}
+TSensBat;
+
+extern const TSensBat tabSensBat[2];
 
 /**
  * \enum EEtat
@@ -81,6 +94,7 @@ typedef struct
 	int idBateau;              /**< Numéro du bateau (voir paramtres) */
 	TPosition position;        /**< Position du bateau dans la grille */
 	EEtat etat[KTAILLEMAXBAT]; /**< Tableau d'état du bateau, renseigne l'état de chaque case du bateau */
+    int estPlace;
 }
 TBateau;
 
@@ -155,6 +169,17 @@ ESens getSensBateau(TBateau *bat);
  * \return Un élément de l'enumération ETypeBat.
 */
 ETypeBat getTypeBateau(TBateau *bat);
+
+/**
+ * Configure la position d'un bateau
+ * \param[in] pBat Le bateau a configurer
+ * \param[in] pSens Sens du bateau
+ * \param[in] pAbs Abscisse du bateau
+ * \param[in] pOrd Ordonnee du bateau
+*/
+void setPosBat(TBateau * pBat, ESens pSens, int pAbs, int pOrd);
+
+int estPlacable(TBateau * bat, Grille * grille);
 
 /**
  * Libre le bateau en mŽmoire

@@ -5,39 +5,19 @@
 #include "../model/partie.h"
 
 #include "../view/vueUtilsSDL.h"
-#include "../view/menu.h"
 #include "../view/vueGrille.h"
 #include "../view/vueChampSaisie.h"
 #include "../view/vueRegles.h"
 #include "../view/includeSDL.h"
 
+#include "menu.h"
+#include "jeu.h"
 #include "utilsSDL.h"
 #include "fichierDebug.h"
+#include "CtrlGrille.h"
 
 #include <stdio.h>
 #include <stdlib.h>
-
-void pause()
-{
-	int continuer = 1;
-	SDL_Event event;
-
-	while(continuer)
-	{
-		SDL_WaitEvent(&event);
-		switch(event.type)
-		{
-			case SDL_QUIT:
-				exit(EXIT_FAILURE);
-			break;
-
-			case SDL_KEYDOWN:
-				continuer = 0;
-			break;
-        }
-    }
-
-}
 
 int main(int argc, char ** argv)
 {
@@ -46,6 +26,7 @@ int main(int argc, char ** argv)
 	int choixMenu;
 	int continuer = 1;
 	int i;
+    int partiePrete;
 
 	ecran = DemarrerSDL(1024, 768, "Bataille Navale");
 
@@ -53,6 +34,8 @@ int main(int argc, char ** argv)
 
     init_debug();
     initRandom();
+    
+    //EcranGrille(NULL);
 
 	AfficherMenuAccueil();
 
@@ -70,7 +53,9 @@ int main(int argc, char ** argv)
         switch (choixMenu)
         {
             case 1: // Nouvelle Partie
-                MenuNouvellePartie(parametrePartie);
+                partiePrete = MenuNouvellePartie(parametrePartie);
+                if(partiePrete)
+                    jeu(parametrePartie);
                 break;
 
             case 2: // Charger partie
@@ -93,6 +78,8 @@ int main(int argc, char ** argv)
                 break;
         }
     }
+    
+    ecranVictoire();
 
 	ArreterSDL();
 	detruire_debug();

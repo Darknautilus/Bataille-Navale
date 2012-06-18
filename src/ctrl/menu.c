@@ -28,14 +28,7 @@
 #include "../model/parametre.h"
 #include "../model/random.h"
 #include "../model/couleurs.h"
-
-const TtypeBat tabTypesBat[K_NBTYPEBATEAUX] = {
-    {VOILIER,"Voilier"},
-    {REMORQUEUR,"Remorqueur"},
-    {CARGOT,"Cargot"},
-    {SOUSMARIN,"Sous-marin"},
-    {PORTEAVION,"Porte-avion"}
-};
+#include "../model/utilsModel.h"
 
 void AfficherMenuAccueil(void)
 {
@@ -189,7 +182,7 @@ int AfficherMenuRacine(void)
 	return choixMenu;
 }
 
-void MenuNouvellePartie(Tparam * parametre)
+int MenuNouvellePartie(Tparam * parametre)
 {
     // Champs de saisie
 	ChampSaisie * champPseudoHumain, * champPseudoIA;
@@ -213,13 +206,16 @@ void MenuNouvellePartie(Tparam * parametre)
     
     // Autres
     int continuer = 1;
-    int i;
+    int i, j;
     int nbInstChange = 1;
+    int nbBat;
     FILE * descFicParam;
 
     int * nbInstancesbat;
     char chaineInstance[3];
     char nomBatIA[K_LGNOM];
+    
+    int partiePrete = 0;
 
     // --------------------------------------------------------------------
 
@@ -333,14 +329,18 @@ void MenuNouvellePartie(Tparam * parametre)
 
                 if(!nbInstChange)
                 {
-                    descFicParam = fopen("dicoNoms.dat", "r");
-                    if(descFicParam == NULL)
-                        dgFatal("dicoNoms.dat non trouve");
-
-                    for(i=0;i<getNbBat(parametre);i++)
+                    descFicParam = ouvrirFichierRessources("dicoNoms.dat", "r");
+                    
+                    nbBat = 0;
+                    for(i=0;i<K_NBTYPEBATEAUX;i++)
                     {
-                        choixMotHasard(nomBatIA, descFicParam, K_LGNOM);
-                        setInfoBateau(&(parametre->bateauxMachine[i]), nomBatIA, nombreAleatoire(1, KCOULEURS_NBCOULMAX-1), i);
+                        for(j=0;j<nbInstancesbat[i];j++)
+                        {
+                            choixMotHasard(nomBatIA, descFicParam, K_LGNOM);
+                            setInfoBateau(&(parametre->bateauxMachine[nbBat]), nomBatIA, nombreAleatoire(1, KCOULEURS_NBCOULMAX-1), tabTypesBat[i].typeBat);
+                            nbBat++;
+                            
+                        }
                     }
                     fclose(descFicParam);
 
@@ -355,9 +355,7 @@ void MenuNouvellePartie(Tparam * parametre)
                     strcpy(globalPartie->joueur->nomJ, champPseudoHumain->chaine);
                     strcpy(globalPartie->machine->nomJ, champPseudoIA->chaine);
 
-
-                    EcranGrille(champPseudoHumain);
-
+                    partiePrete = 1;
                     continuer = 0;
                 }
                 else
@@ -370,19 +368,16 @@ void MenuNouvellePartie(Tparam * parametre)
 			}
             else if(ClicSurBouton(boutonEnregistrerParam, positionClic))
             {
-                descFicParam = fopen("paramUser.dat", "w");
-                if(descFicParam == NULL)
-                    dgFatal("paramUser.dat non trouve");
-
-                memParam(parametre, descFicParam);
-                fclose(descFicParam);
+                if(!nbInstChange)
+                {
+                    descFicParam = ouvrirFichierRessources("paramUser.dat", "w");
+                    memParam(parametre, descFicParam);
+                    fclose(descFicParam);
+                }
             }
             else if(ClicSurBouton(boutonChargerParam, positionClic))
             {
-                descFicParam = fopen("paramUser.dat", "r");
-                if(descFicParam == NULL)
-                    dgFatal("paramUser.dat non trouve");
-
+                descFicParam = ouvrirFichierRessources("paramUser.dat", "r");
                 resetInfoBateau(parametre);
                 chargerParam(descFicParam, parametre);
                 fclose(descFicParam);
@@ -390,10 +385,7 @@ void MenuNouvellePartie(Tparam * parametre)
             }
             else if(ClicSurBouton(boutonRetablirDefaut, positionClic))
             {
-                descFicParam = fopen("paramOrigin.dat", "r");
-                if(descFicParam == NULL)
-                    dgFatal("paramOrigin.dat non trouve");
-
+                descFicParam = ouvrirFichierRessources("paramOrigin.dat", "r");
                 resetInfoBateau(parametre);
                 chargerParam(descFicParam, parametre);
                 fclose(descFicParam);
@@ -439,6 +431,7 @@ void MenuNouvellePartie(Tparam * parametre)
         LibererChamp(paramNbBat[i]);
     }
 
+    return partiePrete;
 }
 
 void MenuParam(Tparam * parametre)
@@ -554,8 +547,8 @@ void MenuParam(Tparam * parametre)
         }
 
         if(ClicSurBouton(boutonAnnuler, positionClic))
-
             continuer = 0;
+        
         else if(ClicSurBouton(boutonValider, positionClic))
         {
             for(i=0;i<K_NBTYPEBATEAUX;i++)
@@ -563,7 +556,7 @@ void MenuParam(Tparam * parametre)
                 nbBat = parametre->nombreInstanceBateaux[i];
                 for(j=0;j<nbBat;j++)
                 {
-                    setInfoBateau(&(parametre->bateauxJoueur[getNumBat(i, j, parametre)]), tabChamp[i][j]->chaine, tabRectChoixCoul[i][j]->couleur, i);
+                    setInfoBateau(&(parametre->bateauxJoueur[getNumBat(i, j, parametre)]), tabChamp[i][j]->chaine, tabRectChoixCoul[i][j]->couleur, i+1);
                 }
             }
             continuer = 0;
