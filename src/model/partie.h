@@ -18,7 +18,7 @@ typedef struct
     Joueur *joueur;
     Joueur *machine;
     Tparam *parametres;
-    Pile *pileCoups;
+    Pile pileCoups;
     Grille *grille;
     int scorePlayer;
 } TPartie;

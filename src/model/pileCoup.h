@@ -3,12 +3,7 @@
 
 #include "grille.h"
 #include "joueur.h"
-
-typedef struct
-{
-	Joueur carJoueur;
-	Coord coordTir;
-}Coup;
+#include "Coups.h"
 
 struct Cellule
 {
@@ -25,7 +20,7 @@ typedef struct Cellule * Pile;
  R : retourne une pile initialisee
  Prec : -
  */
-Pile* CreerPile(void);
+Pile CreerPile(void);
 
 /*
  N : PileVide

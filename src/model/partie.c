@@ -22,18 +22,18 @@ TPartie* initialiser(Tparam *param){
 
     partie->scorePlayer = 0;
 
-    //On compte le nombre de bateaux � allouer
+    //On compte le nombre de bateaux à allouer
     nombreBateaux = getNbBat(param);
 
     //On alloue
     partie->joueur->mesBateaux = malloc( sizeof(TBateau*) * nombreBateaux );
     partie->machine->mesBateaux = malloc( sizeof(TBateau*) * nombreBateaux );
 
-    //=========== Pr�paration ===================================
+    //=========== Préparation ===================================
 
-    //Pr�paration des bateaux
+    //Préparation des bateaux
 
-    //Cr�ation des structures et ajout des id
+    //Création des structures et ajout des id
     for(i = 0 ; i < nombreBateaux ; i++){
         partie->joueur->mesBateaux[i] = CreerBateau();
         partie->machine->mesBateaux[i] = CreerBateau();
@@ -51,7 +51,14 @@ TPartie* initialiser(Tparam *param){
 int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
 
+    //Traiter pile de coup
+    //Modifier etat bateau
+    //Vérifier les règles
+    //  - Bateau touché => coulé
 
+    //On ajoute le coup à la pile de coups
+    Coup *tir = CreerCoup();
+    Empiler()
 
 
 }
