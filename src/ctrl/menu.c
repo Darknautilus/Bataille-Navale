@@ -1,21 +1,24 @@
-#include <string.h>
-
 #include "menu.h"
 
 #include "../model/champSaisie.h"
 #include "../model/partie.h"
+#include "../model/bateau.h"
+#include "../model/parametre.h"
+#include "../model/random.h"
+#include "../model/couleurs.h"
+#include "../model/utilsModel.h"
 
 // Permet la portabilité du programme
-#include "includeSDL.h"
-#include "vueChampSaisie.h"
+#include "../view/includeSDL.h"
+#include "../view/vueChampSaisie.h"
 
-#include "vueUtilsSDL.h"
-#include "vueGrille.h"
-#include "vueBateau.h"
-#include "SDLButton.h"
-#include "SDLImage.h"
-#include "SDLRectangle.h"
-#include "vueSDLMsgBox.h"
+#include "../view/vueUtilsSDL.h"
+#include "../view/vueGrille.h"
+#include "../view/vueBateau.h"
+#include "../view/SDLButton.h"
+#include "../view/SDLImage.h"
+#include "../view/SDLRectangle.h"
+#include "../view/vueSDLMsgBox.h"
 
 #include "../ctrl/utilsSDL.h"
 #include "../ctrl/fichierDebug.h"
@@ -24,11 +27,7 @@
 #include "../test/test.h"
 #include "../test/view/testVue.h"
 
-#include "../model/bateau.h"
-#include "../model/parametre.h"
-#include "../model/random.h"
-#include "../model/couleurs.h"
-#include "../model/utilsModel.h"
+#include <string.h>
 
 void AfficherMenuAccueil(void)
 {
@@ -187,7 +186,7 @@ int MenuNouvellePartie(Tparam * parametre)
     // Champs de saisie
 	ChampSaisie * champPseudoHumain, * champPseudoIA;
     ChampSaisie * paramNbBat[K_NBTYPEBATEAUX]; // Choix du nombre de bateaux (tableau de champs)
-    
+
     // Informations de positions
 	SDL_Rect positionBouton, positionTexte;
 
@@ -203,7 +202,7 @@ int MenuNouvellePartie(Tparam * parametre)
     SDL_Bouton * boutonChargerParam;
     SDL_Bouton * boutonRetablirDefaut;
     SDL_Bouton * boutonEnregistrerParam;
-    
+
     // Autres
     int continuer = 1;
     int i, j;
@@ -214,7 +213,7 @@ int MenuNouvellePartie(Tparam * parametre)
     int * nbInstancesbat;
     char chaineInstance[3];
     char nomBatIA[K_LGNOM];
-    
+
     int partiePrete = 0;
 
     // --------------------------------------------------------------------
@@ -276,7 +275,7 @@ int MenuNouvellePartie(Tparam * parametre)
 
 		AfficherChamp(champPseudoHumain);
 		AfficherChamp(champPseudoIA);
-        
+
         // Champs pour le choix du nombre d'instance de chaque type
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
@@ -287,7 +286,7 @@ int MenuNouvellePartie(Tparam * parametre)
             InitTexte(paramNbBat[i], chaineInstance);
             AfficherChamp(paramNbBat[i]);
         }
-        
+
 		AfficherBouton(boutonOK);
 		AfficherBouton(boutonParam);
         AfficherBouton(boutonChargerParam);
@@ -317,9 +316,9 @@ int MenuNouvellePartie(Tparam * parametre)
             {
                 if(nbInstChange)
                     resetInfoBateau(parametre);
-                
+
                 MenuParam(parametre);
-                
+
                 if(infoBateauValide(parametre))
                    nbInstChange = 0;
             }
@@ -330,7 +329,7 @@ int MenuNouvellePartie(Tparam * parametre)
                 if(!nbInstChange)
                 {
                     descFicParam = ouvrirFichierRessources("dicoNoms.dat", "r");
-                    
+
                     nbBat = 0;
                     for(i=0;i<K_NBTYPEBATEAUX;i++)
                     {
@@ -339,7 +338,7 @@ int MenuNouvellePartie(Tparam * parametre)
                             choixMotHasard(nomBatIA, descFicParam, K_LGNOM);
                             setInfoBateau(&(parametre->bateauxMachine[nbBat]), nomBatIA, nombreAleatoire(1, KCOULEURS_NBCOULMAX-1), tabTypesBat[i].typeBat);
                             nbBat++;
-                            
+
                         }
                     }
                     fclose(descFicParam);
@@ -494,7 +493,7 @@ void MenuParam(Tparam * parametre)
     positionBouton.x = 500;
     positionBouton.y = 682;
     boutonAnnuler = CreerBouton("Annuler", &positionBouton, 25);
-    
+
     // --------------------------------------------------------------------
 
     while (continuer)
@@ -526,9 +525,9 @@ void MenuParam(Tparam * parametre)
         }
 
         SDL_Flip(SDL_GetVideoSurface());
-        
+
         // --------------------------------------------------------------------
-        
+
         AttendreEvent(positionClic, NULL);
 
         for(i=0;i<K_NBTYPEBATEAUX;i++)
@@ -548,7 +547,7 @@ void MenuParam(Tparam * parametre)
 
         if(ClicSurBouton(boutonAnnuler, positionClic))
             continuer = 0;
-        
+
         else if(ClicSurBouton(boutonValider, positionClic))
         {
             for(i=0;i<K_NBTYPEBATEAUX;i++)
@@ -567,7 +566,7 @@ void MenuParam(Tparam * parametre)
             SDL_Flip(SDL_GetVideoSurface());
         }
     }
-    
+
     // --------------------------------------------------------------------
 
     LibererBouton(boutonValider);

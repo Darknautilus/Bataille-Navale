@@ -1,5 +1,7 @@
 #include "pileCoup.h"
 
+#include "../ctrl/fichierDebug.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 

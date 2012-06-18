@@ -71,7 +71,7 @@ TPartie* initialiser(Tparam *param){
 
         partie->joueur->mesBateaux[i]->idBateau = i;
         partie->machine->mesBateaux[i]->idBateau = i + nombreBateaux;
-        
+
         partie->joueur->mesBateaux[i]->estPlace = 0;
         partie->machine->mesBateaux[i]->estPlace = 0;
     }
@@ -91,9 +91,9 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
     //  - Bateau touché => coulé
 
     //On ajoute le coup à la pile de coups
-    Coup *tir = CreerCoup();
-    Empiler()
-
+    Joueur *joueur = partie->joueur;
+    Coup *tir = CreerCoup(joueur, cible);
+    globalPartie->pileCoups = Empiler(globalPartie->pileCoups, tir);
 
 }
 
@@ -101,20 +101,20 @@ void libererPartie(void)
 {
     int i;
     int nombreBateaux = getNbBat(partie_Param());
-    
+
     for(i=0;i<nombreBateaux;i++)
     {
         LibererBateau(partie_JHumain()->mesBateaux[i]);
         LibererBateau(partie_JMachine()->mesBateaux[i]);
     }
-    
+
     LibererJoueur(partie_JHumain());
     LibererJoueur(partie_JMachine());
     LibererGrille(partie_Grille());
     libererParam(partie_Param());
-    
+
     while(!PileVide(partie_PileCoups()))
         Depiler(partie_PileCoups());
-    
+
     free(globalPartie);
 }

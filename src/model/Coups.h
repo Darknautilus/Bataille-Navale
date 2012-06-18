@@ -1,6 +1,8 @@
 #ifndef COUPS_H
 #define COUPS_H
 
+#include "joueur.h"
+
 typedef struct
 {
 	Joueur *carJoueur;
