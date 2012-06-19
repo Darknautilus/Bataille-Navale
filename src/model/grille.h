@@ -27,8 +27,8 @@
 typedef enum {
     GRILLE_CASE_NORMAL, /**< Fond case normal */
     GRILLE_CASE_TOUCHE, /**< Ajout d'un signal "touche" */
-    GRILLE_CASE_COULE, /**< Ajout d'un signal "coule" */
-    GRILLE_CASE_EAU /**< Ajout d'un signal "a l'eau" */
+    GRILLE_CASE_COULE,  /**< Ajout d'un signal "coule" */
+    GRILLE_CASE_EAU     /**< Ajout d'un signal "a l'eau" */
 } EtatCase;
 
 /**
