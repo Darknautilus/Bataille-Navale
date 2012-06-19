@@ -11,41 +11,35 @@
 #include "partie.h"
 
 #include "bateau.h"
+#include "grille.h"
 
 TPartie *globalPartie = NULL;
 
-Joueur * partie_JHumain()
-{
+Joueur * partie_JHumain(){
     return globalPartie->joueur;
 }
 
-Joueur * partie_JMachine()
-{
+Joueur * partie_JMachine(){
     return globalPartie->machine;
 }
 
-Tparam * partie_Param()
-{
+Tparam * partie_Param(){
     return globalPartie->parametres;
 }
 
-Pile partie_PileCoups()
-{
+Pile partie_PileCoups(){
     return globalPartie->pileCoups;
 }
 
-Grille * partie_Grille()
-{
+Grille * partie_Grille(){
     return globalPartie->grille;
 }
 
-Grille * partie_GrilleMachine()
-{
+Grille * partie_GrilleMachine(){
     return globalPartie->grilleMachine;
 }
 
-int partie_Score()
-{
+int partie_Score(){
     return globalPartie->scorePlayer;
 }
 
@@ -100,10 +94,12 @@ TPartie* initialiser(Tparam *param){
 
 int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
-    Joueur *joueur = NULL;
     Coup *tir = NULL;
     TBateau *bateauCible = NULL;
+    Grille *grilleCible = NULL;
+    CaseGrille *caseGrille = NULL;
     int idCible = -1;
+    int i;
     int indexCaseBateauTouche;
 
     //===========================================================================
@@ -114,14 +110,19 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
     //Si c'est le joueur qui tire, la cible est sur la grille de la machine
     if(estJoueur){
-        idCible = getIdBateauSurCase(partie->grilleMachine, cible);
-        joueur = partie->joueur;
+        grilleCible = partie->grilleMachine;
+        idCible = getIdBateauSurCase(grilleCible, cible);
+        tir = CreerCoup(HUMAIN, cible);
     }
     //Sinon on tire sur la grillle du joueur
     else{
-        idCible = getIdBateauSurCase(partie->grille, cible);
-        joueur = partie->machine;
+        grilleCible = partie->grille;
+        idCible = getIdBateauSurCase(grilleCible, cible);
+        tir = CreerCoup(MACHINE, cible);
     }
+
+    //On récupère la case cible
+    caseGrille = Consulter(grilleCible, cible);
 
     //===========================================================================
 
@@ -129,7 +130,7 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
     // On ajoute le coup à la pile des coups
     //
 
-    tir = CreerCoup(joueur, cible);
+
     globalPartie->pileCoups = Empiler(globalPartie->pileCoups, tir);
 
     //===========================================================================
@@ -140,7 +141,10 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
     //Si il n'y a pas de bateau, le tir ne touche personne
     if(idCible < 0){
-        //actions à faire quand case vide touchée
+
+        //On place la case à "à l'eau"
+        caseGrille->etatCase = GRILLE_CASE_EAU;
+
         return 0;
     }
     else{
@@ -160,6 +164,37 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
         //On modifie la case touchée par le tir (etat touché)
         toucherBateau(bateauCible, indexCaseBateauTouche);
+
+        //Si le bateau est coulé
+        if(estCoule(bateauCible)){
+            //On place toute ses cases à "coulé"
+            i = 0;
+
+            //On place la première coordonnée
+            cible.noCol = bateauCible->position.x;
+            cible.noLin = bateauCible->position.y;
+
+            while(i < getTypeBateau(bateauCible)){
+                //On place la case à touché
+                Consulter(grilleCible, cible)->etatCase = GRILLE_CASE_TOUCHE;
+
+                if(bateauCible->position.direction == HORIZONTAL){
+                    cible.noCol = cible.noCol+1;
+                }
+                else{
+                    cible.noLin = cible.noLin+1;
+                }
+
+                i++;
+            }
+
+
+        }
+        //Sinon il est juste touché
+        else{
+            //On modifie la case à "touché"
+            caseGrille->etatCase = GRILLE_CASE_TOUCHE;
+        }
 
         return 1;
     }
@@ -227,8 +262,7 @@ void annulerDernierCoup(TPartie *partie){
 
 
 
-void libererPartie(TPartie *partie)
-{
+void libererPartie(TPartie *partie){
     int i;
     int nombreBateaux = getNbBat(partie->parametres);
 

@@ -84,17 +84,20 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 			{
 				case GRILLE_CASE_TOUCHE:
 					caseGrille = creerSDLImage("caseBateauTouche.png");
-					SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 					break;
 
 				case GRILLE_CASE_COULE:
 					caseGrille = creerSDLImage("caseBateauCoule.png");
-					SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
+					break;
+
+                case GRILLE_CASE_EAU:
+					caseGrille = creerSDLImage("caseBateauEau.png");
 					break;
 
 				default:
 					break;
 			}
+			SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
 		}
 	}
 

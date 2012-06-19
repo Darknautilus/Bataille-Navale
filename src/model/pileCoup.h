@@ -7,8 +7,8 @@
 
 struct Cellule
 {
-	Coup * Info;
-	struct Cellule * Lien;
+	Coup * Info;            /**< Pointeur vers coups **/
+	struct Cellule * Lien;  /**< Pointeur vers la cellule suivante **/
 };
 
 typedef struct Cellule * Pile;

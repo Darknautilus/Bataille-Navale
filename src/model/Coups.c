@@ -3,11 +3,17 @@
 
 #include <stdlib.h>
 
-Coup* CreerCoup(Joueur *joueur, Coord pos){
+Coup* CreerCoup(int estJoueur, Coord pos){
 
     Coup *coup = malloc(sizeof(Coup));
 
-    coup->carJoueur = joueur;
+    if(estJoueur){
+        coup->type = HUMAIN;
+    }
+    else{
+        coup->type = MACHINE;
+    }
+
     coup->coordTir = pos;
 
     return coup;

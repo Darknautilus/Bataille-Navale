@@ -10,6 +10,7 @@
 #include "bateau.h"
 #include "parametre.h"
 #include "partie.h"
+#include "grille.h"
 
 const TtypeBat tabTypesBat[KTAILLEMAXBAT] = {
     {VOILIER,"Voilier"},
@@ -86,9 +87,7 @@ void toucherBateau(TBateau * bat, int posTouch)
 		{
 			bat->etat[i] = COULE;
 		}
-
 	}
-
 }
 
 int nbCoupsBateau(TBateau * bat)

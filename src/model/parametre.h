@@ -34,6 +34,22 @@ typedef struct
 TInfoBateau;
 
 //***************************
+
+/**
+ * \struct Tparam
+ * \brief Les paramtres d'une partie
+ *
+ * Ces paramtres seront ceux crits dans un fichier.
+ * Les noms du joueur et de la machine devront être déplacés dans la structure Tpartie
+*/
+typedef struct
+{
+    int * nombreInstanceBateaux;    /**< Tableau d'entiers : Nombre d'instances de chaque type de bateau */
+    TInfoBateau * bateauxJoueur;    /**< Tableau dynamique des bateaux du joueur. Il est à noter que les id déclaré sont fait dans par taille de bateau croissante.*/
+    TInfoBateau * bateauxMachine;   /**< Tableau dynamique des bateaux de la machine */
+}Tparam;
+
+//***************************
 /**
  * \brief Récupre la couleur du bateau
  *
@@ -76,22 +92,6 @@ void getBNom(const TInfoBateau * pB, char pNom[]);
  * \param[in] pType Le type du bateau
 */
 void setInfoBateau (TInfoBateau *pB, char pNom[], int pCouleur , ETypeBat pType);
-
-
-//***************************
-/**
- * \struct Tparam
- * \brief Les paramtres d'une partie
- *
- * Ces paramtres seront ceux crits dans un fichier.
- * Les noms du joueur et de la machine devront être déplacés dans la structure Tpartie
-*/
-typedef struct
-{
-    int * nombreInstanceBateaux;    /**< Tableau d'entiers : Nombre d'instances de chaque type de bateau */
-    TInfoBateau * bateauxJoueur;    /**< Tableau dynamique des bateaux du joueur. Il est à noter que les id déclaré sont fait dans par taille de bateau croissante.*/
-    TInfoBateau * bateauxMachine;   /**< Tableau dynamique des bateaux de la machine */
-}Tparam;
 
 //***************************
 /**
