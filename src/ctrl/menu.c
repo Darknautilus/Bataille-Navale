@@ -51,9 +51,9 @@ void AfficherMenuAccueil(void)
     Image * imageIUT = CreerImage("iutBlagnac.jpg", 15, 15);
     Image * imageUniv = CreerImage("univMirail.gif", 115, 15);
     Image * imageBateau = CreerImage("bateau.png", 454, 418);
-    
+
     // --------------------------------------------------------------------
-    
+
     afficherRectangle(rectLogos);
 
     positionTexte.x = 219;
@@ -74,7 +74,7 @@ void AfficherMenuAccueil(void)
     AfficherImage(imageBateau);
 
 	SDL_Flip(SDL_GetVideoSurface());
-    
+
     // --------------------------------------------------------------------
 
 	while(continuer)
@@ -95,7 +95,7 @@ void AfficherMenuAccueil(void)
                 break;
         }
 	}
-    
+
     // --------------------------------------------------------------------
 
     LibererImage(imageIUT);
@@ -117,7 +117,7 @@ int AfficherMenuRacine(void)
     SDL_Rect positionTexte;
 
 	SDL_EnableUNICODE(SDL_ENABLE);
-    
+
     // --------------------------------------------------------------------
 
     while(continuer)
@@ -138,7 +138,7 @@ int AfficherMenuRacine(void)
         EcrireTexte("- Quitter", 30, positionTexte, "default.ttf");
 
         SDL_Flip(SDL_GetVideoSurface());
-        
+
         // --------------------------------------------------------------------
 
         AttendreEvent(NULL, touche);
@@ -179,7 +179,7 @@ int AfficherMenuRacine(void)
 
         }
 	}
-    
+
     // --------------------------------------------------------------------
 
 	SDL_EnableUNICODE(SDL_DISABLE);
@@ -216,10 +216,7 @@ int MenuNouvellePartie(Tparam * parametre)
     int continuer = 1;
     int i, j;
 
-    //Doit être à 0 pour que le bouton "Démarrer"
-    //puisse être pressé sans que l'on touche aux
-    //paramètres
-    int nbInstChange = 0;
+    int nbInstChange = 1;
     int nbBat;
     FILE * descFicParam;
 

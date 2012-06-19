@@ -1,3 +1,13 @@
+/**
+ *   \file partie.c
+ *   \author Benoit Sauvere
+ *   \date 19 juin 2012
+ *   \brief Module Partie
+ *
+ *   Contient le module de gestion de la partie.
+*/
+
+
 #include "partie.h"
 
 #include "bateau.h"
@@ -87,7 +97,6 @@ TPartie* initialiser(Tparam *param){
     return partie;
 
 }
-
 
 int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
@@ -205,6 +214,18 @@ int partieEstFinie(TPartie *partie){
     //Si aucun des deux n'a perdu.
     return 0;
 }
+
+void annulerDernierCoup(TPartie *partie){
+
+
+
+
+
+
+
+}
+
+
 
 void libererPartie(TPartie *partie)
 {

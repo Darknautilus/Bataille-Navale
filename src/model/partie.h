@@ -1,3 +1,13 @@
+/**
+ *   \file partie.h
+ *   \author Benoit Sauvere
+ *   \date 19 juin 2012
+ *   \brief Module Partie
+ *
+ *   Contient les déclarations du module de gestion de la partie.
+*/
+
+
 #ifndef PARTIE_H
 #define PARTIE_H
 
@@ -69,6 +79,13 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur);
 */
 int partieEstFinie(TPartie *partie);
 
+/**
+ * Annule le dernier coups joué (aussi bien par la machine que par le joueur).
+ *
+ * \param[out] partie La partie dans laquelle on veux annuler le dernier coups.
+ *
+*/
+void annulerDernierCoup(TPartie *partie);
 
 /**
  * Libère les ressources liées à la partie.
