@@ -333,16 +333,25 @@ int menuPlacementGrille(TBateau * pBat)
 int ecranJeu(void)
 {
     int continuer = 1;
+    int resultCoup;
+    int partieFinie = 0;
 
-    char messageJeu[K_LGMAXMESSAGE];
+    char messageJoueur[K_LGMAXMESSAGE];
+    char messageMachine[K_LGMAXMESSAGE];
 
     SDL_Rect positionTexte;
 
     SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
     SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
     int controleEvent;
+    
+    Coord coordCoup;
+    
+    SDL_Bouton * boutonFinPartie;
+    SDL_Rect positionBouton;
 
-    strcpy(messageJeu, "Pret a commencer");
+    strcpy(messageJoueur, "Pret a commencer");
+    strcpy(messageMachine, "Pret a commencer");
 
     while(continuer)
     {
@@ -350,18 +359,56 @@ int ecranJeu(void)
 
         positionTexte.x = 5;
         positionTexte.y = 682;
-        EcrireTexte(messageJeu, 30, positionTexte, "default.ttf");
+        EcrireTexte(messageJoueur, 30, positionTexte, "default.ttf");
+        positionTexte.x = 750;
+        positionTexte.y = 682;
+        EcrireTexte(messageMachine, 30, positionTexte, "default.ttf");
 
         afficherGrille(partie_Grille(), 50, 50);
         afficherGrille(partie_GrilleMachine(), 530, 50);
 
         SDL_Flip(SDL_GetVideoSurface());
 
+        // Traitement des événements
         controleEvent = AttendreEvent(positionClic, touche);
+        
+        // Événement clavier
         if(controleEvent == 2)
         {
-            if(ToucheSpec(touche) == SDLK_ESCAPE)
-                continuer = 0;
+            if(ToucheSpec(touche) == SDLK_ESCAPE){}
+                //continuer = 0; // Remplacer par menu pause
+        }
+        
+        // Événement souris
+        else if(controleEvent == 1)
+        {
+            // Si l'on clique dans la grille de la machine
+            if(ClicDansGrille(partie_GrilleMachine(), positionClic) && partieFinie == 0 )
+            {
+                // On joue le coup et on récupère le résultat
+                coordCoup = ClicCaseGrille(partie_GrilleMachine(), positionClic);
+                resultCoup = jouerUnCoup(globalPartie, coordCoup, 1);
+                partieFinie = partieEstFinie(globalPartie);
+                
+                if(resultCoup == 1)
+                    strcpy(messageMachine, "Touche !");
+                else
+                    strcpy(messageMachine, "A l'eau !");
+                
+                // Si la partie n'est pas finie,
+                if(partieFinie == 0)
+                {
+                    // On fait jouer la machine
+                    coordCoup = coordAleat(partie_Grille());
+                    resultCoup = jouerUnCoup(globalPartie, coordCoup, 0);
+                    partieFinie = partieEstFinie(globalPartie);
+                    
+                    if(resultCoup == 1)
+                        strcpy(messageJoueur, "Touche !");
+                    else
+                        strcpy(messageJoueur, "A l'eau !");
+                }
+            }
         }
     }
 
@@ -422,4 +469,14 @@ void placementAleatBat(Joueur * pJoueur)
             }
         }
     }
+}
+
+Coord coordAleat(Grille * pGrille)
+{
+    Coord coordRetour;
+    
+    coordRetour.noCol = nombreAleatoire(1, getNbCol(pGrille));
+    coordRetour.noLin = nombreAleatoire(1, getNbLin(pGrille));
+    
+    return coordRetour;
 }

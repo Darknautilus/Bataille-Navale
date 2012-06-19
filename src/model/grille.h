@@ -91,6 +91,18 @@ typedef struct
 Grille * CreerGrille(int nbLin, int nbCol);
 
 /**
+ * \return Le nombre de lignes de la grille
+ * \param[in] pGrille
+*/
+int getNbLin(Grille * pGrille);
+
+/**
+ * \return Le nombre de colonnes de la grille
+ * \param[in] pGrille
+ */
+int getNbCol(Grille * pGrille);
+
+/**
  * \brief Récupère une case
  *
  * \param[in] grille

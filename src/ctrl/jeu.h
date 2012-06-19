@@ -41,4 +41,6 @@ int placementBatValide(Joueur * pJoueur);
 
 void placementAleatBat(Joueur * pJoueur);
 
+Coord coordAleat(Grille * pGrille);
+
 #endif

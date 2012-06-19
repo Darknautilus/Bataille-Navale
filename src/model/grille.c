@@ -63,6 +63,16 @@ Grille * CreerGrille(int nbLin, int nbCol)
 	return grille;
 }
 
+int getNbCol(Grille * pGrille)
+{
+    return pGrille->NbCol;
+}
+
+int getNbLin(Grille * pGrille)
+{
+    return pGrille->NbLin;
+}
+
 CaseGrille * Consulter(Grille * grille, Coord coord)
 {
 	return &(grille->Matrice[coord.noCol-1][coord.noLin-1]);
