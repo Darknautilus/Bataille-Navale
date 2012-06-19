@@ -176,7 +176,7 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
             while(i < getTypeBateau(bateauCible)){
                 //On place la case à touché
-                Consulter(grilleCible, cible)->etatCase = GRILLE_CASE_TOUCHE;
+                Consulter(grilleCible, cible)->etatCase = GRILLE_CASE_COULE;
 
                 if(bateauCible->position.direction == HORIZONTAL){
                     cible.noCol = cible.noCol+1;
@@ -187,8 +187,6 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
                 i++;
             }
-
-
         }
         //Sinon il est juste touché
         else{

@@ -58,4 +58,12 @@ Pile Depiler(Pile pPile);
  */
 Coup * Sommet(Pile pPile);
 
+/**
+ * Détermine la longueur de la pile.
+ * \param[in] pile Un strucutre Pile
+ * \return Un entier contenant la longueur de la pile.
+**/
+int longueurPile(Pile pile);
+
+
 #endif

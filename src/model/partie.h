@@ -93,11 +93,4 @@ void annulerDernierCoup(TPartie *partie);
 */
 void libererPartie(TPartie *partie);
 
-
-
-
-
-
-
-
 #endif

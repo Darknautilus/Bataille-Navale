@@ -43,3 +43,16 @@ Coup* Sommet(Pile pPile)
 {
 	return pPile->Info;
 }
+
+int longueurPile(Pile pile){
+
+    int longueur = 0;
+
+    //tant que l'on a pas attein la fin de la pile
+    while(pile->Lien != NULL){
+        pile = pile->Lien;
+        longueur++;
+    }
+
+    return longueur;
+}
