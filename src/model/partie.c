@@ -1,5 +1,7 @@
 #include "partie.h"
 
+#include "bateau.h"
+
 TPartie *globalPartie = NULL;
 
 Joueur * partie_JHumain()
@@ -157,6 +159,49 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
 int partieEstFinie(TPartie *partie){
 
+    int etatPartie = 0;
+    int i = 0;
+    int nbBateaux;
+    int nbCouleJoueur, nbCouleMachine;
+
+    //
+    //On recherche un joueur dont tout les bateaux sont coulé
+    //
+
+    //On récupère le nombre de bateau par joueur
+    nbBateaux = getNbBat(partie->parametres);
+
+    //Compteur de bateaux touchés
+    nbCouleJoueur = 0;
+    nbCouleMachine = 0;
+
+    //On parcourt les id de bateaux
+    while(etatPartie == 0 && i < nbBateaux){
+
+        if(getBateauFromId(i)->etat[0] == COULE){
+            nbCouleJoueur++;
+        }
+
+        if(getBateauFromId(i+nbBateaux)->etat[0] == COULE){
+            nbCouleMachine++;
+        }
+
+        i++;
+    }
+
+    //Si tout les bateaux du joueur sont coulé
+    //La machine gagne
+    if(nbCouleJoueur == nbBateaux){
+        return -1;
+    }
+    //Si tout les bateaux de la machine sont coulé
+    //Le joueur gagne
+    else if(nbCouleMachine == nbBateaux){
+        return 1;
+    }
+
+    //Si aucun des deux n'a perdu.
+    return 0;
 }
 
 void libererPartie(TPartie *partie)
