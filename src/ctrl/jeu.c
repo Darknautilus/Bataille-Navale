@@ -1,3 +1,12 @@
+/**
+ * \file jeu.c
+ * \author Aurelien Bertron
+ * \date 13 juin 2012
+ * \brief Controleur ecrans jeu
+ *
+ * Contient les controleurs des ecrans de jeu
+ */
+
 #include "jeu.h"
 
 #include "../model/parametre.h"
@@ -63,6 +72,7 @@ int menuPlacementChoixBat(void)
         nbBat = globalPartie->parametres->nombreInstanceBateaux[i];
         tabRectChoixBat[i] = (Rectangle**)malloc(nbBat*sizeof(Rectangle*));
         
+        // Sert a mettre les rectangles a la ligne a partir de 3 rectangles (ne tiennent pas sur une ligne)
         for(j=0;j<nbBat;j++)
         {
             if(j >= 3)
@@ -76,9 +86,11 @@ int menuPlacementChoixBat(void)
                 absInfoBat = 230+j*245;
             }
             
+            // Cree le rectangle d'affichage du bateau
             strcpy(nomBateau, globalPartie->parametres->bateauxJoueur[getNumBat(i, j, globalPartie->parametres)].nomBateau);
             tabRectChoixBat[i][j] = creerRectangle(absInfoBat, ordInfoBat, strlen(nomBateau)*16 + 10, 35);
             
+            // Definit la couleur du rectangle suivant le couleur du bateau
             if(j < globalPartie->parametres->nombreInstanceBateaux[i])
             {
                 tabRectChoixBat[i][j]->couleur = globalPartie->parametres->bateauxJoueur[getNumBat(i, j, globalPartie->parametres)].couleur;
@@ -99,6 +111,7 @@ int menuPlacementChoixBat(void)
     {
         EffacerEcran();
         
+        // Si la partie n'est pas prete, on affiche un bouton vide
         AfficherBouton(boutonAnnuler);
         if(placementBatValide(partie_JHumain()))
             strcpy(boutonValider->texte, "Valider");
@@ -112,12 +125,11 @@ int menuPlacementChoixBat(void)
         
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
+            // Affiche les noms des types de bateaux
             positionTexte.x = 20;
             positionTexte.y = 100+i*120;
-            
             strcpy(labelColonneTypes,tabTypesBat[i].nomType);
             strcat(labelColonneTypes, "s");
-            
             EcrireTexte(labelColonneTypes, 25, positionTexte, "default.ttf");
             
             nbBat = globalPartie->parametres->nombreInstanceBateaux[i];
@@ -146,6 +158,7 @@ int menuPlacementChoixBat(void)
                 {
                     if(clicSurRectangle(tabRectChoixBat[i][j], positionClic) && !placementBatValide(partie_JHumain()))
                     {
+                        // On place le bateau selectionne
                         if(!(partie_JHumain()->mesBateaux[cptBat]->estPlace))
                             menuPlacementGrille(partie_JHumain()->mesBateaux[cptBat]);
                     }
@@ -155,6 +168,7 @@ int menuPlacementChoixBat(void)
             
             if(ClicSurBouton(boutonValider, positionClic))
             {
+                // Si la partie est prete, on continue (code retour = 1)
                 if(placementBatValide(partie_JHumain()))
                 {
                     continuer = 0;
@@ -206,7 +220,7 @@ int menuPlacementGrille(TBateau * pBat)
     SDL_Bouton * boutonAnnuler;
     SDL_Rect positionBouton;
     
-    TBateau * batInser;
+    TBateau * batInser; // Bateau temporaire
     
     Coord coordClicGrille;
     
@@ -226,6 +240,7 @@ int menuPlacementGrille(TBateau * pBat)
     positionBouton.y = 682;
     boutonAnnuler = CreerBouton("Annuler", &positionBouton, 25);
     
+    // On cree le bateau temporaire pour ne pas affecter la partie en cas d'erreur
     batInser = CreerBateau();
     batInser->idBateau = pBat->idBateau;
     
@@ -249,6 +264,7 @@ int menuPlacementGrille(TBateau * pBat)
         AfficherBouton(boutonSensBat);
         AfficherBouton(boutonAnnuler);
         
+        // Si le bateau n'est pas place, on affiche un bouton vide
         if(batInser->estPlace == 0)
             strcpy(boutonOK->texte, "");
         else if(batInser->estPlace == 1)
@@ -269,15 +285,18 @@ int menuPlacementGrille(TBateau * pBat)
         {
             if(ClicSurBouton(boutonSensBat, positionClic))
             {
+                // On change le sens du bateau (et le texte du bouton)
                 sensBat = changerSensBat(sensBat);
                 strcpy(boutonSensBat->texte, tabSensBat[sensBat].libSens);
             }
             else if(ClicSurBouton(boutonAnnuler, positionClic))
             {
+                // placementValide = 0
                 continuer = 0;
             }
             else if(ClicSurBouton(boutonOK, positionClic))
             {
+                // Si le bateau est place, on copie les infos du bateau temporaire dans le vrai
                 if(batInser->estPlace)
                 {
                     pBat->estPlace = 1;
@@ -291,6 +310,7 @@ int menuPlacementGrille(TBateau * pBat)
             }
             else if(ClicDansGrille(partie_Grille(), positionClic))
             {
+                // Lors d'un clic dans la grille, on cherche quelle case a ete cliquee et on verifie que le bateau peut etre place la
                 batInser->estPlace = 0;
                 coordClicGrille = ClicCaseGrille(partie_Grille(), positionClic);
                 setPosBat(batInser, tabSensBat[sensBat].sensBat, coordClicGrille.noCol, coordClicGrille.noLin);

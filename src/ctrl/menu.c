@@ -1,3 +1,12 @@
+/**
+ * \file menu.c
+ * \author Aurelien Bertron
+ * \date 28 avril 2012
+ * \brief Controleur ecrans menu
+ *
+ * Contient les controleurs des ecrans de menu
+*/
+
 #include "menu.h"
 
 #include "../model/champSaisie.h"
@@ -8,7 +17,6 @@
 #include "../model/couleurs.h"
 #include "../model/utilsModel.h"
 
-// Permet la portabilité du programme
 #include "../view/includeSDL.h"
 #include "../view/vueChampSaisie.h"
 
@@ -32,25 +40,25 @@
 void AfficherMenuAccueil(void)
 {
 	int continuer = 1;
-    int controle;
     SDL_Rect positionTexte;
 
     Rectangle * rectLogos;
 
-    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
     SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
 
     rectLogos = creerRectangle(10, 10, 231, 110);
 
-    afficherRectangle(rectLogos);
-
     Image * imageIUT = CreerImage("iutBlagnac.jpg", 15, 15);
     Image * imageUniv = CreerImage("univMirail.gif", 115, 15);
     Image * imageBateau = CreerImage("bateau.png", 454, 418);
+    
+    // --------------------------------------------------------------------
+    
+    afficherRectangle(rectLogos);
 
     positionTexte.x = 219;
     positionTexte.y = 282;
-    EcrireLigneTexte("Bataille Navale", 70, positionTexte, "default.ttf");
+    EcrireTexte("Bataille Navale", 70, positionTexte, "default.ttf");
 
     positionTexte.x = 15;
     positionTexte.y = 700;
@@ -66,40 +74,35 @@ void AfficherMenuAccueil(void)
     AfficherImage(imageBateau);
 
 	SDL_Flip(SDL_GetVideoSurface());
+    
+    // --------------------------------------------------------------------
 
 	while(continuer)
 	{
-		controle = AttendreEvent(positionClic, touche);
+		AttendreEvent(NULL, touche);
 
-        if (controle == 2)
+        switch(ToucheSpec(touche))
         {
-            switch(ToucheSpec(touche))
-            {
-                case SDLK_SPACE:
-                    continuer = 0;
-                    break;
+            case SDLK_SPACE:
+                continuer = 0;
+                break;
 
-                case SDLK_ESCAPE:
-                    exit(EXIT_FAILURE);
-                    break;
+            case SDLK_ESCAPE:
+                exit(EXIT_FAILURE);
+                break;
 
-                default:
-                    break;
-            }
-        }
-        else if(controle == 1)
-        {
-            afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
-            SDL_Flip(SDL_GetVideoSurface());
+            default:
+                break;
         }
 	}
+    
+    // --------------------------------------------------------------------
 
     LibererImage(imageIUT);
     LibererImage(imageUniv);
     LibererImage(imageBateau);
     libererRectangle(rectLogos);
 	free(touche);
-    free(positionClic);
 }
 
 int AfficherMenuRacine(void)
@@ -114,6 +117,8 @@ int AfficherMenuRacine(void)
     SDL_Rect positionTexte;
 
 	SDL_EnableUNICODE(SDL_ENABLE);
+    
+    // --------------------------------------------------------------------
 
     while(continuer)
     {
@@ -133,6 +138,8 @@ int AfficherMenuRacine(void)
         EcrireTexte("- Quitter", 30, positionTexte, "default.ttf");
 
         SDL_Flip(SDL_GetVideoSurface());
+        
+        // --------------------------------------------------------------------
 
         AttendreEvent(NULL, touche);
 
@@ -172,6 +179,8 @@ int AfficherMenuRacine(void)
 
         }
 	}
+    
+    // --------------------------------------------------------------------
 
 	SDL_EnableUNICODE(SDL_DISABLE);
 
