@@ -112,6 +112,15 @@ TBateau * CreerBateau();
 */
 int getIdBat(TBateau * pBat);
 
+
+/**
+ * \brief Récupre un pointeur sur le bateau désigné par l'id
+ *
+ * \param[in] idBateau L'id du bateau désiré
+ * \return Un pointeur sur le bateau désiré
+*/
+TBateau* getBateauFromId(int idBateau);
+
 /**
  * Cette fonction marque une case d'un bateau donnée comme touchée.
  * \param bat Le pointeur sur le bateau en question
@@ -179,6 +188,12 @@ ETypeBat getTypeBateau(TBateau *bat);
 */
 void setPosBat(TBateau * pBat, ESens pSens, int pAbs, int pOrd);
 
+/**
+ * Determine si un bateau est plaçable ou non.
+ * \param[in] bat Le bateau en question.
+ * \param[in] grille La grille qui désire contenir le bateau.
+ * \return 1 si le bateau est plaçable, 0 sinon.
+*/
 int estPlacable(TBateau * bat, Grille * grille);
 
 /**

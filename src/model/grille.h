@@ -19,6 +19,7 @@
 #define KESP_CASE_HORI 5 /**< \brief Espace horizontal entre les cases */
 #define KIDCOULDEFAUT 0 //**< \brief Indice de la couleur par défaut de la grille */
 
+
 /**
  * \enum EtatCase
  * \brief Definit l'aspect de la case
@@ -101,6 +102,19 @@ Grille * CreerGrille(int nbLin, int nbCol);
  * Attention, ligne et colonne doivent etre coherents avec les dimensions de la grilles
 */
 CaseGrille * Consulter(Grille * grille, Coord coord);
+
+/**
+ * \brief Récupère l'id d'un bateau
+ *
+ * \param[in] grille
+ * \param[in] coord Coordonnées dans la grille de la case ou est le bateau
+ *
+ * \return L'id du bateau qui occupe la case. -1 si pas de bateaux.
+ *
+ * Récupère l'id du bateau occupant une case.
+*/
+int getIdBateauSurCase(Grille *grille, Coord coord);
+
 
 /**
  * \brief Définit l'état d'une case

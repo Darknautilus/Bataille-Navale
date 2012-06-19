@@ -34,7 +34,7 @@ int main(int argc, char ** argv)
 
     init_debug();
     initRandom();
-    
+
     //EcranGrille(NULL);
 
 	AfficherMenuAccueil();
@@ -78,7 +78,7 @@ int main(int argc, char ** argv)
                 break;
         }
     }
-    
+
     ecranVictoire();
 
 	ArreterSDL();

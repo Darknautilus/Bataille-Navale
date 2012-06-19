@@ -215,7 +215,11 @@ int MenuNouvellePartie(Tparam * parametre)
     // Autres
     int continuer = 1;
     int i, j;
-    int nbInstChange = 1;
+
+    //Doit être à 0 pour que le bouton "Démarrer"
+    //puisse être pressé sans que l'on touche aux
+    //paramètres
+    int nbInstChange = 0;
     int nbBat;
     FILE * descFicParam;
 
@@ -368,7 +372,7 @@ int MenuNouvellePartie(Tparam * parametre)
                 }
                 else
                 {
-                    // Boite Message (non finalise)
+                    // TODO: Boite Message (non finalise)
                 }
 
 

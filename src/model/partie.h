@@ -27,6 +27,8 @@ typedef struct
 
 /**
  * Variable globale contenant les données de la partie.
+ * Cette variable contient l'ensemble des données de la partie et
+ * peut-être utilisée depuis n"importe quelle partie du programme.
 **/
 extern TPartie *globalPartie;
 
@@ -44,8 +46,8 @@ int partie_Score();
 
 /**
  * Cette fonction prépare une structure pour qu'elle soit jouable.
- * \param param Les paramètres à appliquer à la partie
- * \return La partie préparée
+ * \param[in] param Les paramètres à appliquer à la partie
+ * \return Un pointeur sur la partie préparée
 */
 TPartie* initialiser(Tparam *param);
 
@@ -53,17 +55,26 @@ TPartie* initialiser(Tparam *param);
 /**
  * Cette fonction réalise un tir (aussi bien pour la machine que pour le joueur).
  *
- * \param partie La partie concernée.
- * \param cible Les coordonnées où l'on tire.
- * \param estJoueur Booléen indiquant si c'est un coup pour le joueur ou non.
+ * \param[in] partie La partie concernée.
+ * \param[in] cible Les coordonnées où l'on tire.
+ * \param[in] estJoueur Booléen indiquant si c'est un coup pour le joueur ou non.
  * \return Retourne le résultat de l'action (1 = touché, 0 = raté)
 **/
 int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur);
 
+/**
+ * Détermine si la partie est finie ou non et indique un éventuel vainqueur.
+ * \param[in] partie La partie en question
+ * \return 0 = partie toujours en cours, 1 = le joueur à gagné, -1 = la machine à gagné
+*/
+int partieEstFinie(TPartie *partie);
 
 
-
-void libererPartie(void);
+/**
+ * Libère les ressources liées à la partie.
+ * \param[in] partie La partie à libérer.
+*/
+void libererPartie(TPartie *partie);
 
 
 
