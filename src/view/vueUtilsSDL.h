@@ -3,6 +3,8 @@
 
 #include "includeSDL.h"
 
+#define K_LGMAXMESSAGE 30
+
 void ecranVictoire(void);
 
 /**

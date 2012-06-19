@@ -40,6 +40,7 @@ Joueur * partie_JMachine();
 Tparam * partie_Param();
 Pile partie_PileCoups();
 Grille * partie_Grille();
+Grille * partie_GrilleMachine();
 int partie_Score();
 
 

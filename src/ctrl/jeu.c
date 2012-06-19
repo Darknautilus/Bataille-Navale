@@ -24,13 +24,11 @@ void jeu(Tparam * pParam)
     {
         // On place les bateaux de la machine et on y va !
         placementAleatBat(partie_JMachine());
-        EffacerEcran();
-        afficherGrille(globalPartie->grilleMachine, 50, 50);
-        SDL_Flip(SDL_GetVideoSurface());
-        pause();
+
+        ecranJeu();
     }
 
-    libererPartie();
+    libererPartie(globalPartie);
 }
 
 int menuPlacementChoixBat(void)
@@ -57,6 +55,9 @@ int menuPlacementChoixBat(void)
     SDL_Rect positionBouton;
 
     Rectangle *** tabRectChoixBat = (Rectangle***)malloc(K_NBTYPEBATEAUX * sizeof(Rectangle**));
+
+    // --------------------------------------------------------------------
+
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {
         nbBat = globalPartie->parametres->nombreInstanceBateaux[i];
@@ -91,6 +92,8 @@ int menuPlacementChoixBat(void)
     positionBouton.x = 524;
     positionBouton.y = 682;
     boutonAnnuler = CreerBouton("Annuler", &positionBouton, 25);
+
+    // --------------------------------------------------------------------
 
     while(continuer)
     {
@@ -128,7 +131,13 @@ int menuPlacementChoixBat(void)
         }
 
         SDL_Flip(SDL_GetVideoSurface());
+<<<<<<< HEAD
 
+=======
+
+        // --------------------------------------------------------------------
+
+>>>>>>> 727ebe4d62b1a8f9e66b80c7178811c372e01af2
         controleEvent = AttendreEvent(positionClic, NULL);
 
         cptBat = 0;
@@ -162,7 +171,13 @@ int menuPlacementChoixBat(void)
             }
         }
     }
+<<<<<<< HEAD
 
+=======
+
+    // --------------------------------------------------------------------
+
+>>>>>>> 727ebe4d62b1a8f9e66b80c7178811c372e01af2
     LibererBouton(boutonValider);
     LibererBouton(boutonAnnuler);
     free(positionClic);
@@ -202,7 +217,13 @@ int menuPlacementGrille(TBateau * pBat)
     TBateau * batInser;
 
     Coord coordClicGrille;
+<<<<<<< HEAD
 
+=======
+
+    // --------------------------------------------------------------------
+
+>>>>>>> 727ebe4d62b1a8f9e66b80c7178811c372e01af2
     strcpy(titreFenetre, "Placement de ");
     strcat(titreFenetre, getInfoBateau(pBat->idBateau, partie_Param())->nomBateau);
 
@@ -219,7 +240,13 @@ int menuPlacementGrille(TBateau * pBat)
 
     batInser = CreerBateau();
     batInser->idBateau = pBat->idBateau;
+<<<<<<< HEAD
 
+=======
+
+    // --------------------------------------------------------------------
+
+>>>>>>> 727ebe4d62b1a8f9e66b80c7178811c372e01af2
     while (continuer)
     {
         EffacerEcran();
@@ -245,7 +272,13 @@ int menuPlacementGrille(TBateau * pBat)
         AfficherBouton(boutonOK);
 
         SDL_Flip(SDL_GetVideoSurface());
+<<<<<<< HEAD
 
+=======
+
+        // --------------------------------------------------------------------
+
+>>>>>>> 727ebe4d62b1a8f9e66b80c7178811c372e01af2
         controleEvent = AttendreEvent(positionClic, touche);
         if(controleEvent == 2)
         {
@@ -287,10 +320,14 @@ int menuPlacementGrille(TBateau * pBat)
                 }
             }
         }
-        afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
-        SDL_Flip(SDL_GetVideoSurface());
     }
+<<<<<<< HEAD
 
+=======
+
+    // --------------------------------------------------------------------
+
+>>>>>>> 727ebe4d62b1a8f9e66b80c7178811c372e01af2
     free(titreFenetre);
     free(touche);
     free(positionClic);
@@ -302,12 +339,60 @@ int menuPlacementGrille(TBateau * pBat)
     return placementValide;
 }
 
+int ecranJeu(void)
+{
+    int continuer = 1;
+
+    char messageJeu[K_LGMAXMESSAGE];
+
+    SDL_Rect positionTexte;
+
+    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    int controleEvent;
+
+    strcpy(messageJeu, "Pret a commencer");
+
+    while(continuer)
+    {
+        EffacerEcran();
+
+        positionTexte.x = 5;
+        positionTexte.y = 682;
+        EcrireTexte(messageJeu, 30, positionTexte, "default.ttf");
+
+        afficherGrille(partie_Grille(), 50, 50);
+        afficherGrille(partie_GrilleMachine(), 530, 50);
+
+        SDL_Flip(SDL_GetVideoSurface());
+
+        controleEvent = AttendreEvent(positionClic, touche);
+        if(controleEvent == 2)
+        {
+            if(ToucheSpec(touche) == SDLK_ESCAPE)
+                continuer = 0;
+        }
+    }
+
+    free(positionClic);
+    free(touche);
+
+    return 1;
+}
+
 int changerSensBat(int pSensBat)
 {
     if(pSensBat == 0)
+<<<<<<< HEAD
         return 1;
     else
         return 0;
+=======
+        pSensBat = 1;
+    else if(pSensBat == 1)
+        pSensBat = 0;
+    return pSensBat;
+>>>>>>> 727ebe4d62b1a8f9e66b80c7178811c372e01af2
 }
 
 int placementBatValide(Joueur * pJoueur)
@@ -338,6 +423,7 @@ void placementAleatBat(Joueur * pJoueur)
         {
             if(!(pJoueur->mesBateaux[i]->estPlace))
             {
+                // Tirage au sort de la position du bateau
                 sens = nombreAleatoire(0, 1);
                 abscisse = nombreAleatoire(1, 10);
                 ordonnee = nombreAleatoire(1, 10);
@@ -346,7 +432,6 @@ void placementAleatBat(Joueur * pJoueur)
                 if(estPlacable(pJoueur->mesBateaux[i], globalPartie->grilleMachine))
                 {
                     pJoueur->mesBateaux[i]->estPlace = 1;
-                    InsertBateau(globalPartie->grilleMachine, pJoueur->mesBateaux[i]);
                 }
             }
         }
