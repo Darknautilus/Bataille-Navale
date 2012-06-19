@@ -51,6 +51,28 @@ int getIdBat(TBateau * pBat)
 	return pBat->idBateau;
 }
 
+TBateau* getBateauFromId(int idBateau){
+
+    int nbBateauxPartie = getNbBat(globalPartie->parametres);
+
+    //Si c'est un bateau du joueur
+    if(idBateau < nbBateauxPartie) {
+
+        //A ce stade on considère que les id sont attribué à l'image de leur index dans le tableau de bateau
+        //Le bateau d'id 3 est dans la case mesBateaux[3] (on comence à 0)
+        return globalPartie->joueur->mesBateaux[idBateau];
+
+    }
+    //sinon c'est un bateau de la machine
+    else{
+
+        //De même que précedemment avec une complication : les id commencent à getNbBat
+        return globalPartie->machine->mesBateaux[idBateau-nbBateauxPartie];
+
+    }
+
+}
+
 void toucherBateau(TBateau * bat, int posTouch)
 {
 	int i;

@@ -75,10 +75,8 @@ Grille * SetEtatCase(Grille * grille, Coord coord, EtatCase etat)
 	return grille;
 }
 
-TBateau* getBateauSurCase(Grille *grille, Coord coord){
-
-
-
+int getIdBateauSurCase(Grille *grille, Coord coord){
+    return Consulter(grille, coord)->idBateauOccupe;
 }
 
 Grille * EffacerGrille(Grille * grille)
