@@ -14,38 +14,31 @@
 
 TPartie *globalPartie = NULL;
 
-Joueur * partie_JHumain()
-{
+Joueur * partie_JHumain(){
     return globalPartie->joueur;
 }
 
-Joueur * partie_JMachine()
-{
+Joueur * partie_JMachine(){
     return globalPartie->machine;
 }
 
-Tparam * partie_Param()
-{
+Tparam * partie_Param(){
     return globalPartie->parametres;
 }
 
-Pile partie_PileCoups()
-{
+Pile partie_PileCoups(){
     return globalPartie->pileCoups;
 }
 
-Grille * partie_Grille()
-{
+Grille * partie_Grille(){
     return globalPartie->grille;
 }
 
-Grille * partie_GrilleMachine()
-{
+Grille * partie_GrilleMachine(){
     return globalPartie->grilleMachine;
 }
 
-int partie_Score()
-{
+int partie_Score(){
     return globalPartie->scorePlayer;
 }
 
@@ -227,8 +220,7 @@ void annulerDernierCoup(TPartie *partie){
 
 
 
-void libererPartie(TPartie *partie)
-{
+void libererPartie(TPartie *partie){
     int i;
     int nombreBateaux = getNbBat(partie->parametres);
 
