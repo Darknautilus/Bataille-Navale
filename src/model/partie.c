@@ -97,7 +97,6 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
     Coup *tir = NULL;
     TBateau *bateauCible = NULL;
     Grille *grilleCible = NULL;
-    CaseGrille *caseGrille = NULL;
     int idCible = -1;
     int i;
     int indexCaseBateauTouche;
@@ -121,9 +120,6 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
         tir = CreerCoup(MACHINE, cible);
     }
 
-    //On récupère la case cible
-    caseGrille = Consulter(grilleCible, cible);
-
     //===========================================================================
 
     //
@@ -143,7 +139,7 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
     if(idCible < 0){
 
         //On place la case à "à l'eau"
-        caseGrille->etatCase = GRILLE_CASE_EAU;
+        SetEtatCase(grilleCible, cible, GRILLE_CASE_EAU);
 
         return 0;
     }
@@ -176,7 +172,7 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
             while(i < getTypeBateau(bateauCible)){
                 //On place la case à touché
-                Consulter(grilleCible, cible)->etatCase = GRILLE_CASE_TOUCHE;
+                SetEtatCase(grilleCible, cible, GRILLE_CASE_COULE);
 
                 if(bateauCible->position.direction == HORIZONTAL){
                     cible.noCol = cible.noCol+1;
@@ -193,7 +189,7 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
         //Sinon il est juste touché
         else{
             //On modifie la case à "touché"
-            caseGrille->etatCase = GRILLE_CASE_TOUCHE;
+            SetEtatCase(grilleCible, cible, GRILLE_CASE_TOUCHE);
         }
 
         return 1;

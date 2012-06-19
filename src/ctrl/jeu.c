@@ -30,7 +30,7 @@ void jeu(Tparam * pParam)
     if(menuPlacementChoixBat())
     {
         // On place les bateaux de la machine et on y va !
-        placementAleatBat(partie_JMachine());
+        placementAleatBat(partie_JMachine(), partie_GrilleMachine());
         ecranJeu();
     }
 
@@ -335,6 +335,8 @@ int ecranJeu(void)
     int continuer = 1;
     int resultCoup;
     int partieFinie = 0;
+    
+    int cptCoups = 0;
 
     char messageJoueur[K_LGMAXMESSAGE];
     char messageMachine[K_LGMAXMESSAGE];
@@ -390,6 +392,8 @@ int ecranJeu(void)
                 resultCoup = jouerUnCoup(globalPartie, coordCoup, 1);
                 partieFinie = partieEstFinie(globalPartie);
                 
+                cptCoups++;
+                
                 if(resultCoup == 1)
                     strcpy(messageMachine, "Touche !");
                 else
@@ -402,6 +406,8 @@ int ecranJeu(void)
                     coordCoup = coordAleat(partie_Grille());
                     resultCoup = jouerUnCoup(globalPartie, coordCoup, 0);
                     partieFinie = partieEstFinie(globalPartie);
+                    
+                    cptCoups++;
                     
                     if(resultCoup == 1)
                         strcpy(messageJoueur, "Touche !");
@@ -442,7 +448,7 @@ int placementBatValide(Joueur * pJoueur)
     return retour;
 }
 
-void placementAleatBat(Joueur * pJoueur)
+void placementAleatBat(Joueur * pJoueur, Grille * pGrille)
 {
     int i;
     int sens;
@@ -465,6 +471,7 @@ void placementAleatBat(Joueur * pJoueur)
                 if(estPlacable(pJoueur->mesBateaux[i], globalPartie->grilleMachine))
                 {
                     pJoueur->mesBateaux[i]->estPlace = 1;
+                    InsertBateau(pGrille, pJoueur->mesBateaux[i]);
                 }
             }
         }
