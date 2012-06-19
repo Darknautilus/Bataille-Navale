@@ -18,8 +18,6 @@
 
 void jeu(Tparam * pParam)
 {
-    globalPartie = initialiser(pParam);
-
     if(menuPlacementChoixBat())
     {
         // On place les bateaux de la machine et on y va !
