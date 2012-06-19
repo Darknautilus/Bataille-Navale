@@ -64,7 +64,7 @@ TPartie* initialiser(Tparam *param){
 
     //Préparation des bateaux
 
-    //Création des structures et ajout des id
+    //Création des structures et ajout des id (commencent à 0)
     for(i = 0 ; i < nombreBateaux ; i++){
         partie->joueur->mesBateaux[i] = CreerBateau();
         partie->machine->mesBateaux[i] = CreerBateau();
@@ -84,40 +84,95 @@ TPartie* initialiser(Tparam *param){
 
 int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
+    Joueur *joueur = NULL;
+    Coup *tir = NULL;
+    TBateau *bateauCible = NULL;
+    int idCible = -1;
+    int indexCaseBateauTouche;
 
-    //Traiter pile de coup
-    //Modifier etat bateau
-    //Vérifier les règles
-    //  - Bateau touché => coulé
+    //===========================================================================
 
-    //On ajoute le coup à la pile de coups
-    Joueur *joueur = partie->joueur;
-    Coup *tir = CreerCoup(joueur, cible);
+    //
+    // On récupère la cible.
+    //
+
+    //Si c'est le joueur qui tire, la cible est sur la grille de la machine
+    if(estJoueur){
+        idCible = getIdBateauSurCase(partie->grilleMachine, cible);
+        joueur = partie->joueur;
+    }
+    //Sinon on tire sur la grillle du joueur
+    else{
+        idCible = getIdBateauSurCase(partie->grille, cible);
+        joueur = partie->machine;
+    }
+
+    //===========================================================================
+
+    //
+    // On ajoute le coup à la pile des coups
+    //
+
+    tir = CreerCoup(joueur, cible);
     globalPartie->pileCoups = Empiler(globalPartie->pileCoups, tir);
 
+    //===========================================================================
 
+    //
+    // Traitement des effets du tir
+    //
 
+    //Si il n'y a pas de bateau, le tir ne touche personne
+    if(idCible < 0){
+        //actions à faire quand case vide touchée
+        return 0;
+    }
+    else{
+        //Si on touche un bateau
+        bateauCible = getBateauFromId(idCible);
+
+        //On détermine quelle case du bateau toucher
+
+        //Si le bateau est horizontal on calcule l'index de la case à toucher.
+        if(bateauCible->position.direction == HORIZONTAL){
+            indexCaseBateauTouche = cible.noCol-bateauCible->position.x;
+        }
+        //Si le bateau est vertical
+        else{
+            indexCaseBateauTouche = cible.noLin-bateauCible->position.y;
+        }
+
+        //On modifie la case touchée par le tir (etat touché)
+        toucherBateau(bateauCible, indexCaseBateauTouche);
+
+        return 1;
+    }
 
 }
 
-void libererPartie(void)
+int partieEstFinie(TPartie *partie){
+
+}
+
+void libererPartie(TPartie *partie)
 {
     int i;
-    int nombreBateaux = getNbBat(partie_Param());
+    int nombreBateaux = getNbBat(partie->parametres);
 
     for(i=0;i<nombreBateaux;i++)
     {
-        LibererBateau(partie_JHumain()->mesBateaux[i]);
-        LibererBateau(partie_JMachine()->mesBateaux[i]);
+        LibererBateau(partie->joueur->mesBateaux[i]);
+        LibererBateau(partie->machine->mesBateaux[i]);
     }
 
-    LibererJoueur(partie_JHumain());
-    LibererJoueur(partie_JMachine());
-    LibererGrille(partie_Grille());
-    libererParam(partie_Param());
+    LibererJoueur(partie->joueur);
+    LibererJoueur(partie->machine);
+    LibererGrille(partie->grille);
+    LibererGrille(partie->grilleMachine);
+    libererParam(partie->parametres);
 
-    while(!PileVide(partie_PileCoups()))
-        Depiler(partie_PileCoups());
+    while(!PileVide(partie->pileCoups))
+        Depiler(partie->pileCoups);
 
-    free(globalPartie);
+    free(partie);
 }

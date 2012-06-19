@@ -27,6 +27,8 @@ typedef struct
 
 /**
  * Variable globale contenant les données de la partie.
+ * Cette variable contient l'ensemble des données de la partie et
+ * peut-être utilisée depuis n"importe quelle partie du programme.
 **/
 extern TPartie *globalPartie;
 
@@ -61,8 +63,11 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur);
 
 
 
-
-void libererPartie(void);
+/**
+ * Libère les ressources liées à la partie.
+ * \param[in] partie La partie à libérer.
+*/
+void libererPartie(TPartie *partie);
 
 
 
