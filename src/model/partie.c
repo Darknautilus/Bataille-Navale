@@ -178,10 +178,12 @@ int partieEstFinie(TPartie *partie){
     //On parcourt les id de bateaux
     while(etatPartie == 0 && i < nbBateaux){
 
+        //Si un bateau du joueur est coulé
         if(getBateauFromId(i)->etat[0] == COULE){
             nbCouleJoueur++;
         }
 
+        //Si un bateau de la machine est coulé
         if(getBateauFromId(i+nbBateaux)->etat[0] == COULE){
             nbCouleMachine++;
         }
@@ -209,6 +211,7 @@ void libererPartie(TPartie *partie)
     int i;
     int nombreBateaux = getNbBat(partie->parametres);
 
+    //On libère tout les bateaux
     for(i=0;i<nombreBateaux;i++)
     {
         LibererBateau(partie->joueur->mesBateaux[i]);
@@ -221,6 +224,7 @@ void libererPartie(TPartie *partie)
     LibererGrille(partie->grilleMachine);
     libererParam(partie->parametres);
 
+    //On libère la pile de coups
     while(!PileVide(partie->pileCoups))
         Depiler(partie->pileCoups);
 
