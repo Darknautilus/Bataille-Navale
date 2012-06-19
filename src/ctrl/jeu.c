@@ -24,11 +24,6 @@ void jeu(Tparam * pParam)
     {
         // On place les bateaux de la machine et on y va !
         placementAleatBat(partie_JMachine());
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 727ebe4d62b1a8f9e66b80c7178811c372e01af2
         ecranJeu();
     }
 
