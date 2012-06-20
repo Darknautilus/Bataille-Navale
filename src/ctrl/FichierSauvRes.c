@@ -65,21 +65,21 @@ int sauvegardeBateaux(TPartie *partie, FILE *fichier){
 
     int nbBateaux = getNbBat(partie->parametres);
     int i = 0;
-    TBateau bat;
+    TBateau * bat;
 
     //on écrit le nombre de bateaux par joueurs
-    fwrite(&nbBateaux, sizeof(nbBateaux), 1, fichier);
+    fwrite(&nbBateaux, sizeof(int), 1, fichier);
 
     //On écrit tout les bateaux du joueur
     for(i = 0 ; i < nbBateaux ; i++){
-        bat = *(partie->joueur->mesBateaux[i]);
-        fwrite(&bat, sizeof(bat), 1, fichier);
+        bat = partie->joueur->mesBateaux[i];
+        fwrite(bat, sizeof(TBateau), 1, fichier);
     }
 
     //On écrit tout les bateaux de la machine
     for(i = 0 ; i < nbBateaux ; i++){
-        bat = *(partie->machine->mesBateaux[i]);
-        fwrite(&bat, sizeof(bat), 1, fichier);
+        bat = partie->machine->mesBateaux[i];
+        fwrite(bat, sizeof(TBateau), 1, fichier);
     }
 
     fwrite(partie->joueur->nomJ, sizeof(char) * KLGNOMJ, 1, fichier);
@@ -119,8 +119,8 @@ int sauvegardeGrille(Grille *grille, FILE *fichier){
     }
 
     //On écrit l'abscisse et l'ordonnée
-    fwrite(&abs, sizeof(abs), 1, fichier);
-    fwrite(&ord, sizeof(ord), 1, fichier);
+    fwrite(&abs, sizeof(int), 1, fichier);
+    fwrite(&ord, sizeof(int), 1, fichier);
 
     return 1;
 }
@@ -136,7 +136,7 @@ int sauvegardeCoups(TPartie *partie, FILE *fichier){
 
     // on écrit les coups du sommet vers la queue
     while(pile != NULL){
-        fwrite(&(pile->Info), sizeof(Coup), 1, fichier);
+        fwrite(pile->Info, sizeof(Coup), 1, fichier);
         pile = pile->Lien;
         nbCoups++;
     }
@@ -164,11 +164,11 @@ int sauvegardeParam(TPartie *partie, FILE *fichier){
     //On sait que nb(TInfoBateau) = nb(Bateau d'un joueur)
 
     for(i = 0 ; i < nbTInfoBateau ; i++){
-        fwrite(&(partie->parametres->bateauxJoueur[i]), sizeof(TBateau), 1, fichier);
+        fwrite(&(partie->parametres->bateauxJoueur[i]), sizeof(TInfoBateau), 1, fichier);
     }
 
     for(i = 0 ; i < nbTInfoBateau ; i++){
-        fwrite(&(partie->parametres->bateauxMachine[i]), sizeof(TBateau), 1, fichier);
+        fwrite(&(partie->parametres->bateauxMachine[i]), sizeof(TInfoBateau), 1, fichier);
     }
 
 
@@ -347,11 +347,11 @@ int restaurerCoups(TPartie *partie, FILE* fichier){
     partie->pileCoups = CreerPile();
 
     //On lit les coups
-    for(i = 0 ; i < nbCoups-1 ; i++){
+    for(i = 0 ; i < nbCoups ; i++){
 
         //on alloue un nouveau coup
         coup = malloc(sizeof(Coup));
-        fread(&coup, sizeof(Coup), 1, fichier);
+        fread(coup, sizeof(Coup), 1, fichier);
 
         cell = malloc(sizeof(struct Cellule));
 
