@@ -100,7 +100,7 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
     int idCible = -1;
     int i;
     int indexCaseBateauTouche;
-
+    
     //===========================================================================
 
     //
@@ -183,6 +183,8 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
                 i++;
             }
+            
+            return -1;
         }
         //Sinon il est juste touché
         else{

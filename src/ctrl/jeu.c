@@ -375,7 +375,8 @@ int ecranJeu(void)
         afficherGrille(partie_Grille(), 50, 50);
         afficherGrille(partie_GrilleMachine(), 530, 50);
         
-        AfficherBouton(boutonFinPartie);
+        if(partieFinie != 0)
+            AfficherBouton(boutonFinPartie);
 
         SDL_Flip(SDL_GetVideoSurface());
 
@@ -420,6 +421,8 @@ int ecranJeu(void)
                 
                 if(resultCoup == 1)
                     strcpy(messageMachine, "Touche !");
+                else if(resultCoup == -1)
+                    strcpy(messageMachine, "Coule !");
                 else
                     strcpy(messageMachine, "A l'eau !");
                 
@@ -435,6 +438,8 @@ int ecranJeu(void)
                     
                     if(resultCoup == 1)
                         strcpy(messageJoueur, "Touche !");
+                    else if(resultCoup == -1)
+                        strcpy(messageJoueur, "Coule !");
                     else
                         strcpy(messageJoueur, "A l'eau !");
                 }
