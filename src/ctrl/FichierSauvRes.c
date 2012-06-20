@@ -377,6 +377,8 @@ int restaurerParam(TPartie *partie, FILE* fichier){
     //On alloue les paramètes
     partie->parametres = malloc( sizeof(Tparam));
     partie->parametres->nombreInstanceBateaux = malloc(sizeof(int)*nbType);
+    
+    nbBateau = getNbBat(partie->parametres);
 
     nbBateau = getNbBat(partie->parametres);
 
