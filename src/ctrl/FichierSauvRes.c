@@ -65,20 +65,21 @@ int sauvegardeBateaux(TPartie *partie, FILE *fichier){
 
     short int nbBateaux = getNbBat(partie->parametres);
     int i = 0;
-    TBateau bat;
-    int nbEcrit;
+    TBateau * bat;
 
     //on écrit le nombre de bateaux par joueurs
-    nbEcrit = fwrite(&nbBateaux, sizeof(short int), 1, fichier);
+    fwrite(&nbBateaux, sizeof(int), 1, fichier);
 
     //On écrit tout les bateaux du joueur
     for(i = 0 ; i < nbBateaux ; i++){
-        fwrite(partie->joueur->mesBateaux[i], sizeof(TBateau), 1, fichier);
+        bat = partie->joueur->mesBateaux[i];
+        fwrite(bat, sizeof(TBateau), 1, fichier);
     }
 
     //On écrit tout les bateaux de la machine
     for(i = 0 ; i < nbBateaux ; i++){
-        fwrite(partie->machine->mesBateaux[i], sizeof(TBateau), 1, fichier);
+        bat = partie->machine->mesBateaux[i];
+        fwrite(bat, sizeof(TBateau), 1, fichier);
     }
 
     fwrite(partie->joueur->nomJ, sizeof(char) * KLGNOMJ, 1, fichier);
@@ -350,7 +351,7 @@ int restaurerCoups(TPartie *partie, FILE* fichier){
 
         //on alloue un nouveau coup
         coup = malloc(sizeof(Coup));
-        fread(&coup, sizeof(Coup), 1, fichier);
+        fread(coup, sizeof(Coup), 1, fichier);
 
         cell = malloc(sizeof(struct Cellule));
 
