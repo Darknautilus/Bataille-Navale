@@ -371,14 +371,14 @@ int restaurerParam(TPartie *partie, FILE* fichier){
     int nbBateau;
     int i;
 
-    nbBateau = getNbBat(partie->parametres);
-
     //On lit le nombre de type de bateaux
     fread(&nbType, sizeof(int), 1, fichier);
 
     //On alloue les paramètes
     partie->parametres = malloc( sizeof(Tparam));
     partie->parametres->nombreInstanceBateaux = malloc(sizeof(int)*nbType);
+    
+    nbBateau = getNbBat(partie->parametres);
 
     //On lit le tableau contenant le nombre de bateau pour chaque type
     for(i = 0 ; i < nbType ; i++){
@@ -389,11 +389,11 @@ int restaurerParam(TPartie *partie, FILE* fichier){
     partie->parametres->bateauxMachine = malloc(sizeof(TInfoBateau)*nbBateau);
 
     for(i = 0 ; i < nbBateau ; i++){
-        fread(&(partie->parametres->bateauxJoueur[i]), sizeof(partie->parametres->bateauxJoueur[i]), 1, fichier);
+        fread(&(partie->parametres->bateauxJoueur[i]), sizeof(TInfoBateau), 1, fichier);
     }
 
     for(i = 0 ; i < nbBateau ; i++){
-        fread(&(partie->parametres->bateauxMachine[i]), sizeof(partie->parametres->bateauxJoueur[i]), 1, fichier);
+        fread(&(partie->parametres->bateauxMachine[i]), sizeof(TInfoBateau), 1, fichier);
     }
 
     return 1;

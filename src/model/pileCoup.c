@@ -49,7 +49,7 @@ int longueurPile(Pile pile){
     int longueur = 0;
 
     //tant que l'on a pas attein la fin de la pile
-    while(pile->Lien != NULL){
+    while(pile != NULL){
         pile = pile->Lien;
         longueur++;
     }

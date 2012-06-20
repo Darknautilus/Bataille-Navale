@@ -353,6 +353,10 @@ int ecranJeu(void)
     
     SDL_Bouton * boutonFinPartie;
     SDL_Rect positionBouton;
+    
+    positionBouton.x = 350;
+    positionBouton.y = 682;
+    boutonFinPartie = CreerBouton("Partie Terminee", &positionBouton, 30);
 
     strcpy(messageJoueur, "Pret a commencer");
     strcpy(messageMachine, "Pret a commencer");
@@ -370,6 +374,8 @@ int ecranJeu(void)
 
         afficherGrille(partie_Grille(), 50, 50);
         afficherGrille(partie_GrilleMachine(), 530, 50);
+        
+        AfficherBouton(boutonFinPartie);
 
         SDL_Flip(SDL_GetVideoSurface());
 
@@ -436,6 +442,7 @@ int ecranJeu(void)
         }
     }
 
+    LibererBouton(boutonFinPartie);
     free(positionClic);
     free(touche);
 

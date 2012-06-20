@@ -15,6 +15,7 @@
 #include "utilsSDL.h"
 #include "fichierDebug.h"
 #include "CtrlGrille.h"
+#include "FichierSauvRes.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -59,7 +60,8 @@ int main(int argc, char ** argv)
                 break;
 
             case 2: // Charger partie
-
+                globalPartie = restaurerPartie("partieUser.dat");
+                ecranJeu();
                 break;
 
             case 3: // Meilleurs scores
