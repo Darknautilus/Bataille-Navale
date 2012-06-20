@@ -183,8 +183,6 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
                 i++;
             }
-
-
         }
         //Sinon il est juste touché
         else{
@@ -277,7 +275,7 @@ void libererPartie(TPartie *partie){
 
     //On libère la pile de coups
     while(!PileVide(partie->pileCoups))
-        Depiler(partie->pileCoups);
+        partie->pileCoups = Depiler(partie->pileCoups);
 
     free(partie);
 }

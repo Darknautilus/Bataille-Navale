@@ -32,7 +32,7 @@ Pile Empiler(Pile pPile, Coup * pElem)
 
 Pile Depiler(Pile pPile)
 {
-	struct Cellule * N = pPile->Lien;
+	Pile N = pPile->Lien;
 
 	free(pPile);
 
@@ -42,4 +42,17 @@ Pile Depiler(Pile pPile)
 Coup* Sommet(Pile pPile)
 {
 	return pPile->Info;
+}
+
+int longueurPile(Pile pile){
+
+    int longueur = 0;
+
+    //tant que l'on a pas attein la fin de la pile
+    while(pile->Lien != NULL){
+        pile = pile->Lien;
+        longueur++;
+    }
+
+    return longueur;
 }

@@ -22,6 +22,7 @@
 #include "../view/SDLImage.h"
 
 #include "../ctrl/fichierDebug.h"
+#include "../ctrl/FichierSauvRes.h"
 
 #include "menu.h"
 
@@ -335,6 +336,7 @@ int ecranJeu(void)
     int continuer = 1;
     int resultCoup;
     int partieFinie = 0;
+    int choixMenuPause;
     
     int cptCoups = 0;
 
@@ -377,8 +379,24 @@ int ecranJeu(void)
         // Événement clavier
         if(controleEvent == 2)
         {
-            if(ToucheSpec(touche) == SDLK_ESCAPE){}
-                //continuer = 0; // Remplacer par menu pause
+            if(ToucheSpec(touche) == SDLK_ESCAPE)
+            {
+                choixMenuPause = menuPause();
+                switch (choixMenuPause)
+                {
+                    case 2: // Enregistrer
+                        sauvegardePartie(globalPartie, "partieUser.dat");
+                        break;
+                        
+                    case 3: // Revenir au menu principal
+                        continuer = 0;
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
+            
         }
         
         // Événement souris
@@ -422,6 +440,75 @@ int ecranJeu(void)
     free(touche);
 
     return 1;
+}
+
+int menuPause(void)
+{
+    int continuer = 1;
+    int choixMenu = 1;
+    
+    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    
+	Image * imagePuce = CreerImage("puceMenu.png", 100, 200);
+    
+    SDL_Rect positionTexte;
+    
+    // --------------------------------------------------------------------
+    
+    while(continuer)
+    {
+        EffacerEcran();
+        AfficherImage(imagePuce);
+        
+        positionTexte.x = 170;
+        positionTexte.y = 210;
+        EcrireTexte("- Revenir", 30, positionTexte, "default.ttf");
+        positionTexte.y += 60;
+        EcrireTexte("- Sauvegarder Partie", 30, positionTexte, "default.ttf");
+        positionTexte.y += 60;
+        EcrireTexte("- Revenir au menu principal", 30, positionTexte, "default.ttf");
+        
+        SDL_Flip(SDL_GetVideoSurface());
+        
+        
+        // --------------------------------------------------------------------
+        
+        AttendreEvent(NULL, touche);
+        
+        switch(ToucheSpec(touche))
+        {
+            case SDLK_RETURN:
+                continuer = 0;
+                break;
+                
+            case SDLK_UP:
+                if(choixMenu != 1)
+                {
+                    choixMenu --;
+                    imagePuce->ordonnee -= 60;
+                }
+                break;
+                
+            case SDLK_DOWN:
+                if(choixMenu != 3)
+                {
+                    choixMenu ++;
+                    imagePuce->ordonnee += 60;
+                }
+                break;
+                
+            default:
+                break;
+                
+        }
+	}
+    
+    // --------------------------------------------------------------------
+    
+	LibererImage(imagePuce);
+	free(touche);
+    
+	return choixMenu;
 }
 
 int changerSensBat(int pSensBat)

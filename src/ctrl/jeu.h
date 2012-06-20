@@ -34,6 +34,7 @@ int menuPlacementGrille(TBateau * pBat);
 
 int ecranJeu(void);
 
+int menuPause(void);
 
 int changerSensBat(int pSensBat);
 
