@@ -37,7 +37,7 @@ int sauvegardeBateaux(TPartie *partie, FILE *fichier);
  * \param[in] fichier Le flux où écrire les données
  * \return 1 = pas d'erreur, autre = codeErreur
 **/
-int sauvegardeGrilles(Grille *grille, FILE *fichier);
+int sauvegardeGrille(Grille *grille, FILE *fichier);
 
 /**
  * Sauvegarde les coups de la pile de la partie
@@ -56,5 +56,44 @@ int sauvegardeCoups(TPartie *partie, FILE *fichier);
  * \return 1 = pas d'erreur, autre = codeErreur
 **/
 int sauvegardeParam(TPartie *partie, FILE *fichier);
+
+/**
+ * Créer une partie à partir des données contenu dans le fichier de sauvegarde désigné.
+ * \param[in] nomSauv Le nom du fichier de sauvegarde (dans le dossier saves)
+ * \return Une structure de type TPartie avec les données du fichier de sauvegarde.
+**/
+TPartie* restaurerPartie(const char nomSauv[]);
+
+/**
+ * Restaure les bateaux dans la structure de type TPartie à partir du flux fichier.
+ * \param[out] partie La partie à modifier.
+ * \param[in] fichier Le flux où lire les données
+ * \return 1 = pas d'erreur, autre = codeErreur
+*/
+int restaurerBateaux(TPartie *partie, FILE* fichier);
+
+/**
+ * Restaure les grilles dans la structure TPartie passée en paramètre à partir du flux fichier.
+ * \param[out] partie La partie à remplir
+ * \param[in] fichier Le flux où lire les données
+ * \return 1 = pas d'erreur, autre = codeErreur
+*/
+int restaurerGrilles(TPartie * partie, FILE* fichier);
+
+/**
+ * Restaure les coups dans la pile de la structure de type TPartie à partir du flux fichier.
+ * \param[out] partie La partie à modifier.
+ * \param[in] fichier Le flux où lire les données
+ * \return 1 = pas d'erreur, autre = codeErreur
+*/
+int restaurerCoups(TPartie *partie, FILE* fichier);
+
+/**
+ * Restaure les paramètres dans la structure de type TPartie à partir du flux fichier.
+ * \param[out] partie La partie à modifier.
+ * \param[in] fichier Le flux où lire les données
+ * \return 1 = pas d'erreur, autre = codeErreur
+*/
+int restaurerParam(TPartie *partie, FILE* fichier);
 
 #endif

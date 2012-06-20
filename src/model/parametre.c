@@ -17,8 +17,6 @@
 
 #include "bateau.h"
 
-//int idDernierBateau = 0;/**< \brief Continent le dernier ID attribué.*/
-
 //***************************
 
 int getCouleur(const TInfoBateau * pB)
@@ -187,7 +185,7 @@ int infoBateauValide(const Tparam * pParam)
     int estValide = 1;
     int i = 0;
     int nbBat;
-    
+
     i = 0;
     nbBat = getNbBat(pParam);
     while (estValide && i < nbBat)
@@ -197,7 +195,7 @@ int infoBateauValide(const Tparam * pParam)
             estValide = 0;
         i++;
     }
-    
+
     return estValide;
 }
 
