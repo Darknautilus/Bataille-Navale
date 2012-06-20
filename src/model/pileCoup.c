@@ -32,7 +32,7 @@ Pile Empiler(Pile pPile, Coup * pElem)
 
 Pile Depiler(Pile pPile)
 {
-	struct Cellule * N = pPile->Lien;
+	Pile N = pPile->Lien;
 
 	free(pPile);
 

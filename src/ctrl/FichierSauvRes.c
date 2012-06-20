@@ -34,7 +34,7 @@ int sauvegardePartie(TPartie *partie, const char nomSauv[]){
     //On ouvre le fichier en écrant tout le contenu
     fichier = fopen(chemin, "wb+");
 
-    if(ferror(fichier)){
+    if(fichier == NULL){
         dgErreur("Impossible d'ouvrir le fichier de sauvegarde.");
         return 0;
     }

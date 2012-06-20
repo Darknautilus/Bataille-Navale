@@ -34,11 +34,14 @@ int menuPlacementGrille(TBateau * pBat);
 
 int ecranJeu(void);
 
+int menuPause(void);
 
 int changerSensBat(int pSensBat);
 
 int placementBatValide(Joueur * pJoueur);
 
-void placementAleatBat(Joueur * pJoueur);
+void placementAleatBat(Joueur * pJoueur, Grille * pGrille);
+
+Coord coordAleat(Grille * pGrille);
 
 #endif

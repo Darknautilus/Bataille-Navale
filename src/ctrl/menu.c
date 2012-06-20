@@ -346,7 +346,7 @@ int MenuNouvellePartie(Tparam * parametre)
                         for(j=0;j<nbInstancesbat[i];j++)
                         {
                             choixMotHasard(nomBatIA, descFicParam, K_LGNOM);
-                            setInfoBateau(&(parametre->bateauxMachine[nbBat]), nomBatIA, nombreAleatoire(1, KCOULEURS_NBCOULMAX-1), tabTypesBat[i].typeBat);
+                            setInfoBateau(&(parametre->bateauxMachine[nbBat]), nomBatIA, 0, tabTypesBat[i].typeBat);
                             nbBat++;
 
                         }
