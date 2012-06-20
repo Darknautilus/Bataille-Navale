@@ -219,12 +219,12 @@ int partieEstFinie(TPartie *partie){
     while(etatPartie == 0 && i < nbBateaux){
 
         //Si un bateau du joueur est coulé
-        if(getBateauFromId(i)->etat[0] == COULE){
+        if(estCoule(getBateauFromId(i))){
             nbCouleJoueur++;
         }
 
         //Si un bateau de la machine est coulé
-        if(getBateauFromId(i+nbBateaux)->etat[0] == COULE){
+        if(estCoule(getBateauFromId(i+nbBateaux))){
             nbCouleMachine++;
         }
 

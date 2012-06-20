@@ -78,7 +78,7 @@ void toucherBateau(TBateau * bat, int posTouch)
 {
 	int i;
 
-	bat->etat[posTouch-1] = TOUCHE;
+	bat->etat[posTouch] = TOUCHE;
 
     //Si le bateau est coule
 	if (estCoule(bat))
@@ -166,6 +166,9 @@ int estPlacable(TBateau * bat, Grille * grille)
 	if ( (bat->position.direction == HORIZONTAL && bat->position.x + (typeBat-1) > grille->NbLin) ||
         (bat->position.direction == VERTICAL && bat->position.y + (typeBat-1) > grille->NbCol) )
         estPlacable = 0;
+
+    coordCaseGrille.noCol = 1;
+    coordCaseGrille.noLin = 1;
 
     // détermine si le bateau est plaçé sur un autre bateau
     for(i=0;i<typeBat && estPlacable;i++)

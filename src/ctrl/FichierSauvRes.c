@@ -82,8 +82,8 @@ int sauvegardeBateaux(TPartie *partie, FILE *fichier){
         fwrite(&bat, sizeof(bat), 1, fichier);
     }
 
-    fwrite(partie->joueur->nomJ, sizeof(partie->joueur->nomJ), 1, fichier);
-    fwrite(partie->machine->nomJ, sizeof(partie->machine->nomJ), 1, fichier);
+    fwrite(partie->joueur->nomJ, sizeof(char) * KLGNOMJ, 1, fichier);
+    fwrite(partie->machine->nomJ, sizeof(char) * KLGNOMJ, 1, fichier);
 
     return 1;
 }
@@ -101,8 +101,8 @@ int sauvegardeGrille(Grille *grille, FILE *fichier){
     ord = grille->ordonnee;
 
     //On écrit le nombre de ligne et de colonne
-    fwrite(&nbLigne, sizeof(nbLigne), 1, fichier);
-    fwrite(&nbColonne, sizeof(nbColonne), 1, fichier);
+    fwrite(&nbLigne, sizeof(int), 1, fichier);
+    fwrite(&nbColonne, sizeof(int), 1, fichier);
 
     //On écrit le tableau des CaseGrilles
     //Ligne par ligne
@@ -132,12 +132,13 @@ int sauvegardeCoups(TPartie *partie, FILE *fichier){
 
     Pile pile = partie->pileCoups;
 
-    fwrite(&nbCoups, sizeof(nbCoups), 1, fichier);
+    fwrite(&nbCoups, sizeof(int), 1, fichier);
 
     // on écrit les coups du sommet vers la queue
     while(pile != NULL){
-        fwrite(&(pile->Info), sizeof(pile->Info), 1, fichier);
+        fwrite(&(pile->Info), sizeof(Coup), 1, fichier);
         pile = pile->Lien;
+        nbCoups++;
     }
 
 
@@ -152,7 +153,7 @@ int sauvegardeParam(TPartie *partie, FILE *fichier){
     int i;
 
     //On écrit le nombre de type de bateaux
-    fwrite(&nbTypeInstances, sizeof(nbTypeInstances), 1, fichier);
+    fwrite(&nbTypeInstances, sizeof(int), 1, fichier);
 
     //on écrit le tableau contenant le nombre de bateau pour chaque type
     for(i = 0 ; i < nbTypeInstances ; i++){
@@ -163,11 +164,11 @@ int sauvegardeParam(TPartie *partie, FILE *fichier){
     //On sait que nb(TInfoBateau) = nb(Bateau d'un joueur)
 
     for(i = 0 ; i < nbTInfoBateau ; i++){
-        fwrite(&(partie->parametres->bateauxJoueur[i]), sizeof(partie->parametres->bateauxJoueur[i]), 1, fichier);
+        fwrite(&(partie->parametres->bateauxJoueur[i]), sizeof(TBateau), 1, fichier);
     }
 
     for(i = 0 ; i < nbTInfoBateau ; i++){
-        fwrite(&(partie->parametres->bateauxMachine[i]), sizeof(partie->parametres->bateauxJoueur[i]), 1, fichier);
+        fwrite(&(partie->parametres->bateauxMachine[i]), sizeof(TBateau), 1, fichier);
     }
 
 
@@ -183,11 +184,11 @@ TPartie* restaurerPartie(const char nomSauv[]){
 
     TPartie *partie;
 
-    FILE *fichier;
+    FILE *fichier = NULL;
     char * chemin = malloc( sizeof(char) * (strlen(SAVE_REP) + strlen(nomSauv)));
 
     //Création du chemin
-    strcpy(chemin, "ressources/saves/");
+    strcpy(chemin, SAVE_REP);
     strcat(chemin, nomSauv);
 
     //On ouvre le fichier en écrant tout le contenu
@@ -334,7 +335,7 @@ int restaurerGrilles(TPartie *partie, FILE* fichier){
 
 int restaurerCoups(TPartie *partie, FILE* fichier){
 
-    int nbCoups;
+    int nbCoups = 0;
     int i;
     Coup *coup;
     struct Cellule *cell = NULL;
@@ -346,8 +347,9 @@ int restaurerCoups(TPartie *partie, FILE* fichier){
     partie->pileCoups = CreerPile();
 
     //On lit les coups
-    for(i = 0 ; i < nbCoups ; i++){
+    for(i = 0 ; i < nbCoups-1 ; i++){
 
+        //on alloue un nouveau coup
         coup = malloc(sizeof(Coup));
         fread(&coup, sizeof(Coup), 1, fichier);
 
@@ -367,9 +369,10 @@ int restaurerCoups(TPartie *partie, FILE* fichier){
 
 int restaurerParam(TPartie *partie, FILE* fichier){
 
-    int nbType;
-    int nbBateau;
-    int i;
+    int nbType = 0;
+    int nbBateau = 0;
+    int i = 0;
+    int watch = 0;
 
     //On lit le nombre de type de bateaux
     fread(&nbType, sizeof(int), 1, fichier);
@@ -377,13 +380,14 @@ int restaurerParam(TPartie *partie, FILE* fichier){
     //On alloue les paramètes
     partie->parametres = malloc( sizeof(Tparam));
     partie->parametres->nombreInstanceBateaux = malloc(sizeof(int)*nbType);
-    
-    nbBateau = getNbBat(partie->parametres);
 
     //On lit le tableau contenant le nombre de bateau pour chaque type
     for(i = 0 ; i < nbType ; i++){
-        fread(&(partie->parametres->nombreInstanceBateaux[i]), sizeof(int), 1, fichier);
+        fread(&watch, sizeof(int), 1, fichier);
+        partie->parametres->nombreInstanceBateaux[i] = watch;
     }
+
+    nbBateau = getNbBat(partie->parametres);
 
     partie->parametres->bateauxJoueur = malloc(sizeof(TInfoBateau)*nbBateau);
     partie->parametres->bateauxMachine = malloc(sizeof(TInfoBateau)*nbBateau);
