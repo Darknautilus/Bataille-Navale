@@ -40,14 +40,14 @@ void msgBox(int pAbs, int pOrd, char * pTexte, int pTailleTexte)
     SDL_BlitSurface(boite, NULL, SDL_GetVideoSurface(), &positionElem);
     positionElem.x = pAbs+KPADDING;
     positionElem.y = pOrd+KPADDING;
-    EcrireTexte(pTexte, pTailleTexte, positionElem, "default.ttf");
+    ecrireTexte(pTexte, pTailleTexte, positionElem, "default.ttf");
     
     SDL_Flip(SDL_GetVideoSurface());
     
     while(continuer)
     {
-        controleEvent = AttendreEvent(coordClic, touche);
-        if(controleEvent == 2 && ToucheSpec(touche) == SDLK_RETURN)
+        controleEvent = attendreEvent(coordClic, touche);
+        if(controleEvent == 2 && toucheSpec(touche) == SDLK_RETURN)
             continuer = 0;
     }
     

@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 
-void AfficherParamTest(Tparam * param)
+void afficherParamTest(Tparam * param)
 {
 	int i;
 	char nomCouleur[KCOULEURS_LGNOMCOUL];

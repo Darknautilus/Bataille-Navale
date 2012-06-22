@@ -8,7 +8,7 @@
 #include <stdlib.h>
 
 // insère un bateau dans une grille
-Grille * InsertBateau(Grille * grille, TBateau * bat)
+Grille * insertBateau(Grille * grille, TBateau * bat)
 {
 	int i;
 	Coord coordCaseGrille;
@@ -26,15 +26,15 @@ Grille * InsertBateau(Grille * grille, TBateau * bat)
             coordCaseGrille.noLin = bat->position.y;
         }
 
-        Consulter(grille, coordCaseGrille)->idBateauOccupe = bat->idBateau;
-        Consulter(grille, coordCaseGrille)->couleur = getInfoBateau(bat->idBateau, partie_Param())->couleur;
+        consulter(grille, coordCaseGrille)->idBateauOccupe = bat->idBateau;
+        consulter(grille, coordCaseGrille)->couleur = getInfoBateau(bat->idBateau, partie_Param())->couleur;
 
 		if(bat->etat[i] == TOUCHE)
-			grille = SetEtatCase(grille, coordCaseGrille, GRILLE_CASE_TOUCHE);
+			grille = setEtatCase(grille, coordCaseGrille, GRILLE_CASE_TOUCHE);
 		else if(bat->etat[i] == COULE)
-			grille = SetEtatCase(grille, coordCaseGrille, GRILLE_CASE_COULE);
+			grille = setEtatCase(grille, coordCaseGrille, GRILLE_CASE_COULE);
 		else
-			grille = SetEtatCase(grille, coordCaseGrille, GRILLE_CASE_NORMAL);
+			grille = setEtatCase(grille, coordCaseGrille, GRILLE_CASE_NORMAL);
 	}
 
 	return grille;

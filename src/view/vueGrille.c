@@ -76,7 +76,7 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 			positionCaseGrille.x = i*(KLARGCASE + KESP_CASE_HORI) + abscisse;
 			positionCaseGrille.y = j*(KHAUTEURCASE + KESP_CASE_VERT) + ordonnee;
 
-			contenuCaseGrille = Consulter(grille, coord);
+			contenuCaseGrille = consulter(grille, coord);
             
             caseGrille = SDL_DisplayFormat(caseGrille);// Règle le problème de couleur imprévisible
             SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille->couleur))));
@@ -123,7 +123,7 @@ void updateGrille(Grille * grille, Coord coord)
 	caseGrille = SDL_CreateRGBSurface(SDL_HWSURFACE, 30, 30, 32, 0, 0, 0, 0);
 	caseGrille = SDL_DisplayFormat(caseGrille);// Règle le problème de couleur imprévisible
 
-	contenuCaseGrille = Consulter(grille, coord);
+	contenuCaseGrille = consulter(grille, coord);
 
 	SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille->couleur))));
 	SDL_BlitSurface(caseGrille, NULL, SDL_GetVideoSurface(),&positionCaseGrille);
@@ -151,7 +151,7 @@ void updateGrille(Grille * grille, Coord coord)
 	SDL_FreeSurface(caseGrille);
 }
 
-int ClicDansGrille(Grille * grille, SDL_Rect * positionClic)
+int clicDansGrille(Grille * grille, SDL_Rect * positionClic)
 {
 	int codeRetour = 0;
 
@@ -162,12 +162,12 @@ int ClicDansGrille(Grille * grille, SDL_Rect * positionClic)
     return codeRetour;
 }
 
-Coord ClicCaseGrille(Grille * grille, SDL_Rect * positionClic)
+Coord clicCaseGrille(Grille * grille, SDL_Rect * positionClic)
 {
 	Coord coordClic;
 	int compteurCol, compteurLin;
 
-	if(ClicDansGrille(grille, positionClic))
+	if(clicDansGrille(grille, positionClic))
 	{
 		for(compteurCol=0;positionClic->x > grille->abscisse+compteurCol*(KLARGCASE + KESP_CASE_HORI);compteurCol++)
 		{}

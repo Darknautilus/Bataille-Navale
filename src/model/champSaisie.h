@@ -88,7 +88,7 @@ void initTexte(ChampSaisie * champ, const char * chaine);
  *
  * Cette fonction teste si la chaine du champ n'est pas de la longueur maximale spécifiée à la création du champ.
 */
-int ChainePleine(const ChampSaisie * champ);
+int chainePleine(const ChampSaisie * champ);
 
 /**
  * \brief Change l'état du champ

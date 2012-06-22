@@ -25,20 +25,20 @@ void ecranVictoire(void)
     
     while (continuer)
     {
-        EffacerEcran();
-        AfficherImage(imageCaptain);
-        AfficherImage(imageClavier);
+        effacerEcran();
+        afficherImage(imageCaptain);
+        afficherImage(imageClavier);
         positionTexte.x = 278;
         positionTexte.y = 230;
-        EcrireTexte("VICTOIRE !", 100, positionTexte, "default.ttf");
+        ecrireTexte("VICTOIRE !", 100, positionTexte, "default.ttf");
         positionTexte.x = 380;
         positionTexte.y = 625;
-        EcrireTexte("Espace", 30, positionTexte, "default.ttf");
+        ecrireTexte("Espace", 30, positionTexte, "default.ttf");
         SDL_Flip(SDL_GetVideoSurface());
         
-        controleEvent = AttendreEvent(positionClic, touche);
+        controleEvent = attendreEvent(positionClic, touche);
         
-        if(controleEvent == 2 && ToucheSpec(touche) == SDLK_SPACE)
+        if(controleEvent == 2 && toucheSpec(touche) == SDLK_SPACE)
         {
             continuer = 0;
         }
@@ -54,7 +54,7 @@ void ecranVictoire(void)
     free(positionClic);
 }
 
-void EcrireTexte(char * texte, int taille, SDL_Rect positionTexte, char * cheminPolice)
+void ecrireTexte(char * texte, int taille, SDL_Rect positionTexte, char * cheminPolice)
 {
     int longTexte = strlen(texte);
     char * nouvTexte = (char*)malloc((longTexte+1)*sizeof(char)); // chaine de travail
@@ -70,27 +70,27 @@ void EcrireTexte(char * texte, int taille, SDL_Rect positionTexte, char * chemin
         // Si c'est un saut de ligne, on écrit la ligne et on passe à la suivante
         if(texte[i] == '\n')
         {
-            EcrireLigneTexte(nouvTexte, taille, positionTexte, cheminPolice);
+            ecrireLigneTexte(nouvTexte, taille, positionTexte, cheminPolice);
             positionTexte.y += taille;
             strcpy(nouvTexte, "");
         }
         // Sinon, on ajoute le caractère à la chaine de travail (ligne en cours)
         else
         {
-            AjouterCharFin(nouvTexte, texte[i]);
+            ajouterCharFin(nouvTexte, texte[i]);
         }
         
         // On passe au caractère suivant et si l'on est à la fin, on écrit la ligne.
         i++;
         if(texte[i] == '\0')
-            EcrireLigneTexte(nouvTexte, taille, positionTexte, cheminPolice);
+            ecrireLigneTexte(nouvTexte, taille, positionTexte, cheminPolice);
     }
     
     // Libération chaine de travail
     free(nouvTexte);
 }
 
-void EcrireLigneTexte(char * texte,int taille, SDL_Rect positionTexte, char * cheminPolice)
+void ecrireLigneTexte(char * texte,int taille, SDL_Rect positionTexte, char * cheminPolice)
 {
 	SDL_Surface * zoneTexte;
 	TTF_Font * police = chargerPoliceEcriture(cheminPolice, taille);
@@ -103,7 +103,7 @@ void EcrireLigneTexte(char * texte,int taille, SDL_Rect positionTexte, char * ch
 	TTF_CloseFont(police);
 }
 
-int AttendreEvent(SDL_Rect * coordClic, SDL_keysym * touche)
+int attendreEvent(SDL_Rect * coordClic, SDL_keysym * touche)
 {
 	SDL_Event event;
 	int continuer = 1;
@@ -142,7 +142,7 @@ int AttendreEvent(SDL_Rect * coordClic, SDL_keysym * touche)
     return controle;
 }
 
-char ToucheChar(SDL_keysym * touche)
+char toucheChar(SDL_keysym * touche)
 {
     char charTouche;
 
@@ -151,7 +151,7 @@ char ToucheChar(SDL_keysym * touche)
 	return charTouche;
 }
 
-SDLKey ToucheSpec(SDL_keysym * touche)
+SDLKey toucheSpec(SDL_keysym * touche)
 {
 	return touche->sym;
 }
@@ -171,7 +171,7 @@ void afficherCoordClic(SDL_Rect * pPosClic, int pTaille, int pAbs, int pOrd, cha
     
     posTexte.x = pAbs;
     posTexte.y = pOrd;
-    EcrireLigneTexte(texte, pTaille, posTexte, pPolice);
+    ecrireLigneTexte(texte, pTaille, posTexte, pPolice);
 }
 
 void pause(void)
@@ -196,7 +196,7 @@ void pause(void)
     
 }
 
-void EffacerEcran(void)
+void effacerEcran(void)
 {
 	SDL_FillRect(SDL_GetVideoSurface(), NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, 0, 0, 0));
 }

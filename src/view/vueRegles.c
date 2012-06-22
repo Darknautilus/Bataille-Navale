@@ -14,13 +14,13 @@ void afficherRegles()
 
 	while (continuer)
 	{
-		EffacerEcran();
+		effacerEcran();
 
 
 		SDL_Flip(SDL_GetVideoSurface());
-		AttendreEvent(NULL, touche);
+		attendreEvent(NULL, touche);
 
-		if(ToucheSpec(touche) == SDLK_ESCAPE)
+		if(toucheSpec(touche) == SDLK_ESCAPE)
 			continuer = 0;
 
 	}

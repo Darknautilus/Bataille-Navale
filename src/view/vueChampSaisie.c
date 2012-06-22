@@ -19,7 +19,7 @@
 
 #include <string.h>
 
-void AfficherChamp(ChampSaisie * champ)
+void afficherChamp(ChampSaisie * champ)
 {
 	SDL_Surface * champBG, * texte;
 	TTF_Font * police;
@@ -53,7 +53,7 @@ void AfficherChamp(ChampSaisie * champ)
 	TTF_CloseFont(police);
 }
 
-void EditerChamp(ChampSaisie * champ)
+void editerChamp(ChampSaisie * champ)
 {
 	int continuer = 1;
 	int etatEvent;
@@ -63,20 +63,20 @@ void EditerChamp(ChampSaisie * champ)
 
 	SDL_EnableUNICODE(SDL_ENABLE);
     
-    ChangeFocus(champ, CHAMP_ACTIF);
+    changeFocus(champ, CHAMP_ACTIF);
 
 	while (continuer)
 	{
-		AfficherChamp(champ);
+		afficherChamp(champ);
 		SDL_Flip(SDL_GetVideoSurface());
 
-		etatEvent = AttendreEvent(positionClic, touche);
+		etatEvent = attendreEvent(positionClic, touche);
 
 		if(etatEvent == 1)
 		{
-			if(!ClicSurChamp(champ, positionClic))
+			if(!clicSurChamp(champ, positionClic))
 			{
-				ChangeFocus(champ, CHAMP_INACTIF);
+				changeFocus(champ, CHAMP_INACTIF);
 				continuer = 0;
 			}
 
@@ -84,12 +84,12 @@ void EditerChamp(ChampSaisie * champ)
 
 		else if(etatEvent == 2)
 		{
-			if(ToucheSpec(touche) == SDLK_BACKSPACE)
-				champ->chaine = SupprimerDernierChar(champ->chaine);
+			if(toucheSpec(touche) == SDLK_BACKSPACE)
+				champ->chaine = supprimerDernierChar(champ->chaine);
 			else
 			{
-				if(!ChainePleine(champ))
-					champ->chaine = AjouterCharFin(champ->chaine, ToucheChar(touche));
+				if(!chainePleine(champ))
+					champ->chaine = ajouterCharFin(champ->chaine, toucheChar(touche));
 			}
 		}
 
@@ -101,7 +101,7 @@ void EditerChamp(ChampSaisie * champ)
 	free(touche);
 }
 
-int ClicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic)
+int clicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic)
 {
 	int codeRetour = 0;
 
