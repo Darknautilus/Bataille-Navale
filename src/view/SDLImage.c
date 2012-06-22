@@ -34,7 +34,7 @@ Image * CreerImage(char * pChemin, int pAbscisse, int pOrdonnee)
 	return nouvImage;
 }
 
-void AfficherImage(Image * pImage)
+void afficherImage(Image * pImage)
 {
 	SDL_Rect positionImage;
 
@@ -44,7 +44,7 @@ void AfficherImage(Image * pImage)
 	SDL_BlitSurface(pImage->zoneImage, NULL, SDL_GetVideoSurface(), &positionImage);
 }
 
-int ClicSurImage(Image * pImage, SDL_Rect * pPosClic)
+int clicSurImage(Image * pImage, SDL_Rect * pPosClic)
 {
 	if(pPosClic->x >= pImage->abscisse && pPosClic->x <= pImage->abscisse + pImage->longueur &&
 	   pPosClic->y >= pImage->ordonnee && pPosClic->y <= pImage->ordonnee + pImage->hauteur)

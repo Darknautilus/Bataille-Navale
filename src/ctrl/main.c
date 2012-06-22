@@ -29,7 +29,7 @@ int main(int argc, char ** argv)
     int partiePrete;
     int resultPartie;
 
-	ecran = DemarrerSDL(1024, 768, "Bataille Navale");
+	ecran = demarrerSDL(1024, 768, "Bataille Navale");
 
     Tparam * parametrePartie = malloc (sizeof(Tparam));
 
@@ -38,7 +38,7 @@ int main(int argc, char ** argv)
 
     //EcranGrille(NULL);
 
-	AfficherMenuAccueil();
+	afficherMenuAccueil();
 
 	while (continuer)
 	{
@@ -49,12 +49,12 @@ int main(int argc, char ** argv)
 	    }
 
         parametrePartie = newTParam(nbType);
-		choixMenu = AfficherMenuRacine();
+		choixMenu = afficherMenuRacine();
 
         switch (choixMenu)
         {
             case 1: // Nouvelle Partie
-                partiePrete = MenuNouvellePartie(parametrePartie);
+                partiePrete = menuNouvellePartie(parametrePartie);
                 if(partiePrete)
                 {
                     resultPartie = jeu(parametrePartie);
@@ -87,7 +87,7 @@ int main(int argc, char ** argv)
         }
     }
 
-	ArreterSDL();
+	arreterSDL();
 	detruire_debug();
 
     libererParam(parametrePartie);

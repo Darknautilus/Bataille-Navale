@@ -108,19 +108,19 @@ int menuPlacementChoixBat(void)
 
     while(continuer)
     {
-        EffacerEcran();
+        effacerEcran();
         
         // Si la partie n'est pas prete, on affiche un bouton vide
-        AfficherBouton(boutonAnnuler);
+        afficherBouton(boutonAnnuler);
         if(placementBatValide(partie_JHumain()))
             strcpy(boutonValider->texte, "Valider");
         else
             strcpy(boutonValider->texte, "");
-        AfficherBouton(boutonValider);
+        afficherBouton(boutonValider);
 
         positionTexte.x = 370;
         positionTexte.y = 10;
-        EcrireTexte("Placement des bateaux", 30, positionTexte, "default.ttf");
+        ecrireTexte("Placement des bateaux", 30, positionTexte, "default.ttf");
 
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
@@ -129,7 +129,7 @@ int menuPlacementChoixBat(void)
             positionTexte.y = 100+i*120;
             strcpy(labelColonneTypes,tabTypesBat[i].nomType);
             strcat(labelColonneTypes, "s");
-            EcrireTexte(labelColonneTypes, 25, positionTexte, "default.ttf");
+            ecrireTexte(labelColonneTypes, 25, positionTexte, "default.ttf");
 
             nbBat = globalPartie->parametres->nombreInstanceBateaux[i];
             for(j=0;j<nbBat;j++)
@@ -137,7 +137,7 @@ int menuPlacementChoixBat(void)
                 afficherRectangle(tabRectChoixBat[i][j]);
                 positionTexte.x = tabRectChoixBat[i][j]->abscisse + 5;
                 positionTexte.y = tabRectChoixBat[i][j]->ordonnee + 5;
-                EcrireTexte(globalPartie->parametres->bateauxJoueur[getNumBat(i, j, globalPartie->parametres)].nomBateau, 25, positionTexte, "default.ttf");
+                ecrireTexte(globalPartie->parametres->bateauxJoueur[getNumBat(i, j, globalPartie->parametres)].nomBateau, 25, positionTexte, "default.ttf");
             }
         }
 
@@ -145,7 +145,7 @@ int menuPlacementChoixBat(void)
 
         // --------------------------------------------------------------------
 
-        controleEvent = AttendreEvent(positionClic, NULL);
+        controleEvent = attendreEvent(positionClic, NULL);
 
         cptBat = 0;
         if(controleEvent == 1)
@@ -165,7 +165,7 @@ int menuPlacementChoixBat(void)
                 }
             }
 
-            if(ClicSurBouton(boutonValider, positionClic))
+            if(clicSurBouton(boutonValider, positionClic))
             {
                 // Si la partie est prete, on continue (code retour = 1)
                 if(placementBatValide(partie_JHumain()))
@@ -173,7 +173,7 @@ int menuPlacementChoixBat(void)
                     continuer = 0;
                 }
             }
-            else if(ClicSurBouton(boutonAnnuler, positionClic))
+            else if(clicSurBouton(boutonAnnuler, positionClic))
             {
                 retour = 0;
                 continuer = 0;
@@ -247,71 +247,71 @@ int menuPlacementGrille(TBateau * pBat)
 
     while (continuer)
     {
-        EffacerEcran();
+        effacerEcran();
         afficherGrille(partie_Grille(), 111, 185);
 
         positionTexte.x = 340;
         positionTexte.y = 30;
-        EcrireTexte(titreFenetre, 30, positionTexte, "default.ttf");
+        ecrireTexte(titreFenetre, 30, positionTexte, "default.ttf");
         positionTexte.x = 614;
         positionTexte.y = 298;
-        EcrireTexte("Sens du bateau :", 25, positionTexte, "default.ttf");
+        ecrireTexte("Sens du bateau :", 25, positionTexte, "default.ttf");
         positionTexte.x = 614;
         positionTexte.y = 147;
-        EcrireTexte(tabTypesBat[getInfoBateau(pBat->idBateau, partie_Param())->type-1].nomType, 25, positionTexte, "default.ttf");
+        ecrireTexte(tabTypesBat[getInfoBateau(pBat->idBateau, partie_Param())->type-1].nomType, 25, positionTexte, "default.ttf");
 
-        AfficherBouton(boutonSensBat);
-        AfficherBouton(boutonAnnuler);
+        afficherBouton(boutonSensBat);
+        afficherBouton(boutonAnnuler);
         
         // Si le bateau n'est pas place, on affiche un bouton vide
         if(batInser->estPlace == 0)
             strcpy(boutonOK->texte, "");
         else if(batInser->estPlace == 1)
             strcpy(boutonOK->texte, "OK");
-        AfficherBouton(boutonOK);
+        afficherBouton(boutonOK);
 
         SDL_Flip(SDL_GetVideoSurface());
 
         // --------------------------------------------------------------------
 
-        controleEvent = AttendreEvent(positionClic, touche);
+        controleEvent = attendreEvent(positionClic, touche);
         if(controleEvent == 2)
         {
-            if(ToucheSpec(touche) == SDLK_ESCAPE)
+            if(toucheSpec(touche) == SDLK_ESCAPE)
                 continuer = 0;
         }
         else if(controleEvent == 1)
         {
-            if(ClicSurBouton(boutonSensBat, positionClic))
+            if(clicSurBouton(boutonSensBat, positionClic))
             {
                 // On change le sens du bateau (et le texte du bouton)
                 sensBat = changerSensBat(sensBat);
                 strcpy(boutonSensBat->texte, tabSensBat[sensBat].libSens);
             }
-            else if(ClicSurBouton(boutonAnnuler, positionClic))
+            else if(clicSurBouton(boutonAnnuler, positionClic))
             {
                 // placementValide = 0
                 continuer = 0;
             }
-            else if(ClicSurBouton(boutonOK, positionClic))
+            else if(clicSurBouton(boutonOK, positionClic))
             {
                 // Si le bateau est place, on copie les infos du bateau temporaire dans le vrai
                 if(batInser->estPlace)
                 {
                     pBat->estPlace = 1;
                     setPosBat(pBat, tabSensBat[sensBat].sensBat, coordClicGrille.noCol, coordClicGrille.noLin);
-                    InsertBateau(partie_Grille(), pBat);
+                    insertBateau(partie_Grille(), pBat);
 
                     placementValide = 1;
 
                     continuer = 0;
                 }
             }
-            else if(ClicDansGrille(partie_Grille(), positionClic))
+            else if(clicDansGrille(partie_Grille(), positionClic))
             {
                 // Lors d'un clic dans la grille, on cherche quelle case a ete cliquee et on verifie que le bateau peut etre place la
                 batInser->estPlace = 0;
-                coordClicGrille = ClicCaseGrille(partie_Grille(), positionClic);
+                coordClicGrille = clicCaseGrille(partie_Grille(), positionClic);
                 setPosBat(batInser, tabSensBat[sensBat].sensBat, coordClicGrille.noCol, coordClicGrille.noLin);
                 if(estPlacable(batInser, partie_Grille()))
                 {
@@ -372,31 +372,31 @@ int ecranJeu(void)
 
     while(continuer)
     {
-        EffacerEcran();
+        effacerEcran();
 
         positionTexte.x = 5;
         positionTexte.y = 682;
-        EcrireTexte(messageJoueur, 30, positionTexte, "default.ttf");
+        ecrireTexte(messageJoueur, 30, positionTexte, "default.ttf");
         positionTexte.x = 750;
         positionTexte.y = 682;
-        EcrireTexte(messageMachine, 30, positionTexte, "default.ttf");
+        ecrireTexte(messageMachine, 30, positionTexte, "default.ttf");
 
         afficherGrille(partie_Grille(), 50, 50);
         afficherGrille(partie_GrilleMachine(), 530, 50);
         
         if(partieFinie != 0)
-            AfficherBouton(boutonFinPartie);
-		AfficherBouton(boutonAnnulerCoup);
+            afficherBouton(boutonFinPartie);
+		afficherBouton(boutonAnnulerCoup);
 
         SDL_Flip(SDL_GetVideoSurface());
 
         // Traitement des événements
-        controleEvent = AttendreEvent(positionClic, touche);
+        controleEvent = attendreEvent(positionClic, touche);
         
         // Événement clavier
         if(controleEvent == 2)
         {
-            if(ToucheSpec(touche) == SDLK_ESCAPE)
+            if(toucheSpec(touche) == SDLK_ESCAPE)
             {
                 choixMenuPause = menuPause();
                 switch (choixMenuPause)
@@ -420,10 +420,10 @@ int ecranJeu(void)
         else if(controleEvent == 1)
         {
             // Si l'on clique dans la grille de la machine
-            if(ClicDansGrille(partie_GrilleMachine(), positionClic) && partieFinie == 0 )
+            if(clicDansGrille(partie_GrilleMachine(), positionClic) && partieFinie == 0 )
             {
                 // On joue le coup et on récupère le résultat
-                coordCoup = ClicCaseGrille(partie_GrilleMachine(), positionClic);
+                coordCoup = clicCaseGrille(partie_GrilleMachine(), positionClic);
                 resultCoup = jouerUnCoup(globalPartie, coordCoup, 1);
                 partieFinie = partieEstFinie(globalPartie);
                 
@@ -454,17 +454,17 @@ int ecranJeu(void)
                         strcpy(messageJoueur, "A l'eau !");
                 }
             }
-			else if(ClicSurBouton(boutonAnnulerCoup, positionClic))
+			else if(clicSurBouton(boutonAnnulerCoup, positionClic))
 			{
-				if(!PileVide(partie_PileCoups()))
+				if(!pileVide(partie_PileCoups()))
 				{
 					annulerDernierCoup(globalPartie);
 					positionTexte.x = 350;
 					positionTexte.y = 682;
-					EcrireTexte("Annule", 30, positionTexte, "default.ttf");
+					ecrireTexte("Annule", 30, positionTexte, "default.ttf");
 				}
 			}
-            else if(ClicSurBouton(boutonFinPartie, positionClic))
+            else if(clicSurBouton(boutonFinPartie, positionClic))
             {
                 if(partieFinie != 0)
                 {
@@ -497,25 +497,25 @@ int menuPause(void)
     
     while(continuer)
     {
-        EffacerEcran();
-        AfficherImage(imagePuce);
+        effacerEcran();
+        afficherImage(imagePuce);
         
         positionTexte.x = 170;
         positionTexte.y = 210;
-        EcrireTexte("- Revenir", 30, positionTexte, "default.ttf");
+        ecrireTexte("- Revenir", 30, positionTexte, "default.ttf");
         positionTexte.y += 60;
-        EcrireTexte("- Sauvegarder Partie", 30, positionTexte, "default.ttf");
+        ecrireTexte("- Sauvegarder Partie", 30, positionTexte, "default.ttf");
         positionTexte.y += 60;
-        EcrireTexte("- Revenir au menu principal", 30, positionTexte, "default.ttf");
+        ecrireTexte("- Revenir au menu principal", 30, positionTexte, "default.ttf");
         
         SDL_Flip(SDL_GetVideoSurface());
         
         
         // --------------------------------------------------------------------
         
-        AttendreEvent(NULL, touche);
+        attendreEvent(NULL, touche);
         
-        switch(ToucheSpec(touche))
+        switch(toucheSpec(touche))
         {
             case SDLK_RETURN:
                 continuer = 0;
@@ -598,7 +598,7 @@ void placementAleatBat(Joueur * pJoueur, Grille * pGrille)
                 if(estPlacable(pJoueur->mesBateaux[i], globalPartie->grilleMachine))
                 {
                     pJoueur->mesBateaux[i]->estPlace = 1;
-                    InsertBateau(pGrille, pJoueur->mesBateaux[i]);
+                    insertBateau(pGrille, pJoueur->mesBateaux[i]);
                 }
             }
         }

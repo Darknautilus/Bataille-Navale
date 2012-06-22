@@ -49,7 +49,7 @@ void updateGrille(Grille * grille, Coord coord);
 * \return Les coordonnées du clic dans la grille si le clic est dans la grille et des coordonées nulles sinon
 *
 */
-Coord ClicCaseGrille(Grille * grille, SDL_Rect * positionClic);
+Coord clicCaseGrille(Grille * grille, SDL_Rect * positionClic);
 
 /**
 * \brief Détermine si un clic est dans la grille
@@ -60,7 +60,7 @@ Coord ClicCaseGrille(Grille * grille, SDL_Rect * positionClic);
 * \return 1 si le clic est est dans la grille et 0 sinon
 *
 */
-int ClicDansGrille(Grille * grille, SDL_Rect * positionClic);
+int clicDansGrille(Grille * grille, SDL_Rect * positionClic);
 
 
 #endif

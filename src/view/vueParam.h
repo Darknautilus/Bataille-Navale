@@ -17,6 +17,6 @@
  *
  * \param[in] param Les paramètres de la partie
 */
-void AfficherParamTest(Tparam * param);
+void afficherParamTest(Tparam * param);
 
 #endif

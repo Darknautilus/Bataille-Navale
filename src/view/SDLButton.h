@@ -36,9 +36,9 @@ typedef struct
 */
 SDL_Bouton * CreerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte);
 
-void AfficherBouton(SDL_Bouton * pBouton);
+void afficherBouton(SDL_Bouton * pBouton);
 
-int ClicSurBouton(SDL_Bouton * pBouton, SDL_Rect * positionClic);
+int clicSurBouton(SDL_Bouton * pBouton, SDL_Rect * positionClic);
 
 void LibererBouton(SDL_Bouton * pBouton);
 

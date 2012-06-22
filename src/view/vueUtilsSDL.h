@@ -15,7 +15,7 @@ void ecranVictoire(void);
  * \param[in] positionTexte Coordonnées du texte à l'écran
  * \param[in] cheminPolice Chemin de la police dans le dossier Fonts
  */
-void EcrireTexte(char * texte, int taille, SDL_Rect positionTexte, char * cheminPolice);
+void ecrireTexte(char * texte, int taille, SDL_Rect positionTexte, char * cheminPolice);
 
 /**
  * \brief Permet d'écrire une ligne de texte
@@ -25,7 +25,7 @@ void EcrireTexte(char * texte, int taille, SDL_Rect positionTexte, char * chemin
  * \param[in] positionTexte Coordonnées du texte sur l'ecran
  * \param[in] cheminPolice Chemin de la police dans le dossier Fonts
  */
-void EcrireLigneTexte(char * texte,int taille, SDL_Rect positionTexte, char * cheminPolice);
+void ecrireLigneTexte(char * texte,int taille, SDL_Rect positionTexte, char * cheminPolice);
 
 /**
  * \brief Récupère un événement
@@ -38,7 +38,7 @@ void EcrireLigneTexte(char * texte,int taille, SDL_Rect positionTexte, char * ch
  * Si une touche est pressée, sa valeur est enregistrée et 2 est retourné.
  * Si l'on ne veut utiliser que le clavier ou que la souris, il est possible de mettre l'un des deux paramètres à NULL.
 */
-int AttendreEvent(SDL_Rect * coordClic, SDL_keysym * touche);
+int attendreEvent(SDL_Rect * coordClic, SDL_keysym * touche);
 
 /*
  * \brief Renvoit le caractere Unicode correspondant à la touche tapée
@@ -49,7 +49,7 @@ int AttendreEvent(SDL_Rect * coordClic, SDL_keysym * touche);
  * Attention, le traitement du retour de cette fonction nécessite Unicode activé.
  * Utiliser SDL_EnableUNICODE(SDL_ENABLE) au début du programme appelant et SDL_EnableUNICODE(SDL_DISABLE) à la fin.
 */
-char ToucheChar(SDL_keysym * touche);
+char toucheChar(SDL_keysym * touche);
 
 /*
  * \brief Renvoit la valeur de la touche tapée
@@ -60,7 +60,7 @@ char ToucheChar(SDL_keysym * touche);
  * Le retour de cette fonction peut être utilisé pour tester si la touche appuyée est RETURN ou BACKSPACE par exemple,
  * pour les caractères normaux, voir ToucheCar()
 */
-SDLKey ToucheSpec(SDL_keysym * touche);
+SDLKey toucheSpec(SDL_keysym * touche);
 
 /**
  * \brief Convertit les couleurs
@@ -92,6 +92,6 @@ void pause(void);
 /**
  * \brief Efface l'écran
 */
-void EffacerEcran(void);
+void effacerEcran(void);
 
 #endif

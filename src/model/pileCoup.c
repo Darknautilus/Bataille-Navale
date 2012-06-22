@@ -10,12 +10,12 @@ Pile CreerPile(void)
 	return NULL;
 }
 
-int PileVide(Pile pPile)
+int pileVide(Pile pPile)
 {
 	return pPile == NULL;
 }
 
-Pile Empiler(Pile pPile, Coup * pElem)
+Pile empiler(Pile pPile, Coup * pElem)
 {
 	struct Cellule * N = (struct Cellule *) malloc(sizeof(struct Cellule));
 	if(N == NULL)
@@ -30,7 +30,7 @@ Pile Empiler(Pile pPile, Coup * pElem)
 	return N;
 }
 
-Pile Depiler(Pile pPile)
+Pile depiler(Pile pPile)
 {
 	Pile N = pPile->Lien;
 
@@ -39,7 +39,7 @@ Pile Depiler(Pile pPile)
 	return N;
 }
 
-Coup* Sommet(Pile pPile)
+Coup* sommet(Pile pPile)
 {
 	return pPile->Info;
 }

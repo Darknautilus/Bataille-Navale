@@ -21,9 +21,9 @@ typedef struct
 */
 Image * CreerImage(char * pChemin, int pAbscisse, int pOrdonnee);
 
-void AfficherImage(Image * pImage);
+void afficherImage(Image * pImage);
 
-int ClicSurImage(Image * pImage, SDL_Rect * pPosClic);
+int clicSurImage(Image * pImage, SDL_Rect * pPosClic);
 
 void LibererImage(Image * pImage);
 

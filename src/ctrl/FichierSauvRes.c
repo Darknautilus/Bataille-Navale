@@ -113,7 +113,7 @@ int sauvegardeGrille(Grille *grille, FILE *fichier){
             position.noCol = j;
 
             //On récupère la case et on l'écrit
-            caseGrille = Consulter(grille, position);
+            caseGrille = consulter(grille, position);
             fwrite(caseGrille, sizeof(CaseGrille), 1, fichier);
         }
     }
@@ -292,7 +292,7 @@ int restaurerGrilles(TPartie *partie, FILE* fichier){
             pos.noCol = j;
 
             //On lit une case
-            fread(Consulter(partie->grille, pos), sizeof(CaseGrille), 1, fichier);
+            fread(consulter(partie->grille, pos), sizeof(CaseGrille), 1, fichier);
         }
     }
 
@@ -320,7 +320,7 @@ int restaurerGrilles(TPartie *partie, FILE* fichier){
             pos.noCol = j;
 
             //On lit une case
-            fread(Consulter(partie->grilleMachine, pos), sizeof(CaseGrille), 1, fichier);
+            fread(consulter(partie->grilleMachine, pos), sizeof(CaseGrille), 1, fichier);
         }
     }
 

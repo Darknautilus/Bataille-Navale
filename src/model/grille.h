@@ -113,7 +113,7 @@ int getNbCol(Grille * pGrille);
  * Récupère une case de la grille.
  * Attention, ligne et colonne doivent etre coherents avec les dimensions de la grilles
 */
-CaseGrille * Consulter(Grille * grille, Coord coord);
+CaseGrille * consulter(Grille * grille, Coord coord);
 
 /**
  * \brief Récupère l'id d'un bateau
@@ -140,7 +140,7 @@ int getIdBateauSurCase(Grille *grille, Coord coord);
  * Définit l'état d'une case dans la grille.
  * Attention la grille doit être initialisée
 */
-Grille * SetEtatCase(Grille * grille, Coord coord, EtatCase etat);
+Grille * setEtatCase(Grille * grille, Coord coord, EtatCase etat);
 
 /**
  * \brief Efface la grille
@@ -152,7 +152,7 @@ Grille * SetEtatCase(Grille * grille, Coord coord, EtatCase etat);
  * Efface la grille en la remettant à l'état normal
  * Attention, la grille doit être initialisée
 */
-Grille * EffacerGrille(Grille * grille);
+Grille * effacerGrille(Grille * grille);
 
 /**
  * \brief Libère la grille en mémoire

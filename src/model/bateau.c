@@ -184,7 +184,7 @@ int estPlacable(TBateau * bat, Grille * grille)
 			coordCaseGrille.noLin = bat->position.y + i;
 		}
 
-		if(Consulter(grille, coordCaseGrille)->idBateauOccupe > -1)
+		if(consulter(grille, coordCaseGrille)->idBateauOccupe > -1)
 			estPlacable = 0;
     }
 

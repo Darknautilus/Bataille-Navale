@@ -1,6 +1,6 @@
 #include "testParam.h"
 
-#include "../../view/vueParam.h"
+#include "../../view/VueParam.h"
 
 void controleurParametreVersionTest(Tparam *param)
 {
@@ -34,7 +34,7 @@ void TestParam(void)
 	printf("Fait\n");
 
 	printf("\nAffichage des bateaux\n");
-	AfficherParamTest(param);
+	afficherParamTest(param);
 	printf("Fait\n");
 
 	printf("\nEnregistrement dans un fichier\n");
@@ -50,7 +50,7 @@ void TestParam(void)
 	printf("Fait\n");
 
 	printf("\nAffichage des parametres lus\n");
-	AfficherParamTest(paramLu);
+	afficherParamTest(paramLu);
 	printf("Fait\n");
 
 }

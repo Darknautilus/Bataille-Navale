@@ -11,7 +11,7 @@
 
 #include "../view/includeSDL.h"
 
-SDL_Surface * DemarrerSDL(int width, int height, char * titreFenetre)
+SDL_Surface * demarrerSDL(int width, int height, char * titreFenetre)
 {
 	SDL_Surface * ecran;// Pour voir
 
@@ -26,7 +26,7 @@ SDL_Surface * DemarrerSDL(int width, int height, char * titreFenetre)
 	return ecran;
 }
 
-void ArreterSDL(void)
+void arreterSDL(void)
 {
     TTF_Quit();// On n'écrit plus
 	SDL_Quit();// On ne voit plus

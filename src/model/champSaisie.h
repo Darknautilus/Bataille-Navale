@@ -77,7 +77,7 @@ ChampSaisie * CreerChamp(int longMax, int taille, int abscisse, int ordonnee);
  *
  * Initialise le contenu du champ avec une chaine de caractères.
 */
-void InitTexte(ChampSaisie * champ, const char * chaine);
+void initTexte(ChampSaisie * champ, const char * chaine);
 
 /**
  * \brief Définit si le champ est plein
@@ -98,7 +98,7 @@ int ChainePleine(const ChampSaisie * champ);
  *
  * Met le champ à l'état spécifié (activé ou non)
 */
-void ChangeFocus(ChampSaisie * champ, EtatChamp etat);
+void changeFocus(ChampSaisie * champ, EtatChamp etat);
 
 /**
  * \brief Supprime le dernier caractère d'une chaine
@@ -107,7 +107,7 @@ void ChangeFocus(ChampSaisie * champ, EtatChamp etat);
  *
  * \return La chaine modifiée
 */
-char * SupprimerDernierChar(char * chaine);
+char * supprimerDernierChar(char * chaine);
 
 /**
  * \brief Ajoute un caractère à la fin de la chaine
@@ -119,7 +119,7 @@ char * SupprimerDernierChar(char * chaine);
  *
  * La chaine ne doit pas être pleine.
 */
-char * AjouterCharFin(char * chaine, char charEnt);
+char * ajouterCharFin(char * chaine, char charEnt);
 
 /**
  * \brief Libère le champ en mémoire

@@ -73,12 +73,12 @@ int getNbLin(Grille * pGrille)
     return pGrille->NbLin;
 }
 
-CaseGrille * Consulter(Grille * grille, Coord coord)
+CaseGrille * consulter(Grille * grille, Coord coord)
 {
 	return &(grille->Matrice[coord.noCol-1][coord.noLin-1]);
 }
 
-Grille * SetEtatCase(Grille * grille, Coord coord, EtatCase etat)
+Grille * setEtatCase(Grille * grille, Coord coord, EtatCase etat)
 {
 	grille->Matrice[coord.noCol-1][coord.noLin-1].etatCase = etat;
 
@@ -86,10 +86,10 @@ Grille * SetEtatCase(Grille * grille, Coord coord, EtatCase etat)
 }
 
 int getIdBateauSurCase(Grille *grille, Coord coord){
-    return Consulter(grille, coord)->idBateauOccupe;
+    return consulter(grille, coord)->idBateauOccupe;
 }
 
-Grille * EffacerGrille(Grille * grille)
+Grille * effacerGrille(Grille * grille)
 {
 	int i,j;
 

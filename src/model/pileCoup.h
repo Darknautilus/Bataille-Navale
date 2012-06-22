@@ -29,7 +29,7 @@ Pile CreerPile(void);
  R : retourne 1 si la pile est vide et 0 sinon
  Prec : -
  */
-int PileVide(Pile pPile);
+int pileVide(Pile pPile);
 
 /*
  N : Empiler
@@ -38,7 +38,7 @@ int PileVide(Pile pPile);
  R : retourne la pile modifiee
  Prec : -
  */
-Pile Empiler(Pile pPile, Coup * pElem);
+Pile empiler(Pile pPile, Coup * pElem);
 
 /*
  N : Depiler
@@ -47,7 +47,7 @@ Pile Empiler(Pile pPile, Coup * pElem);
  R : retourne la pile modifiee
  Prec : la liste ne doit pas etre vide
  */
-Pile Depiler(Pile pPile);
+Pile depiler(Pile pPile);
 
 /*
  N : Sommet
@@ -56,7 +56,7 @@ Pile Depiler(Pile pPile);
  R : retourne le premier element de la pile
  Prec : la pile ne doit pas etre vide
  */
-Coup * Sommet(Pile pPile);
+Coup * sommet(Pile pPile);
 
 /**
  * Détermine la longueur de la pile.

@@ -36,7 +36,7 @@
 
 #include <string.h>
 
-void AfficherMenuAccueil(void)
+void afficherMenuAccueil(void)
 {
 	int continuer = 1;
     SDL_Rect positionTexte;
@@ -57,20 +57,20 @@ void AfficherMenuAccueil(void)
 
     positionTexte.x = 219;
     positionTexte.y = 282;
-    EcrireTexte("Bataille Navale", 70, positionTexte, "default.ttf");
+    ecrireTexte("Bataille Navale", 70, positionTexte, "default.ttf");
 
     positionTexte.x = 15;
     positionTexte.y = 700;
-    EcrireTexte("Par Aurelien Bertron\net Benoit Sauvere", 20, positionTexte, "default.ttf");
+    ecrireTexte("Par Aurelien Bertron\net Benoit Sauvere", 20, positionTexte, "default.ttf");
 
     positionTexte.x = 240;
     positionTexte.y = 539;
-    EcrireTexte("Appuyez sur espace pour continuer", 25, positionTexte, "default.ttf");
+    ecrireTexte("Appuyez sur espace pour continuer", 25, positionTexte, "default.ttf");
 
 
-    AfficherImage(imageIUT);
-    AfficherImage(imageUniv);
-    AfficherImage(imageBateau);
+    afficherImage(imageIUT);
+    afficherImage(imageUniv);
+    afficherImage(imageBateau);
 
 	SDL_Flip(SDL_GetVideoSurface());
 
@@ -78,9 +78,9 @@ void AfficherMenuAccueil(void)
 
 	while(continuer)
 	{
-		AttendreEvent(NULL, touche);
+		attendreEvent(NULL, touche);
 
-        switch(ToucheSpec(touche))
+        switch(toucheSpec(touche))
         {
             case SDLK_SPACE:
                 continuer = 0;
@@ -104,7 +104,7 @@ void AfficherMenuAccueil(void)
 	free(touche);
 }
 
-int AfficherMenuRacine(void)
+int afficherMenuRacine(void)
 {
     int continuer = 1;
     int choixMenu = 1;
@@ -121,33 +121,33 @@ int AfficherMenuRacine(void)
 
     while(continuer)
     {
-        EffacerEcran();
-        AfficherImage(imagePuce);
+        effacerEcran();
+        afficherImage(imagePuce);
 
         positionTexte.x = 170;
         positionTexte.y = 210;
-        EcrireTexte("- Nouvelle Partie", 30, positionTexte, "default.ttf");
+        ecrireTexte("- Nouvelle Partie", 30, positionTexte, "default.ttf");
         positionTexte.y += 60;
-        EcrireTexte("- Charger Partie", 30, positionTexte, "default.ttf");
+        ecrireTexte("- Charger Partie", 30, positionTexte, "default.ttf");
         positionTexte.y += 60;
-        EcrireTexte("- Meilleurs Scores", 30, positionTexte, "default.ttf");
+        ecrireTexte("- Meilleurs Scores", 30, positionTexte, "default.ttf");
         positionTexte.y += 60;
-        EcrireTexte("- Afficher Regles", 30, positionTexte, "default.ttf");
+        ecrireTexte("- Afficher Regles", 30, positionTexte, "default.ttf");
         positionTexte.y += 60;
-        EcrireTexte("- Quitter", 30, positionTexte, "default.ttf");
+        ecrireTexte("- Quitter", 30, positionTexte, "default.ttf");
 
         SDL_Flip(SDL_GetVideoSurface());
 
         // --------------------------------------------------------------------
 
-        AttendreEvent(NULL, touche);
+        attendreEvent(NULL, touche);
 
-        if(ToucheChar(touche) == 't')
+        if(toucheChar(touche) == 't')
             MenuTestVue();
-		else if(ToucheChar(touche) == 'y')
+		else if(toucheChar(touche) == 'y')
 			MenuTest();
 
-        switch(ToucheSpec(touche))
+        switch(toucheSpec(touche))
         {
             case SDLK_RETURN:
                 continuer = 0;
@@ -189,7 +189,7 @@ int AfficherMenuRacine(void)
 	return choixMenu;
 }
 
-int MenuNouvellePartie(Tparam * parametre)
+int menuNouvellePartie(Tparam * parametre)
 {
     // Champs de saisie
 	ChampSaisie * champPseudoHumain, * champPseudoIA;
@@ -230,8 +230,8 @@ int MenuNouvellePartie(Tparam * parametre)
     // Initialisation des champs de saisie
 	champPseudoHumain = CreerChamp(30, 20, 230, 150);
 	champPseudoIA = CreerChamp(30, 20, 230, 200);
-    InitTexte(champPseudoHumain, "Anonyme");
-	InitTexte(champPseudoIA, "GlaDos");
+    initTexte(champPseudoHumain, "Anonyme");
+	initTexte(champPseudoIA, "GlaDos");
 
     // Champs du nombre d'instances de chaque bateaux : récupération des valeurs déjà paramétrées et initialisation des champs
     nbInstancesbat = getNBInstances(parametre);
@@ -268,71 +268,71 @@ int MenuNouvellePartie(Tparam * parametre)
 	while (continuer)
 	{
         // Affichage de tous les objets
-        EffacerEcran();
+        effacerEcran();
         positionTexte.x = 300;
         positionTexte.y = 15;
-        EcrireTexte("Nouvelle Partie", 50, positionTexte, "default.ttf");
+        ecrireTexte("Nouvelle Partie", 50, positionTexte, "default.ttf");
         positionTexte.x = 10;
         positionTexte.y = 150;
-        EcrireTexte("Pseudo Humain :", 26, positionTexte, "default.ttf");
+        ecrireTexte("Pseudo Humain :", 26, positionTexte, "default.ttf");
         positionTexte.x = 10;
         positionTexte.y = 200;
-        EcrireTexte("Pseudo IA :", 26, positionTexte, "default.ttf");
+        ecrireTexte("Pseudo IA :", 26, positionTexte, "default.ttf");
         positionTexte.x = 86;
         positionTexte.y = 297;
-        EcrireTexte("Nombre de bateaux (6 max):", 25, positionTexte, "default.ttf");
+        ecrireTexte("Nombre de bateaux (6 max):", 25, positionTexte, "default.ttf");
 
-		AfficherChamp(champPseudoHumain);
-		AfficherChamp(champPseudoIA);
+		afficherChamp(champPseudoHumain);
+		afficherChamp(champPseudoIA);
 
         // Champs pour le choix du nombre d'instance de chaque type
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
             positionTexte.x = 89;
             positionTexte.y = 372+i*40;
-            EcrireTexte(tabTypesBat[i].nomType, 25, positionTexte, "default.ttf");
+            ecrireTexte(tabTypesBat[i].nomType, 25, positionTexte, "default.ttf");
             sprintf(chaineInstance, "%d", nbInstancesbat[i]);
-            InitTexte(paramNbBat[i], chaineInstance);
-            AfficherChamp(paramNbBat[i]);
+            initTexte(paramNbBat[i], chaineInstance);
+            afficherChamp(paramNbBat[i]);
         }
 
-		AfficherBouton(boutonOK);
-		AfficherBouton(boutonParam);
-        AfficherBouton(boutonChargerParam);
-        AfficherBouton(boutonEnregistrerParam);
-        AfficherBouton(boutonRetablirDefaut);
+		afficherBouton(boutonOK);
+		afficherBouton(boutonParam);
+        afficherBouton(boutonChargerParam);
+        afficherBouton(boutonEnregistrerParam);
+        afficherBouton(boutonRetablirDefaut);
 
 		SDL_Flip(SDL_GetVideoSurface());
 
 
         // Traitement de l'événement
-		controleEvent = AttendreEvent(positionClic, touche);
+		controleEvent = attendreEvent(positionClic, touche);
 
         // Événement souris
 		if(controleEvent == 1)
 		{
-			if(ClicSurChamp(champPseudoHumain, positionClic))
+			if(clicSurChamp(champPseudoHumain, positionClic))
 			{
-				EditerChamp(champPseudoHumain);
+				editerChamp(champPseudoHumain);
 			}
 
-			else if(ClicSurChamp(champPseudoIA, positionClic))
+			else if(clicSurChamp(champPseudoIA, positionClic))
 			{
-				EditerChamp(champPseudoIA);
+				editerChamp(champPseudoIA);
 			}
 
-            else if(ClicSurBouton(boutonParam, positionClic))
+            else if(clicSurBouton(boutonParam, positionClic))
             {
                 if(nbInstChange)
                     resetInfoBateau(parametre);
 
-                MenuParam(parametre);
+                menuParam(parametre);
 
                 if(infoBateauValide(parametre))
                    nbInstChange = 0;
             }
 
-			else if(ClicSurBouton(boutonOK, positionClic))
+			else if(clicSurBouton(boutonOK, positionClic))
 			{
 
                 if(!nbInstChange)
@@ -374,7 +374,7 @@ int MenuNouvellePartie(Tparam * parametre)
 
 
 			}
-            else if(ClicSurBouton(boutonEnregistrerParam, positionClic))
+            else if(clicSurBouton(boutonEnregistrerParam, positionClic))
             {
                 if(!nbInstChange)
                 {
@@ -383,7 +383,7 @@ int MenuNouvellePartie(Tparam * parametre)
                     fclose(descFicParam);
                 }
             }
-            else if(ClicSurBouton(boutonChargerParam, positionClic))
+            else if(clicSurBouton(boutonChargerParam, positionClic))
             {
                 descFicParam = ouvrirFichierRessources("paramUser.dat", "r");
                 resetInfoBateau(parametre);
@@ -391,7 +391,7 @@ int MenuNouvellePartie(Tparam * parametre)
                 fclose(descFicParam);
                 nbInstChange = 0;
             }
-            else if(ClicSurBouton(boutonRetablirDefaut, positionClic))
+            else if(clicSurBouton(boutonRetablirDefaut, positionClic))
             {
                 descFicParam = ouvrirFichierRessources("paramOrigin.dat", "r");
                 resetInfoBateau(parametre);
@@ -403,10 +403,10 @@ int MenuNouvellePartie(Tparam * parametre)
             {
                 for(i=0;i<K_NBTYPEBATEAUX;i++)
                 {
-                    if(ClicSurChamp(paramNbBat[i], positionClic))
+                    if(clicSurChamp(paramNbBat[i], positionClic))
                     {
-                        ChangeFocus(paramNbBat[i], CHAMP_ACTIF);
-                        EditerChamp(paramNbBat[i]);
+                        changeFocus(paramNbBat[i], CHAMP_ACTIF);
+                        editerChamp(paramNbBat[i]);
                         parametre->nombreInstanceBateaux[i] = strtol(paramNbBat[i]->chaine, NULL, 10);
                         nbInstChange = 1;
                     }
@@ -418,7 +418,7 @@ int MenuNouvellePartie(Tparam * parametre)
 		}
 
         // Événement clavier
-		if(controleEvent == 2 && ToucheSpec(touche) == SDLK_ESCAPE)
+		if(controleEvent == 2 && toucheSpec(touche) == SDLK_ESCAPE)
 			continuer = 0;
 	}
 
@@ -442,7 +442,7 @@ int MenuNouvellePartie(Tparam * parametre)
     return partiePrete;
 }
 
-void MenuParam(Tparam * parametre)
+void menuParam(Tparam * parametre)
 {
     int continuer = 1;
     int i,j;
@@ -507,13 +507,13 @@ void MenuParam(Tparam * parametre)
 
     while (continuer)
     {
-        EffacerEcran();
-        AfficherBouton(boutonValider);
-        AfficherBouton(boutonAnnuler);
+        effacerEcran();
+        afficherBouton(boutonValider);
+        afficherBouton(boutonAnnuler);
 
         positionTexte.x = 259;
         positionTexte.y = 10;
-        EcrireTexte("Noms et couleurs des bateaux", 35, positionTexte, "default.ttf");
+        ecrireTexte("Noms et couleurs des bateaux", 35, positionTexte, "default.ttf");
 
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
@@ -523,12 +523,12 @@ void MenuParam(Tparam * parametre)
             strcpy(labelColonneTypes,tabTypesBat[i].nomType);
             strcat(labelColonneTypes, "s");
 
-            EcrireTexte(labelColonneTypes, 25, positionTexte, "default.ttf");
+            ecrireTexte(labelColonneTypes, 25, positionTexte, "default.ttf");
 
             nbBat = parametre->nombreInstanceBateaux[i];
             for(j=0;j<nbBat;j++)
             {
-                AfficherChamp(tabChamp[i][j]);
+                afficherChamp(tabChamp[i][j]);
                 afficherRectangle(tabRectChoixCoul[i][j]);
             }
         }
@@ -537,27 +537,27 @@ void MenuParam(Tparam * parametre)
 
         // --------------------------------------------------------------------
 
-        AttendreEvent(positionClic, NULL);
+        attendreEvent(positionClic, NULL);
 
         for(i=0;i<K_NBTYPEBATEAUX;i++)
         {
             nbBat = parametre->nombreInstanceBateaux[i];
             for(j=0;j<nbBat;j++)
             {
-                if(ClicSurChamp(tabChamp[i][j], positionClic))
+                if(clicSurChamp(tabChamp[i][j], positionClic))
                 {
-                    ChangeFocus(tabChamp[i][j], CHAMP_ACTIF);
-                    EditerChamp(tabChamp[i][j]);
+                    changeFocus(tabChamp[i][j], CHAMP_ACTIF);
+                    editerChamp(tabChamp[i][j]);
                 }
                 else if(clicSurRectangle(tabRectChoixCoul[i][j], positionClic))
                     incrCouleurRectangle(tabRectChoixCoul[i][j]);
             }
         }
 
-        if(ClicSurBouton(boutonAnnuler, positionClic))
+        if(clicSurBouton(boutonAnnuler, positionClic))
             continuer = 0;
 
-        else if(ClicSurBouton(boutonValider, positionClic))
+        else if(clicSurBouton(boutonValider, positionClic))
         {
             for(i=0;i<K_NBTYPEBATEAUX;i++)
             {

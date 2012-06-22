@@ -33,12 +33,12 @@ ChampSaisie * CreerChamp(int longMax, int taille, int abscisse, int ordonnee)
 	return champ;
 }
 
-void InitTexte(ChampSaisie * champ, const char * chaine)
+void initTexte(ChampSaisie * champ, const char * chaine)
 {
     strcpy(champ->chaine, chaine);
 }
 
-int ChainePleine(const ChampSaisie * champ)
+int chainePleine(const ChampSaisie * champ)
 {
 	int codeRetour = 1;
 
@@ -48,12 +48,12 @@ int ChainePleine(const ChampSaisie * champ)
 	return codeRetour;
 }
 
-void ChangeFocus(ChampSaisie * champ, EtatChamp etat)
+void changeFocus(ChampSaisie * champ, EtatChamp etat)
 {
 	champ->onFocus = etat;
 }
 
-char * SupprimerDernierChar(char * chaine)
+char * supprimerDernierChar(char * chaine)
 {
 	int i=0;
 	while(chaine[i]!='\0')
@@ -64,7 +64,7 @@ char * SupprimerDernierChar(char * chaine)
 	return chaine;
 }
 
-char * AjouterCharFin(char * chaine, char charEnt)
+char * ajouterCharFin(char * chaine, char charEnt)
 {
 	int i=0;
 	while (chaine[i] != '\0')

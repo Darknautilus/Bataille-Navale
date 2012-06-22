@@ -19,13 +19,13 @@
 
     Dans tout le code, la surface renvoyée par cette fonction peut-être retrouvée avec SDL_GetVideoSurface()
 */
-SDL_Surface * DemarrerSDL(int width, int height, char * titreFenetre);
+SDL_Surface * demarrerSDL(int width, int height, char * titreFenetre);
 
 /**
     Arrête tous les modules SDL
     À ne pas oublier à la fin du programme
 */
-void ArreterSDL(void);
+void arreterSDL(void);
 
 
 

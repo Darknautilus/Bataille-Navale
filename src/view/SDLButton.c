@@ -23,7 +23,7 @@ SDL_Bouton * CreerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte)
 	return nouvBouton;
 }
 
-void AfficherBouton(SDL_Bouton * pBouton)
+void afficherBouton(SDL_Bouton * pBouton)
 {
 	SDL_Surface * fondBouton, * texteBouton;
 	TTF_Font * police;
@@ -52,7 +52,7 @@ void AfficherBouton(SDL_Bouton * pBouton)
 	SDL_FreeSurface(texteBouton);
 }
 
-int ClicSurBouton(SDL_Bouton * pBouton, SDL_Rect * positionClic)
+int clicSurBouton(SDL_Bouton * pBouton, SDL_Rect * positionClic)
 {
 	if(positionClic->x >= pBouton->abscisse && positionClic->x <= pBouton->abscisse+pBouton->longTexte*pBouton->largCarac+2*SDL_BOUTON_KESP_HORI && positionClic->y >= pBouton->ordonnee && positionClic->y <= pBouton->ordonnee+pBouton->tailleTexte+2*SDL_BOUTON_KESP_VERT)
 		return 1;

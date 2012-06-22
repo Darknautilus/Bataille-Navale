@@ -20,7 +20,7 @@
  *
  * Affiche le champ aux coordonnees données lors de la création.
 */
-void AfficherChamp(ChampSaisie * champ);
+void afficherChamp(ChampSaisie * champ);
 
 /**
  * \brief Passe le champ en mode édition
@@ -30,7 +30,7 @@ void AfficherChamp(ChampSaisie * champ);
  * Passe le champ en mode édition (possibilité d'ajouter des caractères et d'en supprimer).
  * Pour sortir du mode édition, il est necessaire de cliquer hors du champ.
 */
-void EditerChamp(ChampSaisie * champ);
+void editerChamp(ChampSaisie * champ);
 
 /**
  * \brief Détermine si le clic est sur le champ
@@ -40,6 +40,6 @@ void EditerChamp(ChampSaisie * champ);
  *
  * \return 1 si le clic est sur le champ et 0 sinon
 */
-int ClicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic);
+int clicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic);
 
 #endif

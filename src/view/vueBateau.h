@@ -6,7 +6,7 @@
 
 // insère un bateau dans une grille, renvoie NULL si ce n'est pas possible.
 // On peut également insérer des bateaux touché ou coulé (pour le chargement d'une partie par ex.)
-Grille * InsertBateau(Grille * grille, TBateau * bat);
+Grille * insertBateau(Grille * grille, TBateau * bat);
 
 
 #endif // VUEBATEAU_H_INCLUDED
