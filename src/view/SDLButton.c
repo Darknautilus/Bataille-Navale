@@ -2,7 +2,7 @@
 
 #include "includeSDL.h"
 
-#include "../ctrl/utilsPoliceEcriture.h"
+#include "../ctrl/UtilsPoliceEcriture.h"
 
 #include <string.h>
 

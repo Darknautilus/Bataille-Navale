@@ -2,7 +2,7 @@
 
 #include "includeSDL.h"
 
-#include "../ctrl/fichierDebug.h"
+#include "../ctrl/FichierDebug.h"
 
 Image * CreerImage(char * pChemin, int pAbscisse, int pOrdonnee)
 {

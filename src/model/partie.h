@@ -11,10 +11,10 @@
 #ifndef PARTIE_H
 #define PARTIE_H
 
-#include "joueur.h"
-#include "parametre.h"
-#include "pileCoup.h"
-#include "grille.h"
+#include "Joueur.h"
+#include "Parametre.h"
+#include "PileCoup.h"
+#include "Grille.h"
 
 /**
  * \struct TPartie

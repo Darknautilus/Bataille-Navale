@@ -1,7 +1,7 @@
 #ifndef COUPS_H
 #define COUPS_H
 
-#include "joueur.h"
+#include "Joueur.h"
 
 typedef struct
 {

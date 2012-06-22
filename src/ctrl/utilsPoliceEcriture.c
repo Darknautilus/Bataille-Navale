@@ -7,11 +7,11 @@
  *   Contient les implémentations pour le module des utilitaires de chargement des polices d'écriture.
 */
 
-#include "utilsPoliceEcriture.h"
+#include "UtilsPoliceEcriture.h"
 
 #include "../view/includeSDL.h"
 
-#include "../ctrl/fichierDebug.h"
+#include "../ctrl/FichierDebug.h"
 
 #include <stdlib.h>
 #include <string.h>

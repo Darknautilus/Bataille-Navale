@@ -8,10 +8,10 @@
 */
 
 
-#include "partie.h"
+#include "Partie.h"
 
-#include "bateau.h"
-#include "grille.h"
+#include "Bateau.h"
+#include "Grille.h"
 
 TPartie *globalPartie = NULL;
 

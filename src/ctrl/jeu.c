@@ -7,24 +7,24 @@
  * Contient les controleurs des ecrans de jeu
  */
 
-#include "jeu.h"
+#include "Jeu.h"
 
-#include "../model/parametre.h"
-#include "../model/partie.h"
-#include "../model/bateau.h"
-#include "../model/random.h"
+#include "../model/Parametre.h"
+#include "../model/Partie.h"
+#include "../model/Bateau.h"
+#include "../model/Random.h"
 
-#include "../view/vueUtilsSDL.h"
+#include "../view/VueUtilsSDL.h"
 #include "../view/SDLButton.h"
 #include "../view/SDLRectangle.h"
-#include "../view/vueGrille.h"
-#include "../view/vueBateau.h"
+#include "../view/VueGrille.h"
+#include "../view/VueBateau.h"
 #include "../view/SDLImage.h"
 
-#include "../ctrl/fichierDebug.h"
+#include "../ctrl/FichierDebug.h"
 #include "../ctrl/FichierSauvRes.h"
 
-#include "menu.h"
+#include "Menu.h"
 
 int jeu(Tparam * pParam)
 {

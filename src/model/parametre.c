@@ -7,15 +7,15 @@
  * Le module parametre d'une partie permet de charger et sauver ces paramètres dans un fichier.
  */
 
-#include "parametre.h"
+#include "Parametre.h"
+
+#include "Bateau.h"
 
 #include "../view/includeSDL.h"
 
 #include <stdlib.h>
 #include <string.h>
 #include <string.h>
-
-#include "bateau.h"
 
 //***************************
 

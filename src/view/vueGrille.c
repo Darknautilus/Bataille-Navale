@@ -8,17 +8,17 @@
  *
  */
 
-#include "vueGrille.h"
+#include "VueGrille.h"
 
-#include "../model/grille.h"
-#include "../model/couleurs.h"
+#include "../model/Grille.h"
+#include "../model/Couleurs.h"
 
 #include "includeSDL.h"
-#include "vueUtilsSDL.h"
+#include "VueUtilsSDL.h"
 #include "SDLImage.h"
 
-#include "../ctrl/utilsPoliceEcriture.h"
-#include "../ctrl/fichierDebug.h"
+#include "../ctrl/UtilsPoliceEcriture.h"
+#include "../ctrl/FichierDebug.h"
 
 void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 {

@@ -1,9 +1,9 @@
-#include "vueBateau.h"
+#include "VueBateau.h"
 
-#include "../model/grille.h"
-#include "../model/bateau.h"
-#include "../model/parametre.h"
-#include "../model/partie.h"
+#include "../model/Grille.h"
+#include "../model/Bateau.h"
+#include "../model/Parametre.h"
+#include "../model/Partie.h"
 
 #include <stdlib.h>
 

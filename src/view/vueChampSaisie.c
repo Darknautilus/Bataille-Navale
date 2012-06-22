@@ -8,14 +8,14 @@
  * Ce module implémente la gestion du champ de saisie. Il permet à l'utilisateur de saisir une chaine de caractères.
  */
 
-#include "../model/champSaisie.h"
+#include "../model/ChampSaisie.h"
 
 #include "includeSDL.h"
-#include "vueChampSaisie.h"
-#include "vueUtilsSDL.h"
+#include "VueChampSaisie.h"
+#include "VueUtilsSDL.h"
 
-#include "../ctrl/utilsPoliceEcriture.h"
-#include "../ctrl/fichierDebug.h"
+#include "../ctrl/UtilsPoliceEcriture.h"
+#include "../ctrl/FichierDebug.h"
 
 #include <string.h>
 

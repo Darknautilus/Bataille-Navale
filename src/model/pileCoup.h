@@ -1,8 +1,8 @@
 #ifndef PILE_COUP_H
 #define PILE_COUP_H
 
-#include "grille.h"
-#include "joueur.h"
+#include "Grille.h"
+#include "Joueur.h"
 #include "Coups.h"
 
 struct Cellule

@@ -1,5 +1,5 @@
 #include "Coups.h"
-#include "joueur.h"
+#include "Joueur.h"
 
 #include <stdlib.h>
 

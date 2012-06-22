@@ -11,7 +11,7 @@
 #ifndef VUEGRILLE_H
 #define VUEGRILLE_H
 
-#include "../model/grille.h"
+#include "../model/Grille.h"
 
 #include "includeSDL.h"
 

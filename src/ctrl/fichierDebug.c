@@ -7,7 +7,7 @@
  *   Contient les implémentation des fonctions du module Debug.
 */
 
-#include "fichierDebug.h"
+#include "FichierDebug.h"
 
 #include <stdlib.h>
 #include <stdio.h>

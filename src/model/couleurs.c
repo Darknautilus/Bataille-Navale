@@ -1,4 +1,4 @@
-#include "couleurs.h"
+#include "Couleurs.h"
 
 #include "../view/includeSDL.h"
 

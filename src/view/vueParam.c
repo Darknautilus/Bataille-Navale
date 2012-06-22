@@ -7,10 +7,10 @@
  * Ce module permet de gérer l'affichage/saisie des paramètres d'une partie
  */
 
-#include "vueParam.h"
+#include "VueParam.h"
 
-#include "../model/parametre.h"
-#include "../model/couleurs.h"
+#include "../model/Parametre.h"
+#include "../model/Couleurs.h"
 
 #include <stdio.h>
 

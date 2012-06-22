@@ -3,7 +3,7 @@
 
 #define KLGNOMJ 25
 
-#include "bateau.h"
+#include "Bateau.h"
 
 /**
  * \enum ETypeBat

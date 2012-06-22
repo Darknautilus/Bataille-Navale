@@ -7,10 +7,10 @@
  *   Contient le module de gestion des structure de type bateau.
 */
 
-#include "bateau.h"
-#include "parametre.h"
-#include "partie.h"
-#include "grille.h"
+#include "Bateau.h"
+#include "Parametre.h"
+#include "Partie.h"
+#include "Grille.h"
 
 const TtypeBat tabTypesBat[KTAILLEMAXBAT] = {
     {VOILIER,"Voilier"},

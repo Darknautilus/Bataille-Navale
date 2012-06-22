@@ -1,12 +1,12 @@
-#include "vueUtilsSDL.h"
+#include "VueUtilsSDL.h"
 
 // Permet la portabilité du programme
 #include "includeSDL.h"
 
-#include "../ctrl/utilsSDL.h"
-#include "../ctrl/utilsPoliceEcriture.h"
+#include "../ctrl/UtilsSDL.h"
+#include "../ctrl/UtilsPoliceEcriture.h"
 
-#include "../model/champSaisie.h"
+#include "../model/ChampSaisie.h"
 
 #include "../view/SDLImage.h"
 

@@ -9,12 +9,12 @@
 
 #include "FichierSauvRes.h"
 
-#include "fichierDebug.h"
+#include "FichierDebug.h"
 
-#include "../model/bateau.h"
-#include "../model/grille.h"
-#include "../model/partie.h"
-#include "../model/pileCoup.h"
+#include "../model/Bateau.h"
+#include "../model/Grille.h"
+#include "../model/Partie.h"
+#include "../model/PileCoup.h"
 
 #define SAVE_REP "ressources/saves/" /**< Contient le chemin du dossier de sauvegarde des parties. */
 

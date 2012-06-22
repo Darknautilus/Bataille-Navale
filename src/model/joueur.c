@@ -1,4 +1,4 @@
-#include "joueur.h"
+#include "Joueur.h"
 
 #include <stdio.h>
 #include <stdlib.h>

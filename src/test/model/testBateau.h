@@ -1,7 +1,7 @@
 #ifndef TESTBATEAU_H
 #define TESTBATEAU_H
 
-#include "../../model/bateau.h"
+#include "../../model/Bateau.h"
 
 /**
     Test unitaire de la fonction estCoule.

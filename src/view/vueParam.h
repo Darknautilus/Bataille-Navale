@@ -10,7 +10,7 @@
 #ifndef VUE_PARAM_H
 #define VUE_PARAM_H
 
-#include "../model/parametre.h"
+#include "../model/Parametre.h"
 
 /**
  * \brief Affiche les paramètres dans la version de test (en ligne de commande)

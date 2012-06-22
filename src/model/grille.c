@@ -8,11 +8,12 @@
  *
  */
 
-#include <stdlib.h>
+#include "Grille.h"
 
-#include "grille.h"
-#include "couleurs.h"
-#include "bateau.h"
+#include "Couleurs.h"
+#include "Bateau.h"
+
+#include <stdlib.h>
 
 Grille * CreerGrille(int nbLin, int nbCol)
 {
