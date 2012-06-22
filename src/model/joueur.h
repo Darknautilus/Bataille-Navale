@@ -23,7 +23,7 @@ typedef struct
 {
 	ETypeJoueur type;      /** Type de joueur **/
 	char nomJ[KLGNOMJ];    /** Nom du joueur **/
-	TBateau* *mesBateaux;  /** Tableau dynamique de pointeurs sur TBateaux **/
+	TBateau ** mesBateaux;  /** Tableau dynamique de pointeurs sur TBateaux **/
 }Joueur;
 
 

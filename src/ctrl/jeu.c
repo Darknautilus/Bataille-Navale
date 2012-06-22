@@ -26,16 +26,19 @@
 
 #include "menu.h"
 
-void jeu(Tparam * pParam)
+int jeu(Tparam * pParam)
 {
+    int resultPartie;
     if(menuPlacementChoixBat())
     {
         // On place les bateaux de la machine et on y va !
         placementAleatBat(partie_JMachine(), partie_GrilleMachine());
-        ecranJeu();
+        resultPartie = ecranJeu();
     }
 
     libererPartie(globalPartie);
+    
+    return resultPartie;
 }
 
 int menuPlacementChoixBat(void)
@@ -352,11 +355,17 @@ int ecranJeu(void)
     Coord coordCoup;
     
     SDL_Bouton * boutonFinPartie;
+	SDL_Bouton * boutonAnnulerCoup;
     SDL_Rect positionBouton;
     
     positionBouton.x = 350;
     positionBouton.y = 682;
     boutonFinPartie = CreerBouton("Partie Terminee", &positionBouton, 30);
+	positionBouton.x = 350;
+	positionBouton.y = 582;
+	boutonAnnulerCoup = CreerBouton("Annuler coup", &positionBouton, 30);
+	
+	//partieFinie = partieEstFinie(globalPartie);
 
     strcpy(messageJoueur, "Pret a commencer");
     strcpy(messageMachine, "Pret a commencer");
@@ -377,6 +386,7 @@ int ecranJeu(void)
         
         if(partieFinie != 0)
             AfficherBouton(boutonFinPartie);
+		AfficherBouton(boutonAnnulerCoup);
 
         SDL_Flip(SDL_GetVideoSurface());
 
@@ -444,14 +454,32 @@ int ecranJeu(void)
                         strcpy(messageJoueur, "A l'eau !");
                 }
             }
+			else if(ClicSurBouton(boutonAnnulerCoup, positionClic))
+			{
+				if(!PileVide(partie_PileCoups()))
+				{
+					annulerDernierCoup(globalPartie);
+					positionTexte.x = 350;
+					positionTexte.y = 682;
+					EcrireTexte("Annule", 30, positionTexte, "default.ttf");
+				}
+			}
+            else if(ClicSurBouton(boutonFinPartie, positionClic))
+            {
+                if(partieFinie != 0)
+                {
+                    continuer = 0;
+                }
+            }
         }
     }
 
     LibererBouton(boutonFinPartie);
+	LibererBouton(boutonAnnulerCoup);
     free(positionClic);
     free(touche);
 
-    return 1;
+    return partieFinie;
 }
 
 int menuPause(void)

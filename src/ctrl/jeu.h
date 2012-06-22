@@ -15,9 +15,10 @@
 
 /**
  * \param[in] pParam Les parametres de la partie, definis a l'ecran des parametres
+ * \return -1 si la machine a gagne, 1 si l'humain a gagné et 0 sinon
  * Initialise la partie et gere l'enchainement des ecrans de jeu
 */
-void jeu(Tparam * pParam);
+int jeu(Tparam * pParam);
 
 /**
  * \return 1 si la partie est prete et 0 sinon

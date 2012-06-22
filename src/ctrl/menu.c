@@ -30,7 +30,6 @@
 
 #include "../ctrl/utilsSDL.h"
 #include "../ctrl/fichierDebug.h"
-#include "../ctrl/CtrlGrille.h"
 
 #include "../test/test.h"
 #include "../test/view/testVue.h"

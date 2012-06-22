@@ -246,14 +246,113 @@ int partieEstFinie(TPartie *partie){
     return 0;
 }
 
-void annulerDernierCoup(TPartie *partie){
+void annulerDernierCoup(TPartie *partie)
+{
+	int i;
+	int idBatCase;
+	Coup * dernierCoup;
+	TBateau * bateauCible;
+	TPosition positionBat;
+	Coord positionCourante;
+	
+	// Récupération du sommet de la pile et remise à l'état normal
+	
+	// Machine ------
+	
+	dernierCoup = Sommet(partie->pileCoups);
+	idBatCase = getIdBateauSurCase(partie->grilleMachine, dernierCoup->coordTir);
+	
+	if(idBatCase >= 0)
+	{
+		bateauCible = getBateauFromId(idBatCase);
+		positionBat = getPosBateau(bateauCible);
+		
+		positionCourante.noCol = positionBat.x;
+		positionCourante.noLin = positionBat.y;
+		
+		// Si le bateau est coulé, on repasse tout à touché
+		if(estCoule(bateauCible))
+		{
+			for(i=0;i<getTypeBateau(bateauCible);i++)
+			{
+				bateauCible->etat[i] = TOUCHE;
+				
+				if(positionBat.direction == HORIZONTAL)
+					positionCourante.noCol += i;
+				else if(positionBat.direction == VERTICAL)
+					positionCourante.noLin += i;
+				
+				SetEtatCase(partie->grilleMachine, positionCourante, GRILLE_CASE_TOUCHE);
+			}
+		}
+		
+		// On traite la case du coup à proprement parler
+		
+		positionCourante.noCol = positionBat.x;
+		positionCourante.noLin = positionBat.y;
+		
+		if(positionBat.direction == HORIZONTAL)
+			i = dernierCoup->coordTir.noCol - positionCourante.noCol;
+		else if(positionBat.direction == VERTICAL)
+			i = dernierCoup->coordTir.noLin - positionCourante.noLin;
 
+		bateauCible->etat[i] = INTACT;
 
-
-
-
-
-
+	}
+		
+	SetEtatCase(partie->grilleMachine, dernierCoup->coordTir, GRILLE_CASE_NORMAL);
+	
+	// On dépile le coup
+	partie->pileCoups = Depiler(partie->pileCoups);
+	
+	
+	// Joueur -------
+	
+	dernierCoup = Sommet(partie->pileCoups);
+	idBatCase = getIdBateauSurCase(partie->grille, dernierCoup->coordTir);
+	
+	if(idBatCase >= 0)
+	{
+		bateauCible = getBateauFromId(idBatCase);
+		positionBat = getPosBateau(bateauCible);
+		
+		positionCourante.noCol = positionBat.x;
+		positionCourante.noLin = positionBat.y;
+		
+		// Si le bateau est coulé, on repasse tout à touché
+		if(estCoule(bateauCible))
+		{
+			for(i=0;i<getTypeBateau(bateauCible);i++)
+			{
+				bateauCible->etat[i] = TOUCHE;
+				
+				if(positionBat.direction == HORIZONTAL)
+					positionCourante.noCol += i;
+				else if(positionBat.direction == VERTICAL)
+					positionCourante.noLin += i;
+				
+				SetEtatCase(partie->grille, positionCourante, GRILLE_CASE_TOUCHE);
+			}
+		}
+		
+		// On traite la case du coup à proprement parler
+		
+		positionCourante.noCol = positionBat.x;
+		positionCourante.noLin = positionBat.y;
+		
+		if(positionBat.direction == HORIZONTAL)
+			i = dernierCoup->coordTir.noCol - positionCourante.noCol;
+		else if(positionBat.direction == VERTICAL)
+			i = dernierCoup->coordTir.noLin - positionCourante.noLin;
+		
+		bateauCible->etat[i] = INTACT;
+		
+	}
+	
+	SetEtatCase(partie->grille, dernierCoup->coordTir, GRILLE_CASE_NORMAL);
+	
+	// On dépile le coup
+	partie->pileCoups = Depiler(partie->pileCoups);
 }
 
 

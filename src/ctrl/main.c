@@ -14,7 +14,6 @@
 #include "jeu.h"
 #include "utilsSDL.h"
 #include "fichierDebug.h"
-#include "CtrlGrille.h"
 #include "FichierSauvRes.h"
 
 #include <stdio.h>
@@ -28,6 +27,7 @@ int main(int argc, char ** argv)
 	int continuer = 1;
 	int i;
     int partiePrete;
+    int resultPartie;
 
 	ecran = DemarrerSDL(1024, 768, "Bataille Navale");
 
@@ -56,12 +56,18 @@ int main(int argc, char ** argv)
             case 1: // Nouvelle Partie
                 partiePrete = MenuNouvellePartie(parametrePartie);
                 if(partiePrete)
-                    jeu(parametrePartie);
+                {
+                    resultPartie = jeu(parametrePartie);
+                    if(resultPartie == 1)
+                        ecranVictoire();
+                }
                 break;
 
             case 2: // Charger partie
                 globalPartie = restaurerPartie("partieUser.dat");
-                ecranJeu();
+                resultPartie = ecranJeu();
+				if(resultPartie == 1)
+					ecranVictoire();
                 break;
 
             case 3: // Meilleurs scores
@@ -80,8 +86,6 @@ int main(int argc, char ** argv)
                 break;
         }
     }
-
-    ecranVictoire();
 
 	ArreterSDL();
 	detruire_debug();

@@ -28,10 +28,10 @@ int sauvegardePartie(TPartie *partie, const char nomSauv[]){
     char * chemin = malloc( sizeof(char) * (strlen(SAVE_REP) + strlen(nomSauv)));
 
     //Création du chemin
-    strcpy(chemin, "ressources/saves/");
+    strcpy(chemin, SAVE_REP);
     strcat(chemin, nomSauv);
 
-    //On ouvre le fichier en écrant tout le contenu
+    //On ouvre le fichier en écrasant tout le contenu
     fichier = fopen(chemin, "wb+");
 
     if(fichier == NULL){
@@ -68,7 +68,7 @@ int sauvegardeBateaux(TPartie *partie, FILE *fichier){
     TBateau * bat;
 
     //on écrit le nombre de bateaux par joueurs
-    fwrite(&nbBateaux, sizeof(int), 1, fichier);
+    fwrite(&nbBateaux, sizeof(short int), 1, fichier);
 
     //On écrit tout les bateaux du joueur
     for(i = 0 ; i < nbBateaux ; i++){
@@ -226,7 +226,7 @@ int restaurerBateaux(TPartie *partie, FILE* fichier){
 
     //Nombre de bateaux pour chaque joueur
     short int nbBat;
-    int i, nbLu;
+    int i;
 
     //Pour les noms des joueurs
     char nom[KLGNOMJ] = {'\0'};
@@ -239,7 +239,7 @@ int restaurerBateaux(TPartie *partie, FILE* fichier){
     partie->machine->type = MACHINE;
 
     //On lit le nombre de bateaux
-    nbLu = fread(&nbBat, sizeof(short int), 1, fichier);
+    fread(&nbBat, sizeof(short int), 1, fichier);
 
     partie->joueur->mesBateaux = malloc(sizeof(TBateau*) * nbBat);
     partie->machine->mesBateaux = malloc(sizeof(TBateau*) * nbBat);
