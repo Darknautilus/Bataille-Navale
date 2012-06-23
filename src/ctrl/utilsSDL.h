@@ -13,17 +13,18 @@
 #include "../view/includeSDL.h"
 
 /**
-    Permet d'initialiser tous les modules SDL
-
-    width et height : dimensions de la fenêtre
-
-    Dans tout le code, la surface renvoyée par cette fonction peut-être retrouvée avec SDL_GetVideoSurface()
+ * Permet d'initialiser tous les modules SDL
+ * Dans tout le code, la surface renvoyée par cette fonction peut-être retrouvée avec SDL_GetVideoSurface()
+ *
+ * \param[in] width Largeur de la fenêtre
+ * \param[in] height Hauteur de la fenêtre
+ * \return La surface de l'écran
 */
 SDL_Surface * demarrerSDL(int width, int height, char * titreFenetre);
 
 /**
-    Arrête tous les modules SDL
-    À ne pas oublier à la fin du programme
+ * Arrête tous les modules SDL
+ * À ne pas oublier à la fin du programme
 */
 void arreterSDL(void);
 

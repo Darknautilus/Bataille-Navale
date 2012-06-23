@@ -3,10 +3,14 @@
 
 <h1>Installation</h1>
 
-<h2>Windows</h2>
-
 <p>Ce programme utilise les bibliothèques SDL 1.2.15, SDL_image et SDL_ttf.<br/>
 Toutes les DLL nécessaires à Windows sont inclues.</p>
+
+<hr/>
+
+<h1>Compilation</h1>
+
+<h2>Windows</h2>
 
 <p>Pour pouvoir compiler, vous devez télécharger des fichiers spécifiques.<br/>
 Attention, procédure pour Code::Blocks sur Windows :<br/>
@@ -48,6 +52,8 @@ Attention, procédure pour Code::Blocks sur Windows :<br/>
 </p>
 
 <p>Le programme a besoin de toutes les DLL fournies avec ce code source, elles devront également être fournies avec l'exécutable.</p>
+
+<hr/>
 
 <p>Si vous rencontrez des difficultés, écrivez-moi : aurelienbertron[AT]gmail[DOT]com</p>
 

@@ -16,6 +16,10 @@
 */
 int init_debug();
 
+/**
+	Termine le debug et enregistre dans le fichier
+	\return 0 si tout est OK. 1 en cas d'erreur.
+*/
 int detruire_debug();
 
 /**
