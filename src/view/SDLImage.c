@@ -1,3 +1,12 @@
+/**
+ * \file SDLImage.c
+ * \author Aurélien Bertron
+ * \date 29 mai 2012
+ * \brief Module d'image SDL
+ *
+ * Contient les fonctions du module Image SDL
+ */
+
 #include "SDLImage.h"
 
 #include "includeSDL.h"

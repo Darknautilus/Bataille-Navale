@@ -25,13 +25,13 @@
 */
 typedef struct
 {
-    Joueur *joueur;
-    Joueur *machine;
-    Tparam *parametres;
-    Pile pileCoups;
-    Grille *grille;
-    Grille *grilleMachine;
-    int scorePlayer;
+    Joueur *joueur; /**< Joueur humain */
+    Joueur *machine; /**< Joueur IA */
+    Tparam *parametres; /**< Paramtres de la partie */
+    Pile pileCoups; /**< Pile de coups */
+    Grille *grille; /**< Grille de l'humain */
+    Grille *grilleMachine; /**< Grille de l'IA */
+    int scorePlayer; /**< Score du joueur */
 } TPartie;
 
 

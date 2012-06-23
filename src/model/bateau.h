@@ -38,8 +38,8 @@ typedef enum {
 */
 typedef struct
 {
-    ETypeBat typeBat;
-    char * nomType;
+    ETypeBat typeBat; /**< Type du bateau */
+    char * nomType; /**< Nom du type */
 }
 TtypeBat;
 
@@ -59,8 +59,8 @@ ESens;
 
 typedef struct
 {
-    ESens sensBat;
-    char * libSens;
+    ESens sensBat; /**< Sens du bateau */
+    char * libSens; /**< LibellŽ du sens */
 }
 TSensBat;
 
@@ -94,7 +94,7 @@ typedef struct
 	int idBateau;              /**< Numéro du bateau (voir paramtres) */
 	TPosition position;        /**< Position du bateau dans la grille */
 	EEtat etat[KTAILLEMAXBAT]; /**< Tableau d'état du bateau, renseigne l'état de chaque case du bateau */
-    int estPlace;
+    int estPlace; /**< Vaut 1 si le bateau est placŽ sur sa grille et 0 sinon */
 }
 TBateau;
 
