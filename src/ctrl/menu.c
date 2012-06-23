@@ -295,8 +295,10 @@ int menuNouvellePartie(Tparam * parametre)
             initTexte(paramNbBat[i], chaineInstance);
             afficherChamp(paramNbBat[i]);
         }
-
-		afficherBouton(boutonOK);
+		
+		if(!nbInstChange)
+			afficherBouton(boutonOK);
+		
 		afficherBouton(boutonParam);
         afficherBouton(boutonChargerParam);
         afficherBouton(boutonEnregistrerParam);

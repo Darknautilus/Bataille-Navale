@@ -1,13 +1,11 @@
-   *** Règles du jeu ***
-
 Le but:
-Il s'agit de découvrir en premier l'emplacement des bateaux de son adversaire pour les couler et ainsi faire capituler la flotte adverse.
+Il s'agit de decouvrir en premier l'emplacement des bateaux de son adversaire pour les couler et ainsi faire capituler la flotte adverse.
 
-Les préparatifs de jeu:
-Chacun des deux jours trace sur sa feuille un tableau comportant 10 cases sur chacun de ses côtés. En abscisse, on porte les lettres (de A a J soit 10 cases) et en abscisse les chiffres de 1 a 10. Les joueurs mettent des croix contigües et alignées en ligne horizontalement ou verticalement (mais pas diagonalement) pour former des navires.
+Les preparatifs de jeu:
+Chacun des deux jours a une grille comportant 10 cases sur chacun de ses cotes. En ordonnee, on porte les lettres (de A a J soit 10 cases) et en abscisse les chiffres de 1 a 10. Les joueurs placent leurs navires sur leur grille.
 
-La règle de la bataille navale:
-Chaque joueur crée ainsi un cuirassé (quatre cases), deux croiseurs (trois cases) et trois torpilleurs (2 cases). Le joueur qui entame la partie déclare la oà¹ il pense que son adversaire a caché un navire en déclarant B5 par exemple. L'adversaire répond par "raté" ou "touché". Un bateau entièrement touché est "coulé".
+La regle de la bataille navale:
+Chaque joueur a a sa disposition 5 types de navires : Porte-avions (5 cases), Sous-marin (4 cases), Cargot (3 cases), Remorqueur (2 cases) et Voilier (1 case). Le joueur qui entame la partie declare la ou il pense que son adversaire a cache un navire en declarant B5 par exemple. L'adversaire repond par "rate" ou "touche". Un bateau entierement touche est "coule".
 
 La fin de la bataille navale
-Le gagnant est celui qui en premier a découvert et détruit l'intégralité de la flotte adverse.  
+Le gagnant est celui qui en premier a decouvert et detruit l'integralite de la flotte adverse.  

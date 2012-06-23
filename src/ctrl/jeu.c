@@ -28,7 +28,7 @@
 
 int jeu(Tparam * pParam)
 {
-    int resultPartie;
+    int resultPartie = 0;
     if(menuPlacementChoixBat())
     {
         // On place les bateaux de la machine et on y va !
@@ -365,7 +365,7 @@ int ecranJeu(void)
 	positionBouton.y = 582;
 	boutonAnnulerCoup = CreerBouton("Annuler coup", &positionBouton, 30);
 	
-	//partieFinie = partieEstFinie(globalPartie);
+	partieFinie = partieEstFinie(globalPartie);
 
     strcpy(messageJoueur, "Pret a commencer");
     strcpy(messageMachine, "Pret a commencer");
@@ -380,13 +380,20 @@ int ecranJeu(void)
         positionTexte.x = 750;
         positionTexte.y = 682;
         ecrireTexte(messageMachine, 30, positionTexte, "default.ttf");
+		positionTexte.x = 120;
+		positionTexte.y = 400;
+		ecrireTexte(partie_JHumain()->nomJ, 30, positionTexte, "default.ttf");
+		positionTexte.x = 680;
+		positionTexte.y = 400;
+		ecrireTexte(partie_JMachine()->nomJ, 30, positionTexte, "default.ttf");
 
         afficherGrille(partie_Grille(), 50, 50);
         afficherGrille(partie_GrilleMachine(), 530, 50);
         
         if(partieFinie != 0)
             afficherBouton(boutonFinPartie);
-		afficherBouton(boutonAnnulerCoup);
+		else
+			afficherBouton(boutonAnnulerCoup);
 
         SDL_Flip(SDL_GetVideoSurface());
 
@@ -456,7 +463,7 @@ int ecranJeu(void)
             }
 			else if(clicSurBouton(boutonAnnulerCoup, positionClic))
 			{
-				if(!pileVide(partie_PileCoups()))
+				if(!pileVide(partie_PileCoups()) && partieFinie == 0)
 				{
 					annulerDernierCoup(globalPartie);
 					positionTexte.x = 350;

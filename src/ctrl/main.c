@@ -15,6 +15,7 @@
 #include "../ctrl/UtilsSDL.h"
 #include "../ctrl/FichierDebug.h"
 #include "../ctrl/FichierSauvRes.h"
+#include "../ctrl/EcransDivers.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -27,7 +28,7 @@ int main(int argc, char ** argv)
 	int continuer = 1;
 	int i;
     int partiePrete;
-    int resultPartie;
+    int resultPartie = 0;
 
 	ecran = demarrerSDL(1024, 768, "Bataille Navale");
 
@@ -58,8 +59,10 @@ int main(int argc, char ** argv)
                 if(partiePrete)
                 {
                     resultPartie = jeu(parametrePartie);
-                    if(resultPartie == 1)
-                        ecranVictoire();
+					if(resultPartie == 1)
+						ecranVictoire();
+					else if(resultPartie == -1)
+						ecranPerte();
                 }
                 break;
 
@@ -68,6 +71,8 @@ int main(int argc, char ** argv)
                 resultPartie = ecranJeu();
 				if(resultPartie == 1)
 					ecranVictoire();
+				else if(resultPartie == -1)
+					ecranPerte();
                 break;
 
             case 3: // Meilleurs scores

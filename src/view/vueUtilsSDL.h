@@ -5,8 +5,6 @@
 
 #define K_LGMAXMESSAGE 30
 
-void ecranVictoire(void);
-
 /**
  * \brief Permet d'écrire du texte en blanc
  *

@@ -260,7 +260,7 @@ void annulerDernierCoup(TPartie *partie)
 	// Machine ------
 	
 	dernierCoup = sommet(partie->pileCoups);
-	idBatCase = getIdBateauSurCase(partie->grilleMachine, dernierCoup->coordTir);
+	idBatCase = getIdBateauSurCase(partie->grille, dernierCoup->coordTir);
 
 	//Si il y a un bateu sur la case
 	if(idBatCase >= 0)
@@ -283,7 +283,7 @@ void annulerDernierCoup(TPartie *partie)
 				else if(positionBat.direction == VERTICAL)
 					positionCourante.noLin += i;
 				
-				setEtatCase(partie->grilleMachine, positionCourante, GRILLE_CASE_TOUCHE);
+				setEtatCase(partie->grille, positionCourante, GRILLE_CASE_TOUCHE);
 			}
 		}
 
@@ -310,7 +310,7 @@ void annulerDernierCoup(TPartie *partie)
 	// Joueur -------
 	
 	dernierCoup = sommet(partie->pileCoups);
-	idBatCase = getIdBateauSurCase(partie->grille, dernierCoup->coordTir);
+	idBatCase = getIdBateauSurCase(partie->grilleMachine, dernierCoup->coordTir);
 
 	if(idBatCase >= 0)
 	{
@@ -332,7 +332,7 @@ void annulerDernierCoup(TPartie *partie)
 				else if(positionBat.direction == VERTICAL)
 					positionCourante.noLin += i;
 				
-				setEtatCase(partie->grille, positionCourante, GRILLE_CASE_TOUCHE);
+				setEtatCase(partie->grilleMachine, positionCourante, GRILLE_CASE_TOUCHE);
 			}
 		}
 
