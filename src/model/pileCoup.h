@@ -1,3 +1,12 @@
+/**
+ *   \file PileCoup.h
+ *   \author Aurélien Bertron
+ *   \date 21 mai 2012
+ *   \brief Module Pile Coups Headers
+ *
+ *   Contient les déclarations du module de pile de coups
+ */
+
 #ifndef PILE_COUP_H
 #define PILE_COUP_H
 
@@ -13,49 +22,41 @@ struct Cellule
 
 typedef struct Cellule * Pile;
 
-/*
- N : CreerPile
- E : -
- S : -
- R : retourne une pile initialisee
- Prec : -
- */
+/**
+ * Initialise une pile
+ * \return Retourne une pile initialisee
+*/
 Pile CreerPile(void);
 
 /*
- N : PileVide
- E : pPile
- S : -
- R : retourne 1 si la pile est vide et 0 sinon
- Prec : -
- */
+ * Détermine si la pile est vide
+ * \param[in] pPile Une pile
+ * \return 1 : pile vide, 0 sinon
+*/
 int pileVide(Pile pPile);
 
 /*
- N : Empiler
- E : pPile, pElem
- S : -
- R : retourne la pile modifiee
- Prec : -
- */
+ * Empile un élément au sommet
+ * \param[in] pPile Une pile
+ * \param[in] pElem Un élément à ajouter
+ * \return La pile modifiee
+*/
 Pile empiler(Pile pPile, Coup * pElem);
 
 /*
- N : Depiler
- E : pPile
- S : -
- R : retourne la pile modifiee
- Prec : la liste ne doit pas etre vide
- */
+ * Dépile le premier élément de la pile
+ * La liste ne doit pas etre vide.
+ * \param[in] pPile Une pile
+ * \return La pile modifiee
+*/
 Pile depiler(Pile pPile);
 
 /*
- N : Sommet
- E : pPile
- S : -
- R : retourne le premier element de la pile
- Prec : la pile ne doit pas etre vide
- */
+ * Récupère le premier élément de la pile
+ * La pile ne doit pas etre vide
+ * \param[in] pPile Une pile
+ * \return Le premier element de la pile
+*/
 Coup * sommet(Pile pPile);
 
 /**

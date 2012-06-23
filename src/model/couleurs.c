@@ -1,3 +1,12 @@
+/**
+ *   \file Couleurs.c
+ *   \author Aurélien Bertron, Benoît Sauvère
+ *   \date 18 avril 2012 
+ *   \brief Module Couleurs
+ *
+ *   Contient les fonctions du module Couleurs
+ */
+
 #include "Couleurs.h"
 
 #include "../view/includeSDL.h"

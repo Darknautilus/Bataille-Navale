@@ -112,6 +112,13 @@ Tparam * newTParam(int *pNbInstances);
 */
 int *getNBInstances (const Tparam * pParam);
 
+/**
+ * Retourne l'id qu'aurait un bateau avec ces caractéristiques
+ * \param[in] pTypeBat Le type du bateau
+ * \param[in] pNumBatType La position du bateau par rapport aux bateaux du même type
+ * \param[in] pParam Les paramètres de la partie (contient les TInfoBateaux
+ * \return Le numéro du bateau
+*/
 int getNumBat(ETypeBat pTypeBat, int pNumBatType, Tparam * pParam);
 
 //***************************
@@ -146,7 +153,10 @@ int getNbInstancesType (const Tparam * pParam, ETypeBat pType);
 */
 int getNbBat(const Tparam * pParam);
 
-
+/**
+ * Configure le nom de tous les bateaux à "Nom :" et la couleur à Blanc
+ * \param[in,out] pParam Les paramètres de la partie
+*/
 void resetInfoBateau(Tparam * pParam);
 
 

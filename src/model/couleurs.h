@@ -1,3 +1,12 @@
+/**
+ *   \file Couleurs.h
+ *   \author Aurélien Bertron, Benoît Sauvère
+ *   \date 18 avril 2012 
+ *   \brief Module Couleurs Headers
+ *
+ *   Contient les déclaration du module Couleurs
+*/
+
 #ifndef _COULEURS_H
 #define _COULEURS_H
 
@@ -15,29 +24,45 @@ typedef
 	}
 Couleur;
 
+extern const Couleur tableCouleurs[KCOULEURS_NBCOULMAX];
+
+/**
+ * \return Le nombre de couleurs gérées
+*/
 int getNbCouleurs (void);
 
-/*
-    Retourne la couleur correspondant ‡ la lettre entrÈe.
-
-    lettre doit exister dans le tableau de couleurs
+/**
+ Retourne la couleur correspondant à la lettre entrée.
+ pLettre doit exister dans le tableau de couleurs.
+	
+ \param[in] pLettre La lettre de la couleur
+ \return La couleur recherchée
 */
 Couleur lettreToCouleur (char pLettre);
 
-/*
-    Retourne la couleur associÈe ‡ l'indice pI dans le tableau des couleurs.
-
-    Le tableau doit avoir au moins pI+1 ÈlÈments
+/**
+    Retourne la couleur associée à l'indice pI dans le tableau des couleurs.
+    Le tableau doit avoir au moins pI+1 éléments.
+	\param[in] pI L'indice de la couleur
+	\return La couleur recherchée
 */
 Couleur getCouleurFromNum (int pI);
 
-// fonction d'accËs ‡ chacun des champs de la structure couleur
+/**
+ * Fonction d'accès au champ rgb de la structure couleur.
+*/
 SDL_Color getColor (Couleur pCouleur);
+/**
+ * Fonction d'accès au champ lettre de la structure couleur.
+ */
 char getChar (Couleur pCouleur);
+/**
+ * Fonction d'accès au champ nom de la structure couleur.
+ */
 void getNom (Couleur pCouleur, char pNom[]);
 
 /**
-    RecupËre l'index d'une couleur dans le tableau des coueleurs depuis la structure color.
+    Recupère l'index d'une couleur dans le tableau des coueleurs depuis la structure color.
     \param color La couleur en question
     \return L'index de la couleur dans le tableau des couleurs
 */

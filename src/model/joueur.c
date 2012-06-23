@@ -1,3 +1,12 @@
+/**
+ *   \file Joueur.c
+ *   \author Aurélien Bertron
+ *   \date 18 avril 2012 
+ *   \brief Module Joueur
+ *
+ *   Contient les fonctions du module Joueur
+ */
+
 #include "Joueur.h"
 
 #include <stdio.h>

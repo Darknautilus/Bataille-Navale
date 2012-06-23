@@ -1,3 +1,12 @@
+/**
+ *   \file PileCoup.c
+ *   \author Aurélien Bertron
+ *   \date 21 mai 2012
+ *   \brief Module Pile Coups
+ *
+ *   Contient les fonctions du module de pile de coups
+ */
+
 #include "PileCoup.h"
 
 #include "../ctrl/FichierDebug.h"

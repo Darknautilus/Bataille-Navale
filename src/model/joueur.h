@@ -1,3 +1,12 @@
+/**
+ *   \file Joueur.h
+ *   \author Aurélien Bertron
+ *   \date 18 avril 2012 
+ *   \brief Module Joueur Headers
+ *
+ *   Contient les déclaration du module Joueur
+ */
+
 #ifndef JOUEUR_H
 #define JOUEUR_H
 
@@ -26,13 +35,30 @@ typedef struct
 	TBateau ** mesBateaux;  /** Tableau dynamique de pointeurs sur TBateaux **/
 }Joueur;
 
-
+/**
+ * Initialise un joueur
+ * \return Un joueur initialisé
+*/
 Joueur * CreerJoueur(void);
 
+/**
+ * Récupère le type d'un joueur
+ * \param[in] pJoueur Le joueur voulu
+ * \return Le type de pJoueur
+*/
 int getTypeJoueur(const Joueur * pJoueur);
 
+/**
+ * Récupère le nom d'un joueur
+ * \param[in] pJoueur Le joueur voulu
+ * \return Le nom de pJoueur
+*/
 char * getNomJoueur(Joueur * pJoueur);
 
+/**
+ * Libère le joueur en mémoire
+ * \param[in] pJoueur Le joueur à libérer
+*/
 void LibererJoueur(Joueur * pJoueur);
 
 
