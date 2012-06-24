@@ -1,10 +1,10 @@
 /**
- *   \file utilsPoliceEcriture.h
- *   \author Benoit Sauvere
+ *   \file UtilsPoliceEcriture.h
+ *   \author Benoit Sauvère
  *   \date 03 juin 2012
- *   \brief Module Utillitaire Police Ecriture
+ *   \brief Contrôleur Utillitaire Police Ecriture
  *
- *   Contient les dÈclarations pour le module des utilitaires de chargement des polices d'Ècriture.
+ *   Contient les déclarations pour le module des utilitaires de chargement des polices d'écriture.
 */
 
 #ifndef UTILSFONT_H

@@ -2,9 +2,9 @@
  *   \file PileCoup.h
  *   \author Aurélien Bertron
  *   \date 21 mai 2012
- *   \brief Module Pile Coups Headers
+ *   \brief Modèle Pile Coups
  *
- *   Contient les déclarations du module de pile de coups
+ *   Contient les déclarations du module de pile de coups.
  */
 
 #ifndef PILE_COUP_H

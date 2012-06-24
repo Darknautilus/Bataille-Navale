@@ -2,7 +2,7 @@
  * \file SDLImage.h
  * \author Aurélien Bertron
  * \date 29 mai 2012
- * \brief Module d'image SDL
+ * \brief Vue des images SDL
  *
  * Contient les déclarations du module Image SDL
  */

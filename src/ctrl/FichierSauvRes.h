@@ -1,8 +1,8 @@
 /**
  * \file FichierSauvRes.h
  * \author Benoît Sauvère
- * \date 19/06/2012
- * \brief Controleur du fichier de sauvegarde
+ * \date 19 juin 2012
+ * \brief Contrôleur du fichier de sauvegarde
  *
  * Contient les déclarations des fonctions utilisées pour la sauvegarde et la restauration d'une partie.
 */

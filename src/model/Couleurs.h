@@ -2,7 +2,7 @@
  *   \file Couleurs.h
  *   \author Aurélien Bertron, Benoît Sauvère
  *   \date 18 avril 2012
- *   \brief Module Couleurs Headers
+ *   \brief Modèle Couleurs
  *
  *   Contient les déclaration du module Couleurs
 */

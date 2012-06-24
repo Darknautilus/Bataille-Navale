@@ -1,3 +1,13 @@
+/**
+ * \file IncludeSDL.h
+ * \author Aurélien Bertron
+ * \date 19 juin 2012
+ * \brief Vue Inclusion de la SDL
+ *
+ *  Contient les inclusions nécessaires à l'utilisation de la libraire SDL,
+ *  ainsi que les chemins vers plusieurs dossiers de ressources.
+*/
+
 #ifndef INCLUDE_SDL_H
 #define INCLUDE_SDL_H
 

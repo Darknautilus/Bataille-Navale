@@ -1,8 +1,8 @@
 /**
- * \file champSaisie.h
+ * \file ChampSaisie.h
  * \author Aurélien Bertron
  * \date 29 avril 2012
- * \brief Modele champ saisie
+ * \brief Modèle Champ Saisie
  *
  * Contient les types et en-têtes des fonctions du module de champs de saisie.
  * Ce module implémente la gestion du champ de saisie. Il permet à l'utilisateur de saisir une chaine de caractères.

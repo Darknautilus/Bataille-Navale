@@ -1,10 +1,10 @@
 /**
- *   \file bateau.h
- *   \author Benoit Sauvere
+ *   \file Bateau.h
+ *   \author Benoît Sauvère
  *   \date 13 mai 2012
- *   \brief Module Bateau Headers
+ *   \brief Modèle Bateau
  *
- *   Contient les dÈclaration du module Bateau
+ *   Contient les déclarations du module Bateau.
 */
 
 #ifndef _BATEAU_H

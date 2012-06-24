@@ -1,8 +1,8 @@
 /**
- * \file grille.h
- * \author Aurelien Bertron
+ * \file Grille.h
+ * \author Aurelien Bertron, Benoît Sauvère
  * \date 21 avril 2012
- * \brief Header modele grille
+ * \brief Modèle Grille
  *
  * Contient les types et en-tetes des fonctions du module de grille
  *

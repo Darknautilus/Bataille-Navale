@@ -1,8 +1,8 @@
 /**
- *   \file utilsSDL.h
- *   \author Aurelien Bertron
+ *   \file UtilsSDL.h
+ *   \author Aurélien Bertron
  *   \date 13 mai 2012
- *   \brief Module Utilitaire SDL
+ *   \brief Contrôleur des utilitaires SDL
  *
  *   Les fonctions d'activation et de destruction de la libraire SDL.
 */

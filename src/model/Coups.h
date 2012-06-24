@@ -1,3 +1,12 @@
+/**
+ * \file Coups.h
+ * \author Benoît Sauvère
+ * \date 19 juin 2012
+ * \brief Modèle Coup
+ *
+ * Contient les déclarations du module Coup, représentant un coup d'un joueur.
+*/
+
 #ifndef COUPS_H
 #define COUPS_H
 

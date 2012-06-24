@@ -2,6 +2,7 @@
 
 #include "../ctrl/UtilsSDL.h"
 #include "../ctrl/FichierDebug.h"
+#include "../ctrl/UtilsModel.h"
 
 #include "../model/ChampSaisie.h"
 #include "../model/Partie.h"
@@ -9,7 +10,6 @@
 #include "../model/Parametre.h"
 #include "../model/Random.h"
 #include "../model/Couleurs.h"
-#include "../model/UtilsModel.h"
 
 #include "../view/IncludeSDL.h"
 #include "../view/VueChampSaisie.h"

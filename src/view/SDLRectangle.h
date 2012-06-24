@@ -2,7 +2,7 @@
  * \file SDLRectangle.h
  * \author Aurélien Bertron
  * \date 7 juin 2012
- * \brief Module de rectangle SDL
+ * \brief Vue Rectangle SDL
  *
  * Contient les déclarations du module Rectangle SDL
  */

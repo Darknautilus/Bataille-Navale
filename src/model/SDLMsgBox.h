@@ -1,3 +1,12 @@
+/**
+ * \file SDLMsgBox.h
+ * \author Aurélien Bertron
+ * \date 19 juin 2012
+ * \brief Modèle de boîtes de messages.
+ *
+ * Contient les déclarations de gestion du modèle de boites de messages.
+*/
+
 #ifndef SDL_MESSAGE_BOX_H
 #define SDL_MESSAGE_BOX_H
 

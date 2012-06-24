@@ -2,7 +2,7 @@
  * \file SDLButton.h
  * \author Aurélien Bertron
  * \date 28 mai 2012
- * \brief Module de bouton SDL
+ * \brief Vue des bouton SDL
  *
  * Contient les déclarations du module Bouton SDL
 */

@@ -1,10 +1,10 @@
 /**
  *   \file Joueur.h
- *   \author Aurélien Bertron
+ *   \author Aurélien Bertron, Benoît Sauvère
  *   \date 18 avril 2012
- *   \brief Module Joueur Headers
+ *   \brief Modèle Joueur
  *
- *   Contient les déclaration du module Joueur
+ *   Contient les déclaration du module Joueur.
  */
 
 #ifndef JOUEUR_H
