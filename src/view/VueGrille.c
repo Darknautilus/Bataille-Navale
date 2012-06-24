@@ -12,7 +12,7 @@
 
 void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 {
-	SDL_Surface * caseGrille, * numCase;
+	SDL_Surface *caseGrille = NULL, *numCase = NULL;
 	SDL_Rect positionCaseGrille, positionNumCase;
 	TTF_Font * policeGrille;
 	SDL_Color couleurBlanche = {255,255,255};

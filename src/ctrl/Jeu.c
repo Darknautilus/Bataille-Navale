@@ -212,7 +212,8 @@ int menuPlacementGrille(TBateau * pBat)
     TBateau * batInser; // Bateau temporaire
 
     Coord coordClicGrille;
-
+    coordClicGrille.noLin = 1;
+    coordClicGrille.noCol = 1;
     // --------------------------------------------------------------------
 
     strcpy(titreFenetre, "Placement de ");
