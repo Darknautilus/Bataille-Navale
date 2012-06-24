@@ -1,34 +1,34 @@
 #include "SDLRectangle.h"
 
-#include "VueUtilsSDL.h"
+#include "../view/VueUtilsSDL.h"
 
 #include "../model/Couleurs.h"
 
 Rectangle * creerRectangle(int pAbs, int pOrd, int pLarg, int pHaut)
 {
     Rectangle * nouvRect = (Rectangle*)malloc(sizeof(Rectangle));
-    
+
     nouvRect->abscisse = pAbs;
     nouvRect->ordonnee = pOrd;
     nouvRect->largeur = pLarg;
     nouvRect->hauteur = pHaut;
     nouvRect->couleur = 0;
-    
+
     nouvRect->zoneRectangle = SDL_CreateRGBSurface(SDL_HWSURFACE, pLarg, pHaut, 32, 0, 0, 0, 0);
     nouvRect->zoneRectangle = SDL_DisplayFormat(nouvRect->zoneRectangle);
-    
+
     return nouvRect;
 }
 
 void afficherRectangle(Rectangle * pRect)
 {
     SDL_Rect positionRectangle;
-    
+
     positionRectangle.x = pRect->abscisse;
     positionRectangle.y = pRect->ordonnee;
-    
+
     SDL_FillRect(pRect->zoneRectangle, NULL, convertSDL_Color(getColor(getCouleurFromNum(pRect->couleur))));
-    
+
     SDL_BlitSurface(pRect->zoneRectangle, NULL, SDL_GetVideoSurface(), &positionRectangle);
 }
 

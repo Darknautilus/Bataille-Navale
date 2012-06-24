@@ -1,6 +1,6 @@
 #include "FichierSauvRes.h"
 
-#include "FichierDebug.h"
+#include "../ctrl/FichierDebug.h"
 
 #include "../model/Bateau.h"
 #include "../model/Grille.h"

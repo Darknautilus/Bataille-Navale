@@ -1,6 +1,6 @@
 #include "SDLButton.h"
 
-#include "IncludeSDL.h"
+#include "../view/IncludeSDL.h"
 
 #include "../ctrl/UtilsPoliceEcriture.h"
 

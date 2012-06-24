@@ -10,8 +10,8 @@
 #ifndef _PARAM_H
 #define _PARAM_H
 
-#include "Bateau.h"
-#include "Couleurs.h"
+#include "../model/Bateau.h"
+#include "../model/Couleurs.h"
 
 #include <stdio.h>
 #include <stdlib.h>

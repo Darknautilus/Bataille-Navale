@@ -11,6 +11,8 @@
 #ifndef VUE_CHAMP_SAISIE_H
 #define VUE_CHAMP_SAISIE_H
 
+#include "../view/IncludeSDL.h"
+
 #include "../model/ChampSaisie.h"
 
 /**

@@ -10,7 +10,7 @@
 #ifndef SDL_RECTANGLE_H
 #define SDL_RECTANGLE_H
 
-#include "includeSDL.h"
+#include "../view/IncludeSDL.h"
 
 /**
  * \struct Rectangle

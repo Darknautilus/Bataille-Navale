@@ -10,7 +10,7 @@
 #ifndef SDLIMAGE_H
 #define SDLIMAGE_H
 
-#include "includeSDL.h"
+#include "../view/IncludeSDL.h"
 
 /**
  * \struct Image

@@ -10,8 +10,8 @@
 #ifndef SDL_BUTTON_H
 #define SDL_BUTTON_H
 
-#include "includeSDL.h"
-#include "VueUtilsSDL.h"
+#include "../view/IncludeSDL.h"
+#include "../view/VueUtilsSDL.h"
 
 #define SDL_BOUTON_KLONGMAX 30 /**< \brief Longueur maximum du texte du bouton */
 #define SDL_BOUTON_KESP_VERT 5 /**< \brief Espacement vertical du texte avec le bord du bouton */

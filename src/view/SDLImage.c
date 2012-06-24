@@ -1,6 +1,6 @@
 #include "SDLImage.h"
 
-#include "IncludeSDL.h"
+#include "../view/IncludeSDL.h"
 
 #include "../ctrl/FichierDebug.h"
 
