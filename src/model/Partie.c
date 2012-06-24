@@ -40,13 +40,16 @@ TPartie* initialiser(Tparam *param){
 
     TPartie *partie = malloc (sizeof(TPartie));
 
+    //On initialise le score
+    partie->scorePlayer = KLARGGRILLE * KHAUTGRILLE;
+
     //=========== Initialisation / Allocation ===================
 
     partie->joueur = creerJoueur();
     partie->machine = creerJoueur();
 
-    partie->grille = creerGrille(10,10);
-    partie->grilleMachine = creerGrille(10, 10);
+    partie->grille = creerGrille(KHAUTEURCASE,KLARGGRILLE);
+    partie->grilleMachine = creerGrille(KHAUTEURCASE, KLARGGRILLE);
 
     partie->parametres = param;
 
@@ -267,13 +270,13 @@ void annulerDernierCoup(TPartie *partie)
 			for(i=0;i<getTypeBateau(bateauCible);i++)
 			{
 				bateauCible->etat[i] = TOUCHE;
+                setEtatCase(partie->grille, positionCourante, GRILLE_CASE_TOUCHE);
 
 				if(positionBat.direction == HORIZONTAL)
 					positionCourante.noCol += 1;
 				else if(positionBat.direction == VERTICAL)
 					positionCourante.noLin += 1;
 
-				setEtatCase(partie->grille, positionCourante, GRILLE_CASE_TOUCHE);
 			}
 		}
 
@@ -317,12 +320,12 @@ void annulerDernierCoup(TPartie *partie)
 			{
 				bateauCible->etat[i] = TOUCHE;
 
+                setEtatCase(partie->grilleMachine, positionCourante, GRILLE_CASE_TOUCHE);
+
 				if(positionBat.direction == HORIZONTAL)
 					positionCourante.noCol += 1;
 				else if(positionBat.direction == VERTICAL)
 					positionCourante.noLin += 1;
-
-				setEtatCase(partie->grilleMachine, positionCourante, GRILLE_CASE_TOUCHE);
 			}
 		}
 

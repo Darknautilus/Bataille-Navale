@@ -278,6 +278,7 @@ int menuPlacementGrille(TBateau * pBat)
                 // On change le sens du bateau (et le texte du bouton)
                 sensBat = changerSensBat(sensBat);
                 strcpy(boutonSensBat->texte, tabSensBat[sensBat].libSens);
+                batInser->estPlace = 0;
             }
             else if(clicSurBouton(boutonAnnuler, positionClic))
             {
@@ -589,8 +590,8 @@ void placementAleatBat(Joueur * pJoueur, Grille * pGrille)
             {
                 // Tirage au sort de la position du bateau
                 sens = nombreAleatoire(0, 1);
-                abscisse = nombreAleatoire(1, 10);
-                ordonnee = nombreAleatoire(1, 10);
+                abscisse = nombreAleatoire(1, KLARGGRILLE);
+                ordonnee = nombreAleatoire(1, KHAUTGRILLE);
 
                 setPosBat(pJoueur->mesBateaux[i], tabSensBat[sens].sensBat, abscisse, ordonnee);
                 if(estPlacable(pJoueur->mesBateaux[i], globalPartie->grilleMachine))

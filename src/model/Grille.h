@@ -11,14 +11,16 @@
 #ifndef GRILLE_H
 #define GRILLE_H
 
-#define KLARGCASE 30 /**< \brief Largeur d'une case */
-#define KHAUTEURCASE 30 /**< \brief Hauteur d'une case */
+#define KLARGGRILLE 10   /**< \brief Largeur de la grille */
+#define KHAUTGRILLE 10   /**< \brief Hauteur de la grille */
+
+#define KLARGCASE 30     /**< \brief Largeur d'une case */
+#define KHAUTEURCASE 30  /**< \brief Hauteur d'une case */
 
 #define KTAILLEPOLICE 30 /**< \brief Taille de police */
 #define KESP_CASE_VERT 5 /**< \brief Espace vertical entre les cases */
 #define KESP_CASE_HORI 5 /**< \brief Espace horizontal entre les cases */
 #define KIDCOULDEFAUT 0  /**< \brief Indice de la couleur par défaut de la grille */
-
 
 /**
  * \enum EtatCase
