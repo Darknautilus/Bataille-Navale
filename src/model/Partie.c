@@ -238,7 +238,7 @@ int partieEstFinie(TPartie *partie){
 
 void annulerDernierCoup(TPartie *partie)
 {
-	int i;
+	int i = 0;
 	int idBatCase;
 	Coup * dernierCoup;
 	TBateau * bateauCible;

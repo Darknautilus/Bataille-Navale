@@ -57,7 +57,7 @@ void getNom (Couleur pCouleur, char pNom[])
 int getNumFromColor(Couleur color){
 
     int i = 0, trouve;
-    int result;
+    int result = -1;
     trouve = 0;
 
     //On parcourt les couleurs

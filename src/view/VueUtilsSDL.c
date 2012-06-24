@@ -61,7 +61,7 @@ int attendreEvent(SDL_Rect * coordClic, SDL_keysym * touche)
 {
 	SDL_Event event;
 	int continuer = 1;
-	int controle;// Permet de retourner si l'événement est un clic ou une touche
+	int controle = 0;  // Permet de retourner si l'événement est un clic ou une touche
 
 	while(continuer)
 	{
