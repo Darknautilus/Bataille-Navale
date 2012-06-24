@@ -377,6 +377,10 @@ int ecranJeu(void)
 		positionTexte.x = 680;
 		positionTexte.y = 400;
 		ecrireTexte(partie_JMachine()->nomJ, 30, positionTexte, "default.ttf");
+		positionTexte.x = 120;
+		positionTexte.y = 450;
+		sprintf(messageJoueur, "Score : %d", partie_Score());
+		ecrireTexte(messageJoueur, 30, positionTexte, "default.ttf");
 
         afficherGrille(partie_Grille(), 50, 50);
         afficherGrille(partie_GrilleMachine(), 530, 50);
