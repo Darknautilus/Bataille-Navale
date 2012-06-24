@@ -1,12 +1,12 @@
 #include "SDLButton.h"
 
-#include "includeSDL.h"
+#include "IncludeSDL.h"
 
 #include "../ctrl/UtilsPoliceEcriture.h"
 
 #include <string.h>
 
-SDL_Bouton * CreerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte)
+SDL_Bouton * creerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte)
 {
 	if(strlen(pTexte)>SDL_BOUTON_KLONGMAX)
 		return NULL;
@@ -60,7 +60,7 @@ int clicSurBouton(SDL_Bouton * pBouton, SDL_Rect * positionClic)
 		return 0;
 }
 
-void LibererBouton(SDL_Bouton * pBouton)
+void libererBouton(SDL_Bouton * pBouton)
 {
 	free(pBouton);
 }

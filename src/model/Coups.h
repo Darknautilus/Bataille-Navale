@@ -15,7 +15,7 @@ typedef struct
  * \param[in] pos Les coordonnées du tir.
  * \return Un pointeur sur le coups crée.
 **/
-Coup* CreerCoup(int estJoueur, Coord pos);
+Coup* creerCoup(int estJoueur, Coord pos);
 
 
 #endif

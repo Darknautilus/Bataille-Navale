@@ -3,7 +3,7 @@
 
 #include <stdlib.h>
 
-Coup* CreerCoup(int estJoueur, Coord pos){
+Coup* creerCoup(int estJoueur, Coord pos){
 
     Coup *coup = malloc(sizeof(Coup));
 

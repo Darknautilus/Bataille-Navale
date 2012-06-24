@@ -1,10 +1,10 @@
 #include "SDLImage.h"
 
-#include "includeSDL.h"
+#include "IncludeSDL.h"
 
 #include "../ctrl/FichierDebug.h"
 
-Image * CreerImage(char * pChemin, int pAbscisse, int pOrdonnee)
+Image * creerImage(char * pChemin, int pAbscisse, int pOrdonnee)
 {
     char * mesErreur;
 	Image * nouvImage = (Image*)malloc(sizeof(Image));
@@ -53,7 +53,7 @@ int clicSurImage(Image * pImage, SDL_Rect * pPosClic)
 		return 0;
 }
 
-void LibererImage(Image * pImage)
+void libererImage(Image * pImage)
 {
 	SDL_FreeSurface(pImage->zoneImage);
 	free(pImage);
