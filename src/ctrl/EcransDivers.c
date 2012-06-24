@@ -1,6 +1,6 @@
 #include "EcransDivers.h"
 
-#include "../view/includeSDL.h"
+#include "../view/IncludeSDL.h"
 #include "../view/SDLImage.h"
 #include "../view/VueUtilsSDL.h"
 
@@ -13,10 +13,10 @@ void ecranVictoire(void)
     Image * imageCaptain;
     Image * imageClavier;
     SDL_Rect positionTexte;
-    
-    imageCaptain = CreerImage("captain.png", 446, 389);
-    imageClavier = CreerImage("clavier.png", 300, 600);
-    
+
+    imageCaptain = creerImage("captain.png", 446, 389);
+    imageClavier = creerImage("clavier.png", 300, 600);
+
     while (continuer)
     {
         effacerEcran();
@@ -29,9 +29,9 @@ void ecranVictoire(void)
         positionTexte.y = 625;
         ecrireTexte("Espace", 30, positionTexte, "default.ttf");
         SDL_Flip(SDL_GetVideoSurface());
-        
+
         controleEvent = attendreEvent(positionClic, touche);
-        
+
         if(controleEvent == 2 && toucheSpec(touche) == SDLK_SPACE)
         {
             continuer = 0;
@@ -42,8 +42,8 @@ void ecranVictoire(void)
             SDL_Flip(SDL_GetVideoSurface());
         }
     }
-    
-    LibererImage(imageCaptain);
+
+    libererImage(imageCaptain);
     free(touche);
     free(positionClic);
 }
@@ -57,10 +57,10 @@ void ecranPerte(void)
     Image * imageCaptain;
     Image * imageClavier;
     SDL_Rect positionTexte;
-    
-    imageCaptain = CreerImage("pirate.png", 446, 389);
-    imageClavier = CreerImage("clavier.png", 300, 600);
-    
+
+    imageCaptain = creerImage("pirate.png", 446, 389);
+    imageClavier = creerImage("clavier.png", 300, 600);
+
     while (continuer)
     {
         effacerEcran();
@@ -73,9 +73,9 @@ void ecranPerte(void)
         positionTexte.y = 625;
         ecrireTexte("Espace", 30, positionTexte, "default.ttf");
         SDL_Flip(SDL_GetVideoSurface());
-        
+
         controleEvent = attendreEvent(positionClic, touche);
-        
+
         if(controleEvent == 2 && toucheSpec(touche) == SDLK_SPACE)
         {
             continuer = 0;
@@ -86,8 +86,8 @@ void ecranPerte(void)
             SDL_Flip(SDL_GetVideoSurface());
         }
     }
-    
-    LibererImage(imageCaptain);
+
+    libererImage(imageCaptain);
     free(touche);
     free(positionClic);
 }

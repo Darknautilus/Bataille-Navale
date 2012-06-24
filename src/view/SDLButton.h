@@ -10,8 +10,8 @@
 #ifndef SDL_BUTTON_H
 #define SDL_BUTTON_H
 
-#include "includeSDL.h"
-#include "VueUtilsSDL.h"
+#include "../view/IncludeSDL.h"
+#include "../view/VueUtilsSDL.h"
 
 #define SDL_BOUTON_KLONGMAX 30 /**< \brief Longueur maximum du texte du bouton */
 #define SDL_BOUTON_KESP_VERT 5 /**< \brief Espacement vertical du texte avec le bord du bouton */
@@ -47,7 +47,7 @@ typedef struct
  * \param pTailleTexte Un entier contenant la taille du texte.
  * \return Une strucutre SDL_Bouton correctement initialisÈe.
 */
-SDL_Bouton * CreerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte);
+SDL_Bouton * creerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte);
 
 /**
  * Affiche un bouton
@@ -67,6 +67,6 @@ int clicSurBouton(SDL_Bouton * pBouton, SDL_Rect * positionClic);
  * Libère le bouton en mémoire
  * \param[in] pBouton Un bouton
 */
-void LibererBouton(SDL_Bouton * pBouton);
+void libererBouton(SDL_Bouton * pBouton);
 
 #endif

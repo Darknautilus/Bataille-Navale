@@ -1,6 +1,6 @@
 #include "FichierSauvRes.h"
 
-#include "FichierDebug.h"
+#include "../ctrl/FichierDebug.h"
 
 #include "../model/Bateau.h"
 #include "../model/Grille.h"
@@ -274,7 +274,7 @@ int restaurerGrilles(TPartie *partie, FILE* fichier){
     //On lit le nombre de colonnes
     fread(&nbCol, sizeof(int), 1, fichier);
 
-    partie->grille = CreerGrille(nbLin, nbCol);
+    partie->grille = creerGrille(nbLin, nbCol);
 
     //Pour chaque case écrite (ligne par ligne)
     for(i = 1; i <= nbLin ; i++){
@@ -302,7 +302,7 @@ int restaurerGrilles(TPartie *partie, FILE* fichier){
     //On lit le nombre de colonnes
     fread(&nbCol, sizeof(int), 1, fichier);
 
-    partie->grilleMachine = CreerGrille(nbLin, nbCol);
+    partie->grilleMachine = creerGrille(nbLin, nbCol);
 
     //Pour chaque case écrite (ligne par ligne)
     for(i = 1; i <= nbLin ; i++){
@@ -335,7 +335,7 @@ int restaurerCoups(TPartie *partie, FILE* fichier){
     //On lit le nombre de coups
     fread(&nbCoups, sizeof(int), 1, fichier);
 
-    partie->pileCoups = CreerPile();
+    partie->pileCoups = creerPile();
 
     //On lit les coups
     for(i = 0 ; i < nbCoups ; i++){

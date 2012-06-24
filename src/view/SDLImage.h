@@ -10,7 +10,7 @@
 #ifndef SDLIMAGE_H
 #define SDLIMAGE_H
 
-#include "includeSDL.h"
+#include "../view/IncludeSDL.h"
 
 /**
  * \struct Image
@@ -32,7 +32,7 @@ typedef struct
  * \param pOrdonnee Un entier contenant l'ordonnÈe o˘ placer l'image
  * \return Une strucutre Image correctement crÈer.
 */
-Image * CreerImage(char * pChemin, int pAbscisse, int pOrdonnee);
+Image * creerImage(char * pChemin, int pAbscisse, int pOrdonnee);
 
 /**
  * Affiche une image
@@ -52,7 +52,7 @@ int clicSurImage(Image * pImage, SDL_Rect * pPosClic);
  * Libère l'image en mémoire
  * \param[in] pImage Une image
  */
-void LibererImage(Image * pImage);
+void libererImage(Image * pImage);
 
 /**
  * Cette fonction charge une image du dossier Image dans une structure SDL_Surface
