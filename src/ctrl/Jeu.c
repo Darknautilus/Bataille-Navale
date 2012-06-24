@@ -3,6 +3,7 @@
 #include "../ctrl/FichierDebug.h"
 #include "../ctrl/FichierSauvRes.h"
 #include "../ctrl/Menu.h"
+#include "../ctrl/FichierMeilleursScores.h"
 
 #include "../model/Parametre.h"
 #include "../model/Partie.h"
@@ -467,7 +468,14 @@ int ecranJeu(void)
             {
                 if(partieFinie != 0)
                 {
+                    //On arrête le jeu et on enregistre le score
                     continuer = 0;
+
+                    Score* score = malloc(sizeof(Score));
+                    setScore(score, globalPartie->scorePlayer);
+                    setNomScore(score, globalPartie->joueur->nomJ);
+                    ajouterScore(score);
+
                 }
             }
         }

@@ -10,7 +10,7 @@
 #ifndef JOUEUR_H
 #define JOUEUR_H
 
-#define KLGNOMJ 25
+#define KLGNOMJ 25   /**< Taille maximale du nom du nom d'un joueur **/
 
 #include "../model/Bateau.h"
 
