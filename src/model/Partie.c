@@ -269,9 +269,9 @@ void annulerDernierCoup(TPartie *partie)
 				bateauCible->etat[i] = TOUCHE;
 
 				if(positionBat.direction == HORIZONTAL)
-					positionCourante.noCol += i;
+					positionCourante.noCol += 1;
 				else if(positionBat.direction == VERTICAL)
-					positionCourante.noLin += i;
+					positionCourante.noLin += 1;
 
 				setEtatCase(partie->grille, positionCourante, GRILLE_CASE_TOUCHE);
 			}
@@ -318,9 +318,9 @@ void annulerDernierCoup(TPartie *partie)
 				bateauCible->etat[i] = TOUCHE;
 
 				if(positionBat.direction == HORIZONTAL)
-					positionCourante.noCol += i;
+					positionCourante.noCol += 1;
 				else if(positionBat.direction == VERTICAL)
-					positionCourante.noLin += i;
+					positionCourante.noLin += 1;
 
 				setEtatCase(partie->grilleMachine, positionCourante, GRILLE_CASE_TOUCHE);
 			}
