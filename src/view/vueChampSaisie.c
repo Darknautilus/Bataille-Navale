@@ -1,13 +1,3 @@
-/**
- * \file vueChampSaisie.c
- * \author Aurélien Bertron
- * \date 29 avril 2012
- * \brief Vue champ saisie
- *
- * Contient les corps des fonctions d'entrée/sortie du module de champs de saisie.
- * Ce module implémente la gestion du champ de saisie. Il permet à l'utilisateur de saisir une chaine de caractères.
- */
-
 #include "../model/ChampSaisie.h"
 
 #include "includeSDL.h"

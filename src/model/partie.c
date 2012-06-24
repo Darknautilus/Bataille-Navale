@@ -1,13 +1,3 @@
-/**
- *   \file partie.c
- *   \author Benoit Sauvere
- *   \date 19 juin 2012
- *   \brief Module Partie
- *
- *   Contient le module de gestion de la partie.
-*/
-
-
 #include "Partie.h"
 
 #include "Bateau.h"

@@ -1,10 +1,10 @@
 /**
  *   \file Joueur.h
- *   \author Aurélien Bertron
+ *   \author Aur√©lien Bertron
  *   \date 18 avril 2012 
  *   \brief Module Joueur Headers
  *
- *   Contient les déclaration du module Joueur
+ *   Contient les d√©claration du module Joueur
  */
 
 #ifndef JOUEUR_H
@@ -18,7 +18,7 @@
  * \enum ETypeBat
  * \brief Types de bateaux
  *
- * DÈfinit ‡ la fois le type et la taille du bateau
+ * D√àfinit ‚Ä° la fois le type et la taille du bateau
 */
 typedef enum {HUMAIN,MACHINE,UNDEF} ETypeJoueur;
 
@@ -26,7 +26,7 @@ typedef enum {HUMAIN,MACHINE,UNDEF} ETypeJoueur;
  * \struct TInfoBateau
  * \brief Contient les informations sur un bateau
  *
- * Ces informations seront stockées dans un tableau (voir Tparam)
+ * Ces informations seront stock√©es dans un tableau (voir Tparam)
 */
 typedef struct
 {
@@ -37,27 +37,27 @@ typedef struct
 
 /**
  * Initialise un joueur
- * \return Un joueur initialisé
+ * \return Un joueur initialis√©
 */
 Joueur * CreerJoueur(void);
 
 /**
- * Récupère le type d'un joueur
+ * R√©cup√®re le type d'un joueur
  * \param[in] pJoueur Le joueur voulu
  * \return Le type de pJoueur
 */
 int getTypeJoueur(const Joueur * pJoueur);
 
 /**
- * Récupère le nom d'un joueur
+ * R√©cup√®re le nom d'un joueur
  * \param[in] pJoueur Le joueur voulu
  * \return Le nom de pJoueur
 */
 char * getNomJoueur(Joueur * pJoueur);
 
 /**
- * Libère le joueur en mémoire
- * \param[in] pJoueur Le joueur à libérer
+ * Lib√®re le joueur en m√©moire
+ * \param[in] pJoueur Le joueur √† lib√©rer
 */
 void LibererJoueur(Joueur * pJoueur);
 

@@ -1,12 +1,3 @@
-/**
- * \file SDLRectangle.c
- * \author Aurélien Bertron
- * \date 7 juin 2012
- * \brief Module de rectangle SDL
- *
- * Contient les fonctions du module Rectangle SDL
- */
-
 #include "SDLRectangle.h"
 
 #include "VueUtilsSDL.h"

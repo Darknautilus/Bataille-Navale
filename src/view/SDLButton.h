@@ -1,10 +1,10 @@
 /**
  * \file SDLButton.h
- * \author Aurélien Bertron
+ * \author Aur√©lien Bertron
  * \date 28 mai 2012
  * \brief Module de bouton SDL
  *
- * Contient les déclarations du module Bouton SDL
+ * Contient les d√©clarations du module Bouton SDL
 */
 
 #ifndef SDL_BUTTON_H
@@ -33,19 +33,19 @@
 typedef struct
 {
 	int abscisse; /**< Abscisse du bouton */
-	int ordonnee; /**< Ordonnée du bouton */
+	int ordonnee; /**< Ordonn√©e du bouton */
 	char texte[SDL_BOUTON_KLONGMAX]; /**< Texte du bouton */
 	int tailleTexte; /**< Taille du texte */
 	int longTexte; /**< Longueur du texte */
-	int largCarac; /**< Largeur d'un caractère */
+	int largCarac; /**< Largeur d'un caract√®re */
 }SDL_Bouton;
 
 /**
- * Crée un bouton.
+ * Cr√©e un bouton.
  * \param pTexte Le texte du bouton.
- * \param pCoord Un pointeur sur les coordonnÈes
+ * \param pCoord Un pointeur sur les coordonn√àes
  * \param pTailleTexte Un entier contenant la taille du texte.
- * \return Une strucutre SDL_Bouton correctement initialisÈe.
+ * \return Une strucutre SDL_Bouton correctement initialis√àe.
 */
 SDL_Bouton * CreerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte);
 
@@ -56,7 +56,7 @@ SDL_Bouton * CreerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte);
 void afficherBouton(SDL_Bouton * pBouton);
 
 /**
- * Détermine si un clic est sur le bouton ou non
+ * D√©termine si un clic est sur le bouton ou non
  * \param[in] pBouton Un bouton
  * \param[in] positionClic La position du clic
  * \return 1 si le clic est sur le bouton et 0 sinon
@@ -64,7 +64,7 @@ void afficherBouton(SDL_Bouton * pBouton);
 int clicSurBouton(SDL_Bouton * pBouton, SDL_Rect * positionClic);
 
 /**
- * Libère le bouton en mémoire
+ * Lib√®re le bouton en m√©moire
  * \param[in] pBouton Un bouton
 */
 void LibererBouton(SDL_Bouton * pBouton);

@@ -1,12 +1,3 @@
-/**
- * \file Random.c
- * \author Aurélien Bertron
- * \date 10 juin 2012
- * \brief Module Aléatoire
- *
- * Contient les fonctions du module d'aléatoire
- */
-
 #include "Random.h"
 
 #include <time.h>

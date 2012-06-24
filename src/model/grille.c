@@ -1,13 +1,3 @@
-/**
- * \file grille.c
- * \author Aurélien Bertron
- * \date 21 avril 2012
- * \brief Code modèle grille
- *
- * Contient les corps des fonctions du module de grille
- *
- */
-
 #include "Grille.h"
 
 #include "Couleurs.h"

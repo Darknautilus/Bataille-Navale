@@ -1,12 +1,3 @@
-/**
- * \file vueParam.h
- * \author Aurélien Bertron
- * \date 19 mai 2012
- * \brief Module Vue Paramètres
- *
- * Ce module permet de gérer l'affichage/saisie des paramètres d'une partie
- */
-
 #include "VueParam.h"
 
 #include "../model/Parametre.h"

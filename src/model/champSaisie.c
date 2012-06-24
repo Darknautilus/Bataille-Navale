@@ -1,13 +1,3 @@
-/**
- * \file champSaisie.c
- * \author Aurélien Bertron
- * \date 29 avril 2012
- * \brief Modele champ saisie
- *
- * Contient les corps des fonctions du module de champs de saisie.
- * Ce module implémente la gestion du champ de saisie. Il permet à l'utilisateur de saisir une chaine de caractères.
-*/
-
 #include "ChampSaisie.h"
 
 #include <stdio.h>

@@ -4,7 +4,7 @@
  *   \date 19 juin 2012
  *   \brief Module Partie
  *
- *   Contient les déclarations du module de gestion de la partie.
+ *   Contient les dÃˆclarations du module de gestion de la partie.
 */
 
 
@@ -18,16 +18,16 @@
 
 /**
  * \struct TPartie
- * \brief Structure représentant une partie
+ * \brief Structure reprÃˆsentant une partie
  *
- * Définis le type Partie.
- * Ce type correspond à une partie de bataille navale.
+ * DÃˆfinis le type Partie.
+ * Ce type correspond â€¡ une partie de bataille navale.
 */
 typedef struct
 {
     Joueur *joueur; /**< Joueur humain */
     Joueur *machine; /**< Joueur IA */
-    Tparam *parametres; /**< Paramtres de la partie */
+    Tparam *parametres; /**< ParamÃ¨tres de la partie */
     Pile pileCoups; /**< Pile de coups */
     Grille *grille; /**< Grille de l'humain */
     Grille *grilleMachine; /**< Grille de l'IA */
@@ -36,9 +36,9 @@ typedef struct
 
 
 /**
- * Variable globale contenant les données de la partie.
- * Cette variable contient l'ensemble des données de la partie et
- * peut-être utilisée depuis n"importe quelle partie du programme.
+ * Variable globale contenant les donnÃ©es de la partie.
+ * Cette variable contient l'ensemble des donnÃ©es de la partie et
+ * peut-Ãªtre utilisÃ©e depuis n'importe quelle partie du programme.
 **/
 extern TPartie *globalPartie;
 
@@ -55,32 +55,32 @@ int partie_Score();
 
 
 /**
- * Cette fonction prépare une structure pour qu'elle soit jouable.
- * \param[in] param Les paramètres à appliquer à la partie
- * \return Un pointeur sur la partie préparée
+ * Cette fonction prÃˆpare une structure pour qu'elle soit jouable.
+ * \param[in] param Les paramÃ‹tres â€¡ appliquer â€¡ la partie
+ * \return Un pointeur sur la partie prÃˆparÃˆe
 */
 TPartie* initialiser(Tparam *param);
 
 
 /**
- * Cette fonction réalise un tir (aussi bien pour la machine que pour le joueur).
+ * Cette fonction rÃˆalise un tir (aussi bien pour la machine que pour le joueur).
  *
- * \param[in] partie La partie concernée.
- * \param[in] cible Les coordonnées où l'on tire.
- * \param[in] estJoueur Booléen indiquant si c'est un coup pour le joueur ou non.
- * \return Retourne le résultat de l'action (1 = touché, 0 = raté)
+ * \param[in] partie La partie concernÃˆe.
+ * \param[in] cible Les coordonnÃˆes oË˜ l'on tire.
+ * \param[in] estJoueur BoolÃˆen indiquant si c'est un coup pour le joueur ou non.
+ * \return Retourne le rÃˆsultat de l'action (1 = touchÃˆ, 0 = ratÃˆ)
 **/
 int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur);
 
 /**
- * Détermine si la partie est finie ou non et indique un éventuel vainqueur.
+ * DÃˆtermine si la partie est finie ou non et indique un Ãˆventuel vainqueur.
  * \param[in] partie La partie en question
- * \return 0 = partie toujours en cours, 1 = le joueur à gagné, -1 = la machine à gagné
+ * \return 0 = partie toujours en cours, 1 = le joueur â€¡ gagnÃˆ, -1 = la machine â€¡ gagnÃˆ
 */
 int partieEstFinie(TPartie *partie);
 
 /**
- * Annule le dernier coups joué (aussi bien par la machine que par le joueur).
+ * Annule le dernier coups jouÃˆ (aussi bien par la machine que par le joueur).
  *
  * \param[out] partie La partie dans laquelle on veux annuler le dernier coups.
  *
@@ -88,8 +88,8 @@ int partieEstFinie(TPartie *partie);
 void annulerDernierCoup(TPartie *partie);
 
 /**
- * Libère les ressources liées à la partie.
- * \param[in] partie La partie à libérer.
+ * LibÃ‹re les ressources liÃˆes â€¡ la partie.
+ * \param[in] partie La partie â€¡ libÃˆrer.
 */
 void libererPartie(TPartie *partie);
 

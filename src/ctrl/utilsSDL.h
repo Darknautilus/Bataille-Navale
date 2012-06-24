@@ -1,5 +1,5 @@
 /**
- *   \file utilsSDL.
+ *   \file utilsSDL.h
  *   \author Aurelien Bertron
  *   \date 13 mai 2012
  *   \brief Module Utilitaire SDL

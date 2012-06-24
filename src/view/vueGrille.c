@@ -1,13 +1,3 @@
-/**
- * \file vueGrille.c
- * \author Aurélien Bertron
- * \date 21 avril 2012
- * \brief Code vue grille
- *
- * Contient le corps des fonctions d'entrée-sortie du module de grille
- *
- */
-
 #include "VueGrille.h"
 
 #include "../model/Grille.h"

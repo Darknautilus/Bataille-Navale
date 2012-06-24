@@ -1,12 +1,3 @@
-/**
- *   \file utilsPoliceEcriture.c
- *   \author Benoit Sauvere
- *   \date 03 juin 2012
- *   \brief Module Utillitaire Police Ecriture
- *
- *   Contient les implémentations pour le module des utilitaires de chargement des polices d'écriture.
-*/
-
 #include "UtilsPoliceEcriture.h"
 
 #include "../view/includeSDL.h"

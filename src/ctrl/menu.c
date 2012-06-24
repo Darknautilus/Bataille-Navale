@@ -1,12 +1,3 @@
-/**
- * \file menu.c
- * \author Aurelien Bertron
- * \date 28 avril 2012
- * \brief Controleur ecrans menu
- *
- * Contient les controleurs des ecrans de menu
-*/
-
 #include "menu.h"
 
 #include "../model/ChampSaisie.h"

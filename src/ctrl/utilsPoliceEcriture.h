@@ -4,7 +4,7 @@
  *   \date 03 juin 2012
  *   \brief Module Utillitaire Police Ecriture
  *
- *   Contient les déclarations pour le module des utilitaires de chargement des polices d'écriture.
+ *   Contient les dÃˆclarations pour le module des utilitaires de chargement des polices d'Ãˆcriture.
 */
 
 #ifndef UTILSFONT_H
@@ -13,10 +13,10 @@
 #include "../view/includeSDL.h"
 
 /**
-    Charge une police d'écriture contenue dans le fichier des polices d'écriture
-    \param pChemin Le chemin de la police dans le dossier contenant les polices d'écritures
+    Charge une police d'Ãˆcriture contenue dans le fichier des polices d'Ãˆcriture
+    \param pChemin Le chemin de la police dans le dossier contenant les polices d'Ãˆcritures
     \param pTailleEcriture Un entier contenant la taille de la police.
-    \return Une structure TTF_Font contenant la police chargée.
+    \return Une structure TTF_Font contenant la police chargÃˆe.
 */
 TTF_Font * chargerPoliceEcriture(const char pChemin[], int pTailleEcriture);
 

@@ -21,11 +21,11 @@
 
     #include <string.h>
 
-    //Définis où se trouvent les ressources du programme
+    //DÃˆfinis oË˜ se trouvent les ressources du programme
     #define RESSOURCES_REP "ressources/"
 
-    //Définis où se trouvent les polices d'écriture
-    #define FONT_REP "ressources/Fonts/"    //Définis où se trouvent les images
+    //DÃˆfinis oË˜ se trouvent les polices d'Ãˆcriture
+    #define FONT_REP "ressources/Fonts/"    //DÃˆfinis oË˜ se trouvent les images
     #define IMG_REP "ressources/Images/"
 
 #endif

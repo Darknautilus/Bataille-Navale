@@ -1,12 +1,3 @@
-/**
- *   \file bateau.h
- *   \author Aurelien Bertron
- *   \date 13 mai 2012
- *   \brief Module Utilitaire SDL
- *
- *   Contient les inplémentations des fonctions d'activation et de destruction de la libraire SDL
-*/
-
 #include "utilsSDL.h"
 
 #include "../view/includeSDL.h"

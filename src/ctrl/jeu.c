@@ -1,12 +1,3 @@
-/**
- * \file jeu.c
- * \author Aurelien Bertron
- * \date 13 juin 2012
- * \brief Controleur ecrans jeu
- *
- * Contient les controleurs des ecrans de jeu
- */
-
 #include "Jeu.h"
 
 #include "../model/Parametre.h"

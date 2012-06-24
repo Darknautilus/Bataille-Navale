@@ -4,7 +4,7 @@
  *   \date 13 mai 2012
  *   \brief Module Bateau Headers
  *
- *   Contient les déclaration du module Bateau
+ *   Contient les dÃˆclaration du module Bateau
 */
 
 #ifndef _BATEAU_H
@@ -19,7 +19,7 @@
  * \enum ETypeBat
  * \brief Types de bateaux
  *
- * Définit à la fois le type et la taille du bateau
+ * DÃˆfinit â€¡ la fois le type et la taille du bateau
 */
 typedef enum {
     VOILIER = 1,
@@ -34,7 +34,7 @@ typedef enum {
  * \struct TtypeBat
  * \brief Types de bateaux et noms
  *
- * Définit le type du bateau et le nom du type (vise à remplacer ETypeBat)
+ * DÃˆfinit le type du bateau et le nom du type (vise â€¡ remplacer ETypeBat)
 */
 typedef struct
 {
@@ -49,7 +49,7 @@ extern const TtypeBat tabTypesBat[KTAILLEMAXBAT];
  * \enum ESens
  * \brief Sens du bateau
  *
- * DŽfinit le sens du bateau dans la grille
+ * DÃ©finit le sens du bateau dans la grille
 */
 typedef enum {
     HORIZONTAL,
@@ -60,7 +60,7 @@ ESens;
 typedef struct
 {
     ESens sensBat; /**< Sens du bateau */
-    char * libSens; /**< LibellŽ du sens */
+    char * libSens; /**< LibellÃ© du sens */
 }
 TSensBat;
 
@@ -68,8 +68,8 @@ extern const TSensBat tabSensBat[2];
 
 /**
  * \enum EEtat
- * \brief état d'une case de bateau
- * Est utilisé dans un tableau dont le nombre d'éléments est égal à la taille du bateau
+ * \brief Ãˆtat d'une case de bateau
+ * Est utilisÃˆ dans un tableau dont le nombre d'ÃˆlÃˆments est Ãˆgal â€¡ la taille du bateau
 */
 typedef enum {INTACT, TOUCHE, COULE} EEtat;
 
@@ -80,32 +80,32 @@ typedef enum {INTACT, TOUCHE, COULE} EEtat;
 typedef struct
 {
 	ESens direction;   /**< Sens/Direction du bateau */
-	int x;             /**< Num colonne dans la grille (point en haut à gauche du bateau) */
-	int y;             /**< Num ligne dans la grille (point en haut à gauche du bateau) */
+	int x;             /**< Num colonne dans la grille (point en haut â€¡ gauche du bateau) */
+	int y;             /**< Num ligne dans la grille (point en haut â€¡ gauche du bateau) */
 }
 TPosition;
 
 /**
  * \struct TBateau
- * \brief CaractŽristiques du bateau
+ * \brief CaractÃ©ristiques du bateau
 */
 typedef struct
 {
-	int idBateau;              /**< Numéro du bateau (voir paramtres) */
+	int idBateau;              /**< NumÃˆro du bateau (voir paramÃ¨tres) */
 	TPosition position;        /**< Position du bateau dans la grille */
-	EEtat etat[KTAILLEMAXBAT]; /**< Tableau d'état du bateau, renseigne l'état de chaque case du bateau */
-    int estPlace; /**< Vaut 1 si le bateau est placŽ sur sa grille et 0 sinon */
+	EEtat etat[KTAILLEMAXBAT]; /**< Tableau d'Ãˆtat du bateau, renseigne l'Ãˆtat de chaque case du bateau */
+    int estPlace; /**< Vaut 1 si le bateau est placÃ© sur sa grille et 0 sinon */
 }
 TBateau;
 
 /**
- * Crée un bateau.
- * \return Une strucutre Bateau correctement initialisée et vide.
+ * CrÃˆe un bateau.
+ * \return Une strucutre Bateau correctement initialisÃˆe et vide.
 */
 TBateau * CreerBateau();
 
 /**
- * \brief Récupre l'id du bateau
+ * \brief RÃˆcupÃ¨re l'id du bateau
  *
  * \param[in] pBat Le bateau voulu
  * \return Le numero du bateau
@@ -114,33 +114,33 @@ int getIdBat(TBateau * pBat);
 
 
 /**
- * \brief Récupre un pointeur sur le bateau désigné par l'id
+ * \brief RÃˆcupÃ¨re un pointeur sur le bateau dÃˆsignÃˆ par l'id
  *
- * \param[in] idBateau L'id du bateau désiré
- * \return Un pointeur sur le bateau désiré
+ * \param[in] idBateau L'id du bateau dÃˆsirÃˆ
+ * \return Un pointeur sur le bateau dÃˆsirÃˆ
 */
 TBateau* getBateauFromId(int idBateau);
 
 /**
- * Cette fonction marque une case d'un bateau donnée comme touchée.
+ * Cette fonction marque une case d'un bateau donnÃˆe comme touchÃˆe.
  * \param bat Le pointeur sur le bateau en question
- * \param posTouch Le rang de la case touchée (cases de 1 à type).
+ * \param posTouch Le rang de la case touchÃˆe (cases de 1 â€¡ type).
  *
 */
 void toucherBateau(TBateau * bat, int posTouch);
 
 /**
- * Renvoie le nombre de coups necessaires pour couler le bateau (0 si le bateau est coulé).
+ * Renvoie le nombre de coups necessaires pour couler le bateau (0 si le bateau est coulÃˆ).
  * Utile ?
  * \param bat un pointeur sur le bateau en question.
- * \return Une valeur de l'énumération EEtat.
+ * \return Une valeur de l'ÃˆnumÃˆration EEtat.
 */
 int etatBateau(TBateau * bat);
 
 /**
- * Vérifie si le bateau est coulé.
+ * VÃˆrifie si le bateau est coulÃˆ.
  * \param bat Un pointeur sur une structure TBateau
- * \return 1 si le bateau est coulé, 0 si il est en vie
+ * \return 1 si le bateau est coulÃˆ, 0 si il est en vie
 */
 int estCoule(TBateau * bat);
 
@@ -168,14 +168,14 @@ int getPosYBateau(TBateau *bat);
 /**
  * Retourne le sens d'un bateau.
  * \param bat Un pointeur sur le bateau en question.
- * \return Un élément de l'enumération ESens.
+ * \return Un ÃˆlÃˆment de l'enumÃˆration ESens.
 */
 ESens getSensBateau(TBateau *bat);
 
 /**
  * Retourne le type d'un bateau.
  * \param bat Un pointeur sur le bateau en question.
- * \return Un élément de l'enumération ETypeBat.
+ * \return Un ÃˆlÃˆment de l'enumÃˆration ETypeBat.
 */
 ETypeBat getTypeBateau(TBateau *bat);
 
@@ -189,15 +189,15 @@ ETypeBat getTypeBateau(TBateau *bat);
 void setPosBat(TBateau * pBat, ESens pSens, int pAbs, int pOrd);
 
 /**
- * Determine si un bateau est plaçable ou non.
+ * Determine si un bateau est plaÃable ou non.
  * \param[in] bat Le bateau en question.
- * \param[in] grille La grille qui désire contenir le bateau.
- * \return 1 si le bateau est plaçable, 0 sinon.
+ * \param[in] grille La grille qui dÃˆsire contenir le bateau.
+ * \return 1 si le bateau est plaÃable, 0 sinon.
 */
 int estPlacable(TBateau * bat, Grille * grille);
 
 /**
- * Libre le bateau en mŽmoire
+ * LibÃ¨re le bateau en mÃ©moire
  * \param[in] bat Un pointeur sur le bateau
 */
 void LibererBateau(TBateau * bat);

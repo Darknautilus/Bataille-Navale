@@ -4,13 +4,13 @@
 
 /**
     Test unitaire de la fonction estCoule.
-    \return 1 si tout les test sont passÈ. 0 Si echec.
+    \return 1 si tout les test sont pass√à. 0 Si echec.
 */
 int testEstCoule(){
 
     int resultat = 1;
 
-    //On crÈer un remorqueur (2 cases)
+    //On cr√àer un remorqueur (2 cases)
     TBateau *bat = CreerBateau();
 
     if(estCoule(bat)){
@@ -20,7 +20,7 @@ int testEstCoule(){
 
     //=======================================================
 
-    //On le marque touchÈ ‡ la case 1
+    //On le marque touch√à ‚Ä° la case 1
     bat->etat[0] = 1;
 
     printf("\n");
@@ -32,8 +32,8 @@ int testEstCoule(){
 
     //=======================================================
 
-    //On le marque touche ‡ la case 2 aussi.
-    //ici le bateau deviens coulÈ.
+    //On le marque touche ‚Ä° la case 2 aussi.
+    //ici le bateau deviens coul√à.
     bat->etat[1] = 1;
 
     printf("\n");
@@ -50,7 +50,7 @@ int testEstCoule(){
 
 /**
     Test unitaire de la fonction estCoule.
-    \return 1 si tout les test sont passÈ. 0 Si echec.
+    \return 1 si tout les test sont pass√à. 0 Si echec.
 */
 int testCreerBateau(){
 
@@ -66,7 +66,7 @@ int testCreerBateau(){
 
     //=================================================
 
-    //VÈrification que les positions sont correctes
+    //V√àrification que les positions sont correctes
     if(bat->position.x != 99 || bat->position.y != 22){
         printf("[NOK] Positions invalides.\n");
         resultat = 0;
@@ -74,7 +74,7 @@ int testCreerBateau(){
 
     //=================================================
 
-    //VÈrification que le type correspond
+    //V√àrification que le type correspond
     if(getTypeBateau(bat) != type){
         printf("[NOK] Type invalide.\n");
         resultat = 0;
@@ -82,7 +82,7 @@ int testCreerBateau(){
 
     //================================================
 
-    //Toute les cases du tableau Ètat doivent Ítre ‡ INTACT
+    //Toute les cases du tableau √àtat doivent √çtre ‚Ä° INTACT
     for(i = 0 ; i < type ; i++){
 
         if(bat->etat[i] != INTACT){
@@ -101,7 +101,7 @@ int testCreerBateau(){
 
 /**
     Test unitaire de la fonction toucheBateau.
-    \return 1 si tout les test sont passÈ. 0 Si echec.
+    \return 1 si tout les test sont pass√à. 0 Si echec.
 */
 int testToucheBateau(){
 
@@ -117,7 +117,7 @@ int testToucheBateau(){
 
     //=================================================
 
-    //On marque la case 1 comme touchÈe
+    //On marque la case 1 comme touch√àe
     toucherBateau(bat, 1);
 
     if(bat->etat[0] != TOUCHE){
@@ -148,7 +148,7 @@ int testToucheBateau(){
 
 /**
     Test unitaire des fonctions getPosBateau, getPosXBateau, getPosYBateau).
-    \return 1 si tout les test sont passÈ. 0 Si echec.
+    \return 1 si tout les test sont pass√à. 0 Si echec.
 */
 int testGetPosBateau(){
 

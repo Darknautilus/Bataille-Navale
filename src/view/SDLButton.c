@@ -1,12 +1,3 @@
-/**
- * \file SDLButton.c
- * \author Aurélien Bertron
- * \date 28 mai 2012
- * \brief Module de bouton SDL
- *
- * Contient les fonctions du module Bouton SDL
- */
-
 #include "SDLButton.h"
 
 #include "includeSDL.h"

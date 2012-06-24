@@ -1,12 +1,3 @@
-/**
- * \file parametre.c
- * \author AurŽlien Bertron
- * \date 19 mai 2012
- * \brief Module Paramtres
- *
- * Le module parametre d'une partie permet de charger et sauver ces paramtres dans un fichier.
- */
-
 #include "Parametre.h"
 
 #include "Bateau.h"
@@ -72,7 +63,7 @@ Tparam * newTParam(int * pNbInstances)
 	//Temporaire pour que cela fonctionne
     //On effecte les id dans l'ordre croissant des taille 0 -> bateau le plus petit, dernier id -> plus grand
 
-    //TODO: Il faudra après compléter les TInfoBateaux avec toutes les informations
+    //TODO: Il faudra aprÃ‹s complÃˆter les TInfoBateaux avec toutes les informations
 
 
 
@@ -212,7 +203,7 @@ void libererParam(Tparam * pParam)
 void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam, const char pNom[], int pCouleur , ETypeBat pType)
 {
 
-    //Si l'id du bateau est inférieure au nombre de bateaux par joueur
+    //Si l'id du bateau est infÃˆrieure au nombre de bateaux par joueur
     //C'est un bateau du joueur
 	if (pIdBateau<getNbBat(pParam))
 	{

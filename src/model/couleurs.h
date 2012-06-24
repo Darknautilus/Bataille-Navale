@@ -1,10 +1,10 @@
 /**
  *   \file Couleurs.h
- *   \author Aurélien Bertron, Benoît Sauvère
+ *   \author Aur√©lien Bertron, Beno√Æt Sauv√®re
  *   \date 18 avril 2012 
  *   \brief Module Couleurs Headers
  *
- *   Contient les déclaration du module Couleurs
+ *   Contient les d√©claration du module Couleurs
 */
 
 #ifndef _COULEURS_H
@@ -27,42 +27,42 @@ Couleur;
 extern const Couleur tableCouleurs[KCOULEURS_NBCOULMAX];
 
 /**
- * \return Le nombre de couleurs gérées
+ * \return Le nombre de couleurs g√©r√©es
 */
 int getNbCouleurs (void);
 
 /**
- Retourne la couleur correspondant à la lettre entrée.
+ Retourne la couleur correspondant √† la lettre entr√©e.
  pLettre doit exister dans le tableau de couleurs.
 	
  \param[in] pLettre La lettre de la couleur
- \return La couleur recherchée
+ \return La couleur recherch√©e
 */
 Couleur lettreToCouleur (char pLettre);
 
 /**
-    Retourne la couleur associée à l'indice pI dans le tableau des couleurs.
-    Le tableau doit avoir au moins pI+1 éléments.
+    Retourne la couleur associ√©e √† l'indice pI dans le tableau des couleurs.
+    Le tableau doit avoir au moins pI+1 √©l√©ments.
 	\param[in] pI L'indice de la couleur
-	\return La couleur recherchée
+	\return La couleur recherch√©e
 */
 Couleur getCouleurFromNum (int pI);
 
 /**
- * Fonction d'accès au champ rgb de la structure couleur.
+ * Fonction d'acc√®s au champ rgb de la structure couleur.
 */
 SDL_Color getColor (Couleur pCouleur);
 /**
- * Fonction d'accès au champ lettre de la structure couleur.
+ * Fonction d'acc√®s au champ lettre de la structure couleur.
  */
 char getChar (Couleur pCouleur);
 /**
- * Fonction d'accès au champ nom de la structure couleur.
+ * Fonction d'acc√®s au champ nom de la structure couleur.
  */
 void getNom (Couleur pCouleur, char pNom[]);
 
 /**
-    Recupère l'index d'une couleur dans le tableau des coueleurs depuis la structure color.
+    Recup√®re l'index d'une couleur dans le tableau des coueleurs depuis la structure color.
     \param color La couleur en question
     \return L'index de la couleur dans le tableau des couleurs
 */

@@ -43,7 +43,7 @@ void TestParam(void)
 	fclose(ficParam);
 	printf("Fait\n");
 
-	printf("\nLecture fichier paramètres\n");
+	printf("\nLecture fichier paramÃ‹tres\n");
 	ficParam = fopen("param.txt", "r");
 	chargerParam(ficParam, paramLu);
 	fclose(ficParam);

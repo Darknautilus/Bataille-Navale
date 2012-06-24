@@ -1,12 +1,3 @@
-/**
- *   \file fichieDebug.c
- *   \author Benoit Sauvere
- *   \date 03 juin 2012
- *   \brief Module Debug
- *
- *   Contient les implÈmentation des fonctions du module Debug.
-*/
-
 #include "FichierDebug.h"
 
 #include <stdlib.h>
@@ -22,25 +13,25 @@ int init_debug(){
     //Le resultat de la fonction
     int resultat = 0;
 
-    //Pour rÈcupÈrer la date "locale"
+    //Pour r√àcup√àrer la date "locale"
     struct tm * localDate;
     time_t dateActuelle;
 
-    //On rÈcupËre la date courante
+    //On r√àcup√ãre la date courante
     dateActuelle = time (NULL);
     localDate = localtime (&dateActuelle);
 
-    //On tente d'ouvrir le fichier ou seront marquÈ les informations de debug.
+    //On tente d'ouvrir le fichier ou seront marqu√à les informations de debug.
     debug_file = fopen(debug_path, "w");
 
-    //Si le fichier ne peut pas Ítre crÈer
+    //Si le fichier ne peut pas √çtre cr√àer
     if(debug_file == NULL){
         fprintf(stderr, "Attention : Impossible de creer le fichier de debug.");
         resultat = 1;
     }
     else{
         fprintf(debug_file, "====================== Debug BatailleNavale ======================\n");
-        //On inscrit la date d'exÈcution
+        //On inscrit la date d'ex√àcution
         fprintf(debug_file, "Date d'execution : %s\n", asctime (localDate));
     }
 
@@ -84,7 +75,7 @@ int dgFatal (const char message[]){
 
 int debug (const char prefixe[], const char message[]){
 
-    //Pour rÈcupÈrer la date "locale"
+    //Pour r√àcup√àrer la date "locale"
     struct tm * localDate;
     time_t dateActuelle;
     int resultat;
@@ -95,7 +86,7 @@ int debug (const char prefixe[], const char message[]){
 
     //Si l'on a pas d'erreur avec le fichier de debug
     if(!ferror(debug_file)){
-        //On rÈcupËre la date courante
+        //On r√àcup√ãre la date courante
         dateActuelle = time(NULL);
         localDate = localtime ( &dateActuelle );
 
@@ -112,11 +103,11 @@ int debug (const char prefixe[], const char message[]){
                              );
 
 
-        //On supprime le \n ‡ la fin du asctime(localDate)
+        //On supprime le \n ‚Ä° la fin du asctime(localDate)
         strcpy(messageDate, asctime(localDate));
         messageDate[tailleDate-1] = '\0';
 
-        //On gÈnËrele message final
+        //On g√àn√ãrele message final
         strcpy(messageFinal, "[");
         strcat(messageFinal, messageDate);
         strcat(messageFinal, "] ");

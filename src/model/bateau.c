@@ -1,12 +1,3 @@
-/**
- *   \file bateau.c
- *   \author Benoit Sauvere
- *   \date 13 mai 2012
- *   \brief Module Bateau
- *
- *   Contient le module de gestion des structure de type bateau.
-*/
-
 #include "Bateau.h"
 #include "Parametre.h"
 #include "Partie.h"
@@ -59,15 +50,15 @@ TBateau* getBateauFromId(int idBateau){
     //Si c'est un bateau du joueur
     if(idBateau < nbBateauxPartie) {
 
-        //A ce stade on considËre que les id sont attribuÈ ‡ l'image de leur index dans le tableau de bateau
-        //Le bateau d'id 3 est dans la case mesBateaux[3] (on comence ‡ 0)
+        //A ce stade on consid√ãre que les id sont attribu√à ‚Ä° l'image de leur index dans le tableau de bateau
+        //Le bateau d'id 3 est dans la case mesBateaux[3] (on comence ‚Ä° 0)
         return globalPartie->joueur->mesBateaux[idBateau];
 
     }
     //sinon c'est un bateau de la machine
     else{
 
-        //De mÍme que prÈcedemment avec une complication : les id commencent ‡ getNbBat
+        //De m√çme que pr√àcedemment avec une complication : les id commencent ‚Ä° getNbBat
         return globalPartie->machine->mesBateaux[idBateau-nbBateauxPartie];
 
     }
@@ -111,17 +102,17 @@ TPosition getPosBateau(TBateau * bat)
 
 int estCoule(TBateau * bat){
 
-    int longBateau = getTypeBateau(bat); //On rÈcupËre la longueur du bateau
+    int longBateau = getTypeBateau(bat); //On r√àcup√ãre la longueur du bateau
     int i = 0;
 
-    int resultat = 1; //Par dÈfaut non coulÈ
+    int resultat = 1; //Par d√àfaut non coul√à
 
-    //Tant que l'on a pas trouvÈ une case non touchÈe et que la longueur du bateau n'est pas dÈpassÈe
+    //Tant que l'on a pas trouv√à une case non touch√àe et que la longueur du bateau n'est pas d√àpass√àe
     while(resultat != 0 && i < longBateau){
 
-        //Si un case n'est pas touchÈe
+        //Si un case n'est pas touch√àe
         if(bat->etat[i] == INTACT){
-            //Le bateau n'est pas coulÈ
+            //Le bateau n'est pas coul√à
             resultat = 0;
         }
 
@@ -162,7 +153,7 @@ int estPlacable(TBateau * bat, Grille * grille)
 
     ETypeBat typeBat = getInfoBateau(bat->idBateau, partie_Param())->type;
 
-    // détermine si le bateau est en dehors de la grille
+    // d√©termine si le bateau est en dehors de la grille
 	if ( (bat->position.direction == HORIZONTAL && bat->position.x + (typeBat-1) > grille->NbLin) ||
         (bat->position.direction == VERTICAL && bat->position.y + (typeBat-1) > grille->NbCol) )
         estPlacable = 0;
@@ -170,7 +161,7 @@ int estPlacable(TBateau * bat, Grille * grille)
     coordCaseGrille.noCol = 1;
     coordCaseGrille.noLin = 1;
 
-    // détermine si le bateau est plaçé sur un autre bateau
+    // d√©termine si le bateau est pla√ß√© sur un autre bateau
     for(i=0;i<typeBat && estPlacable;i++)
     {
         if(bat->position.direction == HORIZONTAL)

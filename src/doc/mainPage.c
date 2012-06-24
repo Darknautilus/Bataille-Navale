@@ -1,10 +1,16 @@
 /**
-@mainpage Lisez-moi !
+@mainpage Installation et Compilation
 
 <h1>Installation</h1>
 
+<h2>Windows</h2>
+
 <p>Ce programme utilise les bibliothèques SDL 1.2.15, SDL_image et SDL_ttf.<br/>
-Toutes les DLL nécessaires à Windows sont inclues.</p>
+Toutes les DLL nécessaires à Windows sont incluses. Et doivent être placées dans le même dossier que l'exécutable.</p>
+
+<h2>MacOS X</h2>
+
+<p>Le programme se présente sous la forme d'un fichier .app et du dossier des ressources. Les deux doivent être placés dans le même répertoire.</p>
 
 <hr/>
 
@@ -52,6 +58,13 @@ Attention, procédure pour Code::Blocks sur Windows :<br/>
 </p>
 
 <p>Le programme a besoin de toutes les DLL fournies avec ce code source, elles devront également être fournies avec l'exécutable.</p>
+
+<h2>MacOS X</h2>
+
+<p>Procédure pour XCode :<br/>
+
+	À venir
+</p>
 
 <hr/>
 
