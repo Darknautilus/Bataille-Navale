@@ -11,6 +11,7 @@ Joueur * creerJoueur(void)
 
     joueur->mesBateaux = NULL;
 
+
     strcpy(joueur->nomJ, "");
 
 	return joueur;

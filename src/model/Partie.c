@@ -35,18 +35,22 @@ int partie_Score(){
 
 TPartie* initialiser(Tparam *param){
 
-    int i = 0;
+    int i = 0, j = 0;
     int nombreBateaux = 0;
+    int casesOccupeBateaux = 0;
 
     TPartie *partie = malloc (sizeof(TPartie));
+
+    //On initialise le score
+    partie->scorePlayer = 0;
 
     //=========== Initialisation / Allocation ===================
 
     partie->joueur = creerJoueur();
     partie->machine = creerJoueur();
 
-    partie->grille = creerGrille(10,10);
-    partie->grilleMachine = creerGrille(10, 10);
+    partie->grille = creerGrille(KHAUTEURCASE,KLARGGRILLE);
+    partie->grilleMachine = creerGrille(KHAUTEURCASE, KLARGGRILLE);
 
     partie->parametres = param;
 
@@ -77,6 +81,15 @@ TPartie* initialiser(Tparam *param){
         partie->machine->mesBateaux[i]->estPlace = 0;
     }
 
+    //Calcul du nombre de cases occupé par les bateaux
+    //pour calculer le score
+    for(i = 0 ; i < K_NBTYPEBATEAUX ; i++){
+        for(j = 0 ; j < partie->parametres->nombreInstanceBateaux[j] ; j++){
+            casesOccupeBateaux += i;
+        }
+    }
+
+    partie->scorePlayer = KLARGGRILLE * KHAUTGRILLE + casesOccupeBateaux;
 
     return partie;
 
@@ -125,6 +138,9 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
     // Traitement des effets du tir
     //
 
+    //On retire 1 au score pour le coup tiré
+    partie->scorePlayer = partie->scorePlayer - 1;
+
     //Si il n'y a pas de bateau, le tir ne touche personne
     if(idCible < 0){
 
@@ -135,6 +151,8 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
     }
     else{
         //Si on touche un bateau
+
+        //On récupère le bateau cible
         bateauCible = getBateauFromId(idCible);
 
         //On détermine quelle case du bateau toucher
@@ -184,6 +202,7 @@ int jouerUnCoup(TPartie *partie, Coord cible, int estJoueur){
 
         return 1;
     }
+
 
 }
 
@@ -267,13 +286,13 @@ void annulerDernierCoup(TPartie *partie)
 			for(i=0;i<getTypeBateau(bateauCible);i++)
 			{
 				bateauCible->etat[i] = TOUCHE;
+                setEtatCase(partie->grille, positionCourante, GRILLE_CASE_TOUCHE);
 
 				if(positionBat.direction == HORIZONTAL)
 					positionCourante.noCol += 1;
 				else if(positionBat.direction == VERTICAL)
 					positionCourante.noLin += 1;
 
-				setEtatCase(partie->grille, positionCourante, GRILLE_CASE_TOUCHE);
 			}
 		}
 
@@ -299,6 +318,9 @@ void annulerDernierCoup(TPartie *partie)
 
 	// Joueur -------
 
+	//On ajoute 1 au score pour le coup tiré
+    partie->scorePlayer = partie->scorePlayer + 1;
+
 	dernierCoup = sommet(partie->pileCoups);
 	idBatCase = getIdBateauSurCase(partie->grilleMachine, dernierCoup->coordTir);
 
@@ -317,12 +339,12 @@ void annulerDernierCoup(TPartie *partie)
 			{
 				bateauCible->etat[i] = TOUCHE;
 
+                setEtatCase(partie->grilleMachine, positionCourante, GRILLE_CASE_TOUCHE);
+
 				if(positionBat.direction == HORIZONTAL)
 					positionCourante.noCol += 1;
 				else if(positionBat.direction == VERTICAL)
 					positionCourante.noLin += 1;
-
-				setEtatCase(partie->grilleMachine, positionCourante, GRILLE_CASE_TOUCHE);
 			}
 		}
 
