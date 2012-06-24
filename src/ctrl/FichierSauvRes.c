@@ -129,7 +129,6 @@ int sauvegardeCoups(TPartie *partie, FILE *fichier){
     while(pile != NULL){
         fwrite(pile->Info, sizeof(Coup), 1, fichier);
         pile = pile->Lien;
-        nbCoups++;
     }
 
 
@@ -334,7 +333,6 @@ int restaurerCoups(TPartie *partie, FILE* fichier){
 
     //On lit le nombre de coups
     fread(&nbCoups, sizeof(int), 1, fichier);
-
     partie->pileCoups = creerPile();
 
     //On lit les coups
@@ -348,12 +346,18 @@ int restaurerCoups(TPartie *partie, FILE* fichier){
 
         cell->Info = coup;
 
-        cell->Lien = cellPrec;
+        //Si ce n'est pas la première case on met le lien de la nouvelle case dans la case précedente.
+        if(i != 0){
+            cellPrec->Lien = cell;
+        }
+        else{
+            //On fait pointer le sommet de pile
+            partie->pileCoups = cell;
+            cell->Lien = NULL;
+        }
+
         cellPrec = cell;
     }
-
-    //On fait pointer le sommet de pile
-    partie->pileCoups = cell;
 
     return 1;
 }

@@ -252,7 +252,7 @@ void annulerDernierCoup(TPartie *partie)
 	dernierCoup = sommet(partie->pileCoups);
 	idBatCase = getIdBateauSurCase(partie->grille, dernierCoup->coordTir);
 
-	//Si il y a un bateu sur la case
+	//Si il y a un bateau sur la case
 	if(idBatCase >= 0)
 	{
 		bateauCible = getBateauFromId(idBatCase);
