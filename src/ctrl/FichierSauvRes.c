@@ -45,6 +45,9 @@ int sauvegardePartie(TPartie *partie, const char nomSauv[]){
         //Les paramètes
         sauvegardeParam(partie, fichier);
 
+        //On sauvegarde le score à la fin
+        fwrite(&(partie->scorePlayer), sizeof(int), 1, fichier);
+
         fclose(fichier);
 
         return 1;
@@ -204,6 +207,9 @@ TPartie* restaurerPartie(const char nomSauv[]){
 
         //Les paramètes
         restaurerParam(partie, fichier);
+
+        //On restaure le score
+        fread(&(partie->scorePlayer), sizeof(int), 1, fichier);
 
         fclose(fichier);
 
