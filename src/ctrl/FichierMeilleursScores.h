@@ -15,7 +15,7 @@
 
 #include <stdio.h>
 
-#define FIC_MEILLEURSSCORES "ressources/bestScores.dat"
+#define FIC_MEILLEURSSCORES "bestScores.dat"
 
 #define MAX_MEILLEURS_SCORES 10
 
