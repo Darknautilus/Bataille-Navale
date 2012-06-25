@@ -98,6 +98,6 @@ void enregistrerTabScore(Score* tabScores[]){
 }
 
 FILE* ouvrirFichierMeilleursScores(const char modeOuverture[]){
-    return ouvrirFichierRessources("bestScores.dat", modeOuverture);
+    return ouvrirFichierRessources(FIC_MEILLEURSSCORES, modeOuverture);
 }
 
