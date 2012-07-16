@@ -209,6 +209,7 @@ int menuNouvellePartie(Tparam * parametre)
     int nbBat;
     FILE * descFicParam;
 
+	int nbInstTemp;
     int * nbInstancesbat;
     char chaineInstance[3];
     char nomBatIA[K_LGNOM];
@@ -399,8 +400,14 @@ int menuNouvellePartie(Tparam * parametre)
                     {
                         changeFocus(paramNbBat[i], CHAMP_ACTIF);
                         editerChamp(paramNbBat[i]);
-                        parametre->nombreInstanceBateaux[i] = strtol(paramNbBat[i]->chaine, NULL, 10);
-                        nbInstChange = 1;
+						
+						// Si le nombre d'instances est erroné, n'enregistre pas les modifs
+						nbInstTemp = strtol(paramNbBat[i]->chaine, NULL, 10);
+						if(nbInstTemp > 0 && nbInstTemp <= 6)
+						{
+							parametre->nombreInstanceBateaux[i] = nbInstTemp;
+							nbInstChange = 1;
+						}
                     }
                 }
                 afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
