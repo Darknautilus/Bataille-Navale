@@ -1,14 +1,14 @@
-#include "VueGrille.h"
+#include "view/VueGrille.h"
 
-#include "../view/IncludeSDL.h"
-#include "../view/VueUtilsSDL.h"
-#include "../view/SDLImage.h"
+#include "view/IncludeSDL.h"
+#include "view/VueUtilsSDL.h"
+#include "view/SDLImage.h"
 
-#include "../model/Grille.h"
-#include "../model/Couleurs.h"
+#include "model/Grille.h"
+#include "model/Couleurs.h"
 
-#include "../ctrl/UtilsPoliceEcriture.h"
-#include "../ctrl/FichierDebug.h"
+#include "ctrl/UtilsPoliceEcriture.h"
+#include "ctrl/FichierDebug.h"
 
 void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 {

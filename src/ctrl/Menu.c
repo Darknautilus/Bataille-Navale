@@ -1,28 +1,28 @@
-#include "Menu.h"
+#include "ctrl/Menu.h"
 
-#include "../ctrl/UtilsSDL.h"
-#include "../ctrl/FichierDebug.h"
-#include "../ctrl/UtilsModel.h"
+#include "ctrl/UtilsSDL.h"
+#include "ctrl/FichierDebug.h"
+#include "ctrl/UtilsModel.h"
 
-#include "../model/ChampSaisie.h"
-#include "../model/Partie.h"
-#include "../model/Bateau.h"
-#include "../model/Parametre.h"
-#include "../model/Random.h"
-#include "../model/Couleurs.h"
+#include "model/ChampSaisie.h"
+#include "model/Partie.h"
+#include "model/Bateau.h"
+#include "model/Parametre.h"
+#include "model/Random.h"
+#include "model/Couleurs.h"
 
-#include "../view/IncludeSDL.h"
-#include "../view/VueChampSaisie.h"
-#include "../view/VueUtilsSDL.h"
-#include "../view/VueGrille.h"
-#include "../view/VueBateau.h"
-#include "../view/SDLButton.h"
-#include "../view/SDLImage.h"
-#include "../view/SDLRectangle.h"
-#include "../view/VueSDLMsgBox.h"
+#include "view/IncludeSDL.h"
+#include "view/VueChampSaisie.h"
+#include "view/VueUtilsSDL.h"
+#include "view/VueGrille.h"
+#include "view/VueBateau.h"
+#include "view/SDLButton.h"
+#include "view/SDLImage.h"
+#include "view/SDLRectangle.h"
+#include "view/VueSDLMsgBox.h"
 
-#include "../test/Test.h"
-#include "../test/view/TestVue.h"
+#include "test/Test.h"
+#include "test/view/TestVue.h"
 
 #include <string.h>
 
@@ -134,8 +134,8 @@ int afficherMenuRacine(void)
 
         if(toucheChar(touche) == 't')
             menuTestVue();
-		else if(toucheChar(touche) == 'y')
-			menuTest();
+        else if(toucheChar(touche) == 'y')
+            menuTest();
 
         switch(toucheSpec(touche))
         {
@@ -167,7 +167,7 @@ int afficherMenuRacine(void)
             break;
 
         }
-	}
+    }
 
     // --------------------------------------------------------------------
 
@@ -400,7 +400,7 @@ int menuNouvellePartie(Tparam * parametre)
                     {
                         changeFocus(paramNbBat[i], CHAMP_ACTIF);
                         editerChamp(paramNbBat[i]);
-						
+
 						// Si le nombre d'instances est erroné, n'enregistre pas les modifs
 						nbInstTemp = strtol(paramNbBat[i]->chaine, NULL, 10);
 						if(nbInstTemp > 0 && nbInstTemp <= 6)

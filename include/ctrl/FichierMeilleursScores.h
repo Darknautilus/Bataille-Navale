@@ -10,8 +10,8 @@
 #ifndef FICHIERMEILLEURSSCORES_H
 #define FICHIERMEILLEURSSCORES_H
 
-#include "../model/Joueur.h"
-#include "../model/Score.h"
+#include "model/Joueur.h"
+#include "model/Score.h"
 
 #include <stdio.h>
 

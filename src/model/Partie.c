@@ -1,7 +1,7 @@
-#include "Partie.h"
+#include "model/Partie.h"
 
-#include "../model/Bateau.h"
-#include "../model/Grille.h"
+#include "model/Bateau.h"
+#include "model/Grille.h"
 
 TPartie *globalPartie = NULL;
 

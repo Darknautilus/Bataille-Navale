@@ -1,7 +1,7 @@
-#include "Test.h"
+#include "test/Test.h"
 
 //#include "TestParam.h"
-#include "../model/Parametre.h"
+#include "model/Parametre.h"
 
 #include <stdio.h>
 
@@ -36,4 +36,3 @@ void menuTest(void)
 		}
 	}
 }
-

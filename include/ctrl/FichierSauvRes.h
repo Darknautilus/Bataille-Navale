@@ -10,7 +10,7 @@
 #ifndef FICHIERSAUVRES_H
 #define FICHIERSAUVRES_H
 
-#include "../model/Partie.h"
+#include "model/Partie.h"
 
 /**
  * Sauvegarde la partie passée en paramète dans le fichier désigné.

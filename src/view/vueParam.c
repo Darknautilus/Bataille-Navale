@@ -1,7 +1,7 @@
-#include "VueParam.h"
+#include "view/VueParam.h"
 
-#include "../model/Parametre.h"
-#include "../model/Couleurs.h"
+#include "model/Parametre.h"
+#include "model/Couleurs.h"
 
 #include <stdio.h>
 

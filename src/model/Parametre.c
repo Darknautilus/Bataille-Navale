@@ -1,8 +1,8 @@
-#include "Parametre.h"
+#include "model/Parametre.h"
 
-#include "../model/Bateau.h"
+#include "model/Bateau.h"
 
-#include "../view/IncludeSDL.h"
+#include "view/IncludeSDL.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -224,4 +224,3 @@ void setIemeInfoBateauTParam(int pIdBateau , Tparam * pParam, const char pNom[],
 
 
 //***************************
-

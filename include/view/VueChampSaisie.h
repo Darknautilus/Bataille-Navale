@@ -11,9 +11,9 @@
 #ifndef VUE_CHAMP_SAISIE_H
 #define VUE_CHAMP_SAISIE_H
 
-#include "../view/IncludeSDL.h"
+#include "view/IncludeSDL.h"
 
-#include "../model/ChampSaisie.h"
+#include "model/ChampSaisie.h"
 
 /**
  * \brief Affiche le champ

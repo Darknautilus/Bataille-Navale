@@ -1,8 +1,8 @@
-#include "SDLRectangle.h"
+#include "view/SDLRectangle.h"
 
-#include "../view/VueUtilsSDL.h"
+#include "view/VueUtilsSDL.h"
 
-#include "../model/Couleurs.h"
+#include "model/Couleurs.h"
 
 Rectangle * creerRectangle(int pAbs, int pOrd, int pLarg, int pHaut)
 {

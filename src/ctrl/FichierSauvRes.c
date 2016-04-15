@@ -1,11 +1,11 @@
-#include "FichierSauvRes.h"
+#include "ctrl/FichierSauvRes.h"
 
-#include "../ctrl/FichierDebug.h"
+#include "ctrl/FichierDebug.h"
 
-#include "../model/Bateau.h"
-#include "../model/Grille.h"
-#include "../model/Partie.h"
-#include "../model/PileCoup.h"
+#include "model/Bateau.h"
+#include "model/Grille.h"
+#include "model/Partie.h"
+#include "model/PileCoup.h"
 
 #define SAVE_REP "ressources/saves/" /**< Contient le chemin du dossier de sauvegarde des parties. */
 

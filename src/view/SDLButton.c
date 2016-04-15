@@ -1,8 +1,8 @@
-#include "SDLButton.h"
+#include "view/SDLButton.h"
 
-#include "../view/IncludeSDL.h"
+#include "view/IncludeSDL.h"
 
-#include "../ctrl/UtilsPoliceEcriture.h"
+#include "ctrl/UtilsPoliceEcriture.h"
 
 #include <string.h>
 

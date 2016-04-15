@@ -1,9 +1,9 @@
-#include "VueBateau.h"
+#include "view/VueBateau.h"
 
-#include "../model/Grille.h"
-#include "../model/Bateau.h"
-#include "../model/Parametre.h"
-#include "../model/Partie.h"
+#include "model/Grille.h"
+#include "model/Bateau.h"
+#include "model/Parametre.h"
+#include "model/Partie.h"
 
 #include <stdlib.h>
 
@@ -39,4 +39,3 @@ Grille * insertBateau(Grille * grille, TBateau * bat)
 
 	return grille;
 }
-

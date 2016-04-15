@@ -1,6 +1,6 @@
-#include "TestParam.h"
+#include "test/model/TestParam.h"
 
-#include "../../view/VueParam.h"
+#include "view/VueParam.h"
 
 void controleurParametreVersionTest(Tparam *param)
 {

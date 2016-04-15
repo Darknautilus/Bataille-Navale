@@ -1,8 +1,8 @@
-#include "UtilsModel.h"
+#include "ctrl/UtilsModel.h"
 
-#include "../view/IncludeSDL.h"
+#include "view/IncludeSDL.h"
 
-#include "../ctrl/FichierDebug.h"
+#include "ctrl/FichierDebug.h"
 
 #include <string.h>
 #include <stdio.h>

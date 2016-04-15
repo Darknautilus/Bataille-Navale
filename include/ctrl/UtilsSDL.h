@@ -10,7 +10,7 @@
 #ifndef UTILSSDL_H
 #define UTILSSDL_H
 
-#include "../view/IncludeSDL.h"
+#include "view/IncludeSDL.h"
 
 /**
  * Permet d'initialiser tous les modules SDL

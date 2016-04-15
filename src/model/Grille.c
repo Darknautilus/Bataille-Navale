@@ -1,7 +1,7 @@
-#include "Grille.h"
+#include "model/Grille.h"
 
-#include "../model/Couleurs.h"
-#include "../model/Bateau.h"
+#include "model/Couleurs.h"
+#include "model/Bateau.h"
 
 #include <stdlib.h>
 

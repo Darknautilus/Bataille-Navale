@@ -10,7 +10,7 @@
 #ifndef _COULEURS_H
 #define _COULEURS_H
 
-#include "../view/IncludeSDL.h"
+#include "view/IncludeSDL.h"
 
 #define KCOULEURS_NBCOULMAX 8
 #define KCOULEURS_LGNOMCOUL 10
@@ -69,4 +69,3 @@ void getNom (Couleur pCouleur, char pNom[]);
 int getNumFromColor(Couleur color);
 
 #endif
-

@@ -1,6 +1,6 @@
-#include "Coups.h"
+#include "model/Coups.h"
 
-#include "../model/Joueur.h"
+#include "model/Joueur.h"
 
 #include <stdlib.h>
 

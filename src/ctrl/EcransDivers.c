@@ -1,8 +1,8 @@
-#include "EcransDivers.h"
+#include "ctrl/EcransDivers.h"
 
-#include "../view/IncludeSDL.h"
-#include "../view/SDLImage.h"
-#include "../view/VueUtilsSDL.h"
+#include "view/IncludeSDL.h"
+#include "view/SDLImage.h"
+#include "view/VueUtilsSDL.h"
 
 void ecranVictoire(void)
 {

@@ -1,0 +1,14 @@
+set(SOURCEFILES
+    ${SOURCEFILES}
+    ${CMAKE_CURRENT_SOURCE_DIR}/EcransDivers.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/fichierDebug.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/FichierMeilleursScores.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/FichierSauvRes.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Jeu.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Main.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Menu.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/UtilsModel.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/UtilsPoliceEcriture.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/UtilsSDL.c
+    PARENT_SCOPE
+)

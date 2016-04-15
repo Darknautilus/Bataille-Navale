@@ -1,4 +1,4 @@
-#include "Score.h"
+#include "model/Score.h"
 
 #include <string.h>
 #include <stdlib.h>

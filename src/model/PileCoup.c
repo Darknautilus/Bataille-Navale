@@ -1,6 +1,6 @@
-#include "PileCoup.h"
+#include "model/PileCoup.h"
 
-#include "../ctrl/FichierDebug.h"
+#include "ctrl/FichierDebug.h"
 
 #include <stdio.h>
 #include <stdlib.h>

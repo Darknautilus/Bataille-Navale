@@ -1,9 +1,9 @@
-#include "VueSDLMsgBox.h"
+#include "view/VueSDLMsgBox.h"
 
-#include "../view/IncludeSDL.h"
-#include "../view/VueUtilsSDL.h"
+#include "view/IncludeSDL.h"
+#include "view/VueUtilsSDL.h"
 
-#include "../model/SDLMsgBox.h"
+#include "model/SDLMsgBox.h"
 
 void msgBox(int pAbs, int pOrd, char * pTexte, int pTailleTexte)
 {

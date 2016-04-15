@@ -10,8 +10,8 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "../model/ChampSaisie.h"
-#include "../model/Parametre.h"
+#include "model/ChampSaisie.h"
+#include "model/Parametre.h"
 
 /**
  * Affiche le menu de presentation

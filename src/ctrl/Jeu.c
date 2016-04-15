@@ -1,21 +1,21 @@
-#include "Jeu.h"
+#include "ctrl/Jeu.h"
 
-#include "../ctrl/FichierDebug.h"
-#include "../ctrl/FichierSauvRes.h"
-#include "../ctrl/Menu.h"
-#include "../ctrl/FichierMeilleursScores.h"
+#include "ctrl/FichierDebug.h"
+#include "ctrl/FichierSauvRes.h"
+#include "ctrl/Menu.h"
+#include "ctrl/FichierMeilleursScores.h"
 
-#include "../model/Parametre.h"
-#include "../model/Partie.h"
-#include "../model/Bateau.h"
-#include "../model/Random.h"
+#include "model/Parametre.h"
+#include "model/Partie.h"
+#include "model/Bateau.h"
+#include "model/Random.h"
 
-#include "../view/VueUtilsSDL.h"
-#include "../view/SDLButton.h"
-#include "../view/SDLRectangle.h"
-#include "../view/VueGrille.h"
-#include "../view/VueBateau.h"
-#include "../view/SDLImage.h"
+#include "view/VueUtilsSDL.h"
+#include "view/SDLButton.h"
+#include "view/SDLRectangle.h"
+#include "view/VueGrille.h"
+#include "view/VueBateau.h"
+#include "view/SDLImage.h"
 
 int jeu(Tparam * pParam)
 {

@@ -10,7 +10,7 @@
 #ifndef SCORE_H
 #define SCORE_H
 
-#include "../model/joueur.h"
+#include "model/Joueur.h"
 
 /**
  * \struct Score

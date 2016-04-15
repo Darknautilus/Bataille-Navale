@@ -1,8 +1,8 @@
-#include "VueRegles.h"
+#include "view/VueRegles.h"
 
-#include "../view/IncludeSDL.h"
-#include "../view/VueUtilsSDL.h"
-#include "../view/VueChampSaisie.h"
+#include "view/IncludeSDL.h"
+#include "view/VueUtilsSDL.h"
+#include "view/VueChampSaisie.h"
 
 
 void afficherRegles()

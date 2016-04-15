@@ -10,7 +10,7 @@
 #ifndef UTILSFONT_H
 #define UTILSFONT_H
 
-#include "../view/IncludeSDL.h"
+#include "view/IncludeSDL.h"
 
 /**
     Charge une police d'Ècriture contenue dans le fichier des polices d'Ècriture

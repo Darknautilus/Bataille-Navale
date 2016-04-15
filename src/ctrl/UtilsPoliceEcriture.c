@@ -1,8 +1,8 @@
-#include "UtilsPoliceEcriture.h"
+#include "ctrl/UtilsPoliceEcriture.h"
 
-#include "../ctrl/FichierDebug.h"
+#include "ctrl/FichierDebug.h"
 
-#include "../view/IncludeSDL.h"
+#include "view/IncludeSDL.h"
 
 #include <stdlib.h>
 #include <string.h>

@@ -1,4 +1,4 @@
-#include "Random.h"
+#include "model/Random.h"
 
 #include <time.h>
 #include <stdio.h>
@@ -20,19 +20,19 @@ void choixMotHasard(char * pMot, FILE * pDesc, int longMax)
 {
     int nbMots = 0, numMotChoisi;
     char caractereLu;
-    
+
     rewind(pDesc);
-    
-    do 
+
+    do
     {
         caractereLu = fgetc(pDesc);
         if(caractereLu == '\n')
             nbMots++;
-        
+
     }while (caractereLu != EOF);
-    
+
     numMotChoisi = nombreAleatoire(1, nbMots);
-    
+
     rewind(pDesc);
     while (numMotChoisi > 0)
     {
@@ -40,7 +40,7 @@ void choixMotHasard(char * pMot, FILE * pDesc, int longMax)
         if (caractereLu == '\n')
             numMotChoisi--;
     }
-    
+
     fgets(pMot, longMax, pDesc);
     pMot[strlen(pMot)-1] = '\0';
 }

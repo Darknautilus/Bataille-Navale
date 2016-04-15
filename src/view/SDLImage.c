@@ -1,8 +1,8 @@
-#include "SDLImage.h"
+#include "view/SDLImage.h"
 
-#include "../view/IncludeSDL.h"
+#include "view/IncludeSDL.h"
 
-#include "../ctrl/FichierDebug.h"
+#include "ctrl/FichierDebug.h"
 
 Image * creerImage(char * pChemin, int pAbscisse, int pOrdonnee)
 {

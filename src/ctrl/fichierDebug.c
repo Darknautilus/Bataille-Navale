@@ -1,4 +1,4 @@
-#include "FichierDebug.h"
+#include "ctrl/FichierDebug.h"
 
 #include <stdlib.h>
 #include <stdio.h>

@@ -1,6 +1,6 @@
-#include "Couleurs.h"
+#include "model/Couleurs.h"
 
-#include "../view/IncludeSDL.h"
+#include "view/IncludeSDL.h"
 
 #include <string.h>
 

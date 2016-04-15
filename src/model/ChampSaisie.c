@@ -1,4 +1,4 @@
-#include "ChampSaisie.h"
+#include "model/ChampSaisie.h"
 
 #include <stdio.h>
 #include <stdlib.h>

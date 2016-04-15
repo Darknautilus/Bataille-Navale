@@ -1,11 +1,11 @@
-#include "TestVue.h"
+#include "test/view/TestVue.h"
 
-#include "../../view/IncludeSDL.h"
-#include "../../view/VueGrille.h"
-#include "../../view/VueUtilsSDL.h"
-#include "../../view/VueChampSaisie.h"
+#include "view/IncludeSDL.h"
+#include "view/VueGrille.h"
+#include "view/VueUtilsSDL.h"
+#include "view/VueChampSaisie.h"
 
-#include "../../model/Grille.h"
+#include "model/Grille.h"
 
 void menuTestVue(void)
 {

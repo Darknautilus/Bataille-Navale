@@ -176,6 +176,11 @@ lib
 *.layout
 maintestBenoit.c
 *.layout.cbtemp
+build
 
 #Ignore log files
 *.log
+
+# Netbeans
+nbproject
+

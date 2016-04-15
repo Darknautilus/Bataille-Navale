@@ -1,8 +1,8 @@
-#include "Bateau.h"
+#include "model/Bateau.h"
 
-#include "../model/Parametre.h"
-#include "../model/Partie.h"
-#include "../model/Grille.h"
+#include "model/Parametre.h"
+#include "model/Partie.h"
+#include "model/Grille.h"
 
 const TtypeBat tabTypesBat[KTAILLEMAXBAT] = {
     {VOILIER,"Voilier"},

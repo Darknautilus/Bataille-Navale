@@ -10,8 +10,8 @@
 #ifndef JEU_H
 #define JEU_H
 
-#include "../model/Parametre.h"
-#include "../model/Joueur.h"
+#include "model/Parametre.h"
+#include "model/Joueur.h"
 
 /**
  * \param[in] pParam Les parametres de la partie, definis a l'ecran des parametres

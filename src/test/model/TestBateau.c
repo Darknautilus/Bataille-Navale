@@ -1,4 +1,4 @@
-#include "TestBateau.h"
+#include "test/model/TestBateau.h"
 
 #include <stdio.h>
 

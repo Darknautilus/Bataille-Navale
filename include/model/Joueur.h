@@ -12,7 +12,7 @@
 
 #define KLGNOMJ 25   /**< Taille maximale du nom du nom d'un joueur **/
 
-#include "../model/Bateau.h"
+#include "model/Bateau.h"
 
 /**
  * \enum ETypeBat

@@ -10,7 +10,7 @@
 #ifndef VUE_UTILS_H
 #define VUE_UTILS_H
 
-#include "../view/IncludeSDL.h"
+#include "view/IncludeSDL.h"
 
 #define K_LGMAXMESSAGE 30
 

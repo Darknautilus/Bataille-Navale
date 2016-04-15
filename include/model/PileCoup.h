@@ -10,9 +10,9 @@
 #ifndef PILE_COUP_H
 #define PILE_COUP_H
 
-#include "../model/Grille.h"
-#include "../model/Joueur.h"
-#include "../model/Coups.h"
+#include "model/Grille.h"
+#include "model/Joueur.h"
+#include "model/Coups.h"
 
 struct Cellule
 {

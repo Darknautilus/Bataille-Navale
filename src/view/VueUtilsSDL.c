@@ -1,12 +1,12 @@
-#include "VueUtilsSDL.h"
+#include "view/VueUtilsSDL.h"
 
-#include "../view/IncludeSDL.h"
-#include "../view/SDLImage.h"
+#include "view/IncludeSDL.h"
+#include "view/SDLImage.h"
 
-#include "../model/ChampSaisie.h"
+#include "model/ChampSaisie.h"
 
-#include "../ctrl/UtilsSDL.h"
-#include "../ctrl/UtilsPoliceEcriture.h"
+#include "ctrl/UtilsSDL.h"
+#include "ctrl/UtilsPoliceEcriture.h"
 
 void ecrireTexte(char * texte, int taille, SDL_Rect positionTexte, char * cheminPolice)
 {
@@ -154,6 +154,3 @@ void effacerEcran(void)
 {
 	SDL_FillRect(SDL_GetVideoSurface(), NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, 0, 0, 0));
 }
-
-
-

@@ -1,6 +1,6 @@
-#include "FichierMeilleursScores.h"
+#include "ctrl/FichierMeilleursScores.h"
 
-#include "../ctrl/UtilsModel.h"
+#include "ctrl/UtilsModel.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -100,4 +100,3 @@ void enregistrerTabScore(Score* tabScores[]){
 FILE* ouvrirFichierMeilleursScores(const char modeOuverture[]){
     return ouvrirFichierRessources(FIC_MEILLEURSSCORES, modeOuverture);
 }
-

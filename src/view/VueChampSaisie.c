@@ -1,12 +1,12 @@
-#include "VueChampSaisie.h"
+#include "view/VueChampSaisie.h"
 
-#include "../view/IncludeSDL.h"
-#include "../view/VueUtilsSDL.h"
+#include "view/IncludeSDL.h"
+#include "view/VueUtilsSDL.h"
 
-#include "../model/ChampSaisie.h"
+#include "model/ChampSaisie.h"
 
-#include "../ctrl/UtilsPoliceEcriture.h"
-#include "../ctrl/FichierDebug.h"
+#include "ctrl/UtilsPoliceEcriture.h"
+#include "ctrl/FichierDebug.h"
 
 #include <string.h>
 

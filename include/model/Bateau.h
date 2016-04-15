@@ -10,7 +10,7 @@
 #ifndef _BATEAU_H
 #define _BATEAU_H
 
-#include "../model/Grille.h"
+#include "model/Grille.h"
 
 #define KTAILLEMAXBAT 5      /**< \brief Taille maximale d'un bateau */
 #define KLONGMAXNOMTYPE 20   /**< \brief Longueur maximale du nom d'un type */
