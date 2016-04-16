@@ -3,6 +3,7 @@
 #include "view/IncludeSDL.h"
 
 #include "ctrl/UtilsPoliceEcriture.h"
+#include "ctrl/UtilsSDL.h"
 
 #include <string.h>
 
@@ -37,15 +38,14 @@ void afficherBouton(SDL_Bouton * pBouton)
 	positionTexteBouton.x = pBouton->abscisse + SDL_BOUTON_KESP_HORI;
 	positionTexteBouton.y = pBouton->ordonnee + SDL_BOUTON_KESP_VERT;
 
-	fondBouton = SDL_CreateRGBSurface(SDL_HWSURFACE, pBouton->longTexte*pBouton->largCarac+2*SDL_BOUTON_KESP_HORI, pBouton->tailleTexte+2*SDL_BOUTON_KESP_VERT, 32, 0, 0, 0, 0);
+	fondBouton = GetNewRGBASurface(pBouton->longTexte*pBouton->largCarac+2*SDL_BOUTON_KESP_HORI,
+                pBouton->tailleTexte+2*SDL_BOUTON_KESP_VERT);
 
-	fondBouton = SDL_DisplayFormat(fondBouton);
-
-	SDL_FillRect(fondBouton, NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, SDL_BOUTON_KCOUL_R, SDL_BOUTON_KCOUL_G, SDL_BOUTON_KCOUL_B));
-	SDL_BlitSurface(fondBouton, NULL, SDL_GetVideoSurface(), &positionFondBouton);
+	SDL_FillRect(fondBouton, NULL, SDL_MapRGB(GetMainScreen()->format, SDL_BOUTON_KCOUL_R, SDL_BOUTON_KCOUL_G, SDL_BOUTON_KCOUL_B));
+	SDL_BlitSurface(fondBouton, NULL, GetMainScreen(), &positionFondBouton);
 
 	texteBouton = TTF_RenderText_Blended(police, pBouton->texte, couleurTexte);
-	SDL_BlitSurface(texteBouton, NULL, SDL_GetVideoSurface(), &positionTexteBouton);
+	SDL_BlitSurface(texteBouton, NULL, GetMainScreen(), &positionTexteBouton);
 
 	TTF_CloseFont(police);
 	SDL_FreeSurface(fondBouton);

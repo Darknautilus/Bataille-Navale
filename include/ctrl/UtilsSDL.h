@@ -12,15 +12,31 @@
 
 #include "view/IncludeSDL.h"
 
+typedef struct {
+    Uint32 rmask;
+    Uint32 gmask;
+    Uint32 bmask;
+    Uint32 amask;
+} SDL_Surface_RGBA_Masks;
+
+SDL_Surface *GetNewRGBASurface(int width, int height);
+
+SDL_Surface *GetMainScreen();
+
+SDL_Texture *GetMainTexture();
+
+void UpdateWindow(int reset);
+
+void ClearWindow();
+
 /**
  * Permet d'initialiser tous les modules SDL
- * Dans tout le code, la surface renvoyée par cette fonction peut-être retrouvée avec SDL_GetVideoSurface()
  *
  * \param[in] width Largeur de la fenêtre
  * \param[in] height Hauteur de la fenêtre
- * \return La surface de l'écran
+ * \return Le renderer de la fenêtre principale
 */
-SDL_Surface * demarrerSDL(int width, int height, char * titreFenetre);
+void demarrerSDL(int width, int height, char * titreFenetre);
 
 /**
  * Arrête tous les modules SDL

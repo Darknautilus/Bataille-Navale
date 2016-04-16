@@ -6,31 +6,27 @@
 #include "view/VueChampSaisie.h"
 
 #include "model/Grille.h"
+#include "ctrl/UtilsSDL.h"
 
 void menuTestVue(void)
 {
 	int continuer = 1;
-	SDL_keysym * touche = (SDL_keysym*) malloc(sizeof(SDL_keysym));
-
-	SDL_EnableUNICODE(SDL_ENABLE);
+	SDL_Keysym touche;
 
 	while (continuer)
 	{
-		effacerEcran();
+            effacerEcran();
 
-		SDL_Flip(SDL_GetVideoSurface());
-		attendreEvent(NULL, touche);
+            UpdateWindow(SDL_TRUE);
+            attendreEvent(NULL, &touche);
 
-		if(toucheSpec(touche) == SDLK_ESCAPE)
-			continuer = 0;
+            if(touche.scancode == SDL_SCANCODE_SPACE)
+                    continuer = 0;
 
-		switch (toucheChar(touche))
-		{
-
-			default:
-				break;
-		}
+            switch (touche.scancode)
+            {
+                default:
+                    break;
+            }
 	}
-
-	SDL_EnableUNICODE(SDL_DISABLE);
 }

@@ -46,10 +46,10 @@ typedef enum{
 */
 typedef struct
 {
-	char * chaine; /**< Chaine tapée dans le champ */
+    char * chaine; /**< Chaine tapée dans le champ */
     int longMax; /**< Longueur maximum de la chaine */
     int tailleTexte; /**< Taille de la police de texte */
-	int largCarac;
+    int largCarac;
     int abscisse; /**< Abscisse du champ dans l'écran */
     int ordonnee; /**< Ordonnee du champ dans l'écran */
     EtatChamp onFocus; /**< Vaut CHAMP_ACTIF si le champ est actif (mode édition) et CHAMP_INACTIF sinon */
@@ -107,19 +107,7 @@ void changeFocus(ChampSaisie * champ, EtatChamp etat);
  *
  * \return La chaine modifiée
 */
-char * supprimerDernierChar(char * chaine);
-
-/**
- * \brief Ajoute un caractère à la fin de la chaine
- *
- * \param[in,out] chaine
- * \param[in] charEnt Caractère à insérer
- *
- * \return La chaine modifiée
- *
- * La chaine ne doit pas être pleine.
-*/
-char * ajouterCharFin(char * chaine, char charEnt);
+void supprimerDernierChar(char * chaine);
 
 /**
  * \brief Libère le champ en mémoire

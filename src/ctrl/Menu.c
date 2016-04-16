@@ -28,12 +28,12 @@
 
 void afficherMenuAccueil(void)
 {
-	int continuer = 1;
+    int continuer = 1;
     SDL_Rect positionTexte;
 
-    Rectangle * rectLogos;
+    Rectangle *rectLogos;
 
-    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    SDL_Keysym touche;
 
     rectLogos = creerRectangle(10, 10, 231, 110);
 
@@ -57,33 +57,32 @@ void afficherMenuAccueil(void)
     positionTexte.y = 539;
     ecrireTexte("Appuyez sur espace pour continuer", 25, positionTexte, "default.ttf");
 
-
     afficherImage(imageIUT);
     afficherImage(imageUniv);
     afficherImage(imageBateau);
 
-	SDL_Flip(SDL_GetVideoSurface());
+    UpdateWindow(SDL_TRUE);
 
     // --------------------------------------------------------------------
 
-	while(continuer)
-	{
-		attendreEvent(NULL, touche);
+    while(continuer)
+    {
+        attendreEvent(NULL, &touche);
 
-        switch(toucheSpec(touche))
+        switch(touche.scancode)
         {
-            case SDLK_SPACE:
+            case SDL_SCANCODE_SPACE:
                 continuer = 0;
                 break;
 
-            case SDLK_ESCAPE:
+            case SDL_SCANCODE_ESCAPE:
                 exit(EXIT_FAILURE);
                 break;
 
             default:
                 break;
         }
-	}
+    }
 
     // --------------------------------------------------------------------
 
@@ -91,7 +90,6 @@ void afficherMenuAccueil(void)
     libererImage(imageUniv);
     libererImage(imageBateau);
     libererRectangle(rectLogos);
-	free(touche);
 }
 
 int afficherMenuRacine(void)
@@ -99,13 +97,11 @@ int afficherMenuRacine(void)
     int continuer = 1;
     int choixMenu = 1;
 
-    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    SDL_Keysym touche;
 
-	Image * imagePuce = creerImage("puceMenu.png", 100, 200);
+    Image * imagePuce = creerImage("puceMenu.png", 100, 200);
 
     SDL_Rect positionTexte;
-
-	SDL_EnableUNICODE(SDL_ENABLE);
 
     // --------------------------------------------------------------------
 
@@ -126,24 +122,24 @@ int afficherMenuRacine(void)
         positionTexte.y += 60;
         ecrireTexte("- Quitter", 30, positionTexte, "default.ttf");
 
-        SDL_Flip(SDL_GetVideoSurface());
+        UpdateWindow(SDL_TRUE);
 
         // --------------------------------------------------------------------
 
-        attendreEvent(NULL, touche);
+        attendreEvent(NULL, &touche);
 
-        if(toucheChar(touche) == 't')
+        if(touche.sym == SDLK_t)
             menuTestVue();
-        else if(toucheChar(touche) == 'y')
+        else if(touche.sym == SDLK_y)
             menuTest();
 
-        switch(toucheSpec(touche))
+        switch(touche.scancode)
         {
-            case SDLK_RETURN:
+            case SDL_SCANCODE_RETURN:
                 continuer = 0;
             break;
 
-            case SDLK_UP:
+            case SDL_SCANCODE_UP:
                 if(choixMenu != 1)
                 {
                     choixMenu --;
@@ -151,7 +147,7 @@ int afficherMenuRacine(void)
                 }
             break;
 
-            case SDLK_DOWN:
+            case SDL_SCANCODE_DOWN:
                 if(choixMenu != 5)
                 {
                     choixMenu ++;
@@ -159,7 +155,7 @@ int afficherMenuRacine(void)
                 }
             break;
 
-            case SDLK_ESCAPE:
+            case SDL_SCANCODE_ESCAPE:
                 exit(EXIT_SUCCESS);
             break;
 
@@ -171,31 +167,28 @@ int afficherMenuRacine(void)
 
     // --------------------------------------------------------------------
 
-	SDL_EnableUNICODE(SDL_DISABLE);
+    libererImage(imagePuce);
 
-	libererImage(imagePuce);
-	free(touche);
-
-	return choixMenu;
+    return choixMenu;
 }
 
 int menuNouvellePartie(Tparam * parametre)
 {
     // Champs de saisie
-	ChampSaisie * champPseudoHumain, * champPseudoIA;
+    ChampSaisie * champPseudoHumain, * champPseudoIA;
     ChampSaisie * paramNbBat[K_NBTYPEBATEAUX]; // Choix du nombre de bateaux (tableau de champs)
 
     // Informations de positions
-	SDL_Rect positionBouton, positionTexte;
+    SDL_Rect positionBouton, positionTexte;
 
     // Informations pour AttendreEvent()
-	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
-	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    SDL_Rect * positionClic = malloc(sizeof(SDL_Rect));
+    SDL_Keysym  touche;
     int controleEvent;
 
     // Boutons
-	SDL_Bouton * boutonOK;
-	SDL_Bouton * boutonParam;
+    SDL_Bouton * boutonOK;
+    SDL_Bouton * boutonParam;
 
     SDL_Bouton * boutonChargerParam;
     SDL_Bouton * boutonRetablirDefaut;
@@ -209,7 +202,7 @@ int menuNouvellePartie(Tparam * parametre)
     int nbBat;
     FILE * descFicParam;
 
-	int nbInstTemp;
+    int nbInstTemp;
     int * nbInstancesbat;
     char chaineInstance[3];
     char nomBatIA[K_LGNOM];
@@ -219,10 +212,10 @@ int menuNouvellePartie(Tparam * parametre)
     // --------------------------------------------------------------------
 
     // Initialisation des champs de saisie
-	champPseudoHumain = creerChamp(30, 20, 230, 150);
-	champPseudoIA = creerChamp(30, 20, 230, 200);
+    champPseudoHumain = creerChamp(30, 20, 230, 150);
+    champPseudoIA = creerChamp(30, 20, 230, 200);
     initTexte(champPseudoHumain, "Anonyme");
-	initTexte(champPseudoIA, "GlaDos");
+    initTexte(champPseudoIA, "GlaDos");
 
     // Champs du nombre d'instances de chaque bateaux : récupération des valeurs déjà paramétrées et initialisation des champs
     nbInstancesbat = getNBInstances(parametre);
@@ -238,12 +231,12 @@ int menuNouvellePartie(Tparam * parametre)
     }
 
     // Positionnement des boutons
-	positionBouton.x = 360;
-	positionBouton.y = 622;
-	boutonParam = creerBouton("Plus de parametres", &positionBouton, 25);
-	positionBouton.x = 360;
-	positionBouton.y = 682;
-	boutonOK = creerBouton("Demarrer la partie", &positionBouton, 25);
+    positionBouton.x = 360;
+    positionBouton.y = 622;
+    boutonParam = creerBouton("Plus de parametres", &positionBouton, 25);
+    positionBouton.x = 360;
+    positionBouton.y = 682;
+    boutonOK = creerBouton("Demarrer la partie", &positionBouton, 25);
     positionBouton.x = 630;
     positionBouton.y = 389;
     boutonChargerParam = creerBouton("Utiliser parametres par defaut", &positionBouton, 20);
@@ -256,8 +249,8 @@ int menuNouvellePartie(Tparam * parametre)
 
     // --------------------------------------------------------------------
 
-	while (continuer)
-	{
+    while (continuer)
+    {
         // Affichage de tous les objets
         effacerEcran();
         positionTexte.x = 300;
@@ -273,8 +266,8 @@ int menuNouvellePartie(Tparam * parametre)
         positionTexte.y = 297;
         ecrireTexte("Nombre de bateaux (6 max):", 25, positionTexte, "default.ttf");
 
-		afficherChamp(champPseudoHumain);
-		afficherChamp(champPseudoIA);
+        afficherChamp(champPseudoHumain);
+        afficherChamp(champPseudoIA);
 
         // Champs pour le choix du nombre d'instance de chaque type
         for(i=0;i<K_NBTYPEBATEAUX;i++)
@@ -287,46 +280,43 @@ int menuNouvellePartie(Tparam * parametre)
             afficherChamp(paramNbBat[i]);
         }
 
-		if(!nbInstChange)
-			afficherBouton(boutonOK);
+        if(!nbInstChange)
+            afficherBouton(boutonOK);
 
-		afficherBouton(boutonParam);
+        afficherBouton(boutonParam);
         afficherBouton(boutonChargerParam);
         afficherBouton(boutonEnregistrerParam);
         afficherBouton(boutonRetablirDefaut);
 
-		SDL_Flip(SDL_GetVideoSurface());
-
+        UpdateWindow(SDL_FALSE);
 
         // Traitement de l'événement
-		controleEvent = attendreEvent(positionClic, touche);
+        controleEvent = attendreEvent(positionClic, &touche);
 
         // Événement souris
-		if(controleEvent == 1)
-		{
-			if(clicSurChamp(champPseudoHumain, positionClic))
-			{
-				editerChamp(champPseudoHumain);
-			}
-
-			else if(clicSurChamp(champPseudoIA, positionClic))
-			{
-				editerChamp(champPseudoIA);
-			}
-
+        if(controleEvent == 1)
+        {
+            if(clicSurChamp(champPseudoHumain, positionClic))
+            {
+                editerChamp(champPseudoHumain);
+            }
+            else if(clicSurChamp(champPseudoIA, positionClic))
+            {
+                editerChamp(champPseudoIA);
+            }
             else if(clicSurBouton(boutonParam, positionClic))
             {
                 if(nbInstChange)
                     resetInfoBateau(parametre);
 
+                UpdateWindow(SDL_TRUE);
                 menuParam(parametre);
 
                 if(infoBateauValide(parametre))
-                   nbInstChange = 0;
+                    nbInstChange = 0;
             }
-
-			else if(clicSurBouton(boutonOK, positionClic))
-			{
+            else if(clicSurBouton(boutonOK, positionClic))
+            {
 
                 if(!nbInstChange)
                 {
@@ -346,7 +336,7 @@ int menuNouvellePartie(Tparam * parametre)
                     fclose(descFicParam);
 
 
-                    /*      / \
+                    /*     / \
                     //     / | \
                     //    /  |  \    globalPartie est une variable GLOBALE
                     //   /___o___\
@@ -358,15 +348,14 @@ int menuNouvellePartie(Tparam * parametre)
 
                     partiePrete = 1;
                     continuer = 0;
+                    UpdateWindow(SDL_TRUE);
                 }
                 else
                 {
                     // TODO: Boite Message (non finalise)
                 }
 
-
-
-			}
+            }
             else if(clicSurBouton(boutonEnregistrerParam, positionClic))
             {
                 if(!nbInstChange)
@@ -401,34 +390,35 @@ int menuNouvellePartie(Tparam * parametre)
                         changeFocus(paramNbBat[i], CHAMP_ACTIF);
                         editerChamp(paramNbBat[i]);
 
-						// Si le nombre d'instances est erroné, n'enregistre pas les modifs
-						nbInstTemp = strtol(paramNbBat[i]->chaine, NULL, 10);
-						if(nbInstTemp > 0 && nbInstTemp <= 6)
-						{
-							parametre->nombreInstanceBateaux[i] = nbInstTemp;
-							nbInstChange = 1;
-						}
+                        // Si le nombre d'instances est erroné, n'enregistre pas les modifs
+                        nbInstTemp = strtol(paramNbBat[i]->chaine, NULL, 10);
+                        if(nbInstTemp > 0 && nbInstTemp <= 6)
+                        {
+                            parametre->nombreInstanceBateaux[i] = nbInstTemp;
+                            nbInstChange = 1;
+                        }
                     }
                 }
                 afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
-                SDL_Flip(SDL_GetVideoSurface());
+                UpdateWindow(SDL_TRUE);
             }
 
-		}
+        }
 
         // Événement clavier
-		if(controleEvent == 2 && toucheSpec(touche) == SDLK_ESCAPE)
-			continuer = 0;
-	}
+        if(controleEvent == 2 && touche.scancode == SDL_SCANCODE_ESCAPE) {
+            continuer = 0;
+            UpdateWindow(SDL_TRUE);
+        }
+    }
 
     // --------------------------------------------------------------------
 
-	free(positionClic);
-	free(touche);
-	libererChamp(champPseudoHumain);
-	libererChamp(champPseudoIA);
-	libererBouton(boutonOK);
-	libererBouton(boutonParam);
+    free(positionClic);
+    libererChamp(champPseudoHumain);
+    libererChamp(champPseudoIA);
+    libererBouton(boutonOK);
+    libererBouton(boutonParam);
     libererBouton(boutonChargerParam);
     libererBouton(boutonEnregistrerParam);
     libererBouton(boutonRetablirDefaut);
@@ -457,18 +447,18 @@ void menuParam(Tparam * parametre)
 
     char labelColonneTypes[KLONGMAXNOMTYPE];
 
-    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+    SDL_Rect * positionClic = malloc(sizeof(SDL_Rect));
 
     // Attention : Tableau à double entrée de pointeurs sur ChampSaisie
-    ChampSaisie *** tabChamp = (ChampSaisie***)malloc(K_NBTYPEBATEAUX * sizeof(ChampSaisie**));
+    ChampSaisie *** tabChamp = malloc(K_NBTYPEBATEAUX * sizeof(ChampSaisie**));
     // De même pour les rectangles de couleur
-    Rectangle *** tabRectChoixCoul = (Rectangle***)malloc(K_NBTYPEBATEAUX * sizeof(Rectangle**));
+    Rectangle *** tabRectChoixCoul = malloc(K_NBTYPEBATEAUX * sizeof(Rectangle**));
     for(i=0;i<K_NBTYPEBATEAUX;i++)
     {
         nbBat = parametre->nombreInstanceBateaux[i]; // getNbInstancesType ne fonctionne pas avec un entier (pourquoi?)
 
-        tabChamp[i] = (ChampSaisie**)malloc(nbBat*sizeof(ChampSaisie*));
-        tabRectChoixCoul[i] = (Rectangle**)malloc(nbBat*sizeof(Rectangle*));
+        tabChamp[i] = malloc(nbBat*sizeof(ChampSaisie*));
+        tabRectChoixCoul[i] = malloc(nbBat*sizeof(Rectangle*));
         for(j=0;j<nbBat;j++)
         {
             if(j >= 3)
@@ -491,7 +481,9 @@ void menuParam(Tparam * parametre)
                 tabRectChoixCoul[i][j]->couleur = parametre->bateauxJoueur[getNumBat(i, j, parametre)].couleur;
             }
             else
+            {
                 strcpy(tabChamp[i][j]->chaine, "Nom :");
+            }
         }
     }
 
@@ -532,7 +524,7 @@ void menuParam(Tparam * parametre)
             }
         }
 
-        SDL_Flip(SDL_GetVideoSurface());
+        UpdateWindow(SDL_TRUE);
 
         // --------------------------------------------------------------------
 
@@ -549,7 +541,9 @@ void menuParam(Tparam * parametre)
                     editerChamp(tabChamp[i][j]);
                 }
                 else if(clicSurRectangle(tabRectChoixCoul[i][j], positionClic))
+                {
                     incrCouleurRectangle(tabRectChoixCoul[i][j]);
+                }
             }
         }
 
@@ -571,7 +565,7 @@ void menuParam(Tparam * parametre)
         else
         {
             afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
-            SDL_Flip(SDL_GetVideoSurface());
+            UpdateWindow(SDL_TRUE);
         }
     }
 

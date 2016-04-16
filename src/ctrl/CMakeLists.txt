@@ -1,7 +1,7 @@
 set(SOURCEFILES
     ${SOURCEFILES}
     ${CMAKE_CURRENT_SOURCE_DIR}/EcransDivers.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/fichierDebug.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/FichierDebug.c
     ${CMAKE_CURRENT_SOURCE_DIR}/FichierMeilleursScores.c
     ${CMAKE_CURRENT_SOURCE_DIR}/FichierSauvRes.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Jeu.c

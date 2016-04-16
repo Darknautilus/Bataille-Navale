@@ -1,7 +1,6 @@
 #include "ctrl/UtilsPoliceEcriture.h"
 
 #include "ctrl/FichierDebug.h"
-
 #include "view/IncludeSDL.h"
 
 #include <stdlib.h>
@@ -10,7 +9,7 @@
 TTF_Font * chargerPoliceEcriture(const char * pChemin, int pTailleEcriture)
 {
     TTF_Font * police;
-    char * chemin = (char*)malloc(sizeof(char)*(strlen(pChemin) + strlen(FONT_REP)));
+    char * chemin = malloc(sizeof(char)*(strlen(pChemin) + strlen(FONT_REP)));
 
     strcpy(chemin, FONT_REP);
     strcat(chemin, pChemin);

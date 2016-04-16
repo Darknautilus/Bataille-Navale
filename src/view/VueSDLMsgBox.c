@@ -4,6 +4,7 @@
 #include "view/VueUtilsSDL.h"
 
 #include "model/SDLMsgBox.h"
+#include "ctrl/UtilsSDL.h"
 
 void msgBox(int pAbs, int pOrd, char * pTexte, int pTailleTexte)
 {
@@ -13,8 +14,8 @@ void msgBox(int pAbs, int pOrd, char * pTexte, int pTailleTexte)
     SDL_Surface * fond, * boite;
     SDL_Rect positionElem;
     int controleEvent;
-    SDL_Rect * coordClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
-    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    SDL_Rect * coordClic = malloc(sizeof(SDL_Rect));
+    SDL_Keysym touche;
     int continuer = 1;
 
     longMaxLin = longLinMax(pTexte);
@@ -26,33 +27,32 @@ void msgBox(int pAbs, int pOrd, char * pTexte, int pTailleTexte)
     msgBox = creerMsgBox(pAbs, pOrd, largeur, hauteur);
     setMsg(msgBox, pTexte);
 
-    fond = SDL_CreateRGBSurface(SDL_HWSURFACE, SDL_GetVideoSurface()->w, SDL_GetVideoSurface()->h, 32, 0, 0, 0, 0);
-    SDL_FillRect(fond, NULL, SDL_MapRGBA(SDL_GetVideoSurface()->format, 0, 0, 0, 0.5));
+    fond = GetNewRGBASurface(GetMainScreen()->w, GetMainScreen()->h);
+    SDL_FillRect(fond, NULL, SDL_MapRGBA(GetMainScreen()->format, 0, 0, 0, 0.5));
 
-    boite = SDL_CreateRGBSurface(SDL_HWSURFACE, largeur, hauteur, 32, 0, 0, 0, 0);
-    SDL_FillRect(boite, NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, 0, 0, 0));
+    boite = GetNewRGBASurface(largeur, hauteur);
+    SDL_FillRect(boite, NULL, SDL_MapRGB(GetMainScreen()->format, 0, 0, 0));
 
     positionElem.x = 0;
     positionElem.y = 0;
-    SDL_BlitSurface(fond, NULL, SDL_GetVideoSurface(), &positionElem);
+    SDL_BlitSurface(fond, NULL, GetMainScreen(), &positionElem);
     positionElem.x = pAbs;
     positionElem.y = pOrd;
-    SDL_BlitSurface(boite, NULL, SDL_GetVideoSurface(), &positionElem);
+    SDL_BlitSurface(boite, NULL, GetMainScreen(), &positionElem);
     positionElem.x = pAbs+KPADDING;
     positionElem.y = pOrd+KPADDING;
     ecrireTexte(pTexte, pTailleTexte, positionElem, "default.ttf");
 
-    SDL_Flip(SDL_GetVideoSurface());
+    UpdateWindow(SDL_TRUE);
 
     while(continuer)
     {
-        controleEvent = attendreEvent(coordClic, touche);
-        if(controleEvent == 2 && toucheSpec(touche) == SDLK_RETURN)
+        controleEvent = attendreEvent(coordClic, &touche);
+        if(controleEvent == 2 && touche.scancode == SDL_SCANCODE_RETURN)
             continuer = 0;
     }
 
     free(coordClic);
-    free(touche);
     SDL_FreeSurface(fond);
     SDL_FreeSurface(boite);
     libererMsgBox(msgBox);

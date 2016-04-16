@@ -45,29 +45,7 @@ void ecrireLigneTexte(char * texte,int taille, SDL_Rect positionTexte, char * ch
  * Si une touche est pressée, sa valeur est enregistrée et 2 est retourné.
  * Si l'on ne veut utiliser que le clavier ou que la souris, il est possible de mettre l'un des deux paramètres à NULL.
 */
-int attendreEvent(SDL_Rect * coordClic, SDL_keysym * touche);
-
-/*
- * \brief Renvoit le caractere Unicode correspondant à la touche tapée
- *
- * \param[in] touche Touche récupérée avec la fonction AttendreEvent()
- * \return Un caractère
- *
- * Attention, le traitement du retour de cette fonction nécessite Unicode activé.
- * Utiliser SDL_EnableUNICODE(SDL_ENABLE) au début du programme appelant et SDL_EnableUNICODE(SDL_DISABLE) à la fin.
-*/
-char toucheChar(SDL_keysym * touche);
-
-/*
- * \brief Renvoit la valeur de la touche tapée
- *
- * \param[in] touche Touche récupérée avec la fonction AttendreEvent()
- * \return La valeur de la touche (géré par SDL)
- *
- * Le retour de cette fonction peut être utilisé pour tester si la touche appuyée est RETURN ou BACKSPACE par exemple,
- * pour les caractères normaux, voir ToucheCar()
-*/
-SDLKey toucheSpec(SDL_keysym * touche);
+int attendreEvent(SDL_Rect *coordClic, SDL_Keysym *touche);
 
 /**
  * \brief Convertit les couleurs

@@ -7,89 +7,108 @@
 
 #include "ctrl/UtilsPoliceEcriture.h"
 #include "ctrl/FichierDebug.h"
+#include "ctrl/UtilsSDL.h"
 
 #include <string.h>
 
 void afficherChamp(ChampSaisie * champ)
 {
-	SDL_Surface * champBG, * texte;
-	TTF_Font * police;
-	SDL_Color couleurTexte = {KCOULTXT_R, KCOULTXT_G, KCOULTXT_B};
-	SDL_Rect positionChamp, positionTexte;
-	Uint32 couleurFondChamp;
+    SDL_Surface * champBG, * texte;
+    TTF_Font * police;
+    SDL_Color couleurTexte = {KCOULTXT_R, KCOULTXT_G, KCOULTXT_B};
+    SDL_Rect positionChamp, positionTexte;
+    Uint32 couleurFondChamp;
 
-	police = chargerPoliceEcriture("default.ttf", champ->tailleTexte);
+    police = chargerPoliceEcriture("default.ttf", champ->tailleTexte);
 
-	positionChamp.x = champ->abscisse;
-	positionChamp.y = champ->ordonnee;
-	positionTexte.x = champ->abscisse+KESP_HORI;
-	positionTexte.y = champ->ordonnee+KESP_VERT;
+    positionChamp.x = champ->abscisse;
+    positionChamp.y = champ->ordonnee;
+    positionTexte.x = champ->abscisse+KESP_HORI;
+    positionTexte.y = champ->ordonnee+KESP_VERT;
 
-	champBG = SDL_CreateRGBSurface(SDL_HWSURFACE, champ->longMax*champ->largCarac+2*KESP_HORI, champ->tailleTexte+2*KESP_VERT, 32, 0, 0, 0, 0);
+    champBG = GetNewRGBASurface(champ->longMax*champ->largCarac+2*KESP_HORI,
+        champ->tailleTexte+2*KESP_VERT);
 
-	if(champ->onFocus == CHAMP_ACTIF)
-		couleurFondChamp = SDL_MapRGB(champBG->format, KCOULEDIT_R, KCOULEDIT_G, KCOULEDIT_B);
-	else
-		couleurFondChamp = SDL_MapRGB(champBG->format, KCOULNORM_R, KCOULNORM_G, KCOULNORM_B);
+    if(champ->onFocus == CHAMP_ACTIF)
+        couleurFondChamp = SDL_MapRGB(champBG->format, KCOULEDIT_R, KCOULEDIT_G, KCOULEDIT_B);
+    else
+        couleurFondChamp = SDL_MapRGB(champBG->format, KCOULNORM_R, KCOULNORM_G, KCOULNORM_B);
 
-	SDL_FillRect(champBG, NULL, couleurFondChamp);
+    SDL_FillRect(champBG, NULL, couleurFondChamp);
 
-	texte = TTF_RenderText_Blended(police, champ->chaine, couleurTexte);
+    texte = TTF_RenderText_Blended(police, champ->chaine, couleurTexte);
 
-	SDL_BlitSurface(champBG, NULL, SDL_GetVideoSurface(), &positionChamp);
-	SDL_BlitSurface(texte, NULL, SDL_GetVideoSurface(), &positionTexte);
+    SDL_BlitSurface(champBG, NULL, GetMainScreen(), &positionChamp);
+    SDL_BlitSurface(texte, NULL, GetMainScreen(), &positionTexte);
 
-	SDL_FreeSurface(champBG);
-	SDL_FreeSurface(texte);
-	TTF_CloseFont(police);
+    SDL_FreeSurface(champBG);
+    SDL_FreeSurface(texte);
+    TTF_CloseFont(police);
 }
 
 void editerChamp(ChampSaisie * champ)
 {
-	int continuer = 1;
-	int etatEvent;
+    int continuer = 1;
+    int etatEvent;
 
-	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
-	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
-
-	SDL_EnableUNICODE(SDL_ENABLE);
+    SDL_Event event;
+    SDL_Rect * positionClic = malloc(sizeof(SDL_Rect));
 
     changeFocus(champ, CHAMP_ACTIF);
 
-	while (continuer)
-	{
-		afficherChamp(champ);
-		SDL_Flip(SDL_GetVideoSurface());
+    SDL_StartTextInput();
 
-		etatEvent = attendreEvent(positionClic, touche);
+    afficherChamp(champ);
+    UpdateWindow(SDL_FALSE);
+    
+    while (continuer)
+    {
+        int render = 0;
+        
+        if (SDL_PollEvent(&event)) {
+            switch(event.type) {
+                case SDL_QUIT:
+                    exit(EXIT_FAILURE);
+                    break;
+                
+                case SDL_KEYDOWN: {
+                    if (event.key.keysym.scancode == SDL_SCANCODE_BACKSPACE && strlen(champ->chaine) > 0) {
+                        supprimerDernierChar(champ->chaine);
+                        render = 1;
+                    }
+                    break;
+                }
+                case SDL_TEXTINPUT: {
+                    int insertLen = strlen(event.text.text);
+                    if (strlen(champ->chaine) + insertLen < champ->longMax) {
+                        strcat(champ->chaine, event.text.text);
+                        render = 1;
+                    }
+                    break;
+                }
+                case SDL_MOUSEBUTTONDOWN: {
+                    positionClic->x = event.button.x;
+                    positionClic->y = event.button.y;
+                    if(!clicSurChamp(champ, positionClic))
+                    {
+                        changeFocus(champ, CHAMP_INACTIF);
+                        continuer = 0;
+                        render = 1;
+                    }
+                    break;
+                }
+            }
+        }
+        
+        if (render) {
+            afficherChamp(champ);
+            UpdateWindow(SDL_FALSE);
+        }
 
-		if(etatEvent == 1)
-		{
-			if(!clicSurChamp(champ, positionClic))
-			{
-				changeFocus(champ, CHAMP_INACTIF);
-				continuer = 0;
-			}
+    }
+    SDL_StopTextInput();
 
-		}
-
-		else if(etatEvent == 2)
-		{
-			if(toucheSpec(touche) == SDLK_BACKSPACE)
-				champ->chaine = supprimerDernierChar(champ->chaine);
-			else
-			{
-				if(!chainePleine(champ))
-					champ->chaine = ajouterCharFin(champ->chaine, toucheChar(touche));
-			}
-		}
-
-	}
-
-	SDL_EnableUNICODE(SDL_DISABLE);
-
-	free(positionClic);
-	free(touche);
+    free(positionClic);
 }
 
 int clicSurChamp(ChampSaisie * champ, SDL_Rect * positionClic)

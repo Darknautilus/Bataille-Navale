@@ -22,35 +22,32 @@
 
 int main(int argc, char ** argv)
 {
-	SDL_Surface * ecran;
-
-	int choixMenu;
-	int continuer = 1;
-	int i;
+    int choixMenu;
+    int continuer = 1;
+    int i;
     int partiePrete;
     int resultPartie = 0;
 
-	ecran = demarrerSDL(1024, 768, "Bataille Navale");
+    demarrerSDL(1024, 768, "Bataille Navale");
 
-    Tparam * parametrePartie = malloc (sizeof(Tparam));
+    Tparam * parametrePartie = malloc(sizeof(Tparam));
 
     init_debug();
     initRandom();
 
     //EcranGrille(NULL);
 
-	afficherMenuAccueil();
+    afficherMenuAccueil();
 
-	while (continuer)
-	{
-	    //On créer un tableau d'entier
-	    int * nbType = malloc (sizeof(int) * K_NBTYPEBATEAUX);
-	    for(i = 0 ; i < K_NBTYPEBATEAUX ; i++){
-            nbType[i]=1;
-	    }
-
+    //On créer un tableau d'entier
+    int * nbType = malloc (sizeof(int) * K_NBTYPEBATEAUX);
+    for(i = 0 ; i < K_NBTYPEBATEAUX ; i++){
+        nbType[i]=1;
+    }
+    while (continuer)
+    {
         parametrePartie = newTParam(nbType);
-		choixMenu = afficherMenuRacine();
+        choixMenu = afficherMenuRacine();
 
         switch (choixMenu)
         {
@@ -59,24 +56,23 @@ int main(int argc, char ** argv)
                 if(partiePrete)
                 {
                     resultPartie = jeu(parametrePartie);
-					if(resultPartie == 1)
-						ecranVictoire();
-					else if(resultPartie == -1)
-						ecranPerte();
+                    if(resultPartie == 1)
+                        ecranVictoire();
+                    else if(resultPartie == -1)
+                        ecranPerte();
                 }
                 break;
 
             case 2: // Charger partie
                 globalPartie = restaurerPartie("partieUser.dat");
                 resultPartie = ecranJeu();
-				if(resultPartie == 1)
-					ecranVictoire();
-				else if(resultPartie == -1)
-					ecranPerte();
+                if(resultPartie == 1)
+                    ecranVictoire();
+                else if(resultPartie == -1)
+                    ecranPerte();
                 break;
 
             case 3: // Meilleurs scores
-
                 break;
 
             case 4: // Afficher règles
@@ -91,12 +87,9 @@ int main(int argc, char ** argv)
                 break;
         }
     }
-
-	arreterSDL();
-	detruire_debug();
+    detruire_debug();
 
     libererParam(parametrePartie);
 
-
-	return 0;
+    exit(EXIT_SUCCESS);
 }

@@ -3,12 +3,13 @@
 #include "view/IncludeSDL.h"
 #include "view/SDLImage.h"
 #include "view/VueUtilsSDL.h"
+#include "ctrl/UtilsSDL.h"
 
 void ecranVictoire(void)
 {
     int continuer = 1;
-    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
-    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+    SDL_Keysym touche;
+    SDL_Rect * positionClic = malloc(sizeof(SDL_Rect));
     int controleEvent;
     Image * imageCaptain;
     Image * imageClavier;
@@ -28,31 +29,30 @@ void ecranVictoire(void)
         positionTexte.x = 380;
         positionTexte.y = 625;
         ecrireTexte("Espace", 30, positionTexte, "default.ttf");
-        SDL_Flip(SDL_GetVideoSurface());
+        UpdateWindow(SDL_TRUE);
 
-        controleEvent = attendreEvent(positionClic, touche);
+        controleEvent = attendreEvent(positionClic, &touche);
 
-        if(controleEvent == 2 && toucheSpec(touche) == SDLK_SPACE)
+        if(controleEvent == 2 && touche.scancode == SDL_SCANCODE_SPACE)
         {
             continuer = 0;
         }
         else if(controleEvent == 1)
         {
             afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
-            SDL_Flip(SDL_GetVideoSurface());
+            UpdateWindow(SDL_TRUE);
         }
     }
 
     libererImage(imageCaptain);
-    free(touche);
     free(positionClic);
 }
 
 void ecranPerte(void)
 {
-	int continuer = 1;
-    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
-    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+    int continuer = 1;
+    SDL_Keysym touche;
+    SDL_Rect * positionClic = malloc(sizeof(SDL_Rect));
     int controleEvent;
     Image * imageCaptain;
     Image * imageClavier;
@@ -72,22 +72,21 @@ void ecranPerte(void)
         positionTexte.x = 380;
         positionTexte.y = 625;
         ecrireTexte("Espace", 30, positionTexte, "default.ttf");
-        SDL_Flip(SDL_GetVideoSurface());
+        UpdateWindow(SDL_TRUE);
 
-        controleEvent = attendreEvent(positionClic, touche);
+        controleEvent = attendreEvent(positionClic, &touche);
 
-        if(controleEvent == 2 && toucheSpec(touche) == SDLK_SPACE)
+        if(controleEvent == 2 && touche.scancode == SDL_SCANCODE_SPACE)
         {
             continuer = 0;
         }
         else if(controleEvent == 1)
         {
             afficherCoordClic(positionClic, 20, 0, 650, "default.ttf");
-            SDL_Flip(SDL_GetVideoSurface());
+            UpdateWindow(SDL_TRUE);
         }
     }
 
     libererImage(imageCaptain);
-    free(touche);
     free(positionClic);
 }

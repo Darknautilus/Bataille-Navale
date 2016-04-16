@@ -16,6 +16,7 @@
 #include "view/VueGrille.h"
 #include "view/VueBateau.h"
 #include "view/SDLImage.h"
+#include "ctrl/UtilsSDL.h"
 
 int jeu(Tparam * pParam)
 {
@@ -132,7 +133,7 @@ int menuPlacementChoixBat(void)
             }
         }
 
-        SDL_Flip(SDL_GetVideoSurface());
+        UpdateWindow(SDL_TRUE);
 
         // --------------------------------------------------------------------
 
@@ -201,7 +202,7 @@ int menuPlacementGrille(TBateau * pBat)
 
     SDL_Rect positionTexte;
 
-    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    SDL_Keysym touche;
     SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
     int controleEvent;
 
@@ -262,14 +263,14 @@ int menuPlacementGrille(TBateau * pBat)
             strcpy(boutonOK->texte, "OK");
         afficherBouton(boutonOK);
 
-        SDL_Flip(SDL_GetVideoSurface());
+        UpdateWindow(SDL_TRUE);
 
         // --------------------------------------------------------------------
 
-        controleEvent = attendreEvent(positionClic, touche);
+        controleEvent = attendreEvent(positionClic, &touche);
         if(controleEvent == 2)
         {
-            if(toucheSpec(touche) == SDLK_ESCAPE)
+            if(touche.scancode == SDL_SCANCODE_SPACE)
                 continuer = 0;
         }
         else if(controleEvent == 1)
@@ -317,7 +318,6 @@ int menuPlacementGrille(TBateau * pBat)
     // --------------------------------------------------------------------
 
     free(titreFenetre);
-    free(touche);
     free(positionClic);
     libererBouton(boutonOK);
     libererBouton(boutonSensBat);
@@ -338,28 +338,28 @@ int ecranJeu(void)
 
     char messageJoueur[K_LGMAXMESSAGE];
     char messageMachine[K_LGMAXMESSAGE];
-	char score[K_LGMAXMESSAGE];
+    char score[K_LGMAXMESSAGE];
 
     SDL_Rect positionTexte;
 
-    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
-    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    SDL_Rect * positionClic = malloc(sizeof(SDL_Rect));
+    SDL_Keysym touche;
     int controleEvent;
 
     Coord coordCoup;
 
     SDL_Bouton * boutonFinPartie;
-	SDL_Bouton * boutonAnnulerCoup;
+    SDL_Bouton * boutonAnnulerCoup;
     SDL_Rect positionBouton;
 
     positionBouton.x = 350;
     positionBouton.y = 682;
     boutonFinPartie = creerBouton("Partie Terminee", &positionBouton, 30);
-	positionBouton.x = 350;
-	positionBouton.y = 582;
-	boutonAnnulerCoup = creerBouton("Annuler coup", &positionBouton, 30);
+    positionBouton.x = 350;
+    positionBouton.y = 582;
+    boutonAnnulerCoup = creerBouton("Annuler coup", &positionBouton, 30);
 
-	partieFinie = partieEstFinie(globalPartie);
+    partieFinie = partieEstFinie(globalPartie);
 
     strcpy(messageJoueur, "Pret a commencer");
     strcpy(messageMachine, "Pret a commencer");
@@ -374,34 +374,34 @@ int ecranJeu(void)
         positionTexte.x = 750;
         positionTexte.y = 682;
         ecrireTexte(messageMachine, 30, positionTexte, "default.ttf");
-		positionTexte.x = 120;
-		positionTexte.y = 400;
-		ecrireTexte(partie_JHumain()->nomJ, 30, positionTexte, "default.ttf");
-		positionTexte.x = 680;
-		positionTexte.y = 400;
-		ecrireTexte(partie_JMachine()->nomJ, 30, positionTexte, "default.ttf");
-		positionTexte.x = 120;
-		positionTexte.y = 450;
-		sprintf(score, "Score : %d", partie_Score());
-		ecrireTexte(score, 30, positionTexte, "default.ttf");
+        positionTexte.x = 120;
+        positionTexte.y = 400;
+        ecrireTexte(partie_JHumain()->nomJ, 30, positionTexte, "default.ttf");
+        positionTexte.x = 680;
+        positionTexte.y = 400;
+        ecrireTexte(partie_JMachine()->nomJ, 30, positionTexte, "default.ttf");
+        positionTexte.x = 120;
+        positionTexte.y = 450;
+        sprintf(score, "Score : %d", partie_Score());
+        ecrireTexte(score, 30, positionTexte, "default.ttf");
 
         afficherGrille(partie_Grille(), 50, 50);
         afficherGrille(partie_GrilleMachine(), 530, 50);
 
         if(partieFinie != 0)
             afficherBouton(boutonFinPartie);
-		else
-			afficherBouton(boutonAnnulerCoup);
+        else
+            afficherBouton(boutonAnnulerCoup);
 
-        SDL_Flip(SDL_GetVideoSurface());
+        UpdateWindow(SDL_TRUE);
 
         // Traitement des événements
-        controleEvent = attendreEvent(positionClic, touche);
+        controleEvent = attendreEvent(positionClic, &touche);
 
         // Événement clavier
         if(controleEvent == 2)
         {
-            if(toucheSpec(touche) == SDLK_ESCAPE)
+            if(touche.scancode == SDL_SCANCODE_SPACE)
             {
                 choixMenuPause = menuPause();
                 switch (choixMenuPause)
@@ -487,9 +487,8 @@ int ecranJeu(void)
     }
 
     libererBouton(boutonFinPartie);
-	libererBouton(boutonAnnulerCoup);
+    libererBouton(boutonAnnulerCoup);
     free(positionClic);
-    free(touche);
 
     return partieFinie;
 }
@@ -499,9 +498,9 @@ int menuPause(void)
     int continuer = 1;
     int choixMenu = 1;
 
-    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    SDL_Keysym touche;
 
-	Image * imagePuce = creerImage("puceMenu.png", 100, 200);
+    Image * imagePuce = creerImage("puceMenu.png", 100, 200);
 
     SDL_Rect positionTexte;
 
@@ -520,20 +519,20 @@ int menuPause(void)
         positionTexte.y += 60;
         ecrireTexte("- Revenir au menu principal", 30, positionTexte, "default.ttf");
 
-        SDL_Flip(SDL_GetVideoSurface());
+        UpdateWindow(SDL_TRUE);
 
 
         // --------------------------------------------------------------------
 
-        attendreEvent(NULL, touche);
+        attendreEvent(NULL, &touche);
 
-        switch(toucheSpec(touche))
+        switch(touche.scancode)
         {
-            case SDLK_RETURN:
+            case SDL_SCANCODE_RETURN:
                 continuer = 0;
                 break;
 
-            case SDLK_UP:
+            case SDL_SCANCODE_UP:
                 if(choixMenu != 1)
                 {
                     choixMenu --;
@@ -541,7 +540,7 @@ int menuPause(void)
                 }
                 break;
 
-            case SDLK_DOWN:
+            case SDL_SCANCODE_DOWN:
                 if(choixMenu != 3)
                 {
                     choixMenu ++;
@@ -558,7 +557,6 @@ int menuPause(void)
     // --------------------------------------------------------------------
 
 	libererImage(imagePuce);
-	free(touche);
 
 	return choixMenu;
 }
