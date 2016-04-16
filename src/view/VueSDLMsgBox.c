@@ -5,6 +5,8 @@
 
 #include "model/SDLMsgBox.h"
 
+#include <stdlib.h>
+
 void msgBox(int pAbs, int pOrd, char * pTexte, int pTailleTexte)
 {
     int largeur, hauteur;
@@ -13,8 +15,8 @@ void msgBox(int pAbs, int pOrd, char * pTexte, int pTailleTexte)
     SDL_Surface * fond, * boite;
     SDL_Rect positionElem;
     int controleEvent;
-    SDL_Rect * coordClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
-    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+    SDL_Rect * coordClic = malloc(sizeof(SDL_Rect));
+    SDL_keysym * touche = malloc(sizeof(SDL_keysym));
     int continuer = 1;
 
     longMaxLin = longLinMax(pTexte);

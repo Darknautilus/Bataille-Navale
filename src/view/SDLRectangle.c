@@ -4,9 +4,11 @@
 
 #include "model/Couleurs.h"
 
+#include <stdlib.h>
+
 Rectangle * creerRectangle(int pAbs, int pOrd, int pLarg, int pHaut)
 {
-    Rectangle * nouvRect = (Rectangle*)malloc(sizeof(Rectangle));
+    Rectangle * nouvRect = malloc(sizeof(Rectangle));
 
     nouvRect->abscisse = pAbs;
     nouvRect->ordonnee = pOrd;
@@ -15,7 +17,7 @@ Rectangle * creerRectangle(int pAbs, int pOrd, int pLarg, int pHaut)
     nouvRect->couleur = 0;
 
     nouvRect->zoneRectangle = SDL_CreateRGBSurface(SDL_HWSURFACE, pLarg, pHaut, 32, 0, 0, 0, 0);
-    nouvRect->zoneRectangle = SDL_DisplayFormat(nouvRect->zoneRectangle);
+    nouvRect->zoneRectangle = SDL_DisplayFormatAlpha(nouvRect->zoneRectangle);
 
     return nouvRect;
 }

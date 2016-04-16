@@ -4,10 +4,13 @@
 
 #include "ctrl/FichierDebug.h"
 
+#include <stdlib.h>
+#include <string.h>
+
 Image * creerImage(char * pChemin, int pAbscisse, int pOrdonnee)
 {
     char * mesErreur;
-	Image * nouvImage = (Image*)malloc(sizeof(Image));
+	Image * nouvImage = malloc(sizeof(Image));
 
     //On alloue une variable pouvant contenir le chemin vers le dossier image + celui de l'image
 	char * chemin = malloc(sizeof(IMG_REP) + sizeof(char)*strlen(pChemin) + sizeof(char));
@@ -18,7 +21,7 @@ Image * creerImage(char * pChemin, int pAbscisse, int pOrdonnee)
 	nouvImage->zoneImage = IMG_Load(chemin);
 
     if(nouvImage->zoneImage == NULL){
-        mesErreur = (char*)malloc((strlen(chemin) + 30)*sizeof(char));
+        mesErreur = malloc((strlen(chemin) + 30)*sizeof(char));
         strcpy(mesErreur, chemin);
         strcat(mesErreur, " : Impossible de charger une image");
         dgFatal(mesErreur);

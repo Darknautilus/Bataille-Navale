@@ -4,11 +4,13 @@
 #include "view/SDLImage.h"
 #include "view/VueUtilsSDL.h"
 
+#include <stdlib.h>
+
 void ecranVictoire(void)
 {
     int continuer = 1;
-    SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
-    SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
+    SDL_keysym * touche = malloc(sizeof(SDL_keysym));
+    SDL_Rect * positionClic = malloc(sizeof(SDL_Rect));
     int controleEvent;
     Image * imageCaptain;
     Image * imageClavier;

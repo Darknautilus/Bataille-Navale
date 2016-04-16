@@ -4,12 +4,13 @@
 #include "view/VueUtilsSDL.h"
 #include "view/VueChampSaisie.h"
 
+#include <stdlib.h>
 
 void afficherRegles()
 {
 	int continuer = 1;
 	SDL_Rect positionTexte;
-	SDL_keysym * touche = (SDL_keysym*) malloc(sizeof(SDL_keysym));
+	SDL_keysym * touche = malloc(sizeof(SDL_keysym));
 
 	while (continuer)
 	{

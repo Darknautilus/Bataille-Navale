@@ -9,6 +9,7 @@
 #include "ctrl/FichierDebug.h"
 
 #include <string.h>
+#include <stdlib.h>
 
 void afficherChamp(ChampSaisie * champ)
 {
@@ -49,8 +50,8 @@ void editerChamp(ChampSaisie * champ)
 	int continuer = 1;
 	int etatEvent;
 
-	SDL_Rect * positionClic = (SDL_Rect*)malloc(sizeof(SDL_Rect));
-	SDL_keysym * touche = (SDL_keysym*)malloc(sizeof(SDL_keysym));
+	SDL_Rect * positionClic = malloc(sizeof(SDL_Rect));
+	SDL_keysym * touche = malloc(sizeof(SDL_keysym));
 
 	SDL_EnableUNICODE(SDL_ENABLE);
 

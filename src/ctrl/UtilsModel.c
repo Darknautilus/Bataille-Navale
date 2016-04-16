@@ -6,12 +6,13 @@
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 FILE * ouvrirFichierRessources(const char * nomFic, const char * mode)
 {
     char mesErreur[50];
     FILE * descFic;
-    char * chemin = (char*)malloc(sizeof(RESSOURCES_REP)+strlen(nomFic)*sizeof(char));
+    char * chemin = malloc(sizeof(RESSOURCES_REP)+strlen(nomFic)*sizeof(char));
 
     strcpy(chemin, RESSOURCES_REP);
     strcat(chemin, nomFic);

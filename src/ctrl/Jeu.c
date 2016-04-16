@@ -17,6 +17,8 @@
 #include "view/VueBateau.h"
 #include "view/SDLImage.h"
 
+#include <string.h>
+
 int jeu(Tparam * pParam)
 {
     int resultPartie = 0;

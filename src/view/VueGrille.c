@@ -10,6 +10,9 @@
 #include "ctrl/UtilsPoliceEcriture.h"
 #include "ctrl/FichierDebug.h"
 
+#include <stdlib.h>
+#include <stdio.h>
+
 void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 {
 	SDL_Surface *caseGrille = NULL, *numCase = NULL;
@@ -27,7 +30,7 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 	grille->ordonnee = ordonnee;
 
 	caseGrille = SDL_CreateRGBSurface(SDL_HWSURFACE, KLARGCASE, KHAUTEURCASE, 32, 0, 0, 0, 0);
-	caseGrille = SDL_DisplayFormat(caseGrille);// Règle le problème de couleur imprévisible
+	caseGrille = SDL_DisplayFormatAlpha(caseGrille);// Règle le problème de couleur imprévisible
 
 
 	policeGrille = chargerPoliceEcriture("default.ttf", KTAILLEPOLICE);
@@ -68,7 +71,7 @@ void afficherGrille(Grille * grille, int abscisse, int ordonnee)
 
 			contenuCaseGrille = consulter(grille, coord);
 
-            caseGrille = SDL_DisplayFormat(caseGrille);// Règle le problème de couleur imprévisible
+            caseGrille = SDL_DisplayFormatAlpha(caseGrille);// Règle le problème de couleur imprévisible
             SDL_FillRect(caseGrille, NULL, convertSDL_Color(getColor(getCouleurFromNum(contenuCaseGrille->couleur))));
 
 			switch(contenuCaseGrille->etatCase)
@@ -111,7 +114,7 @@ void updateGrille(Grille * grille, Coord coord)
 	positionCaseGrille.y = grille->ordonnee + (KHAUTEURCASE + KESP_CASE_VERT) * (coord.noLin-1);
 
 	caseGrille = SDL_CreateRGBSurface(SDL_HWSURFACE, 30, 30, 32, 0, 0, 0, 0);
-	caseGrille = SDL_DisplayFormat(caseGrille);// Règle le problème de couleur imprévisible
+	caseGrille = SDL_DisplayFormatAlpha(caseGrille);// Règle le problème de couleur imprévisible
 
 	contenuCaseGrille = consulter(grille, coord);
 

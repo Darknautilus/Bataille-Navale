@@ -7,10 +7,12 @@
 
 #include "model/Grille.h"
 
+#include <stdlib.h>
+
 void menuTestVue(void)
 {
 	int continuer = 1;
-	SDL_keysym * touche = (SDL_keysym*) malloc(sizeof(SDL_keysym));
+	SDL_keysym * touche = malloc(sizeof(SDL_keysym));
 
 	SDL_EnableUNICODE(SDL_ENABLE);
 

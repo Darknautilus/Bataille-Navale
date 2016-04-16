@@ -22,9 +22,9 @@
     //Inclusion pour les autres systèmes
     #else
 
-        #include <SDL/SDL.h>
-        #include <SDL/SDL_image.h>
-        #include <SDL/SDL_ttf.h>
+        #include <SDL.h>
+        #include <SDL_image.h>
+        #include <SDL_ttf.h>
 
     #endif
 

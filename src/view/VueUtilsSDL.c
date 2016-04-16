@@ -8,10 +8,14 @@
 #include "ctrl/UtilsSDL.h"
 #include "ctrl/UtilsPoliceEcriture.h"
 
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
 void ecrireTexte(char * texte, int taille, SDL_Rect positionTexte, char * cheminPolice)
 {
     int longTexte = strlen(texte);
-    char * nouvTexte = (char*)malloc((longTexte+1)*sizeof(char)); // chaine de travail
+    char * nouvTexte = malloc((longTexte+1)*sizeof(char)); // chaine de travail
 
     int i = 0;
 
@@ -66,31 +70,32 @@ int attendreEvent(SDL_Rect * coordClic, SDL_keysym * touche)
 	while(continuer)
 	{
 		// On attend que quelque chose se passe
-		SDL_WaitEvent(&event);
-		// Si c'est un clic gauche et qu'on a activé l'option
-		if (event.type == SDL_MOUSEBUTTONDOWN && coordClic != NULL && event.button.button == SDL_BUTTON_LEFT)
-		{
-			coordClic->x = event.button.x;
-			coordClic->y = event.button.y;
-			controle = 1;
-			continuer = 0;
-		}
+		if (SDL_PollEvent(&event)) {
+                    // Si c'est un clic gauche et qu'on a activé l'option
+                    if (event.type == SDL_MOUSEBUTTONDOWN && coordClic != NULL && event.button.button == SDL_BUTTON_LEFT)
+                    {
+                            coordClic->x = event.button.x;
+                            coordClic->y = event.button.y;
+                            controle = 1;
+                            continuer = 0;
+                    }
 
-		// Si c'est une touche et qu'on a activé l'option
-		else if(event.type == SDL_KEYDOWN && touche != NULL)
-		{
-			* touche = event.key.keysym;
-			controle = 2;
-			continuer = 0;
-		}
+                    // Si c'est une touche et qu'on a activé l'option
+                    else if(event.type == SDL_KEYDOWN && touche != NULL)
+                    {
+                            * touche = event.key.keysym;
+                            controle = 2;
+                            continuer = 0;
+                    }
 
-		// Si l'utilisateur a fait n'importe quoi
-		else if(coordClic == NULL && touche == NULL)
-			continuer = 0;
+                    // Si l'utilisateur a fait n'importe quoi
+                    else if(coordClic == NULL && touche == NULL)
+                            continuer = 0;
 
-		// Si l'utilisateur veut quitter brutalement
-		else if(event.type == SDL_QUIT)
-			exit(EXIT_FAILURE);
+                    // Si l'utilisateur veut quitter brutalement
+                    else if(event.type == SDL_QUIT)
+                            exit(EXIT_FAILURE);
+                }
 	}
 
     return controle;
@@ -128,29 +133,7 @@ void afficherCoordClic(SDL_Rect * pPosClic, int pTaille, int pAbs, int pOrd, cha
     ecrireLigneTexte(texte, pTaille, posTexte, pPolice);
 }
 
-void pause(void)
-{
-	int continuer = 1;
-	SDL_Event event;
-
-	while(continuer)
-	{
-		SDL_WaitEvent(&event);
-		switch(event.type)
-		{
-			case SDL_QUIT:
-				exit(EXIT_FAILURE);
-                break;
-
-			case SDL_KEYDOWN:
-				continuer = 0;
-                break;
-        }
-    }
-
-}
-
 void effacerEcran(void)
 {
-	SDL_FillRect(SDL_GetVideoSurface(), NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, 0, 0, 0));
+    SDL_FillRect(SDL_GetVideoSurface(), NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, 0, 0, 0));
 }

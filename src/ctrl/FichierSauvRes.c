@@ -7,6 +7,8 @@
 #include "model/Partie.h"
 #include "model/PileCoup.h"
 
+#include <string.h>
+
 #define SAVE_REP "ressources/saves/" /**< Contient le chemin du dossier de sauvegarde des parties. */
 
 //===============================//

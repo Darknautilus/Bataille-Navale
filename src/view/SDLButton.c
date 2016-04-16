@@ -5,13 +5,14 @@
 #include "ctrl/UtilsPoliceEcriture.h"
 
 #include <string.h>
+#include <stdlib.h>
 
 SDL_Bouton * creerBouton(char * pTexte, SDL_Rect * pCoord, int pTailleTexte)
 {
 	if(strlen(pTexte)>SDL_BOUTON_KLONGMAX)
 		return NULL;
 
-	SDL_Bouton * nouvBouton = (SDL_Bouton*)malloc(sizeof(SDL_Bouton));
+	SDL_Bouton * nouvBouton = malloc(sizeof(SDL_Bouton));
 
 	strcpy(nouvBouton->texte, pTexte);
 	nouvBouton->abscisse = pCoord->x;
@@ -39,7 +40,7 @@ void afficherBouton(SDL_Bouton * pBouton)
 
 	fondBouton = SDL_CreateRGBSurface(SDL_HWSURFACE, pBouton->longTexte*pBouton->largCarac+2*SDL_BOUTON_KESP_HORI, pBouton->tailleTexte+2*SDL_BOUTON_KESP_VERT, 32, 0, 0, 0, 0);
 
-	fondBouton = SDL_DisplayFormat(fondBouton);
+	fondBouton = SDL_DisplayFormatAlpha(fondBouton);
 
 	SDL_FillRect(fondBouton, NULL, SDL_MapRGB(SDL_GetVideoSurface()->format, SDL_BOUTON_KCOUL_R, SDL_BOUTON_KCOUL_G, SDL_BOUTON_KCOUL_B));
 	SDL_BlitSurface(fondBouton, NULL, SDL_GetVideoSurface(), &positionFondBouton);
