@@ -4,37 +4,6 @@ Projet de Bataille Navale - Langage C - 1ère année
 L'énoncé complet du projet est accessible à cette adresse :
 http://aurelienbertron.free.fr/ProjetBatailleNavaleSujet.pdf
 
-
-=== Portabilité du programme : ===
-
-Ce programme utilise les bibliothèques SDL 1.2.15, SDL_image et SDL_ttf.
-Toutes les DLL nécessaires à Windows sont inclues.
-
-Pour pouvoir compiler, vous devez télécharger des fichiers spécifiques.
-Attention, procédure pour Code::Blocks sur Windows :
-SDL :
-	1) http://www.libsdl.org/release/SDL-devel-1.2.15-mingw32.tar.gz
-	2) Extraire l'archive dans un dossier (SDL-1.2.15 par défaut)
-	3) Déplacez les fichiers de SDL-1.2.15\include\SDL dans SDL-1.2.15\include
-	4) Déplacez le dossier SDL-1.2.15 dans le répertoire d'installation de Code::Blocks
-	5) Créez un projet SDL dans Code::Blocks
-	6) Une fois à la fenêtre "Global Variable Editor", dans le champ "base", chercher le dossier<répertoire installation Code::Blocks>\SDL-1.2.15
-	7) Ignorez les avertissements ou les fenêtres, continuer normalement.
-
-SDL_image :
-	1) http://www.libsdl.org/projects/SDL_image/release/SDL_image-devel-1.2.12-VC.zip
-	2) Dézippez tout
-	3) SDL_image.h va dans <répertoire installation Code::Blocks>\SDL-1.2.15\include
-	4) SDL_image.lib va dans <répertoire installation Code::Blocks>\SDL-1.2.15\lib
-	5) Dans Code::Blocks allez dans les paramètres du linker
-	6) Ajoutez le fichier SDL_image.lib
-
-SDL_ttf :
-	1) http://www.libsdl.org/projects/SDL_ttf/release/SDL_ttf-devel-2.0.11-VC.zip
-	2) SDL_ttf.h va dans <répertoire installation Code::Blocks>\SDL-1.2.15\include
-	3) SDL_ttf.lib va dans <répertoire installation Code::Blocks>\SDL-1.2.15\lib
-	4) Ajoutez le .lib aux paramètres du linker comme pour SDL_image
-
-Le programme a besoin de toutes les DLL fournies avec ce code source, elles devront également être fournies avec l'exécutable.
-
-Si vous rencontrez des difficultés, écrivez-moi : aurelienbertron[AT]gmail[DOT]com 
+mkdir build && cd build
+cmake ..
+make
