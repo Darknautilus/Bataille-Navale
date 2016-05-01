@@ -5,6 +5,10 @@
 #include "view/IncludeSDL.h"
 #include "view/SDLImage.h"
 
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
 void ecrireTexte(char * texte, int taille, SDL_Rect positionTexte, char * cheminPolice)
 {
     int longTexte = strlen(texte);
@@ -64,7 +68,7 @@ int attendreEvent(SDL_Rect *coordClic, SDL_Keysym *touche)
     int controle = 0;  // Permet de retourner si l'événement est un clic ou une touche
 
     if (coordClic == NULL && touche == NULL) return 0;
-    
+
     while(continuer)
     {
         if (SDL_PollEvent(&event)) {

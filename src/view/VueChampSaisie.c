@@ -9,6 +9,7 @@
 #include "ctrl/FichierDebug.h"
 #include "ctrl/UtilsSDL.h"
 
+#include <stdlib.h>
 #include <string.h>
 
 void afficherChamp(ChampSaisie * champ)
@@ -60,17 +61,17 @@ void editerChamp(ChampSaisie * champ)
 
     afficherChamp(champ);
     UpdateWindow(SDL_FALSE);
-    
+
     while (continuer)
     {
         int render = 0;
-        
+
         if (SDL_PollEvent(&event)) {
             switch(event.type) {
                 case SDL_QUIT:
                     exit(EXIT_FAILURE);
                     break;
-                
+
                 case SDL_KEYDOWN: {
                     if (event.key.keysym.scancode == SDL_SCANCODE_BACKSPACE && strlen(champ->chaine) > 0) {
                         supprimerDernierChar(champ->chaine);
@@ -99,7 +100,7 @@ void editerChamp(ChampSaisie * champ)
                 }
             }
         }
-        
+
         if (render) {
             afficherChamp(champ);
             UpdateWindow(SDL_FALSE);

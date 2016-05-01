@@ -4,6 +4,7 @@
 
 #include "ctrl/FichierDebug.h"
 
+#include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
 

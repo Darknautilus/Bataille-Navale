@@ -4,6 +4,8 @@
 #include "ctrl/FichierDebug.h"
 #include "view/IncludeSDL.h"
 
+#include <stdlib.h>
+
 Image * creerImage(char * pChemin, int pAbscisse, int pOrdonnee)
 {
     char * mesErreur;
